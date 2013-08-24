@@ -83,7 +83,7 @@ Ext.define('smiley360.view.Home', {
 							styleHtmlContent: true
 						},
 						width: '100%',
-						height: 140,
+						height: 130,
 						listeners: {
 							painted:
                                 function (carousel) {

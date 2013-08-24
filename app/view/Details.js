@@ -66,7 +66,8 @@ Ext.define('smiley360.view.Details', {
                     height: 160,
                     listeners: {
                         activeitemchange: function (carousel, value, oldValue) {
-                            this.up('#xDetailsView').setMissionDetails(value.id);
+                        	this.up('#xDetailsView').setMissionDetails(value.id);
+                        	this.up('#xDetailsView').setUserLevel();
                         }
                     }
                 }, {

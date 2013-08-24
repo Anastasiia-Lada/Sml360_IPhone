@@ -26,14 +26,15 @@ Ext.define('smiley360.view.Login', {
             cls: 'login-box',
             height: '254px',
             items: [{
-                xtype: 'textfield',
+                xtype: 'emailfield',
                 placeHolder: 'Username',
                 itemId: 'txtUserName',
                 id: 'txtLogin',
                 name: 'txtUserName',
                 cls: 'cust-input cust-input-user',
                 clearIcon: false,
-                required: true                
+                required: true,
+				autoCapitalize: false
             }, {
                 xtype: 'passwordfield',
                 maxHeight: '20px',
@@ -43,7 +44,8 @@ Ext.define('smiley360.view.Login', {
                 name: 'txtPassword',
                 cls: 'cust-input cust-input-pwd',
                 clearIcon: false,
-                required: true
+                required: true,
+                autoCapitalize: false
             }, {
                 xtype: 'spacer',
                 height: '12px'

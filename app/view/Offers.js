@@ -329,7 +329,8 @@ Ext.define('smiley360.view.Offers', {
 		}
 
 		if (smiley360.memberData.isProfileComplete.complete == 'false') {
-		    Ext.widget('missingoffersview').show();
+			Ext.widget('missingoffersview').show();
+			smiley360.memberData.isProfileComplete.complete = 'user is already informed'
 		}
 	},
 });
