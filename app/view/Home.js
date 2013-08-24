@@ -69,6 +69,7 @@ Ext.define('smiley360.view.Home', {
 					style: 'padding-left: 15px;'
 				}, {
 					xtype: 'container',
+					height: 140,
 					style: 'background-color: #efecea',
 					items: [{
 						xtype: 'carousel',
@@ -147,7 +148,15 @@ Ext.define('smiley360.view.Home', {
 			if (smiley360.ProfileDropdowns.stateID[item] == smiley360.memberData.Profile.stateID)
 				tmpStateId = item;
 		};
-		Ext.getCmp('xCityState').setHtml(smiley360.memberData.Profile.city + ', ' + tmpStateId);
+		var str_tmp = '';
+		if (smiley360.memberData.Profile.city)
+			str_tmp += smiley360.memberData.Profile.city;
+		if ((tmpStateId != '') && (smiley360.memberData.Profile.city))
+			str_tmp += ', ';
+		if (tmpStateId != '')
+			str_tmp += tmpStateId;
+
+		Ext.getCmp('xCityState').setHtml(str_tmp);
 	},
 
 	setUserLevel: function () {
@@ -207,8 +216,8 @@ Ext.define('smiley360.view.Home', {
 				cls: 'cont-pad',
 			});
 			var incLabel = oneItemContainer.add(new Ext.Label({
-				width: '60%',
-				style: 'font-size: 1.1em; font-family: \'din medium\';',
+				width: '55%',
+				style: 'font-size: 1.1em; font-family: \'din medium\';padding-right: 10px;',
 				html: oneItem.desc, //'Description goes here lorem ipsum.',
 				listeners: {
 					element: 'element',
@@ -223,7 +232,7 @@ Ext.define('smiley360.view.Home', {
 				width: 100,
 				height: 100,
 				cls: 'has-shadow',
-				style: 'background-color: white; margin-left: 10px; border-radius: 5px; border-style: solid; border-width: 1px; border-color: white;',
+				style: 'background-color: white; border-radius: 5px; border-style: solid; border-width: 1px; border-color: white;',
 			}));
 			counter += 1;
 			xSpecialOffersList.add(oneItemContainer);

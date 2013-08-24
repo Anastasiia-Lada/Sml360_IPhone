@@ -250,7 +250,7 @@ Ext.define('smiley360.view.EditProfile', {
 					itemId: 'ddlStatus',
 					name: 'ddlStatus',
 					id: 'marital',
-					cls: 'cust-input cust-input-ddl marriage-status',
+					cls: 'cust-input cust-input-ddl',
 					autoSelect: false,
 					placeHolder: 'Single',
 					options: [

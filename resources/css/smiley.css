@@ -1078,23 +1078,6 @@
 	background-size: 25px;
 }
 
-/*.marriage-status .x-input-el .x-form-field .x-input-text:before{
-	content: url("../images/bullet-13.png");
-    position: absolute;
-    left: 18px;
-}*/
-
-.x-field-select.marriage-status .x-input-el:before {
-	content: url("../images/bullet-13.png");
-	position: absolute;
-	left: 18px;
-}
-
-.x-field-mask.marriage-status {
-	content: url("../images/bullet-13.png");
-	position: absolute;
-	left: 18px;
-}
 
 .custom-ddl-label {
 	background: white;

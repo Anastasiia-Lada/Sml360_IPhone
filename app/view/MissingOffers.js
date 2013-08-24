@@ -82,7 +82,7 @@ Ext.define('smiley360.view.MissingOffers', {
 		}],
 		listeners: {
 			initialize: function () {
-			    smiley360.adjustPopupSize(this, 20);
+				smiley360.adjustPopupSize(this, 20);
 			},
 			painted: function () {
 				this.setMOUser();
@@ -101,6 +101,13 @@ Ext.define('smiley360.view.MissingOffers', {
 			if (smiley360.ProfileDropdowns.stateID[item] == smiley360.memberData.Profile.stateID)
 				tmpStateId = item;
 		};
-		this.down('#xCityState').setHtml(smiley360.memberData.Profile.city + ', ' + tmpStateId);
+		var str_tmp = '';
+		if (smiley360.memberData.Profile.city)
+			str_tmp += smiley360.memberData.Profile.city;
+		if ((tmpStateId != '') && (smiley360.memberData.Profile.city))
+			str_tmp += ', ';
+		if (tmpStateId != '')
+			str_tmp += tmpStateId;
+		this.down('#xCityState').setHtml(str_tmp);
 	},
 });

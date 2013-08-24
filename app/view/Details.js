@@ -448,7 +448,7 @@ Ext.define('smiley360.view.Details', {
             }
 
             if (detailsArray.mission_shipment_active == '1') {
-                this.down('#xDetailsShipment').setHtml('Your packgage will ship ' + detailsArray.mission_shipment_message);
+                this.down('#xDetailsShipment').setHtml('Your package will ship ' + detailsArray.mission_shipment_message);
             }
             else {
                 this.down('#xDetailsShipment').setHtml('');

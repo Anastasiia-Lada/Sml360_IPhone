@@ -127,7 +127,7 @@ Ext.define('smiley360.view.ForgetPassword', {
                 xEmailField.hide();
                 xShareButton.setHtml('CLOSE')
                 xTitleImage.setSrc('resources/images/smile-successful.png');
-                xMessageText.setHtml('Thankyou, your password reminder was sent');
+                xMessageText.setHtml('Thank you, your password reminder was sent.');
                 //xShareStatus.setStyle('background-color: #5F9E45;');
 
                 break;

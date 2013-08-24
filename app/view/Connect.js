@@ -97,17 +97,17 @@ Ext.define('smiley360.view.Connect', {
 								}],
 							}, {
 								xtype: 'spacer',
-								style: 'margin-top:-5px; background: -webkit-linear-gradient(top, #9f9a98 0%, #423c39 100%); height: 45px;',
+								style: 'margin-top:-5px; background: -webkit-linear-gradient(top, #9f9a98 0%, #423c39 100%);',
 							}, {
 								xtype: 'container',
 								width: 40,
-								style: 'margin-top:-5px; height: 45px; border-radius: 0px 5px 0px 0px; background: -webkit-linear-gradient(top, #9f9a98 0%, #423c39 100%); ',
+								style: 'margin-top:-5px; border-radius: 0px 5px 0px 0px; background: -webkit-linear-gradient(top, #9f9a98 0%, #423c39 100%); ',
 								//docked: 'right',
 								//cls: 'btn-icon-special',
 								items: [{
 									xtype: 'image',
 									height: 20,
-									width: 20,
+									width: 22,
 									style: 'margin-top: 10px;',
 									//cls: 'btn-icon-special',
 									//style: 'background-position: 5px 5px;',
@@ -233,15 +233,15 @@ Ext.define('smiley360.view.Connect', {
 			});
 
 			var incLabel = oneItemContainer.add(new Ext.Label({
-				style: 'font-size: 1.1em; font-family: \'din medium\';',
+				style: 'font-size: 1.1em; font-family: \'din medium\'; padding-right: 10px;',
 				html: oneItem.descr, //'Description goes here lorem ipsum.',
-				width: '60%',
+				width: '55%',
 			}));
 
 			var incImg = oneItemContainer.add(new Ext.Img({
 				cls: 'has-shadow',
 				//id: 'xHomeBrandImage',
-				style: 'background-color: white; margin-left: 10px; border-radius: 5px; border-style: solid; border-width: 1px; border-color: white;',
+				style: 'background-color: white; border-radius: 5px; border-style: solid; border-width: 1px; border-color: white;',
 				src: smiley360.configuration.getResourceDomain() + '/' + oneItem.imageURL,//'resources/images/offers_logo3.png',
 				width: 100,
 			    height: 100,

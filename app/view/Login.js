@@ -33,8 +33,7 @@ Ext.define('smiley360.view.Login', {
                 name: 'txtUserName',
                 cls: 'cust-input cust-input-user',
                 clearIcon: false,
-                required: true,
-                value: 'mantelln@hotmail.com',
+                required: true                
             }, {
                 xtype: 'passwordfield',
                 maxHeight: '20px',
@@ -44,8 +43,7 @@ Ext.define('smiley360.view.Login', {
                 name: 'txtPassword',
                 cls: 'cust-input cust-input-pwd',
                 clearIcon: false,
-                required: true,
-                value: 'General1234',
+                required: true
             }, {
                 xtype: 'spacer',
                 height: '12px'

@@ -112,8 +112,14 @@ Ext.define('smiley360.view.Signup', {
 				},
 				required: true,
 				autoSelect: false,
-				dateFormat: 'Y-m-d'
-
+				dateFormat: 'Y-m-d',
+				listeners: {
+					element: 'element',
+					tap: function () {
+						if (this.getValue() == null)
+							this.setValue({ year: 1970, day: 1, month: 1 });
+					},
+				}
 			}, {
 				xtype: 'selectfield',
 				itemId: 'ddlGender',
