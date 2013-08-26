@@ -183,7 +183,7 @@
     doShare: function () {
         var shareView = this;
         var shareData = {
-            missionID: smiley360.missionData.MissionDetails.MissionId,
+            missionID: shareView.missionId,
             memberID: smiley360.memberData.UserId,
             sharepeople: this.down('#xPeoplesSelector').getValue(),
             rating: this.down('#xRating').getValue(),
@@ -205,5 +205,11 @@
         else {
             this.down('#xShareButton').disable();
         }
-    }
+    },
+
+    setMissionId: function (missionId) {
+        this.missionId = missionId;
+    },
+
+    missionId: undefined,
 });

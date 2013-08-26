@@ -231,11 +231,16 @@ Ext.define('smiley360.view.Connect', {
 				layout: 'hbox',
 				cls: 'cont-pad',
 			});
-
-			var incLabel = oneItemContainer.add(new Ext.Label({
-				style: 'font-size: 1.1em; font-family: \'din medium\'; padding-right: 10px;',
-				html: oneItem.descr, //'Description goes here lorem ipsum.',
+			var tmpCont = oneItemContainer.add(new Ext.Container({
+				style: 'height: 120px; max-height: 120px; overflow: hidden; text-overflow: ellipsis;',
+				//style: 'font-size: 1.1em; font-family: \'din medium\'; padding-right: 10px; overflow: hidden; text-overflow: ellipsis;',
+				//html: oneItem.descr, //'Description goes here lorem ipsum.',
 				width: '55%',
+			}));
+			var incLabel = tmpCont.add(new Ext.Label({
+				style: 'height: 120px; max-height: 120px; font-size: 1.1em; font-family: \'din medium\'; padding-right: 10px; overflow: hidden; text-overflow: ellipsis;',
+				html: oneItem.descr, //'Description goes here lorem ipsum.',
+				//width: '55%',
 			}));
 
 			var incImg = oneItemContainer.add(new Ext.Img({

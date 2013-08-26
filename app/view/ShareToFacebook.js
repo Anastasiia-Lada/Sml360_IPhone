@@ -31,8 +31,9 @@
                 cls: 'popup-top-panel facebook-background',
                 items: [{
                     xtype: 'label',
+                    id: 'xTitleLabel',
                     cls: 'popup-title-text',
-                    html: 'Earn 5 Smiles Sharing on Facebook',
+                    html: 'Earn {0} Smiles Sharing on Facebook',
                 }, {
                     xtype: 'image',
                     docked: 'right',
@@ -78,6 +79,21 @@
                         }
                     }
                 }, {
+                    xtype: 'panel',
+                    layout: 'hbox',
+                    items: [{
+                        xtype: 'label',
+                        cls: 'popup-post-bottom-text',
+                        style: 'color: #878789;',
+                        html: 'Post must contain at least 70 characters.',
+                    }, {
+                        xtype: 'label',
+                        id: 'xPostCountLabel',
+                        docked: 'right',
+                        cls: 'popup-post-bottom-text',
+                        html: '0',
+                    }],
+                }, {
                     xtype: 'textareafield',
                     id: 'xPostText',
                     cls: 'popup-input popup-input-text',
@@ -95,21 +111,6 @@
                             }
                         }
                     }
-                }, {
-                    xtype: 'panel',
-                    layout: 'hbox',
-                    items: [{
-                        xtype: 'label',
-                        cls: 'popup-post-bottom-text',
-                        style: 'color: #878789;',
-                        html: 'Post must contain at least 70 characters.',
-                    }, {
-                        xtype: 'label',
-                        id: 'xPostCountLabel',
-                        docked: 'right',
-                        cls: 'popup-post-bottom-text',
-                        html: '0',
-                    }],
                 }],
             }, {
                 xtype: 'panel',
@@ -118,7 +119,7 @@
                     xtype: 'panel',
                     layout: 'hbox',
                     defaults: {
-                        width: '50%',
+                        width: '100%',
                         labelAlign: 'right',
                         labelWidth: '100%',
                     },
@@ -136,20 +137,20 @@
                                 this.up('#xView').doShareValidation();
                             }
                         }
-                    }, {
-                        xtype: 'checkboxfield',
-                        id: 'xToBrandPageCheckbox',
-                        label: 'Post to Brand Page.',
-                        labelCls: 'popup-checkbox-grey-label',
-                        cls: 'popup-checkbox',
-                        listeners: {
-                            check: function () {
-                                this.up('#xView').doShareValidation();
-                            },
-                            uncheck: function () {
-                                this.up('#xView').doShareValidation();
-                            }
-                        }
+                    //}, {
+                    //    xtype: 'checkboxfield',
+                    //    id: 'xToBrandPageCheckbox',
+                    //    label: 'Post to Brand Page.',
+                    //    labelCls: 'popup-checkbox-grey-label',
+                    //    cls: 'popup-checkbox',
+                    //    listeners: {
+                    //        check: function () {
+                    //            this.up('#xView').doShareValidation();
+                    //        },
+                    //        uncheck: function () {
+                    //            this.up('#xView').doShareValidation();
+                    //        }
+                    //    }
                     }],
                 }, {
                     xtype: 'label',
@@ -198,12 +199,12 @@
             shareOptions.push(1);
         }
 
-        if (this.down('#xToBrandPageCheckbox').getChecked() == true) {
-            shareOptions.push(2);
-        }
+        //if (this.down('#xToBrandPageCheckbox').getChecked() == true) {
+        //    shareOptions.push(2);
+        //}
 
         var shareData = {
-            missionID: smiley360.missionData.MissionDetails.MissionId,
+            missionID: shareView.missionId,
             memberID: smiley360.memberData.UserId,
             rating: this.down('#xRating').getValue(),
             text: this.down('#xPostText').getValue(),
@@ -219,12 +220,25 @@
     doShareValidation: function () {
         if (this.down('#xRating').getValue() > -1 &&
             this.down('#xPostText').getValue().length >= 70 && (
-            this.down('#xToProfileCheckbox').getChecked() == true ||
-            this.down('#xToBrandPageCheckbox').getChecked() == true)) {
+            this.down('#xToProfileCheckbox').getChecked() == true/* ||
+            this.down('#xToBrandPageCheckbox').getChecked() == true*/)) {
             this.down('#xShareButton').enable();
         }
         else {
             this.down('#xShareButton').disable();
         }
-    }
+    },
+
+    setEarnSmiles: function (smiles) {
+        var xTitleLabel = this.down('#xTitleLabel');
+
+        xTitleLabel.setHtml(Ext.String.format(
+            xTitleLabel.getHtml(), smiles));
+    },
+
+    setMissionId: function (missionId) {
+        this.missionId = missionId;
+    },
+
+    missionId: undefined,
 });

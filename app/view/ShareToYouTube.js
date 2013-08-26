@@ -85,7 +85,7 @@
                 items: [{
                     xtype: 'button',
                     id: 'xShareButton',
-                    text: 'POST',
+                    text: 'SUBMIT',
                     icon: 'resources/images/share-initial.png',
                     iconAlign: 'right',
                     iconCls: 'popup-post-icon',
@@ -112,7 +112,7 @@
     doShare: function () {
         var shareView = this;
         var shareData = {
-            missionID: smiley360.missionData.MissionDetails.MissionId,
+            missionID: shareView.missionId,
             memberID: smiley360.memberData.UserId,
             youtubeURL: this.down('#xUrlField').getValue(),
         };
@@ -128,5 +128,11 @@
 
         xTitleLabel.setHtml(Ext.String.format(
             xTitleLabel.getHtml(), smiles));
-    }
+    },
+
+    setMissionId: function (missionId) {
+        this.missionId = missionId;
+    },
+
+    missionId: undefined,
 });

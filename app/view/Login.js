@@ -40,6 +40,7 @@ Ext.define('smiley360.view.Login', {
                 maxHeight: '20px',
                 placeHolder: '******',
                 id: 'txtPassword',
+				padding: '4px 0px;',
                 itemId: 'txtPassword',
                 name: 'txtPassword',
                 cls: 'cust-input cust-input-pwd',
@@ -73,7 +74,7 @@ Ext.define('smiley360.view.Login', {
                 xtype: 'button',
                 id: 'xFacebookLoginButton',
                 text: 'LOG IN WITH FACEBOOK',
-                ui: 'action',
+                cls: 'cust-btn fb-login-btn'
             }],
         }],
 

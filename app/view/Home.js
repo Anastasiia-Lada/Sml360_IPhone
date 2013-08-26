@@ -126,11 +126,11 @@ Ext.define('smiley360.view.Home', {
 
 		listeners: {
 			show: function () {
-				console.log('Home view showed!');
+				console.log('Home view showed!');				
 			},
 
 			painted: function () {
-				console.log('Home view painted!');
+				console.log('Home view painted!');				
 
 				this.setUserLevel();
 				this.setWhatsHappening();

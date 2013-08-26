@@ -8,7 +8,11 @@
         html: '<div id="xShareButtons" align="center"></div>'
     },
 
+    missionDetails: {},
+
     setShareButtons: function (missionDetails) {
+        this.missionDetails = missionDetails;
+
         var xShareButtons = Ext.get('xShareButtons');
         var smilesArray = missionDetails.MissionPoints.sharingToolScore;
         var pointsArray = missionDetails.MissionPoints;
@@ -74,6 +78,8 @@
     },
 
     createShareButton: function (shareItem, buttonCls, shareViewAlias) {
+        var me = this;
+
         return new Ext.ux.ShareButton(
             {
                 cls: buttonCls,
@@ -83,8 +89,13 @@
                 listeners: {
                     tap: function () {
                         var shareView = Ext.widget(shareViewAlias).show();
+
                         if (shareView.setEarnSmiles)
                             shareView.setEarnSmiles(this.getSmilesCurrent());
+
+                        if (shareView.setMissionId)
+                            shareView.setMissionId(me.missionDetails.MissionId);
+
                         if (shareViewAlias == 'reviewforfenderview')
                             //alert('fendercommand');
                             Ext.getCmp('xDetailsView').fireEvent('onShareConnectTapCommand', 'Share', smiley360.memberData.UserId, shareItem.currentBrand, shareItem.currentBrandId);

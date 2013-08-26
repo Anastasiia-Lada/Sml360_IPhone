@@ -29,8 +29,9 @@
                 cls: 'popup-top-panel twitter-background',
                 items: [{
                     xtype: 'label',
+                    id: 'xTitleLabel',
                     cls: 'popup-title-text',
-                    html: 'Earn 5 Smiles Sharing on Twitter',
+                    html: 'Earn {0} Smiles Sharing on Twitter',
                 }, {
                     xtype: 'image',
                     docked: 'right',
@@ -81,7 +82,13 @@
                             }
                             else {
                                 xPostCountLabel.setStyle('color: #878789;')
-                                xView.down('#xShareButton').enable();
+
+                                if (postLenght > 0) {
+                                    xView.down('#xShareButton').enable();
+                                }
+                                else {
+                                    xView.down('#xShareButton').disable();
+                                }
                             }
                         }
                     }
@@ -110,6 +117,7 @@
                     iconAlign: 'right',
                     iconCls: 'popup-post-icon',
                     cls: 'popup-post-button',
+                    disabled: true,
                     listeners: {
                         tap: function () {
                             this.up('#xView').doShare();
@@ -131,7 +139,7 @@
     doShare: function () {
         var shareView = this;
         var shareData = {
-            missionID: smiley360.missionData.MissionDetails.MissionId,
+            missionID: shareView.missionId,
             memberID: smiley360.memberData.UserId,
             text: this.down('#xPostText').getValue(),
         };
@@ -141,4 +149,17 @@
             smiley360.setResponseStatus(shareView, response);
         });
     },
+
+    setEarnSmiles: function (smiles) {
+        var xTitleLabel = this.down('#xTitleLabel');
+
+        xTitleLabel.setHtml(Ext.String.format(
+            xTitleLabel.getHtml(), smiles));
+    },
+
+    setMissionId: function (missionId) {
+        this.missionId = missionId;
+    },
+
+    missionId: undefined,
 });

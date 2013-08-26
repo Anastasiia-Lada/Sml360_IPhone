@@ -24,6 +24,7 @@ Ext.define('smiley360.view.Main', {
                 id: 'xBackButton',
                 ui: 'plain',
                 align: 'left',
+                cls: 'toolbar-btn-size toolbar-btn-back-size',
                 iconCls: 'back-btn',
                 iconMask: true,
                 hidden: true,
@@ -38,6 +39,7 @@ Ext.define('smiley360.view.Main', {
                 xtype: 'button',
                 ui: 'plain',
                 align: 'right',
+                cls: 'toolbar-btn-size toolbar-btn-menu-size',
                 iconCls: 'menu-btn',
                 iconMask: true,
                 listeners: {

@@ -148,7 +148,7 @@ Ext.define('smiley360.view.Details', {
                                 xtype: 'image',
                                 style: 'margin-right: 10px;',
                                 src: 'resources/images/missions-box.png',
-                                padding: 14,
+                                padding: '14px 22px',
                             }],
                         }],
                     }, {
@@ -170,6 +170,7 @@ Ext.define('smiley360.view.Details', {
                             xtype: 'label',
                             id: 'xDetailsWhatYoullRecieve',
                             style: 'font-family: franklin; font-size:1em;',
+                            cls: 'ddl-text-size',
                             html: '1 Campbell\'s Slow Kettle Soup',
                             padding: '10px 20px',
                         }],
@@ -222,7 +223,7 @@ Ext.define('smiley360.view.Details', {
                                 xtype: 'image',
                                 style: 'margin-right: 10px;',
                                 src: 'resources/images/code.png',
-                                padding: '14px 14px',
+                                padding: '14px 23px',
                             }],
                         }],
                     }, {
@@ -231,6 +232,7 @@ Ext.define('smiley360.view.Details', {
                         cls: 'has-shadow',
                         style: 'background-color:#e2ddda; border-radius: 0px 0px 5px 5px; margin: -20px -10px 20px -10px;',
                         id: 'trynew_panel',
+                        cls: 'ddl-text-size',
                         listeners: {
                             initialize: function () {
                                 this.hide();
@@ -299,7 +301,7 @@ Ext.define('smiley360.view.Details', {
                             items: [{
                                 xtype: 'image',
                                 src: 'resources/images/bookmark-missions.png',
-                                padding: '15px 25px',
+                                padding: '14px 33px',
                             }],
                         }],
                     }, {
@@ -374,8 +376,15 @@ Ext.define('smiley360.view.Details', {
             },
 
             painted: function () {
-                console.log('Home view painted!');
+                console.log('Details view painted!');
                 this.up('#xMainView').enableSharing();
+                Ext.Viewport.element.dom.addEventListener('click', function (e) {
+                	if (e.target.tagName !== 'A') {
+                		return;
+                	};
+                	e.preventDefault();
+                	var href = e.target.getAttribute('href');
+                }, false);
             },
         },
     },

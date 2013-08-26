@@ -744,7 +744,10 @@ smiley360.services.ajax = function (method, params, onCompleted) {
 	{
 		url: smiley360.configuration.getServerUrl() + "?method=" + method + "&params=" + Ext.JSON.encode(params),
 		callback: function (result, response) {
-			if (response.error == 'Error. This method requires authorization') {
+		    if (response == null) {
+		        onCompleted(Ext.apply({ success: false }, response));
+		    }
+		    else if (response.error == 'Error. This method requires authorization') {
 				Ext.Msg.alert('You are not authorized or your session is expired.');
 				smiley360.animateViewLeft('loginview');
 			}

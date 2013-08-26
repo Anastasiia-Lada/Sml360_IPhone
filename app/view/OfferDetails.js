@@ -169,6 +169,7 @@ Ext.define('smiley360.view.OfferDetails', {
 													cls: 'has-shadow',
 													style: 'border-radius: 0px 0px 5px 5px; background-color: #e2ddda; margin: -20px -10px 20px -10px;',
 													id: 'offer_offer_panel',
+													cls: 'ddl-text-size',
 													listeners: {
 														initialize: function ()
 														{ this.hide(); }
@@ -246,6 +247,7 @@ Ext.define('smiley360.view.OfferDetails', {
 										cls: 'has-shadow',
 										style: 'background-color:#e2ddda; border-radius: 0px 0px 5px 5px; margin: -20px -10px 20px -10px;',
 										id: 'offer_mission_panel',
+										cls: 'ddl-text-size',
 										listeners: {
 											initialize: function ()
 											{ this.hide(); }
@@ -323,6 +325,7 @@ Ext.define('smiley360.view.OfferDetails', {
 												cls: 'has-shadow',
 												style: 'background-color:#e2ddda; border-radius: 0px 0px 5px 5px; margin: -20px -10px 20px -10px;',
 												id: 'offer_recieve_panel',
+												cls: 'ddl-text-size',
 												listeners: {
 													initialize: function ()
 													{ this.hide(); }
@@ -407,6 +410,13 @@ Ext.define('smiley360.view.OfferDetails', {
 				Ext.getCmp('xOfferView').fireEvent('getAddressCommand', this, smiley360.memberData.UserId);
 				console.log('OfferDetails view showed!');
 				this.setOfferDetails();
+				Ext.Viewport.element.dom.addEventListener('click', function (e) {
+					if (e.target.tagName !== 'A') {
+						return;
+					};
+					e.preventDefault();
+					var href = e.target.getAttribute('href');
+				}, false);
 			},
 		},
 	},

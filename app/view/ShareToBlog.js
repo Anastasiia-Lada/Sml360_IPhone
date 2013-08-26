@@ -55,12 +55,18 @@
                     id: 'xBlogUrlField',
                     cls: 'cust-input',
                     value: 'www.wordpress.com/sampleblog',
+                    listeners: {
+                        keyup: function () {
+                            this.up('#xView').doShareValidation();
+                        }
+                    }
                 }]
             }, {
                 xtype: 'panel',
                 cls: 'popup-bottom-panel',
                 items: [{
                     xtype: 'checkboxfield',
+                    id: 'xAgreementCheckbox',
                     label: 'I disclosed that I received a free sample in my video.',
                     labelAlign: 'right',
                     labelWidth: '100%',
@@ -70,10 +76,10 @@
                     cls: 'popup-checkbox',
                     listeners: {
                         check: function () {
-                            this.up('#xView').down('#xShareButton').enable();
+                            this.up('#xView').doShareValidation();
                         },
                         uncheck: function () {
-                            this.up('#xView').down('#xShareButton').disable();
+                            this.up('#xView').doShareValidation();
                         }
                     }
                 }],
@@ -132,7 +138,7 @@
         if (this.isValid()) {
             var shareView = this;
             var shareData = {
-                missionID: smiley360.missionData.MissionDetails.MissionId,
+                missionID: shareView.missionId,
                 memberID: smiley360.memberData.UserId,
                 blogURL: this.down('#xBlogUrlField').getValue(),
             };
@@ -144,10 +150,27 @@
         }
     },
 
+    doShareValidation: function () {
+        if (this.down('#xBlogUrlField').getValue().length > 0 &&
+            this.down('#xAgreementCheckbox').getChecked() == true) {
+            this.down('#xShareButton').enable();
+        }
+        else {
+            this.down('#xShareButton').disable();
+        }
+    },
+
     setEarnSmiles: function (smiles) {
         var xTitleLabel = this.down('#xTitleLabel');
 
         xTitleLabel.setHtml(Ext.String.format(
             xTitleLabel.getHtml(), smiles));
     },
+
+
+    setMissionId: function (missionId) {
+        this.missionId = missionId;
+    },
+
+    missionId: undefined,
 });

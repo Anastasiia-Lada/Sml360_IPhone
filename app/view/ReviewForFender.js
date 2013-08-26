@@ -378,5 +378,11 @@ Ext.define('smiley360.view.ReviewForFender', {
 		else {
 			this.down('#xShareButton').enable();
 		}
-	}
+	},
+
+	//setMissionId: function (missionId) {
+	//    this.missionId = missionId;
+	//},
+
+	//missionId: undefined,
 });

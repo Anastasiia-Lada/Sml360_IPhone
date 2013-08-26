@@ -37,8 +37,8 @@
 }
 
 .popup-title-image {
-	min-width: 50px;
-	min-height: 50px;
+	width: 30px;
+	height: 30px;
 	background-size: contain !important;
 	background-position: right !important;
 }
@@ -436,6 +436,9 @@
 	color: #414042;
 	text-shadow: 0px 1px 3px rgba(255,255,255,0.5);
 }
+.login-btn .x-button-label {
+		font-family: 'din bold';
+	}
 
 .signup-btn {
 	background: -webkit-linear-gradient(top, #454241 0%, #353231 100%);
@@ -445,10 +448,14 @@
 }
 
 .fb-login-btn {
-	background: url(../images/fb-login-btn.png) 0 0 no-repeat !important;
+	background: -webkit-linear-gradient(top, #6a7da7 0%, #3f5d9b 100%);
 	color: #FFFFFF;
 	text-shadow: 0px 1px 3px rgba(23,23,23,0.5);
 }
+
+	.fb-login-btn .x-button-label {
+		font-family: 'din medium';
+	}
 
 .profile-top {
 	background: #e2ddda;
@@ -895,6 +902,7 @@
 	display: block;
 	text-align: center;
 	font-size: 6pt;
+	word-wrap: normal;
 }
 
 .x-share-button-badge-current-text {
@@ -1090,9 +1098,79 @@
 	font-weight: normal !important;
 	font-size: 1em !important;
 }
+
 .set-height {
 	line-height: 110%;
 }
 /*.x-field-input .x-clear-icon{
 
 }*/
+.x-toolbar .x-button.x-button-plain.toolbar-btn-size {
+	background: none;
+	border: 0 none;
+	-webkit-border-radius: 0px;
+	border-radius: 0px;
+	min-height: 0;
+	text-shadow: none;
+	line-height: auto;
+	width: 1.35em;
+	height: 1.05em;
+	padding: 0em 0.4em;
+}
+
+
+.x-button.x-button-plain.toolbar-btn-menu-size .x-button-icon, .x-toolbar .x-button.x-button-plain.toolbar-btn-menu-size .x-button-icon {
+	-webkit-mask-size: 1em 1.05em;
+	/*width: 1.1em;*/
+	/*height: 1.05em;*/
+}
+
+.x-button.x-button-plain.toolbar-btn-back-size .x-button-icon, .x-toolbar .x-button.x-button-plain.toolbar-btn-back-size .x-button-icon {
+	-webkit-mask-size: 1em 1.05em;
+	width: 1.05em;
+	/*height: 1.05em;*/
+}
+
+.ddl-text-size .x-innerhtml {
+	font-family: 'franklin';
+}
+
+	.ddl-text-size .x-innerhtml h1 {
+		font-size: 1.25em;
+		font-weight: bold;
+		margin-bottom: 0em;
+	}
+
+	.ddl-text-size .x-innerhtml h2 {
+		font-size: 1.2em;
+		font-weight: bold;
+		margin-bottom: 0em;
+	}
+
+	.ddl-text-size .x-innerhtml h3 {
+		font-size: 1.15em;
+		font-weight: bold;
+		margin-bottom: 0em;
+	}
+
+	.ddl-text-size .x-innerhtml h4 {
+		font-size: 1.1em;
+		font-weight: bold;
+		margin-bottom: 0em;
+	}
+
+	.ddl-text-size .x-innerhtml h5 {
+		font-size: 1em;
+		font-weight: bold;
+		margin-bottom: 0em;
+	}
+
+	.ddl-text-size .x-innerhtml h6 {
+		font-size: 1em;
+		font-weight: bold;
+		margin-bottom: 0em;
+	}
+
+	.ddl-text-size .x-innerhtml p {
+		margin: 0px;
+	}
