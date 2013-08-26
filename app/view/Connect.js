@@ -51,13 +51,17 @@ Ext.define('smiley360.view.Connect', {
 						},
 						listeners: {
 							painted: function (carousel) {
-								me = this;
+								me = Ext.getCmp('xFeaturedList');
 								carousel.pageTurner = new Ext.util.DelayedTask(function () {
-									if (me.getActiveIndex() == me.items.length - 1) {
-										me.setActiveItem(0, 'slide');
+									//alert('fr' + Ext.getCmp('xSpecialOffersList').getActiveIndex());
+									if (Ext.getCmp('xFeaturedList').getActiveIndex() == Ext.getCmp('xFeaturedList').items.length - 2)
+									{
+										//alert('next page');
+										Ext.getCmp('xFeaturedList').setActiveItem(0);//(0, { type: 'slide', direction: 'right' })
+										//alert(Ext.getCmp('xSpecialOffersList').getActiveIndex());
 									}
 									else {
-										me.next();
+										Ext.getCmp('xFeaturedList').next();
 									}
 								}, carousel);
 

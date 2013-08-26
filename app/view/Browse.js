@@ -358,7 +358,7 @@ Ext.define('smiley360.view.Browse', {
                                                     	src: 'resources/images/computer_c.png',
                                                     	height: 35,
                                                     	align: 'center',
-                                                    	margin: '15px 0px',
+                                                    	margin: '10px 0px',
                                                     },
                                                      {
                                                      	xtype: 'label',
@@ -388,7 +388,7 @@ Ext.define('smiley360.view.Browse', {
                                                     	id: 'xEco_FriendlyPict',
                                                     	src: 'resources/images/eco_friendly_c.png',
                                                     	height: 35,
-                                                    	margin: '15px 0px',
+                                                    	margin: '10px 0px',
                                                     },
                                                      {
                                                      	xtype: 'label',
@@ -417,7 +417,7 @@ Ext.define('smiley360.view.Browse', {
                                                     	src: 'resources/images/edu_c.png',
                                                     	height: 35,
                                                     	width: '60%',
-                                                    	margin: '15px 21px',
+                                                    	margin: '10px 21px',
                                                     },
                                                      {
                                                      	xtype: 'label',
@@ -500,7 +500,7 @@ Ext.define('smiley360.view.Browse', {
                                                     	id: 'xMobilePict',
                                                     	src: 'resources/images/mobile_c.png',
                                                     	height: 35,
-                                                    	margin: '15px 35px',
+                                                    	margin: '10px 35px',
                                                     },
                                                      {
                                                      	xtype: 'label',
@@ -529,13 +529,13 @@ Ext.define('smiley360.view.Browse', {
                                                     	id: 'xFinancePict',
                                                     	src: 'resources/images/finance_c.png',
                                                     	height: 35,
-                                                    	margin: '15px 35px',
+                                                    	margin: '10px 35px',
                                                     },
                                                      {
                                                      	xtype: 'label',
                                                      	id: 'xFinanceLabel',
                                                      	html: 'Financial Services',
-                                                     	style: 'margin-top: -20px;',
+                                                     	style: 'margin-top: -20px; line-height: 110%;',
                                                      	cls: 'browse_text',
                                                      },
                                             	]
@@ -558,11 +558,12 @@ Ext.define('smiley360.view.Browse', {
                                                     	id: 'xFoodPict',
                                                     	src: 'resources/images/food_c.png',
                                                     	height: 35,
-                                                    	margin: '15px 35px',
+                                                    	margin: '10px 35px',
                                                     },
                                                      {
                                                      	xtype: 'label',
                                                      	id: 'xFoodLabel',
+														style: 'line-height: 110%;',
                                                      	html: 'Food & Drinks',
                                                      	cls: 'browse_text',
                                                      },
@@ -1316,7 +1317,7 @@ Ext.define('smiley360.view.Browse', {
 		var lbl_padding = '10px 0px 10px ';
 		if (pos == 'left') { lbl_padding += '20px'; }
 		if (pos == 'middle') { lbl_padding += '128px'; }
-		if (pos == 'right') { lbl_padding += '236px'; }
+		if (pos == 'right') { lbl_padding += '240px'; }
 		var sub_categoryCount = categoryCount;
 		for (var key in items_arr) {
 			sub_categoryCount += 1;

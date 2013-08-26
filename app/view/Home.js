@@ -87,24 +87,33 @@ Ext.define('smiley360.view.Home', {
 						listeners: {
 							painted:
                                 function (carousel) {
-                                	me = this;
+                                	me = Ext.getCmp('xSpecialOffersList');
 
                                 	carousel.pageTurner = new Ext.util.DelayedTask(
                                         function () {
-                                        	if (me.getActiveIndex() == me.items.length - 1) {
-                                        		me.setActiveItem(0, 'slide');
+                                        	//alert('fr' + Ext.getCmp('xSpecialOffersList').getActiveIndex());
+                                        	if (Ext.getCmp('xSpecialOffersList').getActiveIndex() == Ext.getCmp('xSpecialOffersList').items.length - 1) {
+                                        		//alert('next page');
+                                        		if (Ext.getCmp('SpCont0')) {
+                                        			//console.log(Ext.getCmp('SpCont0').valueOf());
+                                        			Ext.getCmp('xFeaturedList').setActiveItem(Ext.getCmp('SpCont0'));
+                                        			//alert(Ext.getCmp('xSpecialOffersList').getActiveIndex());
+                                        		}
                                         	}
                                         	else {
-                                        		me.next();
+                                        		Ext.getCmp('xSpecialOffersList').next();
                                         	}
-                                        	//console.log(me.pageTurner.valueOf());
-                                        	//me.pageTurner.delay(3000); //comment this to avoid js-bug
-                                        }, carousel);
+                                        		//console.log(me.pageTurner.valueOf());
+                                        		//me.pageTurner.delay(3000); //comment this to avoid js-bug
+                                        	}, carousel);
 
-                                	carousel.pageTurner.delay(3000);
-                                }
-						},
-					}, {
+                                        	carousel.pageTurner.delay(3000);
+                                        },
+                                		activeitemchange: function () {
+                                			
+                                		}
+                                },
+						}, {
 						xtype: 'button',
 						cls: 'specialoffers-left-btn',
 					}, {
@@ -126,11 +135,11 @@ Ext.define('smiley360.view.Home', {
 
 		listeners: {
 			show: function () {
-				console.log('Home view showed!');				
+				console.log('Home view showed!');
 			},
 
 			painted: function () {
-				console.log('Home view painted!');				
+				console.log('Home view painted!');
 
 				this.setUserLevel();
 				this.setWhatsHappening();
@@ -214,6 +223,7 @@ Ext.define('smiley360.view.Home', {
 			var oneItemContainer = new Ext.Container({
 				layout: 'hbox',
 				cls: 'cont-pad',
+				id: 'SpCont' + key,
 			});
 			var incLabel = oneItemContainer.add(new Ext.Label({
 				width: '55%',

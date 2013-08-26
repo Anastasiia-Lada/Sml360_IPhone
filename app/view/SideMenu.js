@@ -23,7 +23,7 @@
 				style: 'padding-top: 10px;',
 				id: 'xFirstLastName',
 				html: 'Noel Zahra',
-				style: 'font-size:1.1em; margin-bottom: -4px;text-align: right;',
+				style: 'font-size:1.1em; margin-bottom: -4px;text-align: right; line-height: 130%;',
 			}, {
 				xtype: 'label',
 				id: 'xCityState',

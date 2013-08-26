@@ -127,7 +127,7 @@ Ext.define('smiley360.view.Brand', {
 																xtype: 'button',
 																cls: 'has-shadow follow-btn',
 																id: 'xBrandIsFollow',
-																style: 'font-family: franklin; font-size: 0.6em; margin: 20px 0px 5px 0px;',
+																style: 'font-family: franklin; font-size: 0.8em; margin: 20px 0px 5px 0px;',
 																width: 135,
 																height: 30,
 																text: 'FOLLOW',
@@ -148,7 +148,7 @@ Ext.define('smiley360.view.Brand', {
 															{
 																xtype: 'button',
 																cls: 'has-shadow add-review-btn',
-																style: 'font-family: franklin; font-size: 0.6em; margin: 5px 0px 5px 0px;',
+																style: 'font-family: franklin; font-size: 0.8em; margin: 5px 0px 5px 0px;',
 																width: 135,
 																height: 30,
 																text: 'ADD REVIEW',
