@@ -148,7 +148,7 @@ Ext.define('smiley360.view.Details', {
                                 xtype: 'image',
                                 style: 'margin-right: 10px;',
                                 src: 'resources/images/missions-box.png',
-                                padding: '14px 22px',
+                                padding: '17px 22px',
                             }],
                         }],
                     }, {
@@ -223,7 +223,7 @@ Ext.define('smiley360.view.Details', {
                                 xtype: 'image',
                                 style: 'margin-right: 10px;',
                                 src: 'resources/images/code.png',
-                                padding: '14px 23px',
+                                padding: '11px 23px',
                             }],
                         }],
                     }, {

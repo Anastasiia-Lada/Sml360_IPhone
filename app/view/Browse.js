@@ -188,8 +188,7 @@ Ext.define('smiley360.view.Browse', {
                                     {
                                     	xtype: 'container',
                                     	layout: 'hbox',
-                                    	style: 'background: #f0eceb;',
-                                    	padding: 20,
+                                    	style: 'background: #f0eceb; padding: 20px 10px 20px 20px;',
                                     	items: [
                                             {
                                             	xtype: 'container',
@@ -337,8 +336,7 @@ Ext.define('smiley360.view.Browse', {
                                     {
                                     	xtype: 'container',
                                     	layout: 'hbox',
-                                    	style: 'background: #f0eceb;',
-                                    	padding: 20,
+                                    	style: 'background: #f0eceb; padding: 20px 10px 20px 20px;',
                                     	items: [
                                             {
                                             	xtype: 'container',
@@ -481,8 +479,7 @@ Ext.define('smiley360.view.Browse', {
                                     {
                                     	xtype: 'container',
                                     	layout: 'hbox',
-                                    	style: 'background: #f0eceb;',
-                                    	padding: 20,
+                                    	style: 'background: #f0eceb; padding: 20px 10px 20px 20px;',
                                     	items: [
                                             {
                                             	xtype: 'container',
@@ -632,8 +629,7 @@ Ext.define('smiley360.view.Browse', {
                                     {
                                     	xtype: 'container',
                                     	layout: 'hbox',
-                                    	style: 'background: #f0eceb;',
-                                    	padding: 20,
+                                    	style: 'background: #f0eceb; padding: 20px 10px 20px 20px;',
                                     	items: [
                                             {
                                             	xtype: 'container',
@@ -794,8 +790,7 @@ Ext.define('smiley360.view.Browse', {
                                     {
                                     	xtype: 'container',
                                     	layout: 'hbox',
-                                    	style: 'background: #f0eceb;',
-                                    	padding: 20,
+                                    	style: 'background: #f0eceb; padding: 20px 10px 20px 20px;',
                                     	items: [
                                             {
                                             	xtype: 'container',
@@ -942,8 +937,7 @@ Ext.define('smiley360.view.Browse', {
                                     {
                                     	xtype: 'container',
                                     	layout: 'hbox',
-                                    	style: 'background: #f0eceb;',
-                                    	padding: 20,
+                                    	style: 'background: #f0eceb; padding: 20px 10px 20px 20px;',
                                     	items: [
                                             {
                                             	xtype: 'container',
@@ -1093,8 +1087,7 @@ Ext.define('smiley360.view.Browse', {
                                     {
                                     	xtype: 'container',
                                     	layout: 'hbox',
-                                    	style: 'background: #f0eceb;',
-                                    	padding: 20,
+                                    	style: 'background: #f0eceb; padding: 20px 10px 20px 20px;',
                                     	items: [
                                             {
                                             	xtype: 'container',
@@ -1241,15 +1234,15 @@ Ext.define('smiley360.view.Browse', {
 		});
 		var ContItem = FavoritedItem.add(new Ext.Container(
 		{
-			height: 100,
-			width: 100,
+			height: 90,
+			width: 90,
 			style: 'border-radius: 5px;',
 		}));
 		var Item = ContItem.add(new Ext.Img(
 		{
 			style: 'border-radius: 5px;background-color: white;',
 			src: smiley360.configuration.getResourceDomain() + '/' + oneItem.imageURL,
-			padding: 50,
+			padding: 45,
 			listeners: {
 				tap: function () {
 					this.up('#xBrowse').fireEvent('onBrandTapCommand', this, smiley360.memberData.UserId, oneItem.smileyconnectID, 0, 10);
@@ -1265,8 +1258,8 @@ Ext.define('smiley360.view.Browse', {
 		}));
 
 		Ext.getCmp('xMyFavorited').add(FavoritedItem);
-		if (NextItem.getHtml().toString().length > 12) {
-			NextItem.setHtml(NextItem.getHtml().toString().substr(0, 9) + '...');
+		if (NextItem.getHtml().toString().length > 10) {
+			NextItem.setHtml(NextItem.getHtml().toString().substr(0, 7) + '...');
 		};
 	},
 	//////////////
@@ -1290,8 +1283,8 @@ Ext.define('smiley360.view.Browse', {
 		});
 		var ContItem = HotItem.add(new Ext.Container(
 		{
-			height: 100,
-			width: 100,
+			height: 90,
+			width: 90,
 			style: 'border-radius: 5px;',
 		}));
 		var Item = ContItem.add(new Ext.Img(
@@ -1299,7 +1292,7 @@ Ext.define('smiley360.view.Browse', {
 			cls: 'browse-pict',
 			style: 'border-radius: 5px; background-color: white;',
 			src: smiley360.configuration.getResourceDomain() + '/' + oneItem.imageURL,
-			padding: 50,
+			padding: 45,
 			listeners: {
 				tap: function () {
 					this.up('#xBrowse').fireEvent('onBrandTapCommand', this, smiley360.memberData.UserId, oneItem.smileyconnectID, 0, 10);
@@ -1315,15 +1308,15 @@ Ext.define('smiley360.view.Browse', {
 		}));
 
 		Ext.getCmp('xMyHot').add(HotItem);
-		if (NextItem.getHtml().toString().length > 12) {
-			NextItem.setHtml(NextItem.getHtml().toString().substr(0, 9) + '...');
+		if (NextItem.getHtml().toString().length > 10) {
+			NextItem.setHtml(NextItem.getHtml().toString().substr(0, 7) + '...');
 		};
 	},
 	doCreateItems: function (items_arr, id, pos, category, categoryCount) {
 		var lbl_padding = '10px 0px 10px ';
 		if (pos == 'left') { lbl_padding += '20px'; }
-		if (pos == 'middle') { lbl_padding += '138px'; }
-		if (pos == 'right') { lbl_padding += '256px'; }
+		if (pos == 'middle') { lbl_padding += '128px'; }
+		if (pos == 'right') { lbl_padding += '236px'; }
 		var sub_categoryCount = categoryCount;
 		for (var key in items_arr) {
 			sub_categoryCount += 1;

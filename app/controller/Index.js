@@ -711,7 +711,7 @@ Ext.define('smiley360.controller.Index', {
                 profArray[fields[field]] = Ext.ComponentQuery.query('#' + fields[field] + '_signup')[0].getValue();
             if (fields[field] == 'birthdate') {
                 profArray[fields[field]] = Ext.ComponentQuery.query('#' + fields[field] + '_signup')[0].getFormattedValue();
-                alert(profArray[fields[field]]);
+                //alert(profArray[fields[field]]);
             };
             if (fields[field] == 'username')
                 profArray['username'] = Ext.ComponentQuery.query('#' + 'email' + '_signup')[0].getValue();

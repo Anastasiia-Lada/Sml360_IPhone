@@ -34,12 +34,14 @@ Ext.define('smiley360.view.Brand', {
                                 {
                                 	xtype: 'container',
                                 	laytout: { type: 'vbox' },
+									width: '100%',
                                 	cls: 'has-shadow',
                                 	items: [
 
                                         {
                                         	xtype: 'container',
                                         	layout: { type: 'hbox' },
+                                        	width: '100%',
                                         	style: 'background-color: #efecea;',
                                         	items: [
                                                 {
@@ -48,6 +50,7 @@ Ext.define('smiley360.view.Brand', {
                                                 	layout: {
                                                 		type: 'vbox',
                                                 	},
+													width: '55%',
                                                 	items: [
                                                         {
                                                         	xtype: 'label',
@@ -92,7 +95,7 @@ Ext.define('smiley360.view.Brand', {
                                                 {
                                                 	xtype: 'container',
                                                 	layout: { type: 'vbox', align: 'middle' },
-                                                	style: 'padding: 20px;',
+                                                	style: 'padding: 20px 0px;',
                                                 	items: [
                                                             {
                                                             	xtype: 'container',
@@ -124,8 +127,8 @@ Ext.define('smiley360.view.Brand', {
 																xtype: 'button',
 																cls: 'has-shadow follow-btn',
 																id: 'xBrandIsFollow',
-																style: 'font-family: franklin; font-size: 0.8em; letter-spacing: 1px;margin: 20px 0px 5px 0px;',
-																width: 120,
+																style: 'font-family: franklin; font-size: 0.6em; margin: 20px 0px 5px 0px;',
+																width: 135,
 																height: 30,
 																text: 'FOLLOW',
 																listeners: {
@@ -145,8 +148,8 @@ Ext.define('smiley360.view.Brand', {
 															{
 																xtype: 'button',
 																cls: 'has-shadow add-review-btn',
-																style: 'font-family: franklin; font-size: 0.8em; letter-spacing: 1px;margin: 5px 0px 5px 0px;',
-																width: 120,
+																style: 'font-family: franklin; font-size: 0.6em; margin: 5px 0px 5px 0px;',
+																width: 135,
 																height: 30,
 																text: 'ADD REVIEW',
 																listeners: {
@@ -376,7 +379,7 @@ Ext.define('smiley360.view.Brand', {
 		{
 			html: oneItem.sc_comment_text,
 			//html: 'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Proin vel malesuada odio. Phasellus aliquam dignissim scelerisque. Sed ullamcorper libero nec placerat posuere.',
-			style: 'color: #7c7a7b; font-size:1em; margin-top: -10px; padding: 0px 15px 10px 0px; word-wrap: break-all; background-color: #efecea; color:#413f40; font-family: \'franklin\';',
+			style: 'line-height: 110%; color: #7c7a7b; font-size:1em; margin-top: -10px; padding: 0px 15px 10px 0px; word-wrap: break-all; background-color: #efecea; color:#413f40; font-family: \'franklin\';',
 
 		}));
 		if (oneItem.commenter_isonMission == 1)

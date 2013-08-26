@@ -744,16 +744,16 @@
 .browse_container {
 	background: #e2ddda;
 	border-radius: 5px;
-	width: 100px;
-	height: 100px;
+	width: 90px;
+	height: 90px;
 }
 
 .after_browse_container {
 	background: #534b48;
 	border-radius: 5px;
 	margin-right: 18px;
-	width: 100px;
-	height: 100px;
+	width: 90px;
+	height: 90px;
 }
 
 .browse_text {
