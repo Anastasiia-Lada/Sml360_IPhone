@@ -1,5 +1,7 @@
 ﻿smiley360 = smiley360 || {};
 smiley360.services = smiley360.services || {};
+var mask = false;
+
 
 smiley360.services.authenticateservice = function (login, password, deviceId, onCompleted) {
 	smiley360.services.ajax(
@@ -184,6 +186,18 @@ smiley360.services.getMissionDetails = function (missionID, memberID, onComplete
 				});
         });
 }
+smiley360.services.getMissionSharingToolDetails = function (missionID, memberID, sharingTool_typeID, onCompleted) {
+	smiley360.services.ajax(
+		"getMissionSharingToolDetails",
+		{
+			missionID: missionID,
+			memberID: memberID,
+			sharingTool_typeID: sharingTool_typeID
+		},
+			onCompleted
+		);
+}
+
 
 smiley360.services.getConnectBrand = function (memberID, brandID, start, howmany, onCompleted) {
 	var brandResponse = { BrandId: brandID };
@@ -738,21 +752,40 @@ smiley360.services.postToFace2face = function (postData, onCompleted) {
 }
 
 /***************** Helper Members *****************/
+function delayedUnMask() {
+	Ext.Function.defer(function () {
+		if (mask == false) {
+			Ext.Viewport.setMasked(false);
+		}
+	}, 3500);
+}
 
 smiley360.services.ajax = function (method, params, onCompleted) {
+	mask = true;
+	//alert(Ext.Viewport.getMasked());
+	if (!Ext.Viewport.getMasked() || Ext.Viewport.getMasked()) {
+		Ext.Viewport.setMasked({ xtype: 'loadmask', indicator: true, message: 'We are fetching data for you...<br>Please, wait...' });
+	}
+
 	Ext.data.JsonP.request(
 	{
 		url: smiley360.configuration.getServerUrl() + "?method=" + method + "&params=" + Ext.JSON.encode(params),
 		callback: function (result, response) {
-		    if (response == null) {
-		        onCompleted(Ext.apply({ success: false }, response));
-		    }
-		    else if (response.error == 'Error. This method requires authorization') {
+			if (response == null) {
+				onCompleted(Ext.apply({ success: false }, response));
+				mask = false;
+				delayedUnMask();
+			}
+			else if (response.error == 'Error. This method requires authorization') {
 				Ext.Msg.alert('You are not authorized or your session is expired.');
 				smiley360.animateViewLeft('loginview');
+				mask = false;
+				delayedUnMask();
 			}
 			else {
 				onCompleted(Ext.apply({ success: (result && !response.error) }, response));
+				mask = false;
+				delayedUnMask();
 			}
 		}
 	});

@@ -32,7 +32,7 @@ Ext.define('smiley360.view.Connect', {
 						cls: 'heading-text active-sign',
 						style: 'padding-left: 15px;',
 						flex: 2,
-					},],
+					}, ],
 				}, {
 					xtype: 'container',
 					style: 'background-color: #efecea',
@@ -54,10 +54,9 @@ Ext.define('smiley360.view.Connect', {
 								me = Ext.getCmp('xFeaturedList');
 								carousel.pageTurner = new Ext.util.DelayedTask(function () {
 									//alert('fr' + Ext.getCmp('xSpecialOffersList').getActiveIndex());
-									if (Ext.getCmp('xFeaturedList').getActiveIndex() == Ext.getCmp('xFeaturedList').items.length - 2)
-									{
+									if (Ext.getCmp('xFeaturedList').getActiveIndex() == Ext.getCmp('xFeaturedList').items.length - 2) {
 										//alert('next page');
-										Ext.getCmp('xFeaturedList').setActiveItem(0);//(0, { type: 'slide', direction: 'right' })
+										//Ext.getCmp('xFeaturedList').setActiveItem(0);//(0, { type: 'slide', direction: 'right' })
 										//alert(Ext.getCmp('xSpecialOffersList').getActiveIndex());
 									}
 									else {
@@ -80,50 +79,53 @@ Ext.define('smiley360.view.Connect', {
 						xtype: 'container',
 						style: 'background-color: #F4F3F1; padding: 40px 25px;',
 						layout: 'vbox',
-						items: [{
-							xtype: 'panel',
-							layout: 'hbox',
-							style: 'border-radius: 5px 5px 0px 0px;',
-							cls: 'menu-list-btn-recieve',
-							listeners: {
-								element: 'element',
-								tap: function () {
-									this.up('#xConnectView').fireEvent('onSearchTapCommand', this, Ext.getCmp('BrandTitleSearchField').getValue().toString(), 10, 10);
+						items: [
+							{
+								xtype: 'panel',
+								hidden: true,
+								layout: 'hbox',
+								style: 'border-radius: 5px 5px 0px 0px;',
+								cls: 'menu-list-btn-recieve',
+								listeners: {
+									element: 'element',
+									tap: function () {
+										this.up('#xConnectView').fireEvent('onSearchTapCommand', this, Ext.getCmp('BrandTitleSearchField').getValue().toString(), 10, 10);
+									},
 								},
-							},
-							items: [{
-								xtype: 'container',
-								docked: 'left',
-								style: 'margin-top:-5px; ',
 								items: [{
-									xtype: 'label', style: 'border-radius: 5px 0px 0px 0px; margin-top:-5px; padding: 15px 2px 15px 15px; background: -webkit-linear-gradient(top, #9f9a98 0%, #423c39 100%);',
-									html: 'SEARCH',
-								}],
-							}, {
-								xtype: 'spacer',
-								style: 'margin-top:-5px; background: -webkit-linear-gradient(top, #9f9a98 0%, #423c39 100%);',
-							}, {
-								xtype: 'container',
-								width: 40,
-								style: 'margin-top:-5px; border-radius: 0px 5px 0px 0px; background: -webkit-linear-gradient(top, #9f9a98 0%, #423c39 100%); ',
-								//docked: 'right',
-								//cls: 'btn-icon-special',
-								items: [{
-									xtype: 'image',
-									height: 24,
-									width: 23,
-									style: 'margin-top: 10px;',
+									xtype: 'container',
+									docked: 'left',
+									style: 'margin-top:-5px; ',
+									items: [{
+										xtype: 'label', style: 'border-radius: 5px 0px 0px 0px; margin-top:-5px; padding: 15px 2px 15px 15px; background: -webkit-linear-gradient(top, #9f9a98 0%, #423c39 100%);',
+										html: 'SEARCH',
+									}],
+								}, {
+									xtype: 'spacer',
+									style: 'margin-top:-5px; background: -webkit-linear-gradient(top, #9f9a98 0%, #423c39 100%);',
+								}, {
+									xtype: 'container',
+									width: 40,
+									style: 'margin-top:-5px; border-radius: 0px 5px 0px 0px; background: -webkit-linear-gradient(top, #9f9a98 0%, #423c39 100%); ',
+									//docked: 'right',
 									//cls: 'btn-icon-special',
-									//style: 'background-position: 5px 5px;',
-									src: 'resources/images/search_connect.png',
-									padding: '14px 15px',
+									items: [{
+										xtype: 'image',
+										height: 24,
+										width: 23,
+										style: 'margin-top: 10px;',
+										//cls: 'btn-icon-special',
+										//style: 'background-position: 5px 5px;',
+										src: 'resources/images/search_connect.png',
+										padding: '14px 15px',
+									}],
 								}],
-							}],
-						},
+							},
 
 						{
 							xtype: 'panel',
 							layout: 'vbox',
+							hidden: true,
 							cls: 'has-shadow',
 							style: 'border-radius: 0px 0px 5px 5px; background-color: #e2ddda; margin: -20px -10px 30px -10px;',
 							id: 'search_panel',
@@ -145,21 +147,10 @@ Ext.define('smiley360.view.Connect', {
 								}],
 							}],
 						},
-						//{
-						//	xtype: 'button',
-						//	style: 'padding: 30px 0px 50px 0px; margin: 60px 0px;',
-						//	cls: 'connect-btn-browse',
-						//	text: 'BROWSE',
-						//	listeners: {
-						//		tap: function () {
-						//			this.up('#xConnectView').fireEvent('onBrowseTapCommand', this, smiley360.memberData.UserId);
-						//		},
-						//	},
-						//}
-						
 						{
 							xtype: 'panel',
 							layout: 'hbox',
+							style: 'margin-top: -50px;',
 							cls: 'menu-list-btn-recieve btn-icon-special',
 							listeners: {
 								element: 'element',
@@ -172,7 +163,7 @@ Ext.define('smiley360.view.Connect', {
 								docked: 'left',
 								items: [{
 									xtype: 'label', style: 'padding: 15px 2px 15px 15px;',
-									html: 'BROWSE',
+									html: 'BROWSE BRANDS',
 								}],
 							}, {
 								xtype: 'spacer',
@@ -253,7 +244,7 @@ Ext.define('smiley360.view.Connect', {
 				style: 'background-color: white; border-radius: 5px; border-style: solid; border-width: 1px; border-color: white;',
 				src: smiley360.configuration.getResourceDomain() + '/' + oneItem.imageURL,//'resources/images/offers_logo3.png',
 				width: 100,
-			    height: 100,
+				height: 100,
 				listeners: {
 					tap: function () {
 						this.up('#xConnectView').fireEvent('onBrandTapCommand', this, smiley360.memberData.UserId, oneItem.smileyconnectID, 0, 100);
