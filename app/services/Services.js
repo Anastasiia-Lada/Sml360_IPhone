@@ -384,8 +384,7 @@ smiley360.services.createComment = function (commentData, onCompleted) {
         	brandID: commentData.brandID,
         	text: commentData.text,
         	rating: commentData.rating,
-        	pageSize: commentData.pageSize,
-        	photoData: commentData.photoData,
+        	imageID: 23,//commentData.imageID,
         },
         onCompleted);
 }
@@ -763,9 +762,17 @@ function delayedUnMask() {
 smiley360.services.ajax = function (method, params, onCompleted) {
 	mask = true;
 	//alert(Ext.Viewport.getMasked());
-	if (!Ext.Viewport.getMasked() || Ext.Viewport.getMasked()) {
-		Ext.Viewport.setMasked({ xtype: 'loadmask', indicator: true, message: 'We are fetching data for you...<br>Please, wait...' });
-	}
+	var preventLoadIndicator = false;
+	var noSpecialLoadMethods = ['getMissionSharingToolDetails', 'postconnect', 'postblog',
+		'postyoutube', 'postfacebook', 'posttwitter', 'postuploadphoto'];
+	for (var method_key in noSpecialLoadMethods)
+		if (noSpecialLoadMethods[method_key] == method)
+			preventLoadIndicator = true;
+
+	if (isLoadedApp && !preventLoadIndicator)
+		if (!Ext.Viewport.getMasked() || Ext.Viewport.getMasked()) {
+			Ext.Viewport.setMasked({ xtype: 'loadmask', indicator: true, message: 'We are fetching data for you...<br>Please, wait...' });
+		}
 
 	Ext.data.JsonP.request(
 	{

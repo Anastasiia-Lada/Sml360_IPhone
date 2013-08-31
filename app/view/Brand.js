@@ -50,7 +50,7 @@ Ext.define('smiley360.view.Brand', {
                                                 	layout: {
                                                 		type: 'vbox',
                                                 	},
-                                                	width: '50%',
+                                                	width: '45%',
                                                 	items: [
                                                         {
                                                         	xtype: 'label',
@@ -71,6 +71,7 @@ Ext.define('smiley360.view.Brand', {
 														{
 															xtype: 'container',
 															layout: 'hbox',
+															hidden: true,
 															id: 'Top10Container',
 															style: 'padding-left: 15px;',
 															items: [
@@ -95,13 +96,14 @@ Ext.define('smiley360.view.Brand', {
                                                 },
                                                 {
                                                 	xtype: 'container',
-                                                	layout: { type: 'vbox', align: 'middle' },
-                                                	style: 'padding: 20px 0px;',
+                                                	layout: { type: 'vbox', },
+                                                	style: 'padding: 20px 0px 20px 30px;',
+													width:'50%',
                                                 	items: [
                                                             {
                                                             	xtype: 'container',
                                                             	layout: { type: 'vbox', align: 'middle' },
-                                                            	style: 'padding: 20px 0px 0px 20px; background-color: white; border-style:inset; border-width: 1px; border-radius: 5px;',
+                                                            	style: 'padding: 20px 0px 0px 30px; background-color: white; border-style:inset; border-width: 1px; border-radius: 5px;',
                                                             	cls: 'has-shadow browse-pict',
                                                             	width: 120,
                                                             	height: 120,
@@ -119,7 +121,7 @@ Ext.define('smiley360.view.Brand', {
                                                             	labelWidth: 'auto',
                                                             	itemsCount: 5,
                                                             	readOnly: true,
-                                                            	style: 'padding: 10px 0px 30px 0px;',
+                                                            	style: 'padding: 10px 0px 10px 10px;',
                                                             	itemCls: 'x-rating-star',
                                                             	itemHoverCls: 'x-rating-star-hover',
                                                             	disabled: true
@@ -387,7 +389,7 @@ Ext.define('smiley360.view.Brand', {
 			LabelItem = MiddleSubItem.add(new Ext.Label(
 			{
 				cls: 'rew_comment',
-				style: 'font-size:0.8em; margin-top: -10px; padding: 0px 15px 10px 0px; word-wrap: break-all; background-color: #efecea;font-family: \'franklin\';',
+				style: 'font-size:0.8em; margin-top: 0px; padding: 0px 15px 10px 0px; word-wrap: break-all; background-color: #efecea;font-family: \'franklin\';',
 				html: 'I\'m on the mission!',
 			}));
 		//right
