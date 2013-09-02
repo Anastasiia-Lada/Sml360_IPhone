@@ -1,3 +1,4 @@
+var local_name = '';
 Ext.define('smiley360.view.ConnectPopUp', {
 	extend: 'Ext.Container',
 	alias: 'widget.connectpopupview',
@@ -60,11 +61,18 @@ Ext.define('smiley360.view.ConnectPopUp', {
 					cls: 'popup-submit-button',
 					listeners: {
 						tap: function () {
-							this.up('#xView').destroy();
-							
-								allow_fb = true;
+							allow_fb = true;
 							if (smiley360.memberData.Profile.twitter_token && smiley360.memberData.Profile.twitter_token != "")
 								allow_twitter = true;
+							if (local_name == 'Facebook') {
+								this.up('#xView').onFacebookLoginTap();
+							}
+							else {
+								this.up('#xView').onTwitterLoginTap();
+							};
+
+							this.up('#xView').destroy();
+
 							//Ext.widget('missingoffersview').hide();
 							//Ext.getCmp('xMainView').showExternalView('editprofileview');
 						}
@@ -94,11 +102,7 @@ Ext.define('smiley360.view.ConnectPopUp', {
 
 		xMessageText.setHtml(Ext.String.format(
             xMessageText.getHtml(), name));
-
-		if (name == 'Facebook')
-			this.onFacebookLoginTap();
-		else
-			this.onTwitterLoginTap();
+		local_name = name;
 	},
 	onFacebookLoginTap: function () {
 		var deviceId = Ext.getStore('membersStore').getAt(0).data.deviceId;

@@ -1038,7 +1038,7 @@ smiley360.setViewStatus = function (view, status, states) {
 				statusAnimation.from = { width: xStatusIndicator.getWidth() };
 
 				var task = new Ext.util.DelayedTask(function () {
-
+					
 					xShareButton.setText(states.initial);
 					xShareButton.enable();
 
@@ -1067,12 +1067,6 @@ smiley360.setViewStatus = function (view, status, states) {
 				statusAnimation.from = { width: xStatusIndicator.getWidth() };
 
 				var task = new Ext.util.DelayedTask(function () {
-
-					//var openview = Ext.widget('connectpopupview').show();
-					//if (openview.setToolName) {
-					//	openview.setToolName('Facebook');
-					//};
-
 					xShareButton.setText(states.initial);
 					xShareButton.enable();
 

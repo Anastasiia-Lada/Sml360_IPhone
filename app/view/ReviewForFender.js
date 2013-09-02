@@ -308,7 +308,8 @@ Ext.define('smiley360.view.ReviewForFender', {
 			painted: function () {
 				var fileName = guid();
 				var uploadUrl = smiley360.configuration.getServerDomain() +
-                    'getfile.php?foldername=comments&filename=' + fileName;
+                    'getfile.php?memberID=' + smiley360.memberData.UserId +
+                    '&deviceID=' + Ext.getStore('membersStore').getAt(0).data.deviceId;
 
 				this.down('#xAddPhotoButton').setUrl(uploadUrl);
 			}
