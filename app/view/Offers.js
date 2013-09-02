@@ -320,8 +320,7 @@ Ext.define('smiley360.view.Offers', {
 			domContainer.appendChild(descTag);
 
 			var xOfferList = this.down('#xOfferList' + oneItem.mission_categoryID);
-			if (xOfferList)
-			{
+			if (xOfferList) {
 				//xOfferList.removeAll(true, true);
 				xOfferList.add(allContainer);
 				this.down('#xOfferListHeader' + oneItem.mission_categoryID).setCls('heading-text active-sign');
@@ -333,4 +332,5 @@ Ext.define('smiley360.view.Offers', {
 			smiley360.memberData.isProfileComplete.complete = 'user is already informed'
 		}
 	},
+	
 });

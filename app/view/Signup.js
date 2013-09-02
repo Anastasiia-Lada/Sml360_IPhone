@@ -117,7 +117,7 @@ Ext.define('smiley360.view.Signup', {
 					element: 'element',
 					tap: function () {
 						if (this.getValue() == null)
-							this.setValue({ year: 1970, day: 1, month: 1 });
+							this.setValue({ year: 1970, month: 1, day: 1});
 					},
 				}
 			}, {

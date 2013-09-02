@@ -1,5 +1,5 @@
 var counter = 0;
-
+var compareTo;
 Ext.define('smiley360.view.Home', {
 	extend: 'Ext.Panel',
 	alias: 'widget.homeview',
@@ -85,33 +85,54 @@ Ext.define('smiley360.view.Home', {
 						width: '100%',
 						height: 130,
 						listeners: {
-							painted:
-                                function (carousel) {
-                                	me = Ext.getCmp('xSpecialOffersList');
+							painted: function () {
+								
+								var carousel = Ext.getCmp('xSpecialOffersList');
 
-                                	carousel.pageTurner = new Ext.util.DelayedTask(
-                                        function () {
-                                        	//alert('fr' + Ext.getCmp('xSpecialOffersList').getActiveIndex());
-                                        	if (Ext.getCmp('xSpecialOffersList').getActiveIndex() == Ext.getCmp('xSpecialOffersList').items.length - 1) {
-                                        		//alert('next page');
-                                        		if (Ext.getCmp('SpCont0')) {
-                                        			//console.log(Ext.getCmp('SpCont0').valueOf());
-                                        			//Ext.getCmp('xFeaturedList').setActiveItem(Ext.getCmp('SpCont0'));
-                                        			//alert(Ext.getCmp('xSpecialOffersList').getActiveIndex());
-                                        		}
-                                        	}
-                                        	else {
-                                        		Ext.getCmp('xSpecialOffersList').next();
-                                        	}
-                                        	//console.log(me.pageTurner.valueOf());
-                                        	//me.pageTurner.delay(3000); //comment this to avoid js-bug
-                                        }, carousel);
-
-                                	carousel.pageTurner.delay(3000);
-                                },
+								Ext.Function.defer(function () {
+										carousel.next(this, { type: 'slide', direction: 'right' });
+								}, 3000);
+							},
 							activeitemchange: function () {
+								var carousel = Ext.getCmp('xSpecialOffersList');
+								compareTo = parseInt(Ext.getCmp('xSpecialOffersList').getItemLength() - 1);
 
-							}
+								if (Ext.getCmp('xSpecialOffersList').getActiveIndex() == compareTo) {
+
+									var first_cr = carousel.getAt(0);
+									Ext.Function.defer(function () {
+										carousel.setActiveItem(first_cr, { type: 'slide', direction: 'right' });
+									}, 3000);
+								}
+								else {
+									Ext.Function.defer(function () {
+										carousel.next(this, { type: 'slide', direction: 'right' });
+									}, 3000);
+								}
+								//function (carousel) {
+								//me = Ext.getCmp('xSpecialOffersList');
+
+								//carousel.pageTurner = new Ext.util.DelayedTask(
+								//    function () {
+								//    	//alert('fr' + Ext.getCmp('xSpecialOffersList').getActiveIndex());
+								//    	if (Ext.getCmp('xSpecialOffersList').getActiveIndex() == Ext.getCmp('xSpecialOffersList').items.length - 1) {
+								//    		//alert('next page');
+								//    		if (Ext.getCmp('SpCont0')) {
+								//    			//console.log(Ext.getCmp('SpCont0').valueOf());
+								//    			//Ext.getCmp('xFeaturedList').setActiveItem(Ext.getCmp('SpCont0'));
+								//    			//alert(Ext.getCmp('xSpecialOffersList').getActiveIndex());
+								//    		}
+								//    	}
+								//    	else {
+								//    		Ext.getCmp('xSpecialOffersList').next();
+								//    	}
+								//    	//console.log(me.pageTurner.valueOf());
+								//    	//me.pageTurner.delay(3000); //comment this to avoid js-bug
+								//    }, carousel);
+
+								//carousel.pageTurner.delay(3000);
+								//},
+							},
 						},
 					}, {
 						xtype: 'button',
@@ -227,14 +248,14 @@ Ext.define('smiley360.view.Home', {
 				myLink: oneItem.link,
 				listeners: {
 					element: 'element',
-					tap: function () {						
+					tap: function () {
 						if (this.config.myLink != "") {
-							//try {
-							Ext.device.Device.openURL(this.config.myLink);
-							//}
-							//catch (err) {
-							//	window.open(this.Mylink, '_blank');
-							//}
+							try {
+								Ext.device.Device.openURL(this.config.myLink);
+							}
+							catch (err) {
+								window.open(this.config.Mylink, '_blank');
+							}
 						}//Ext.device.Device.openURL(oneItem.link);//window.open(oneItem.link)
 						else {
 							Ext.getCmp('xConnectView').fireEvent('onBrandTapCommand', this, smiley360.memberData.UserId, this.getId().substr(6), 0, 100);

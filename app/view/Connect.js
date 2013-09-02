@@ -50,21 +50,47 @@ Ext.define('smiley360.view.Connect', {
 							styleHtmlContent: true
 						},
 						listeners: {
-							painted: function (carousel) {
-								me = Ext.getCmp('xFeaturedList');
-								carousel.pageTurner = new Ext.util.DelayedTask(function () {
-									//alert('fr' + Ext.getCmp('xSpecialOffersList').getActiveIndex());
-									if (Ext.getCmp('xFeaturedList').getActiveIndex() == Ext.getCmp('xFeaturedList').items.length - 2) {
-										//alert('next page');
-										//Ext.getCmp('xFeaturedList').setActiveItem(0);//(0, { type: 'slide', direction: 'right' })
-										//alert(Ext.getCmp('xSpecialOffersList').getActiveIndex());
-									}
-									else {
-										Ext.getCmp('xFeaturedList').next();
-									}
-								}, carousel);
+							painted: function () {
+								
+								var carousel = Ext.getCmp('xFeaturedList');
 
-								carousel.pageTurner.delay(3000);
+								Ext.Function.defer(function () {
+									carousel.next(this, { type: 'slide', direction: 'right' });
+								}, 3000);
+							},
+							activeitemchange: function () {
+								var carousel = Ext.getCmp('xFeaturedList');
+								compareTo = parseInt(Ext.getCmp('xFeaturedList').getItemLength() - 1);
+
+								if (Ext.getCmp('xFeaturedList').getActiveIndex() == compareTo) {
+
+									var first_cr = carousel.getAt(0);
+									Ext.Function.defer(function () {
+										carousel.setActiveItem(first_cr, { type: 'slide', direction: 'right' });
+									}, 3000);
+								}
+								else {
+									Ext.Function.defer(function () {
+										carousel.next(this, { type: 'slide', direction: 'right' });
+									}, 3000);
+								}
+
+
+							//painted: function (carousel) {
+							//	me = Ext.getCmp('xFeaturedList');
+							//	carousel.pageTurner = new Ext.util.DelayedTask(function () {
+							//		//alert('fr' + Ext.getCmp('xSpecialOffersList').getActiveIndex());
+							//		if (Ext.getCmp('xFeaturedList').getActiveIndex() == Ext.getCmp('xFeaturedList').items.length - 2) {
+							//			//alert('next page');
+							//			//Ext.getCmp('xFeaturedList').setActiveItem(0);//(0, { type: 'slide', direction: 'right' })
+							//			//alert(Ext.getCmp('xSpecialOffersList').getActiveIndex());
+							//		}
+							//		else {
+							//			Ext.getCmp('xFeaturedList').next();
+							//		}
+							//	}, carousel);
+
+							//	carousel.pageTurner.delay(3000);
 							}
 						},
 					}, {

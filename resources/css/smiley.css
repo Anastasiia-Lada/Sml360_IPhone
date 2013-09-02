@@ -158,7 +158,7 @@
 
 .popup-checkbox-red-label {
 	margin: 0px 0px 0px 0px;
-	padding: 0px 0px 0px 30px;
+	padding: 0px 0px 0px 25px;
 	font-size: 10pt;
 	font-family: din bold;
 	background-color: transparent !important;
@@ -290,6 +290,7 @@
 }
 
 .popup-photo-button {
+	border: 0;
 	margin: 5px 5px 5px 0px;
 	padding: 10px 5px;
 	font-size: 11pt;
@@ -299,6 +300,7 @@
 }
 
 .popup-photo-button-required {
+	border: 0;
 	margin: 5px 5px 5px 0px;
 	padding: 10px 5px;
 	font-size: 11pt;
@@ -1115,14 +1117,14 @@
 	text-shadow: none;
 	line-height: auto;
 	width: 1.4em;
-	height: 1.05em;
-	padding: 0em 0.4em;
-	margin-right: 1em;
+	height: 1.4em;
+	margin: 0em 1em;
+	padding: 0em;
 }
-
 
 .x-button.x-button-plain.toolbar-btn-menu-size .x-button-icon, .x-toolbar .x-button.x-button-plain.toolbar-btn-menu-size .x-button-icon {
 	-webkit-mask-size: 1em 1.05em;
+	-webkit-mask-repeat: no-repeat;
 	/*width: 1.1em;*/
 	/*height: 1.05em;*/
 }
@@ -1130,6 +1132,7 @@
 .x-button.x-button-plain.toolbar-btn-back-size .x-button-icon, .x-toolbar .x-button.x-button-plain.toolbar-btn-back-size .x-button-icon {
 	-webkit-mask-size: 1em 1.05em;
 	width: 1.05em;
+	-webkit-mask-repeat: no-repeat;
 	/*height: 1.05em;*/
 }
 

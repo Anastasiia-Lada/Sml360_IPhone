@@ -89,15 +89,22 @@ Ext.define('smiley360.view.EditProfile', {
 					name: 'calDob',
 					ui: 'light',
 					readOnly: true,
+					dateFormat: 'Y-m-d',
 					picker: {
 						yearFrom: 1900,
 					},
 					placeHolder: 'Date of birth',
 					required: true,
+					
 					listeners: {
 						painted: function () {
-							if (smiley360.memberData.Profile.birthdate == "" || smiley360.memberData.Profile.birthdate == null)
+							if (smiley360.memberData.Profile.birthdate == "" || smiley360.memberData.Profile.birthdate == null || smiley360.memberData.Profile.birthdate == "0000-00-00")
 								this.setReadOnly(false);
+						},
+						element: 'element',
+						tap: function () {
+							if (!this.getReadOnly())
+								this.setValue({ year: 1970, month: 1, day: 1 });								
 						}
 					}
 				}, {
@@ -111,8 +118,9 @@ Ext.define('smiley360.view.EditProfile', {
 					readOnly: true,
 					listeners: {
 						painted: function () {
-							if (smiley360.memberData.Profile.gender == "" || smiley360.memberData.Profile.birthdate == null)
+							if (smiley360.memberData.Profile.gender == "" || smiley360.memberData.Profile.gender == null) {
 								this.setReadOnly(false);
+							}
 						}
 					},
 					options: [
@@ -511,7 +519,14 @@ Ext.define('smiley360.view.EditProfile', {
                         ? Ext.getCmp(field + '1')
                         : Ext.getCmp(field);
 
-					if (element && (field != 'race')) {
+					if (element && (field == 'birthdate')) {
+						if (profile[field] != "0000-00-00")
+							element.setValue({ year: parseInt(profile[field].toString().substr(0, 4)), month: parseInt(profile[field].toString().substr(5, 2)), day: parseInt(profile[field].toString().substr(8, 2)) });//profile[field]);
+
+					}
+
+
+					if (element && (field != 'race') && (field != 'birthdate')) {
 						element.setValue(profile[field]);
 					}
 					else if (field == 'race') {

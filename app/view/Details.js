@@ -111,7 +111,7 @@ Ext.define('smiley360.view.Details', {
                     }, {
                         xtype: 'label',
                         id: 'xDetailsPromo',
-                        style: 'font-family: franklin; font-size:1em;padding: 30px 0px 50px 0px; margin: -113px 0px 50px 0px;',
+                        style: 'font-family: din bold; font-size:1em;padding: 50px 20px 0px; margin: -113px 0px 50px 0px;',
                         html: '',
                         padding: '10px 20px',
                     }, {
@@ -375,17 +375,17 @@ Ext.define('smiley360.view.Details', {
                 console.log('Details view showed!');
             },
 
-            painted: function () {
-                console.log('Details view painted!');
-                this.up('#xMainView').enableSharing();
-                Ext.Viewport.element.dom.addEventListener('click', function (e) {
-                	if (e.target.tagName !== 'A') {
-                		return;
-                	};
-                	e.preventDefault();
-                	var href = e.target.getAttribute('href');
-                }, false);
-            },
+            //painted: function () {
+            //    console.log('Details view painted!');
+            //    this.up('#xMainView').enableSharing();
+            //    Ext.Viewport.element.dom.addEventListener('click', function (e) {
+            //    	if (e.target.tagName !== 'A') {
+            //    		return;
+            //    	};
+            //    	e.preventDefault();
+            //    	var href = e.target.getAttribute('href');
+            //    }, false);
+            //},
         },
     },
 

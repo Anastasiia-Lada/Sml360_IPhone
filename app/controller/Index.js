@@ -548,11 +548,16 @@ Ext.define('smiley360.controller.Index', {
             	if (response.success) {
             		//delete response.success;
             		if (response) {
+
             			if (response[0].link != null)
             				if (shareView.setLink) {
             					shareView.setLink(response[0].link);
             				};
             			if (response[0].seedphrase != null) {
+
+            				if (shareView.down('#xCharacterMaximum')) {
+            					shareView.setCharacterMaximum(140 - response[0].seedphrase.length);
+            				};
 
             				if (shareView.setSeedPhrase) {
             					shareView.setSeedPhrase(response[0].seedphrase);
@@ -611,7 +616,7 @@ Ext.define('smiley360.controller.Index', {
             'fName',
             'lName',
             'email',
-            'birthdate',
+            'dob',
             'gender',
             'blogURL',
             'aboutself',
@@ -629,12 +634,14 @@ Ext.define('smiley360.controller.Index', {
 		var profArray = {};
 
 		for (var field in fields) {
-			if (fields[field] == 'birthdate' || fields[field] == 'race') {
+			if (fields[field] == 'dob' || fields[field] == 'race') {
 				console.log('Datebirthfield or Race')
 			}
 			else {
 				profArray[fields[field]] = Ext.ComponentQuery.query('#' + fields[field])[0].getValue();
 			}
+			if (fields[field] == 'dob')
+				profArray[fields[field]] = Ext.ComponentQuery.query('#' + 'birthdate')[0].getFormattedValue();
 
 			if (fields[field] == 'race') {
 				profArray[fields[field]] = '';
@@ -962,8 +969,9 @@ smiley360.setResponseStatus = function (view, response, states) {
 	var status = response.success ?
         smiley360.viewStatus.successful :
         smiley360.viewStatus.unsuccessful;
-	if (!response.success || response.status == 'failed')
-		smiley360.viewStatus.unsuccessful;
+	if (!response.success || response.status == 'failed') {
+		status = smiley360.viewStatus.unsuccessful;
+	}
 	smiley360.setViewStatus(view, status, states);
 }
 
@@ -1030,6 +1038,7 @@ smiley360.setViewStatus = function (view, status, states) {
 				statusAnimation.from = { width: xStatusIndicator.getWidth() };
 
 				var task = new Ext.util.DelayedTask(function () {
+
 					xShareButton.setText(states.initial);
 					xShareButton.enable();
 
@@ -1058,6 +1067,12 @@ smiley360.setViewStatus = function (view, status, states) {
 				statusAnimation.from = { width: xStatusIndicator.getWidth() };
 
 				var task = new Ext.util.DelayedTask(function () {
+
+					//var openview = Ext.widget('connectpopupview').show();
+					//if (openview.setToolName) {
+					//	openview.setToolName('Facebook');
+					//};
+
 					xShareButton.setText(states.initial);
 					xShareButton.enable();
 

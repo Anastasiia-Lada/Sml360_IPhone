@@ -88,16 +88,16 @@
             	smilesCurrent: shareItem.sharingTool_perShare_smiles,
             	listeners: {
             		tap: function () {
-            			if ((shareViewAlias == 'sharetofacebookview' && (!smiley360.memberData.Profile.fbtoken || smiley360.memberData.Profile.fbtoken == ""))
-							|| (shareViewAlias == 'sharetotwitterview' && (!smiley360.memberData.Profile.twitter_token || smiley360.memberData.Profile.twitter_token == ""))) {
+            			//if ((shareViewAlias == 'sharetofacebookview' && (!smiley360.memberData.Profile.fbtoken || smiley360.memberData.Profile.fbtoken == ""))
+						//	|| (shareViewAlias == 'sharetotwitterview' && (!smiley360.memberData.Profile.twitter_token || smiley360.memberData.Profile.twitter_token == ""))) {
             				
-            				var shareView = Ext.widget('connectpopupview').show();
-            				if (shareView.setToolName)
-            					if (shareViewAlias == 'sharetofacebookview')
-            						shareView.setToolName('Facebook')
-            					else shareView.setToolName('Twitter');
-            			}
-
+            			//	var shareView = Ext.widget('connectpopupview').show();
+            			//	if (shareView.setToolName)
+            			//		if (shareViewAlias == 'sharetofacebookview')
+            			//			shareView.setToolName('Facebook')
+            			//		else shareView.setToolName('Twitter');
+            			//}
+            			if (false) { }
             			else {
             				var shareView = Ext.widget(shareViewAlias).show();
             				Ext.getCmp('xDetailsView').fireEvent('goSetSharingInfo', this, me.missionDetails.MissionId, smiley360.memberData.UserId, shareItem.sharingTool_typeID, shareView);

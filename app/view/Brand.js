@@ -97,13 +97,13 @@ Ext.define('smiley360.view.Brand', {
                                                 {
                                                 	xtype: 'container',
                                                 	layout: { type: 'vbox', },
-                                                	style: 'padding: 20px 0px 20px 30px;',
+                                                	style: 'padding: 20px 0px 20px 20px;',
 													width:'50%',
                                                 	items: [
                                                             {
                                                             	xtype: 'container',
                                                             	layout: { type: 'vbox', align: 'middle' },
-                                                            	style: 'padding: 20px 0px 0px 30px; background-color: white; border-style:inset; border-width: 1px; border-radius: 5px;',
+                                                            	style: 'padding: 20px 0px 0px 20px; margin-left: 5px; background-color: white; border-style:inset; border-width: 1px; border-radius: 5px;',
                                                             	cls: 'has-shadow browse-pict',
                                                             	width: 120,
                                                             	height: 120,
@@ -121,7 +121,7 @@ Ext.define('smiley360.view.Brand', {
                                                             	labelWidth: 'auto',
                                                             	itemsCount: 5,
                                                             	readOnly: true,
-                                                            	style: 'padding: 10px 0px 10px 10px;',
+                                                            	style: 'padding: 10px 0px 10px 5px;',
                                                             	itemCls: 'x-rating-star',
                                                             	itemHoverCls: 'x-rating-star-hover',
                                                             	disabled: true

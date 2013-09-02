@@ -12,7 +12,9 @@ Ext.define('smiley360.view.Survey', {
                 xtype: 'panel',
                 margin: '0px -16px 0px 0px',
                 html: '<iframe id="xSurveyFrame" frameborder="0" scrolling="yes" class="popup-survey-iframe"></iframe>',
+                
             }]
         }],
     },
+    
 });

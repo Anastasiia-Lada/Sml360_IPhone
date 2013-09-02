@@ -431,18 +431,18 @@ Ext.define('smiley360.view.OfferDetails', {
 
 		],
 		listeners: {
-			show: function () {
-				Ext.getCmp('xOfferView').fireEvent('getAddressCommand', this, smiley360.memberData.UserId);
-				console.log('OfferDetails view showed!');
-				this.setOfferDetails();
-				Ext.Viewport.element.dom.addEventListener('click', function (e) {
-					if (e.target.tagName !== 'A') {
-						return;
-					};
-					e.preventDefault();
-					var href = e.target.getAttribute('href');
-				}, false);
-			},
+			//show: function () {
+			//	Ext.getCmp('xOfferView').fireEvent('getAddressCommand', this, smiley360.memberData.UserId);
+			//	console.log('OfferDetails view showed!');
+			//	this.setOfferDetails();
+			//	Ext.Viewport.element.dom.addEventListener('click', function (e) {
+			//		if (e.target.tagName !== 'A') {
+			//			return;
+			//		};
+			//		e.preventDefault();
+			//		var href = e.target.getAttribute('href');
+			//	}, false);
+			//},
 		},
 	},
 	onGoToProfileTap: function () {
