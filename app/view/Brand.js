@@ -97,8 +97,8 @@ Ext.define('smiley360.view.Brand', {
                                                 {
                                                 	xtype: 'container',
                                                 	layout: { type: 'vbox', },
-                                                	style: 'padding: 20px 0px 20px 20px;',
-													width:'50%',
+                                                	style: 'padding: 20px 0px 20px 30px;',
+													width:'41%',
                                                 	items: [
                                                             {
                                                             	xtype: 'container',

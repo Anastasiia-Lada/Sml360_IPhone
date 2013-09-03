@@ -110,7 +110,7 @@ Ext.define('smiley360.view.UploadPhoto', {
 
                                 xPostCountLabel.setHtml(postLenght.toString());
 
-                                if (postLenght > 84) {
+                                if (postLenght > Ext.getCmp('xCharacterMaximum').config.xMax) {
                                     xPostCountLabel.setStyle('color: red;')
                                 }
                                 else {
@@ -125,7 +125,8 @@ Ext.define('smiley360.view.UploadPhoto', {
                     items: [{
                         xtype: 'label',
                         cls: 'popup-post-bottom-text',
-						id: 'xCharacterMaximum',
+                        id: 'xCharacterMaximum',
+						xMax: 140,
                         style: 'color: #878789;',
 						html: 'Post must contain a maximum of {0} characters.',
                     }, {
@@ -287,7 +288,8 @@ Ext.define('smiley360.view.UploadPhoto', {
 			Ext.getCmp('xShareButton').setDisabled(false)
 		else Ext.getCmp('xShareButton').setDisabled(true);
 	},
-	setCharacterMaximum: function (number) {
+    setCharacterMaximum: function (number) {
+    	this.down('#xCharacterMaximum').config.xMax = number;
 		this.down('#xCharacterMaximum').setHtml(Ext.String.format(
             this.down('#xCharacterMaximum').getHtml(), number));
 	},

@@ -85,55 +85,48 @@ Ext.define('smiley360.view.Home', {
 						width: '100%',
 						height: 130,
 						listeners: {
-							painted: function () {
-								
-								var carousel = Ext.getCmp('xSpecialOffersList');
+							painted:
+							//	function () {
 
-								Ext.Function.defer(function () {
-										carousel.next(this, { type: 'slide', direction: 'right' });
-								}, 3000);
-							},
-							activeitemchange: function () {
-								var carousel = Ext.getCmp('xSpecialOffersList');
-								compareTo = parseInt(Ext.getCmp('xSpecialOffersList').getItemLength() - 1);
+							//	var carousel = Ext.getCmp('xSpecialOffersList');
 
-								if (Ext.getCmp('xSpecialOffersList').getActiveIndex() == compareTo) {
+							//	Ext.Function.defer(function () {
+							//			carousel.next(this, { type: 'slide', direction: 'right' });
+							//	}, 3000);
+							//},
+							//activeitemchange: function () {
+							//	var carousel = Ext.getCmp('xSpecialOffersList');
+							//	compareTo = parseInt(Ext.getCmp('xSpecialOffersList').getItemLength() - 1);
 
-									var first_cr = carousel.getAt(0);
-									Ext.Function.defer(function () {
-										carousel.setActiveItem(first_cr, { type: 'slide', direction: 'right' });
-									}, 3000);
-								}
-								else {
-									Ext.Function.defer(function () {
-										carousel.next(this, { type: 'slide', direction: 'right' });
-									}, 3000);
-								}
-								//function (carousel) {
-								//me = Ext.getCmp('xSpecialOffersList');
+							//	if (Ext.getCmp('xSpecialOffersList').getActiveIndex() == compareTo) {
 
-								//carousel.pageTurner = new Ext.util.DelayedTask(
-								//    function () {
-								//    	//alert('fr' + Ext.getCmp('xSpecialOffersList').getActiveIndex());
-								//    	if (Ext.getCmp('xSpecialOffersList').getActiveIndex() == Ext.getCmp('xSpecialOffersList').items.length - 1) {
-								//    		//alert('next page');
-								//    		if (Ext.getCmp('SpCont0')) {
-								//    			//console.log(Ext.getCmp('SpCont0').valueOf());
-								//    			//Ext.getCmp('xFeaturedList').setActiveItem(Ext.getCmp('SpCont0'));
-								//    			//alert(Ext.getCmp('xSpecialOffersList').getActiveIndex());
-								//    		}
-								//    	}
-								//    	else {
-								//    		Ext.getCmp('xSpecialOffersList').next();
-								//    	}
-								//    	//console.log(me.pageTurner.valueOf());
-								//    	//me.pageTurner.delay(3000); //comment this to avoid js-bug
-								//    }, carousel);
+							//		var first_cr = carousel.getAt(0);
+							//		Ext.Function.defer(function () {
+							//			carousel.setActiveItem(first_cr, { type: 'slide', direction: 'right' });
+							//		}, 3000);
+							//	}
+							//	else {
+							//		Ext.Function.defer(function () {
+							//			carousel.next(this, { type: 'slide', direction: 'right' });
+							//		}, 3000);
+							//	}
+								function (carousel) {
+									carousel.pageTurner = new Ext.util.DelayedTask(function () {
+										if (Ext.getCmp('xSpecialOffersList').getActiveIndex() == Ext.getCmp('xSpecialOffersList').items.length - 1) {
+											Ext.getCmp('xSpecialOffersList').setActiveItem(0, 'slide');
+										}
+										else {
+											Ext.getCmp('xSpecialOffersList').next();
+										}
+										
+											Ext.getCmp('xSpecialOffersList').pageTurner.delay(3000);
+									}, carousel);
+									carousel.pageTurner.delay(3000);
 
-								//carousel.pageTurner.delay(3000);
-								//},
-							},
+								},
+
 						},
+
 					}, {
 						xtype: 'button',
 						cls: 'specialoffers-left-btn',

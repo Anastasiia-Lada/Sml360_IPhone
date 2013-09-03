@@ -1,4 +1,5 @@
-﻿Ext.define('smiley360.view.ShareToTwitter', {
+﻿
+Ext.define('smiley360.view.ShareToTwitter', {
 	extend: 'Ext.Container',
 	alias: 'widget.sharetotwitterview',
 	config: {
@@ -52,6 +53,7 @@
 						xtype: 'label',
 						cls: 'popup-post-bottom-text',
 						id: 'xCharacterMaximum',
+						xMax: 140,
 						style: 'color: #878789;',
 						html: 'Tweet must contain a maximum of {0} characters.',
 					}, {
@@ -72,13 +74,13 @@
 						keyup: function () {
 							var postLenght = this.getValue().length;
 
-							var xView = this.up('#xView')
+							var xView = this.up('#xView');
 							var xPostCountLabel = xView.down('#xPostCountLabel');
 
 							xPostCountLabel.setHtml(postLenght.toString());
 
-							if (postLenght > 84) {
-								xPostCountLabel.setStyle('color: red;')
+							if (postLenght > Ext.getCmp('xCharacterMaximum').config.xMax) {
+								xPostCountLabel.setStyle('color: red;');
 								xView.down('#xShareButton').disable();
 							}
 							else {
@@ -169,6 +171,7 @@
 		Ext.getCmp('xSeedPhrase').setHtml(seedPhrase);
 	},
 	setCharacterMaximum: function (number) {
+		this.down('#xCharacterMaximum').config.xMax = number;
 		this.down('#xCharacterMaximum').setHtml(Ext.String.format(
             this.down('#xCharacterMaximum').getHtml(), number));
 	},

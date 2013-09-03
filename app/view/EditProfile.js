@@ -98,7 +98,7 @@ Ext.define('smiley360.view.EditProfile', {
 					
 					listeners: {
 						painted: function () {
-							if (smiley360.memberData.Profile.birthdate == "" || smiley360.memberData.Profile.birthdate == null || smiley360.memberData.Profile.birthdate == "0000-00-00")
+							if (smiley360.memberData.Profile.birthdate == "0000-00-00" || smiley360.memberData.Profile.birthdate == "" || smiley360.memberData.Profile.birthdate == null || smiley360.memberData.Profile.birthdate == "0000-00-00")
 								this.setReadOnly(false);
 						},
 						element: 'element',
@@ -520,7 +520,7 @@ Ext.define('smiley360.view.EditProfile', {
                         : Ext.getCmp(field);
 
 					if (element && (field == 'birthdate')) {
-						if (profile[field] != "0000-00-00")
+						if (profile[field] != "0000-00-00" && profile[field] != "" && profile[field] != null)
 							element.setValue({ year: parseInt(profile[field].toString().substr(0, 4)), month: parseInt(profile[field].toString().substr(5, 2)), day: parseInt(profile[field].toString().substr(8, 2)) });//profile[field]);
 
 					}
