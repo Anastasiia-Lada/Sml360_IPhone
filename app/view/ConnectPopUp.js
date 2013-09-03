@@ -7,7 +7,7 @@ Ext.define('smiley360.view.ConnectPopUp', {
 		centered: true,
 		fullscreen: true,
 		hideOnMaskTap: true,
-		id: 'xView',
+		id: 'xViewPopup',
 		scrollable: 'vertical',
 		cls: 'popup-panel',
 		items: [{
@@ -19,7 +19,7 @@ Ext.define('smiley360.view.ConnectPopUp', {
 				cls: 'popup-close-button',
 				listeners: {
 					tap: function () {
-						this.up('#xView').destroy();
+						this.up('#xViewPopup').destroy();
 					}
 				}
 			}, {
@@ -65,13 +65,13 @@ Ext.define('smiley360.view.ConnectPopUp', {
 							if (smiley360.memberData.Profile.twitter_token && smiley360.memberData.Profile.twitter_token != "")
 								allow_twitter = true;
 							if (local_name == 'Facebook') {
-								this.up('#xView').onFacebookLoginTap();
+								this.up('#xViewPopup').onFacebookLoginTap();
 							}
 							else {
-								this.up('#xView').onTwitterLoginTap();
+								this.up('#xViewPopup').onTwitterLoginTap();
 							};
 
-							this.up('#xView').destroy();
+							this.up('#xViewPopup').destroy();
 
 							//Ext.widget('missingoffersview').hide();
 							//Ext.getCmp('xMainView').showExternalView('editprofileview');

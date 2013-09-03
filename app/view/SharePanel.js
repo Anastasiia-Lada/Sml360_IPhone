@@ -91,11 +91,21 @@
             			if ((shareViewAlias == 'sharetofacebookview' && (!smiley360.memberData.Profile.fbtoken || smiley360.memberData.Profile.fbtoken == ""))
 						|| (shareViewAlias == 'sharetotwitterview' && (!smiley360.memberData.Profile.twitter_token || smiley360.memberData.Profile.twitter_token == ""))) {
 
-            				var shareView = Ext.widget('connectpopupview').show();
-            				if (shareView.setToolName)
-            					if (shareViewAlias == 'sharetofacebookview')
-            						shareView.setToolName('Facebook')
-            					else shareView.setToolName('Twitter');
+            				if (shareViewAlias == 'uploadphotoview') {
+            					
+            					var shareView = Ext.widget('connectpopupview').show();
+            					if (shareView.setToolName)
+            						if (!smiley360.memberData.Profile.fbtoken || smiley360.memberData.Profile.fbtoken == "")            						
+            							shareView.setToolName('Facebook')
+            						else shareView.setToolName('Twitter');
+            				}
+            				else {
+            					var shareView = Ext.widget('connectpopupview').show();
+            					if (shareView.setToolName)
+            						if (shareViewAlias == 'sharetofacebookview')
+            							shareView.setToolName('Facebook')
+            						else shareView.setToolName('Twitter');
+            				};
             			}
 
             			else {

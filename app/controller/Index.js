@@ -1069,7 +1069,15 @@ smiley360.setViewStatus = function (view, status, states) {
 				var task = new Ext.util.DelayedTask(function () {
 					xShareButton.setText(states.initial);
 					xShareButton.enable();
+					if ((viewName == 'smiley360.view.ShareToFacebook')
+						|| (viewName == 'smiley360.view.ShareToTwitter')) {
 
+						var shareView = Ext.widget('connectpopupview').show();
+						if (shareView.setToolName)
+							if (viewName == 'smiley360.view.ShareToFacebook')
+								shareView.setToolName('Facebook')
+							else shareView.setToolName('Twitter');
+					}
 					if (xShareButton.getIcon()) {
 						xShareButton.setIcon('resources/images/share-initial.png');
 					}
