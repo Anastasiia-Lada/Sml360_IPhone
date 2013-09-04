@@ -36,19 +36,8 @@
 
         Otherwise, you can specify specific domains:
     -->
-	<access origin="http://127.0.0.1*" />
-	<access origin="http://uat.smiley360.com*" />
-	<access origin="http://ajax.googleapis.com*" />
-
-	<access origin="http://connect.facebook.net*" />
-
-	<access origin="http://static.ak.facebook.com*" />
-
-	<access origin="https://s-static.ak.facebook.com*" />
-
-	<access origin="https://www.facebook.com*" />
-
-	<access origin="https://fbstatic-a.akamaihd.net*" />
+	<access origin="*" />
+	
 
 	<!-- allow local pages -->
 	<!--
