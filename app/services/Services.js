@@ -384,7 +384,7 @@ smiley360.services.createComment = function (commentData, onCompleted) {
         	brandID: commentData.brandID,
         	text: commentData.text,
         	rating: commentData.rating,
-        	imageID: 23,//commentData.imageID,
+        	imageID: commentData.imageID,
         },
         onCompleted);
 }

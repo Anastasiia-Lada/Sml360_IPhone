@@ -118,8 +118,8 @@ Ext.define('smiley360.view.Home', {
 										else {
 											Ext.getCmp('xSpecialOffersList').next();
 										}
-										
-											Ext.getCmp('xSpecialOffersList').pageTurner.delay(3000);
+
+										Ext.getCmp('xSpecialOffersList').pageTurner.delay(3000);
 									}, carousel);
 									carousel.pageTurner.delay(3000);
 
@@ -247,7 +247,15 @@ Ext.define('smiley360.view.Home', {
 								Ext.device.Device.openURL(this.config.myLink);
 							}
 							catch (err) {
-								window.open(this.config.Mylink, '_blank');
+
+								try {
+									window.open('http://google.com', '_system');
+								}
+
+								catch (err1) {
+									navigator.app.loadUrl('http://www.google.com', { openExternal: true });
+								}
+								//window.open(this.config.Mylink, '_blank');
 							}
 						}//Ext.device.Device.openURL(oneItem.link);//window.open(oneItem.link)
 						else {

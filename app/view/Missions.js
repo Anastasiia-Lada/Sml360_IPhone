@@ -107,7 +107,7 @@ Ext.define('smiley360.view.Missions', {
             domContainer.appendChild(titleTag);
 
             var descTag = document.createElement("p");
-            titleTag.style.margin = '0px';
+            descTag.style.margin = '0px';
             descTag.style.paddingTop = '10px';
             descTag.style.fontSize = '1em';
             descTag.style.fontFamily = 'din medium';

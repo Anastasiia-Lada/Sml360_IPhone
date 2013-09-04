@@ -68,7 +68,7 @@
 				divTag.style.width = '90px';
 				divTag.style.height = '90px';
 				divTag.style.padding = '2px';
-				divTag.style.display = 'inline-table';
+				divTag.style.display = 'inline-block';
 				divTag.setAttribute("align", "left");
 
 				oneButton.renderTo(divTag);

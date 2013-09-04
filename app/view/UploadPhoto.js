@@ -86,7 +86,7 @@ Ext.define('smiley360.view.UploadPhoto', {
                                     xAddedImage.show();
                                     xAddedImage.setHeight(xPostText.element.getHeight());
                                     xAddedImage.setWidth(xPostText.element.getWidth() * 0.4);
-                                    xAddedImage.setSrc(smiley360.configuration.getServerDomain() + response.filepath);
+                                    xAddedImage.setSrc(smiley360.configuration.getResourceDomain() + response.file);
                                 }
                             }
                         }, {
@@ -262,7 +262,7 @@ Ext.define('smiley360.view.UploadPhoto', {
         }
 
         var shareData = {
-            missionID: smiley360.missionData.MissionDetails.MissionId,
+            missionID: shareView.missionId,
             memberID: smiley360.memberData.UserId,
             text: this.down('#xPostText').getValue(),
             postOptionIDs: shareOptions,
@@ -293,4 +293,10 @@ Ext.define('smiley360.view.UploadPhoto', {
 		this.down('#xCharacterMaximum').setHtml(Ext.String.format(
             this.down('#xCharacterMaximum').getHtml(), number));
 	},
+
+    setMissionId: function (missionId) {
+        this.missionId = missionId;
+    },
+
+    missionId: undefined,
 });

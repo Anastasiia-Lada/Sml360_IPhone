@@ -65,7 +65,7 @@ Ext.define('smiley360.view.ReviewForFender', {
 					listeners: {
 						success: function (response) {
 							this.disable();
-
+							this.imageID = response.imageID;
 							//var xView = this.up('#xView');
 							//var xAddedImage = xView.down('#xAddedImage');
 							//var xReviewText = xView.down('#xReviewText');
@@ -323,7 +323,7 @@ Ext.define('smiley360.view.ReviewForFender', {
 			brandID: smiley360.brandData.BrandId,
 			text: this.down('#xReviewText').getValue(),
 			rating: this.down('#xRating').getValue(),
-			imageID: 23,
+			imageID: this.down('#xAddPhotoButton').imageID,
 		};
 
 		smiley360.setViewStatus(commentView, smiley360.viewStatus.progress);
@@ -337,10 +337,10 @@ Ext.define('smiley360.view.ReviewForFender', {
 		var commentView = this;
 		var commentData = {
 			memberID: smiley360.memberData.UserId,
-			missionID: Ext.getCmp('xDetailsView').getCurrentMission().MissionId,
+			missionID: commentView.missionId,
 			text: this.down('#xReviewText').getValue(),
-			rating: this.down('#xRating').getValue()
-			//imageID: imageID,
+			rating: this.down('#xRating').getValue(),
+		    imageID: this.down('#xAddPhotoButton').imageID,
 		};
 
 		smiley360.setViewStatus(commentView, smiley360.viewStatus.progress);
@@ -381,9 +381,9 @@ Ext.define('smiley360.view.ReviewForFender', {
 		}
 	},
 
-	//setMissionId: function (missionId) {
-	//    this.missionId = missionId;
-	//},
+	setMissionId: function (missionId) {
+	    this.missionId = missionId;
+	},
 
-	//missionId: undefined,
+	missionId: undefined,
 });
