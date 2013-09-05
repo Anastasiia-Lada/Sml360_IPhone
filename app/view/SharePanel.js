@@ -79,7 +79,6 @@
 
 	createShareButton: function (shareItem, buttonCls, shareViewAlias) {
 		var me = this;
-
 		return new Ext.ux.ShareButton(
             {
             	cls: buttonCls,
@@ -89,15 +88,25 @@
             	listeners: {
             		tap: function () {
             			if ((shareViewAlias == 'sharetofacebookview' && (!smiley360.memberData.Profile.fbtoken || smiley360.memberData.Profile.fbtoken == ""))
-						|| (shareViewAlias == 'sharetotwitterview' && (!smiley360.memberData.Profile.twitter_token || smiley360.memberData.Profile.twitter_token == ""))) {
+						|| (shareViewAlias == 'sharetotwitterview' && (!smiley360.memberData.Profile.twitter_token || smiley360.memberData.Profile.twitter_token == ""))
+						|| (shareViewAlias == 'uploadphotoview' && (!smiley360.memberData.Profile.twitter_token || smiley360.memberData.Profile.twitter_token == ""
+						|| !smiley360.memberData.Profile.fbtoken || smiley360.memberData.Profile.fbtoken == "")
+							)) {
 
             				if (shareViewAlias == 'uploadphotoview') {
-            					
+            					Ext.getCmp('xDetailsView').fireEvent('goSetSharingInfo', this, me.missionDetails.MissionId, smiley360.memberData.UserId, shareItem.sharingTool_typeID, 'uploadphotoview');
+
+            					var saved_smilesCurrent = this.getSmilesCurrent();
+
+            					var saved_missionId = me.missionDetails.MissionId;
+
+
             					var shareView = Ext.widget('connectpopupview').show();
-            					if (shareView.setToolName)
-            						if (!smiley360.memberData.Profile.fbtoken || smiley360.memberData.Profile.fbtoken == "")            						
-            							shareView.setToolName('Facebook')
-            						else shareView.setToolName('Twitter');
+            					shareView.config.saved_smilesCurrent = saved_smilesCurrent;
+            					shareView.config.saved_missionId = saved_missionId;
+
+            					if (shareView.setText)
+            						shareView.setText('Connect to Facebook and Twitter to upload photos!', 'You can use the Facebook and Twitter<br> sharing tools to connect so you can<br> upload photos to both social<br> networks!', 'OK');
             				}
             				else {
             					var shareView = Ext.widget('connectpopupview').show();
@@ -123,6 +132,8 @@
             			}
             		}
             	}
+
             });
-	}
+	},
+
 });

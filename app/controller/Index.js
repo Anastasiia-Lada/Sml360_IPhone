@@ -554,10 +554,16 @@ Ext.define('smiley360.controller.Index', {
             					shareView.setLink(response[0].link);
             				};
             			if (response[0].seedphrase != null) {
-
-            				if (shareView.down('#xCharacterMaximum')) {
-            					shareView.setCharacterMaximum(140 - response[0].seedphrase.length);
-            				};
+							
+            				if (shareView != 'uploadphotoview') {
+            					if (shareView.down('#xCharacterMaximum')) {
+            						shareView.setCharacterMaximum(140 - response[0].seedphrase.length);
+            					}
+            				}
+            				else {
+            					Ext.getCmp('xViewPopup').config.saved_seedPhrase = response[0].seedphrase;
+            					Ext.getCmp('xViewPopup').config.saved_seedLength = 140 - response[0].seedphrase.length;
+            				}
 
             				if (shareView.setSeedPhrase) {
             					shareView.setSeedPhrase(response[0].seedphrase);

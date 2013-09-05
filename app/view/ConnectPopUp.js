@@ -1,4 +1,5 @@
 var local_name = '';
+var showUploadDialog = false;
 Ext.define('smiley360.view.ConnectPopUp', {
 	extend: 'Ext.Container',
 	alias: 'widget.connectpopupview',
@@ -7,6 +8,10 @@ Ext.define('smiley360.view.ConnectPopUp', {
 		centered: true,
 		fullscreen: true,
 		hideOnMaskTap: true,
+		saved_smilesCurrent: 0,
+		saved_missionId: 0,
+		saved_seedPhrase: '',
+		saved_seedLength: 0,
 		id: 'xViewPopup',
 		scrollable: 'vertical',
 		cls: 'popup-panel',
@@ -19,6 +24,23 @@ Ext.define('smiley360.view.ConnectPopUp', {
 				cls: 'popup-close-button',
 				listeners: {
 					tap: function () {
+						if ((showUploadDialog) &&
+							((smiley360.memberData.Profile.twitter_token && smiley360.memberData.Profile.twitter_token != "")
+								|| (smiley360.memberData.Profile.fbtoken && smiley360.memberData.Profile.fbtoken != ""))) {
+
+							var shareView = Ext.widget('uploadphotoview').show();
+							//var shareItem.sharingTool_typeID = 9;
+							Ext.getCmp('xDetailsView').fireEvent('goSetSharingInfo', this, Ext.getCmp('xSharePanel').missionDetails.MissionId, smiley360.memberData.UserId, 9, shareView);
+
+							if (shareView.setEarnSmiles)
+								shareView.setEarnSmiles(Ext.getCmp('xViewPopup').config.saved_smilesCurrent);
+
+							if (shareView.setMissionId)
+								shareView.setMissionId(Ext.getCmp('xViewPopup').config.saved_missionId);
+
+						};
+						showUploadDialog = false;
+						Ext.getCmp('xSubmitButton').setText('Connect!');
 						this.up('#xViewPopup').destroy();
 					}
 				}
@@ -61,18 +83,32 @@ Ext.define('smiley360.view.ConnectPopUp', {
 					cls: 'popup-submit-button',
 					listeners: {
 						tap: function () {
-							allow_fb = true;
-							if (smiley360.memberData.Profile.twitter_token && smiley360.memberData.Profile.twitter_token != "")
-								allow_twitter = true;
-							if (local_name == 'Facebook') {
-								this.up('#xViewPopup').onFacebookLoginTap();
+							if (this.getText() == 'OK') {
+								showUploadDialog = true;
+								if (!smiley360.memberData.Profile.fbtoken || smiley360.memberData.Profile.fbtoken == "") {
+									local_name = 'Facebook';
+									this.up('#xViewPopup').setText(Ext.String.format('Connect {0} <br> to share!', 'Facebook'), Ext.String.format('Click the button below to connect to {0}, otherwise close this prompt to continue sharing without {0}.', 'Facebook'), 'Connect!');
+								}
+
+								else if (!smiley360.memberData.Profile.twitter_token || smiley360.memberData.Profile.twitter_token == "") {
+									local_name = 'Twitter';
+									this.up('#xViewPopup').setText(Ext.String.format('Connect {0} <br> to share!', 'Twitter'), Ext.String.format('Click the button below to connect to {0}, otherwise close this prompt to continue sharing without {0}.', 'Twitter'), 'Connect!');
+								};
 							}
-							else {
-								this.up('#xViewPopup').onTwitterLoginTap();
+							else if (this.getText() == 'Connect!') {
+
+								allow_fb = true;
+								if (smiley360.memberData.Profile.twitter_token && smiley360.memberData.Profile.twitter_token != "")
+									allow_twitter = true;
+								if (local_name == 'Facebook') {
+									this.up('#xViewPopup').onFacebookLoginTap();
+								}
+								else if (local_name == 'Twitter') {
+									this.up('#xViewPopup').onTwitterLoginTap();
+								};
+
+								this.up('#xViewPopup').destroy();
 							};
-
-							this.up('#xViewPopup').destroy();
-
 							//Ext.widget('missingoffersview').hide();
 							//Ext.getCmp('xMainView').showExternalView('editprofileview');
 						}
@@ -88,9 +124,39 @@ Ext.define('smiley360.view.ConnectPopUp', {
 
 			},
 			hide: function () {
+				if ((showUploadDialog) &&
+					((smiley360.memberData.Profile.twitter_token && smiley360.memberData.Profile.twitter_token != "")
+							|| (smiley360.memberData.Profile.fbtoken && smiley360.memberData.Profile.fbtoken != ""))) {
+					var shareView = Ext.widget('uploadphotoview').show();
+					//var shareItem.sharingTool_typeID = 9;
+					Ext.getCmp('xDetailsView').fireEvent('goSetSharingInfo', this, Ext.getCmp('xSharePanel').missionDetails.MissionId, smiley360.memberData.UserId, 9, shareView);
+
+					if (shareView.setEarnSmiles)
+						shareView.setEarnSmiles(Ext.getCmp('xViewPopup').config.saved_smilesCurrent);
+
+					if (shareView.setMissionId)
+						shareView.setMissionId(Ext.getCmp('xViewPopup').config.saved_missionId);
+
+				};
+				showUploadDialog = false;
+				Ext.getCmp('xSubmitButton').setText('Connect!');
 				this.destroy();
 			}
 		},
+	},
+	setText: function (txt_title, txt_msg, txt_btn) {
+
+		var xTitleLabel = this.down('#xTitleLabel');
+
+		xTitleLabel.setHtml(txt_title);
+
+		var xMessageText = this.down('#xMessageText');
+
+		xMessageText.setHtml(txt_msg);
+
+		var xSubmitButton = this.down('#xSubmitButton');
+
+		xSubmitButton.setText(txt_btn);
 	},
 	setToolName: function (name) {
 		var xTitleLabel = this.down('#xTitleLabel');

@@ -235,28 +235,34 @@ Ext.define('smiley360.view.Brand', {
 
     },
     setCommentItem: function (oneItem) {
-        var oneItemContainer = new Ext.Container({
-            //id: id + 'container',
-            layout: { type: 'hbox' },
-            cls: 'brands-brand-panel',
-        });
+    	var oneItemContainer = new Ext.Container({
+    		//id: id + 'container',
+    		layout: { type: 'hbox' },
+    		cls: 'brands-brand-panel',
+    	});
 
-        var domContainer = oneItemContainer.element.dom.firstChild;
+    	var domContainer = oneItemContainer.element.dom.firstChild;
+    	
+    		var imgTag = document.createElement("img");
+    		imgTag.style.minWidth = '100px';
+    		imgTag.style.marginRight = '15px';
+    		imgTag.style.marginBottom = '5px';
+    		imgTag.style.borderRadius = '5px';
+    		imgTag.style.borderStyle = 'solid';
+    		imgTag.style.borderColor = 'white';
+    		imgTag.style.backgroundColor = 'white';
+    		imgTag.style.float = 'left';
+    		imgTag.setAttribute('id', 'xBrandPageImage_' + oneItem.sc_brandID);
+    		if (oneItem.member_image_file_name) {
+    			imgTag.setAttribute('src', smiley360.configuration.getProfilePic(oneItem.memberID, oneItem.member_image_file_name));
+    		}
+    		else {
+    			imgTag.setAttribute('src', smiley360.configuration.getResourceDomain() + '/images/default-profile.jpg');
+    		};
+    		imgTag.setAttribute('class', 'has-shadow');
 
-        var imgTag = document.createElement("img");
-        imgTag.style.minWidth = '100px';
-        imgTag.style.marginRight = '15px';
-        imgTag.style.marginBottom = '5px';
-        imgTag.style.borderRadius = '5px';
-        imgTag.style.borderStyle = 'solid';
-        imgTag.style.borderColor = 'white';
-        imgTag.style.backgroundColor = 'white';
-        imgTag.style.float = 'left';
-        imgTag.setAttribute('id', 'xBrandPageImage_' + oneItem.sc_brandID);
-        imgTag.setAttribute('src', smiley360.configuration.getProfilePic(oneItem.memberID, oneItem.member_image_file_name));
-        imgTag.setAttribute('class', 'has-shadow');
-
-        domContainer.appendChild(imgTag);
+    		domContainer.appendChild(imgTag);
+    	
         //********************************************************************
 
         if (oneItem.has_image == 1 &&

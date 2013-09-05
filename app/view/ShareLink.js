@@ -58,7 +58,7 @@
                 cls: 'popup-button-panel',
                 items: [{
                     xtype: 'button',
-                    text: 'COPY',
+                    text: 'DONE',
                     icon: 'resources/images/share-copy.png',
                     iconAlign: 'right',
                     iconCls: 'popup-post-icon',
