@@ -280,7 +280,8 @@ Ext.define('smiley360.view.Offers', {
 							this.up('#xOfferView').fireEvent('LoadOfferDetailsCommand', this, this.getId().substr(12));
 						}
 						else {
-							this.up('#xOfferView').fireEvent('LoadOfferSurveyCommand', this, this.getId().substr(12));
+							if (oneItem.survey_link)
+								this.up('#xOfferView').fireEvent('LoadOfferSurveyCommand', this, this.getId().substr(12), oneItem.survey_link);
 						}
 					}
 				}
@@ -332,5 +333,5 @@ Ext.define('smiley360.view.Offers', {
 			smiley360.memberData.isProfileComplete.complete = 'user is already informed'
 		}
 	},
-	
+
 });

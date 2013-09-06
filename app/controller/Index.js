@@ -723,7 +723,7 @@ Ext.define('smiley360.controller.Index', {
 		//});
 	},
 
-	ShowSurveyViewCommand: function (fromView, missionID) {
+	ShowSurveyViewCommand: function (fromView, missionID, link) {
 		//=========================================================
 		console.log('ShowSurveyViewCommand -> offerId: ', missionID);
 		//=========================================================
@@ -732,7 +732,9 @@ Ext.define('smiley360.controller.Index', {
 			var surveyFrame = Ext.get('xSurveyFrame');
 			var surveyFrameUrl = 'http://uat.smiley360.com/mobile_survey/pms000.php?deviceID='
                 + Ext.getStore('membersStore').getAt(0).data.deviceId + '&offerID=' + missionID;
-
+			//new to test
+			surveyFrameUrl = link;
+			//alert(link);
 			surveyFrame.dom.src = surveyFrameUrl;
 
 			Ext.Viewport.animateActiveItem(surveyView, this.slideLeftTransition);
