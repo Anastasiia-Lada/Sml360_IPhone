@@ -19,10 +19,10 @@
                         Ext.getCmp('xMainView').hideSidePanel();
                     }
                     else {
-                        var imageScr = Ext.String.format(
-                            'resources/images/mobie_tutorial_{0}.png', this.currentImageIndex)
+                    	var imageScr = Ext.String.format(
+                            'resources/images/mobie_tutorial_{0}.png', this.currentImageIndex);
 
-                        this.setSrc(imageScr)
+                    	this.setSrc(imageScr);
                     }
                 }
             }

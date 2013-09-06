@@ -972,7 +972,7 @@ smiley360.sharingType =
 };
 
 smiley360.setResponseStatus = function (view, response, states) {
-	var status = response.success ?
+	var status = (response.success || response.status == 'success') ?
         smiley360.viewStatus.successful :
         smiley360.viewStatus.unsuccessful;
 	if (!response.success || response.status == 'failed') {

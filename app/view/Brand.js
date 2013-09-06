@@ -31,12 +31,12 @@ Ext.define('smiley360.view.Brand', {
                     xtype: 'label',
                     id: 'xBrandTitle',
                     html: 'FENDER',
-                    style: 'font-size:1.4em; font-family: \'franklin\';',
+                    style: 'line-height: 125%; font-size:1.4em; font-family: \'franklin\';',
                 }, {
                     xtype: 'label',
                     id: 'xBrandDescription',
                     html: 'Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore.Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore.Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore.Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore.',
-                    style: 'font-size:1em; font-family: \'franklin\'; text-align: justify; word-break: break-word; word-wrap: break-word;',
+                    style: 'line-height: 125%; font-size:1em; font-family: \'franklin\'; text-align: left; word-break: break-word; word-wrap: break-word;',
                 }, {
                     xtype: 'container',
                     layout: 'hbox',
@@ -77,7 +77,7 @@ Ext.define('smiley360.view.Brand', {
                     labelWidth: 'auto',
                     itemsCount: 5,
                     readOnly: true,
-                    style: 'margin: 5px;',
+                    style: 'margin: 5px -10px 5px 0px;',
                     itemCls: 'x-rating-star',
                     itemHoverCls: 'x-rating-star-hover',
                     disabled: true

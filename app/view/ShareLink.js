@@ -95,5 +95,7 @@
     {
     	var xLinkField = this.down('#xLinkField');
     	xLinkField.setValue(link_to_set);
+    	xLinkField.focus();
+    	xLinkField.select();
     }
 });

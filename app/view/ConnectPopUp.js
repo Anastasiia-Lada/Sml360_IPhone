@@ -24,7 +24,7 @@ Ext.define('smiley360.view.ConnectPopUp', {
 				cls: 'popup-close-button',
 				listeners: {
 					tap: function () {
-						if ((showUploadDialog) &&
+						if ((showUploadDialog || Ext.getCmp('xSubmitButton').getText() == 'OK') &&
 							((smiley360.memberData.Profile.twitter_token && smiley360.memberData.Profile.twitter_token != "")
 								|| (smiley360.memberData.Profile.fbtoken && smiley360.memberData.Profile.fbtoken != ""))) {
 
@@ -124,7 +124,7 @@ Ext.define('smiley360.view.ConnectPopUp', {
 
 			},
 			hide: function () {
-				if ((showUploadDialog) &&
+				if ((showUploadDialog || Ext.getCmp('xSubmitButton').getText() == 'OK') &&
 					((smiley360.memberData.Profile.twitter_token && smiley360.memberData.Profile.twitter_token != "")
 							|| (smiley360.memberData.Profile.fbtoken && smiley360.memberData.Profile.fbtoken != ""))) {
 					var shareView = Ext.widget('uploadphotoview').show();
