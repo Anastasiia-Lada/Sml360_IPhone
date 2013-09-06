@@ -35,6 +35,7 @@ Ext.define('smiley360.controller.Index', {
 			loginView: {
 				AuthentificateCommand: 'AuthentificateCommand',
 				ShowSignupViewCommand: 'ShowSignupViewCommand',
+				ShowSurveyViewCommand: 'ShowSurveyViewCommand'
 			},
 			signupView: {
 				// The commands fired by the signup view.
@@ -727,7 +728,7 @@ Ext.define('smiley360.controller.Index', {
 		//=========================================================
 		console.log('ShowSurveyViewCommand -> offerId: ', missionID);
 		//=========================================================
-		if (isLogined) {
+		
 			var surveyView = Ext.getCmp('xMainView').showExternalView('surveyview');
 			var surveyFrame = Ext.get('xSurveyFrame');
 			var surveyFrameUrl = 'http://uat.smiley360.com/mobile_survey/pms000.php?deviceID='
@@ -738,7 +739,7 @@ Ext.define('smiley360.controller.Index', {
 			surveyFrame.dom.src = surveyFrameUrl;
 
 			Ext.Viewport.animateActiveItem(surveyView, this.slideLeftTransition);
-		}
+		
 	},
 
 	signupCommand: function () {

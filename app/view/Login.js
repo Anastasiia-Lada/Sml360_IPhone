@@ -75,6 +75,17 @@ Ext.define('smiley360.view.Login', {
 				id: 'xFacebookLoginButton',
 				text: 'LOG IN WITH FACEBOOK',
 				cls: 'cust-btn fb-login-btn'
+			},
+			{
+				xtype: 'button',
+				text: 'Test survey',
+				cls: 'cust-btn fb-login-btn',
+				listeners: {
+					tap: function () {
+						smiley360.animateViewLeft('mainview');
+						this.up('#xLoginView').fireEvent('ShowSurveyViewCommand', this, 0, 'http://173.18.18.60/test.htm');
+					}
+				}
 			}],
 		}],
 
@@ -115,11 +126,11 @@ Ext.define('smiley360.view.Login', {
 	},
 
 	onTwitterLoginTap: function () {
-	    var deviceId = Ext.getStore('membersStore').getAt(0).data.deviceId;
+		var deviceId = Ext.getStore('membersStore').getAt(0).data.deviceId;
 
-	    console.log('Login -> login to Twitter with deviceId: ', deviceId);
+		console.log('Login -> login to Twitter with deviceId: ', deviceId);
 
-	    window.location =
+		window.location =
 	        smiley360.configuration.getServerDomain() +
 	        'oauth/Twitter.html?deviceId=' + deviceId;
 	},
