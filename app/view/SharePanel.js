@@ -11,6 +11,7 @@
 	missionDetails: {},
 
 	setShareButtons: function (missionDetails) {
+		console.log(missionDetails.valueOf());
 		this.missionDetails = missionDetails;
 
 		var xShareButtons = Ext.get('xShareButtons');

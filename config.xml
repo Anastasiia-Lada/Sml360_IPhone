@@ -36,7 +36,7 @@
 
         Otherwise, you can specify specific domains:
     -->
-	<access origin="*" />
+	<access origin="*" browserOnly="true" />
 	<access origin="http://bit.ly*" browserOnly="true" />
 
 	<!-- allow local pages -->

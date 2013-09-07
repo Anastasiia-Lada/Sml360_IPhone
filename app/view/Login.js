@@ -75,18 +75,8 @@ Ext.define('smiley360.view.Login', {
 				id: 'xFacebookLoginButton',
 				text: 'LOG IN WITH FACEBOOK',
 				cls: 'cust-btn fb-login-btn'
-			},
-			{
-				xtype: 'button',
-				text: 'Test survey',
-				cls: 'cust-btn fb-login-btn',
-				listeners: {
-					tap: function () {
-						smiley360.animateViewLeft('mainview');
-						this.up('#xLoginView').fireEvent('ShowSurveyViewCommand', this, 0, 'http://173.18.18.61/test.htm');
-					}
-				}
-			}],
+			}
+			],
 		}],
 
 		listeners: [{
