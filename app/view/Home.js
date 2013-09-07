@@ -249,11 +249,11 @@ Ext.define('smiley360.view.Home', {
 							catch (err) {
 
 								try {
-									window.open('http://google.com', '_system');
+									window.open(this.config.myLink, '_system');
 								}
 
 								catch (err1) {
-									navigator.app.loadUrl('http://www.google.com', { openExternal: true });
+									navigator.app.loadUrl(this.config.myLink, { openExternal: true });
 								}
 								//window.open(this.config.Mylink, '_blank');
 							}

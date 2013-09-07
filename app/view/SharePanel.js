@@ -81,6 +81,7 @@
 		var me = this;
 		return new Ext.ux.ShareButton(
             {
+            	name: 'Btn-' + shareViewAlias,
             	cls: buttonCls,
             	smilesDone: shareItem.sharingTool_current_smiles,
             	smilesTotal: shareItem.sharingTool_max_smiles,

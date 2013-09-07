@@ -22,23 +22,13 @@ Ext.define('smiley360.view.Survey', {
 			}],
 			listeners: {
 				initialize: function () {
-					window.addEventListener("message", this.receiveMessage, true);
-					//alert(window.addEventListener.valueOf());
-				},
-				receiveMessage: function (event)
-				{
-					alert(event.source);
-					alert(event.data);
-				},
-
-				//clickHandler: function (e) {
-				//	alert('handeled');
-				//	setTimeout(this.doTask, 1000);
-				//},
-				//doTask: function () {
-				//	alert('blah');
-				//}
-			},
-		}],
-	},
+					window.addEventListener("message", function (evt)
+					{
+						alert(evt.source);
+						alert(evt.data);
+					}, true);
+				}
+			}
+		}]
+	}
 });
