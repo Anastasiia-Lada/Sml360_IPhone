@@ -1051,6 +1051,12 @@ smiley360.setViewStatus = function (view, status, states) {
 					xShareButton.setText(states.initial);
 					xShareButton.enable();
 					//there will be code to update point base!!!!!!!!!!!!!!!!!!
+					//var update_sml_query = Ext.ComponentQuery.query('[name="Btn-' + viewName.toString().toLowerCase().substr(15, 30) + '"]');
+					//alert(viewName.toString().toLowerCase().substr(15, 20));
+					//console.log(update_sml_query.valueOf());
+					//var last_item = update_sml_query.lenght;
+					//update_sml_query[last_item].smilesDone = update_sml_query[last_item].smilesDone + update_sml_query[last_item].smilesCurrent;
+
 					//if ((viewName == 'smiley360.view.ShareToFacebook')
 					//	|| (viewName == 'smiley360.view.ShareToTwitter')) {
 

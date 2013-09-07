@@ -264,23 +264,47 @@ Ext.define('smiley360.view.UploadPhoto', {
 
 		if (this.down('#xFacebookCheckbox').getChecked() == true) {
 			shareOptions.push(1);
+			var shareDataFB = {
+				missionID: shareView.missionId,
+				memberID: smiley360.memberData.UserId,
+				rating: 1,//this.down('#xRating').getValue(),
+				text: this.down('#xPostText').getValue(),
+				postOptionIDs: [1],//shareOptions,
+			};
+
+			smiley360.setViewStatus(shareView, smiley360.viewStatus.progress);
+			smiley360.services.postToFacebook(shareDataFB, function (response) {
+				smiley360.setResponseStatus(shareView, response);
+			});
 		}
 
-		if (this.down('#xTwitterCheckbox').getChecked() == true) {
-			shareOptions.push(3);
-		}
+		//if (this.down('#xTwitterCheckbox').getChecked() == true) {
+		//	shareOptions.push(3);
+		//	var shareDataTW = {
+		//		missionID: shareView.missionId,
+		//		memberID: smiley360.memberData.UserId,
+		//		text: this.down('#xPostText').getValue(),
+		//	};
 
-		var shareData = {
-			missionID: shareView.missionId,
-			memberID: smiley360.memberData.UserId,
-			text: this.down('#xPostText').getValue(),
-			postOptionIDs: shareOptions,
-		};
+		//	smiley360.setViewStatus(shareView, smiley360.viewStatus.progress);
+		//	smiley360.services.postToTwitter(shareDataTW, function (response) {
+		//		smiley360.setResponseStatus(shareView, response);
 
-		smiley360.setViewStatus(shareView, smiley360.viewStatus.progress);
-		smiley360.services.postToUploadPhoto(shareData, function (response) {
-			smiley360.setResponseStatus(shareView, response);
-		});
+		//	});
+		//}
+
+		//var shareData = {
+		//	missionID: shareView.missionId,
+		//	memberID: smiley360.memberData.UserId,
+		//	text: this.down('#xPostText').getValue(),
+		//	postOptionIDs: shareOptions,
+		//};
+
+		//smiley360.setViewStatus(shareView, smiley360.viewStatus.progress);
+		//smiley360.services.postToUploadPhoto(shareData, function (response) {
+		//	smiley360.setResponseStatus(shareView, response);
+		//});		
+
 		if (Ext.getCmp('xView')) Ext.getCmp('xView').doValidation();
 	},
 	setEarnSmiles: function (smiles) {

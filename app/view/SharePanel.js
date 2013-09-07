@@ -88,7 +88,8 @@
             	smilesTotal: shareItem.sharingTool_max_smiles,
             	smilesCurrent: shareItem.sharingTool_perShare_smiles,
             	listeners: {
-            		tap: function () {
+            		tap: function () {           			
+            			alert(this.getName());
             			if ((shareViewAlias == 'sharetofacebookview' && (!smiley360.memberData.Profile.fbtoken || smiley360.memberData.Profile.fbtoken == ""))
 						|| (shareViewAlias == 'sharetotwitterview' && (!smiley360.memberData.Profile.twitter_token || smiley360.memberData.Profile.twitter_token == ""))
 						|| (shareViewAlias == 'uploadphotoview' && (!smiley360.memberData.Profile.twitter_token || smiley360.memberData.Profile.twitter_token == ""
@@ -137,5 +138,6 @@
 
             });
 	},
+
 
 });
