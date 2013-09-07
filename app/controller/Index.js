@@ -731,10 +731,10 @@ Ext.define('smiley360.controller.Index', {
 		
 			var surveyView = Ext.getCmp('xMainView').showExternalView('surveyview');
 			var surveyFrame = Ext.get('xSurveyFrame');
-			var surveyFrameUrl = 'http://uat.smiley360.com/mobile_survey/pms000.php?deviceID='
-                + Ext.getStore('membersStore').getAt(0).data.deviceId + '&offerID=' + missionID;
+			//var surveyFrameUrl = 'http://uat.smiley360.com/mobile_survey/pms000.php?deviceID='
+            //   + Ext.getStore('membersStore').getAt(0).data.deviceId + '&offerID=' + missionID;
 			//new to test
-			surveyFrameUrl = link;
+			var surveyFrameUrl = link;
 			//alert(link);
 			surveyFrame.dom.src = surveyFrameUrl;
 

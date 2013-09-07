@@ -21,11 +21,15 @@ Ext.define('smiley360.view.Survey', {
 				'<iframe id="xSurveyFrame" frameborder="0" scrolling="yes" class="popup-survey-iframe"></iframe>',
 			}],
 			listeners: {
-				initialize: function () {
-					window.addEventListener("message", function (evt)
-					{
-						alert(evt.source);
-						alert(evt.data);
+				painted: function () {
+					window.addEventListener("message", function (evt) {
+						if (evt.data)
+							try {
+								this.up('#xMainView').showExternalView(evt.data);
+							}
+						catch (err) {
+								Ext.widget(evt.data).show();
+							};
 					}, true);
 				}
 			}

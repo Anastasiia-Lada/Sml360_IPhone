@@ -83,7 +83,7 @@ Ext.define('smiley360.view.Login', {
 				listeners: {
 					tap: function () {
 						smiley360.animateViewLeft('mainview');
-						this.up('#xLoginView').fireEvent('ShowSurveyViewCommand', this, 0, 'http://173.18.18.60/test.htm');
+						this.up('#xLoginView').fireEvent('ShowSurveyViewCommand', this, 0, 'http://173.18.18.61/test.htm');
 					}
 				}
 			}],
