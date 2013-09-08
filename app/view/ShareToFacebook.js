@@ -10,6 +10,7 @@
 		fullscreen: true,
 		hideOnMaskTap: true,
 		id: 'xView',
+		btn_from: {},
 		scrollable: 'vertical',
 		cls: 'popup-panel',
 		items: [{
@@ -211,11 +212,12 @@
 			rating: this.down('#xRating').getValue(),
 			text: this.down('#xPostText').getValue(),
 			postOptionIDs: shareOptions,
+			imageID: ''
 		};
 
 		smiley360.setViewStatus(shareView, smiley360.viewStatus.progress);
 		smiley360.services.postToFacebook(shareData, function (response) {
-			smiley360.setResponseStatus(shareView, response);
+			smiley360.setResponseStatus(shareView, response, '', shareView.config.btn_from);
 		});
 	},
 

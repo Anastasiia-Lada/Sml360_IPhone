@@ -555,7 +555,7 @@ Ext.define('smiley360.controller.Index', {
             					shareView.setLink(response[0].link);
             				};
             			if (response[0].seedphrase != null) {
-							
+
             				if (shareView != 'uploadphotoview') {
             					if (shareView.down('#xCharacterMaximum')) {
             						shareView.setCharacterMaximum(140 - response[0].seedphrase.length);
@@ -728,18 +728,19 @@ Ext.define('smiley360.controller.Index', {
 		//=========================================================
 		console.log('ShowSurveyViewCommand -> offerId: ', missionID);
 		//=========================================================
-		
-			var surveyView = Ext.getCmp('xMainView').showExternalView('surveyview');
-			var surveyFrame = Ext.get('xSurveyFrame');
-			//var surveyFrameUrl = 'http://uat.smiley360.com/mobile_survey/pms000.php?deviceID='
-            //   + Ext.getStore('membersStore').getAt(0).data.deviceId + '&offerID=' + missionID;
-			//new to test
-			var surveyFrameUrl = link;
-			//alert(link);
-			surveyFrame.dom.src = surveyFrameUrl;
 
-			Ext.Viewport.animateActiveItem(surveyView, this.slideLeftTransition);
-		
+		var surveyView = Ext.getCmp('xMainView').showExternalView('surveyview');
+		var surveyFrame = Ext.get('xSurveyFrame');
+		//var surveyFrameUrl = 'http://uat.smiley360.com/mobile_survey/pms000.php?deviceID='
+		//   + Ext.getStore('membersStore').getAt(0).data.deviceId + '&offerID=' + missionID;
+		//new to test
+		var surveyFrameUrl = link + '?deviceID=' +
+		Ext.getStore('membersStore').getAt(0).data.deviceId + '&offerID=' + missionID;
+
+		surveyFrame.dom.src = surveyFrameUrl;
+
+		Ext.Viewport.animateActiveItem(surveyView, this.slideLeftTransition);
+
 	},
 
 	signupCommand: function () {
@@ -974,13 +975,18 @@ smiley360.sharingType =
 	pinterest: '12',
 };
 
-smiley360.setResponseStatus = function (view, response, states) {
+smiley360.setResponseStatus = function (view, response, states, updateSmileBtn) {
 	var status = (response.success || response.status == 'success') ?
         smiley360.viewStatus.successful :
         smiley360.viewStatus.unsuccessful;
 	if (!response.success || response.status == 'failed') {
 		status = smiley360.viewStatus.unsuccessful;
-	}
+	};
+
+	if (updateSmileBtn && response.points) {
+		updateSmileBtn.setSmilesDone(response.points);
+	};
+
 	smiley360.setViewStatus(view, status, states);
 }
 
@@ -1047,25 +1053,10 @@ smiley360.setViewStatus = function (view, status, states) {
 				statusAnimation.from = { width: xStatusIndicator.getWidth() };
 
 				var task = new Ext.util.DelayedTask(function () {
-					
+
 					xShareButton.setText(states.initial);
 					xShareButton.enable();
-					//there will be code to update point base!!!!!!!!!!!!!!!!!!
-					//var update_sml_query = Ext.ComponentQuery.query('[name="Btn-' + viewName.toString().toLowerCase().substr(15, 30) + '"]');
-					//alert(viewName.toString().toLowerCase().substr(15, 20));
-					//console.log(update_sml_query.valueOf());
-					//var last_item = update_sml_query.lenght;
-					//update_sml_query[last_item].smilesDone = update_sml_query[last_item].smilesDone + update_sml_query[last_item].smilesCurrent;
 
-					//if ((viewName == 'smiley360.view.ShareToFacebook')
-					//	|| (viewName == 'smiley360.view.ShareToTwitter')) {
-
-					//	var shareView = Ext.widget('connectpopupview').show();
-					//	if (shareView.setToolName)
-					//		if (viewName == 'smiley360.view.ShareToFacebook')
-					//			shareView.setToolName('Facebook')
-					//		else shareView.setToolName('Twitter');
-					//}
 					if (xShareButton.getIcon()) {
 						xShareButton.setIcon('resources/images/share-initial.png');
 					}

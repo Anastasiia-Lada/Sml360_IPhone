@@ -82,14 +82,12 @@
 		var me = this;
 		return new Ext.ux.ShareButton(
             {
-            	name: 'Btn-' + shareViewAlias,
             	cls: buttonCls,
             	smilesDone: shareItem.sharingTool_current_smiles,
             	smilesTotal: shareItem.sharingTool_max_smiles,
             	smilesCurrent: shareItem.sharingTool_perShare_smiles,
             	listeners: {
-            		tap: function () {           			
-            			alert(this.getName());
+            		tap: function () {
             			if ((shareViewAlias == 'sharetofacebookview' && (!smiley360.memberData.Profile.fbtoken || smiley360.memberData.Profile.fbtoken == ""))
 						|| (shareViewAlias == 'sharetotwitterview' && (!smiley360.memberData.Profile.twitter_token || smiley360.memberData.Profile.twitter_token == ""))
 						|| (shareViewAlias == 'uploadphotoview' && (!smiley360.memberData.Profile.twitter_token || smiley360.memberData.Profile.twitter_token == ""
@@ -123,6 +121,11 @@
             			else {
             				var shareView = Ext.widget(shareViewAlias).show();
             				Ext.getCmp('xDetailsView').fireEvent('goSetSharingInfo', this, me.missionDetails.MissionId, smiley360.memberData.UserId, shareItem.sharingTool_typeID, shareView);
+
+            				if (shareView.config.btn_from)
+            					shareView.config.btn_from = this;
+            				
+            				//console.log('shbtn' + shareView.config.btn_from);
 
             				if (shareView.setEarnSmiles)
             					shareView.setEarnSmiles(this.getSmilesCurrent());

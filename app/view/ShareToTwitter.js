@@ -8,6 +8,7 @@ Ext.define('smiley360.view.ShareToTwitter', {
 		fullscreen: true,
 		hideOnMaskTap: true,
 		id: 'xView',
+		btn_from: {},
 		scrollable: 'vertical',
 		cls: 'popup-panel',
 		items: [{
@@ -123,10 +124,10 @@ Ext.define('smiley360.view.ShareToTwitter', {
 					cls: 'popup-post-button',
 					disabled: true,
 					listeners: {
-						
+
 						tap: function () {
-							
-								this.up('#xView').doShare();
+
+							this.up('#xView').doShare();
 						}
 					},
 				}],
@@ -148,11 +149,12 @@ Ext.define('smiley360.view.ShareToTwitter', {
 			missionID: shareView.missionId,
 			memberID: smiley360.memberData.UserId,
 			text: this.down('#xPostText').getValue(),
+			imageID: ''
 		};
 
 		smiley360.setViewStatus(shareView, smiley360.viewStatus.progress);
 		smiley360.services.postToTwitter(shareData, function (response) {
-			smiley360.setResponseStatus(shareView, response);
+			smiley360.setResponseStatus(shareView, response, '', shareView.config.btn_from);
 
 		});
 	},

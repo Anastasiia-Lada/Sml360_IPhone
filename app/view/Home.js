@@ -242,52 +242,57 @@ Ext.define('smiley360.view.Home', {
 				listeners: {
 					element: 'element',
 					tap: function () {
-						if (this.config.myLink != "") {
-							try {
-								Ext.device.Device.openURL(this.config.myLink);
-							}
-							catch (err) {
+						if (this.config.myLink && this.config.myLink != "") {
+							if (app.isAndroid()) {
+								navigator.app.loadUrl(this.config.myLink);
+							} else {
+								window.location.href = this.config.myLink;
+							};
+						//try {
+						//	Ext.device.Device.openURL(this.config.myLink);
+						//}
+						//catch (err) {
 
-								try {
-									window.open(this.config.myLink, '_system');
-								}
+						//	try {
+						//		window.open(this.config.myLink, '_system');
+						//	}
 
-								catch (err1) {
-									navigator.app.loadUrl(this.config.myLink, { openExternal: true });
-								}
-								//window.open(this.config.Mylink, '_blank');
-							}
-						}//Ext.device.Device.openURL(oneItem.link);//window.open(oneItem.link)
-						else {
+						//	catch (err1) {
+						//		navigator.app.loadUrl(this.config.myLink, { openExternal: true });
+						//	}
+						//window.open(this.config.Mylink, '_blank');
+					
+		}//Ext.device.Device.openURL(oneItem.link);//window.open(oneItem.link)
+	else {
 							Ext.getCmp('xConnectView').fireEvent('onBrandTapCommand', this, smiley360.memberData.UserId, this.getId().substr(6), 0, 100);
-						}
-					}
-				}
-			});
-			console.log(oneItemContainer.valueOf());
-			var incLabel = oneItemContainer.add(new Ext.Label({
-				width: '55%',
-				style: 'font-size: 1.1em; font-family: \'din medium\';padding-right: 10px;',
-				html: oneItem.desc, //'Description goes here lorem ipsum.',
-				//Mylink: oneItem.link,
-				listeners: {
-					//element: 'element',
-					//tap: function () {
-					//	if (this.Mylink != '') alert(this.Mylink);//
-					//	else { this.up('#xHomeView').fireEvent('onBrandTapCommand', this, smiley360.memberData.UserId, this.getId().substr(5), 0, 100); };
-					//}
-				}
-			}));
-			var incImg = oneItemContainer.add(new Ext.Img({
-				src: smiley360.configuration.getResourceDomain() + '/' + oneItem.brandImage,//'resources/images/offers_logo3.png',
-				width: 100,
-				height: 100,
-				cls: 'has-shadow',
-				style: 'background-color: white; border-radius: 5px; border-style: solid; border-width: 1px; border-color: white;',
-			}));
-			counter += 1;
-			xSpecialOffersList.add(oneItemContainer);
-		};
+	}
+}
+}
+});
+console.log(oneItemContainer.valueOf());
+var incLabel = oneItemContainer.add(new Ext.Label({
+	width: '55%',
+	style: 'font-size: 1.1em; font-family: \'din medium\';padding-right: 10px;',
+	html: oneItem.desc, //'Description goes here lorem ipsum.',
+	//Mylink: oneItem.link,
+	listeners: {
+		//element: 'element',
+		//tap: function () {
+		//	if (this.Mylink != '') alert(this.Mylink);//
+		//	else { this.up('#xHomeView').fireEvent('onBrandTapCommand', this, smiley360.memberData.UserId, this.getId().substr(5), 0, 100); };
+		//}
+	}
+}));
+var incImg = oneItemContainer.add(new Ext.Img({
+	src: smiley360.configuration.getResourceDomain() + '/' + oneItem.brandImage,//'resources/images/offers_logo3.png',
+	width: 100,
+	height: 100,
+	cls: 'has-shadow',
+	style: 'background-color: white; border-radius: 5px; border-style: solid; border-width: 1px; border-color: white;',
+}));
+counter += 1;
+xSpecialOffersList.add(oneItemContainer);
+};
 
-	},
+},
 });

@@ -271,6 +271,7 @@ Ext.define('smiley360.view.Offers', {
 			var allContainer = new Ext.Container({
 				id: 'OfferID_pane' + oneItem.missionID,
 				cls: 'offers-offer-panel',
+				survey_link: oneItem.survey_link,
 				listeners: {
 					element: 'element',
 					tap: function () {
@@ -280,8 +281,8 @@ Ext.define('smiley360.view.Offers', {
 							this.up('#xOfferView').fireEvent('LoadOfferDetailsCommand', this, this.getId().substr(12));
 						}
 						else {
-							if (oneItem.survey_link)
-								this.up('#xOfferView').fireEvent('LoadOfferSurveyCommand', this, this.getId().substr(12), oneItem.survey_link);
+							if (this.config.survey_link)
+								this.up('#xOfferView').fireEvent('LoadOfferSurveyCommand', this, this.getId().substr(12), this.config.survey_link);
 						}
 					}
 				}

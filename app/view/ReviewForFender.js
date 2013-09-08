@@ -14,6 +14,7 @@ Ext.define('smiley360.view.ReviewForFender', {
 		fullscreen: true,
 		hideOnMaskTap: true,
 		id: 'xReviewView',
+		btn_from: {},
 		scrollable: 'vertical',
 		cls: 'popup-panel',
 		items: [{
@@ -340,12 +341,12 @@ Ext.define('smiley360.view.ReviewForFender', {
 			missionID: commentView.missionId,
 			text: this.down('#xReviewText').getValue(),
 			rating: this.down('#xRating').getValue(),
-		    imageID: this.down('#xAddPhotoButton').imageID,
+			imageID: this.down('#xAddPhotoButton').imageID,
 		};
 
 		smiley360.setViewStatus(commentView, smiley360.viewStatus.progress);
 		smiley360.services.postToConnect(commentData, function (response) {
-			smiley360.setResponseStatus(commentView, response);
+			smiley360.setResponseStatus(commentView, response, '', commentView.config.btn_from);
 		});
 	},
 
@@ -382,7 +383,7 @@ Ext.define('smiley360.view.ReviewForFender', {
 	},
 
 	setMissionId: function (missionId) {
-	    this.missionId = missionId;
+		this.missionId = missionId;
 	},
 
 	missionId: undefined,

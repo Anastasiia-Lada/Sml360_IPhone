@@ -695,6 +695,7 @@ smiley360.services.postToTwitter = function (postData, onCompleted) {
         	missionID: postData.missionID,
         	memberID: postData.memberID,
         	text: postData.text,
+        	imageID: postData.imageID
         },
         onCompleted);
 }
@@ -708,6 +709,7 @@ smiley360.services.postToFacebook = function (postData, onCompleted) {
         	text: postData.text,
         	rating: postData.rating,
         	postOptionIDs: postData.postOptionIDs,
+        	imageID: postData.imageID
         },
         onCompleted);
 }

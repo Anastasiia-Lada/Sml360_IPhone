@@ -8,6 +8,7 @@
         fullscreen: true,
         hideOnMaskTap: true,
         id: 'xView',
+        btn_from: {},
         scrollable: 'vertical',
         cls: 'popup-panel',
         items: [{
@@ -192,7 +193,7 @@
 
         smiley360.setViewStatus(shareView, smiley360.viewStatus.progress);
         smiley360.services.postToFace2face(shareData, function (response) {
-            smiley360.setResponseStatus(shareView, response);
+        	smiley360.setResponseStatus(shareView, response, '', shareView.config.btn_from);
         });
     },
 

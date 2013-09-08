@@ -13,6 +13,8 @@ Ext.define('smiley360.view.UploadPhoto', {
 		fullscreen: true,
 		hideOnMaskTap: true,
 		id: 'xView',
+		imageID: '',
+		btn_from: {},
 		scrollable: 'vertical',
 		cls: 'popup-panel',
 		items: [{
@@ -73,11 +75,15 @@ Ext.define('smiley360.view.UploadPhoto', {
 							},
 							listeners: {
 								tap: function () {
+									this.up('#xView').down('#xShareButton').disable();
 									photoAdded = true;
 									this.up('#xView').doValidation();
 								},
 								success: function (response) {
 									this.hide();
+									this.up('#xView').config.imageID = response.imageID;
+									this.up('#xView').down('#xShareButton').enable();
+
 
 									var xView = this.up('#xView');
 									var xAddedImage = xView.down('#xAddedImage');
@@ -86,7 +92,7 @@ Ext.define('smiley360.view.UploadPhoto', {
 									xAddedImage.show();
 									xAddedImage.setHeight(xPostText.element.getHeight());
 									xAddedImage.setWidth(xPostText.element.getWidth() * 0.4);
-									
+
 									xAddedImage.setSrc(response.url);
 								}
 							}
@@ -261,8 +267,12 @@ Ext.define('smiley360.view.UploadPhoto', {
 	doShare: function () {
 		var shareView = this;
 		var shareOptions = [];
+		var shareResponse = [];
 
-		if (this.down('#xFacebookCheckbox').getChecked() == true) {
+		smiley360.setViewStatus(shareView, smiley360.viewStatus.progress);
+		///////////////facebook
+		if (this.down('#xFacebookCheckbox').getChecked() == true && !this.down('#xFacebookCheckbox').isHidden()) {
+			this.down('#xTwitterCheckbox').setChecked(false);
 			shareOptions.push(1);
 			var shareDataFB = {
 				missionID: shareView.missionId,
@@ -270,40 +280,35 @@ Ext.define('smiley360.view.UploadPhoto', {
 				rating: 1,//this.down('#xRating').getValue(),
 				text: this.down('#xPostText').getValue(),
 				postOptionIDs: [1],//shareOptions,
+				imageID: Ext.getCmp('xView').config.imageID
 			};
 
-			smiley360.setViewStatus(shareView, smiley360.viewStatus.progress);
-			smiley360.services.postToFacebook(shareDataFB, function (response) {
-				smiley360.setResponseStatus(shareView, response);
+
+			smiley360.services.postToFacebook(shareDataFB, function (responseFB) {
+				//if (!response.success || response.status != 'success')
+				//	shareResponse.push(0);
+				smiley360.setResponseStatus(shareView, responseFB, '', shareView.config.btn_from);
 			});
-		}
+		};
 
-		//if (this.down('#xTwitterCheckbox').getChecked() == true) {
-		//	shareOptions.push(3);
-		//	var shareDataTW = {
-		//		missionID: shareView.missionId,
-		//		memberID: smiley360.memberData.UserId,
-		//		text: this.down('#xPostText').getValue(),
-		//	};
 
-		//	smiley360.setViewStatus(shareView, smiley360.viewStatus.progress);
-		//	smiley360.services.postToTwitter(shareDataTW, function (response) {
-		//		smiley360.setResponseStatus(shareView, response);
+		///////////////twitter
+		if (this.down('#xTwitterCheckbox').getChecked() == true && !this.down('#xTwitterCheckbox').isHidden()) {
+			this.down('#xFacebookCheckbox').setChecked(false);
+			shareOptions.push(3);
+			var shareDataTW = {
+				missionID: shareView.missionId,
+				memberID: smiley360.memberData.UserId,
+				text: this.down('#xPostText').getValue(),
+				imageID: Ext.getCmp('xView').config.imageID
+			};
 
-		//	});
-		//}
-
-		//var shareData = {
-		//	missionID: shareView.missionId,
-		//	memberID: smiley360.memberData.UserId,
-		//	text: this.down('#xPostText').getValue(),
-		//	postOptionIDs: shareOptions,
-		//};
-
-		//smiley360.setViewStatus(shareView, smiley360.viewStatus.progress);
-		//smiley360.services.postToUploadPhoto(shareData, function (response) {
-		//	smiley360.setResponseStatus(shareView, response);
-		//});		
+			smiley360.services.postToTwitter(shareDataTW, function (responseTW) {
+				//if (!response.success || response.status != 'success')
+				//	shareResponse.push(1);
+				smiley360.setResponseStatus(shareView, responseTW, '', shareView.config.btn_from);
+			});
+		};
 
 		if (Ext.getCmp('xView')) Ext.getCmp('xView').doValidation();
 	},

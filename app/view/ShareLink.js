@@ -7,6 +7,7 @@
         fullscreen: true,
         hideOnMaskTap: true,
         id: 'xView',
+        btn_from: {},
         scrollable: 'vertical',
         cls: 'popup-panel',
         items: [{

@@ -18,13 +18,10 @@ Ext.define('smiley360.view.Survey', {
 			listeners: {
 				painted: function () {
 					window.addEventListener("message", function (evt) {
-						if (evt.data)
-							try {
-								this.up('#xMainView').showExternalView(evt.data);
-							}
-						catch (err) {
-								Ext.widget(evt.data).show();
-							};
+						if (evt.data) {
+							Ext.getCmp('xMainView').showExternalView(evt.data);
+						};
+						
 					}, true);
 				}
 			}
