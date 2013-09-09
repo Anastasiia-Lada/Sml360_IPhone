@@ -15,9 +15,10 @@
 			listeners: {
 				element: 'element',
                 tap: function () {
-                    if (this.config.currentImageIndex > 7){
+                	if (this.config.currentImageIndex > 7) {
+                		this.config.currentImageIndex = 1;
                         smiley360.animateViewLeft('mainview');
-                        Ext.getCmp('xMainView').hideSidePanel();
+                        Ext.getCmp('xMainView').hideSidePanel();                        
                     }
                     else {
                     	var imageScr = Ext.String.format(
