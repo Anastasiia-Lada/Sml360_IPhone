@@ -1,18 +1,19 @@
 ﻿Ext.define('smiley360.view.Tutorial', {
-    extend: 'Ext.Panel',
-    alias: 'widget.tutorialiew',
-    config: {
-        id: 'xTutorialView',
-        layout: 'fit',
-        fullscreen: true,
-        items: [{
-            xtype: 'image',
-            id: 'xTutorialImage',
-            //centered: true,
-            src: 'resources/images/mobie_tutorial_1.png',
-            style: 'background-size: 100% auto;',
-            currentImageIndex: 1,
-            listeners: {
+	extend: 'Ext.Panel',
+	alias: 'widget.tutorialiew',
+	config: {
+		id: 'xTutorialView',
+		layout: 'fit',
+		fullscreen: true,
+		items: [{
+			xtype: 'image',
+			id: 'xTutorialImage',
+			//centered: true,
+			src: 'resources/images/mobie_tutorial_1.png',
+			style: 'background-size: 100% auto;',
+			currentImageIndex: 1,
+			listeners: {
+				element: 'element',
                 tap: function () {
                     if (++this.currentImageIndex > 7){
                         smiley360.animateViewLeft('mainview');
