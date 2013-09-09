@@ -94,7 +94,8 @@ Ext.define('smiley360.view.UploadPhoto', {
 									xAddedImage.setWidth(xPostText.element.getWidth() * 0.4);
 
 									xAddedImage.setSrc(response.url);
-								}
+								},
+
 							}
 						}, {
 							xtype: 'image',

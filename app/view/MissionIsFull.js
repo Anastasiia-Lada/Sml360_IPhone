@@ -29,7 +29,7 @@ Ext.define('smiley360.view.MissionIsFull', {
 					cls: 'missing-offers-title-text',
 					style: 'max-height: 40px; padding-right: 10px;',
 					html: 'This Mission is Full!',
-				},				
+				},
 				],
 			}, {
 				xtype: 'panel',
@@ -38,11 +38,11 @@ Ext.define('smiley360.view.MissionIsFull', {
 					xtype: 'label',
 					id: 'xMessageText',
 					cls: 'popup-message-text',
-					html: 'We\'re sorry. This is mission is now full.<br>'+
-						'Sometimes our missions fill very fast, and we<br>'+
+					html: 'We\'re sorry. This is mission is now full.<br>' +
+						'Sometimes our missions fill very fast, and we<br>' +
 						'have unfortunately exceeded the number of <br>' +
-						'spots avaliable.<br>'+
-						'Please be on the lookout for future<br>'+
+						'spots avaliable.<br>' +
+						'Please be on the lookout for future<br>' +
 						'opportunities!',
 				}],
 			}, {
@@ -66,7 +66,7 @@ Ext.define('smiley360.view.MissionIsFull', {
 		}],
 		listeners: {
 			initialize: function () {
-			    smiley360.adjustPopupSize(this, 20);
+				smiley360.adjustPopupSize(this, 20);
 			},
 			painted: function () {
 			},
