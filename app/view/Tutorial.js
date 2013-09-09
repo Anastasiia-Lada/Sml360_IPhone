@@ -15,15 +15,16 @@
 			listeners: {
 				element: 'element',
                 tap: function () {
-                    if (++this.currentImageIndex > 7){
+                    if (this.config.currentImageIndex > 7){
                         smiley360.animateViewLeft('mainview');
                         Ext.getCmp('xMainView').hideSidePanel();
                     }
                     else {
                     	var imageScr = Ext.String.format(
-                            'resources/images/mobie_tutorial_{0}.png', this.currentImageIndex);
+                            'resources/images/mobie_tutorial_{0}.png', this.config.currentImageIndex);
 
                     	this.setSrc(imageScr);
+                    	this.config.currentImageIndex += 1;
                     }
                 }
             }
