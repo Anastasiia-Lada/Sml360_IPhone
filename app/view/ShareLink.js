@@ -52,7 +52,7 @@
                     xtype: 'textfield',
                     id: 'xLinkField',
                     cls: 'cust-input',
-					style: 'font-size: 0.75em;',
+					style: 'font-size: 0.8em;',
                     value: '',
                 }]
             }, {
@@ -99,8 +99,9 @@
     	xLinkField.setValue(link_to_set);
     	
     	xLinkField.focus();
-    	xLinkField.select();    	
     	xLinkField.click(); //android
+    	xLinkField.select();    	
+    	
     	
     }
 });
