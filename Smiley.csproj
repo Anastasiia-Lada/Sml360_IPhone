@@ -62,12 +62,14 @@
     <Content Include=".sencha\workspace\plugin.xml" />
     <Content Include="app.js" />
     <Content Include="app\controller\Index.js" />
+    <Content Include="app\model\ShareTool.js" />
     <Content Include="app\model\UrlModel.js" />
     <Content Include="app\model\Member.js" />
     <Content Include="app\model\SignupModel.js" />
     <Content Include="app\services\Configuration.js" />
     <Content Include="app\services\Services.js" />
     <Content Include="app\services\Services.mock.js" />
+    <Content Include="app\store\ShareTools.js" />
     <Content Include="app\store\Members.js" />
     <Content Include="app\view\Browse.js" />
     <Content Include="app\view\Connect.js" />

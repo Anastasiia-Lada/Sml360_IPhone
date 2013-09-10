@@ -52,7 +52,7 @@
                     xtype: 'textfield',
                     id: 'xLinkField',
                     cls: 'cust-input',
-					style: 'font-size: 0.8em;',
+					style: 'font-size: 0.9em;',
                     value: '',
                 }]
             }, {
@@ -79,8 +79,8 @@
 
                 var xLinkField = this.down('#xLinkField');
 
-                xLinkField.focus();
-                xLinkField.select();
+                //xLinkField.focus();
+                //xLinkField.select();
             },
             hide: function () {
                 this.destroy();
@@ -99,7 +99,7 @@
     	xLinkField.setValue(link_to_set);
     	
     	xLinkField.focus();
-    	xLinkField.click(); //android
+    	//xLinkField.click(); //android
     	xLinkField.select();    	
     	
     	

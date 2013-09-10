@@ -120,7 +120,7 @@
 
         smiley360.setViewStatus(shareView, smiley360.viewStatus.progress, { progress: 'SUBMIT' });
         smiley360.services.postToYoutube(shareData, function (response) {
-        	smiley360.setResponseStatus(shareView, response, { successful: 'DONE' }, shareView.config.btn_from);
+        	smiley360.setResponseStatus(shareView, response, { successful: 'DONE' }, shareView.config.btn_from, shareView.missionId);
         });
     },
 

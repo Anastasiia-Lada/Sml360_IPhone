@@ -346,7 +346,7 @@ Ext.define('smiley360.view.ReviewForFender', {
 
 		smiley360.setViewStatus(commentView, smiley360.viewStatus.progress);
 		smiley360.services.postToConnect(commentData, function (response) {
-			smiley360.setResponseStatus(commentView, response, '', commentView.config.btn_from);
+			smiley360.setResponseStatus(commentView, response, '', commentView.config.btn_from, commentView.missionId);
 		});
 	},
 

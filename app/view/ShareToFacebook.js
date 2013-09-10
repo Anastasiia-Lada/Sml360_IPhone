@@ -217,7 +217,7 @@
 
 		smiley360.setViewStatus(shareView, smiley360.viewStatus.progress);
 		smiley360.services.postToFacebook(shareData, function (response) {
-			smiley360.setResponseStatus(shareView, response, '', shareView.config.btn_from);
+			smiley360.setResponseStatus(shareView, response, '', shareView.config.btn_from, shareView.missionId);
 		});
 	},
 

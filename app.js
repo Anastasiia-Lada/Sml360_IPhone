@@ -30,8 +30,8 @@ Ext.application({
         'Ext.data.Validations',
         'smiley360.model.SignupModel',
     ],
-    stores: ['Members'],
-    models: ['Member'],
+    stores: ['Members', 'ShareTools'],
+    models: ['Member', 'ShareTool'],
     controllers: ['Index'],
     views: [
         'Login',

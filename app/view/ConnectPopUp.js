@@ -101,13 +101,16 @@ Ext.define('smiley360.view.ConnectPopUp', {
 								if (smiley360.memberData.Profile.twitter_token && smiley360.memberData.Profile.twitter_token != "")
 									allow_twitter = true;
 								if (local_name == 'Facebook') {
+									Ext.getCmp('xDetailsView').fireEvent('setToolId', 'sharetofacebookview');
 									this.up('#xViewPopup').onFacebookLoginTap();
 								}
 								else if (local_name == 'Twitter') {
+									Ext.getCmp('xDetailsView').fireEvent('setToolId', 'sharetotwitterview');
 									this.up('#xViewPopup').onTwitterLoginTap();
 								};
 
 								this.up('#xViewPopup').destroy();
+
 							};
 							//Ext.widget('missingoffersview').hide();
 							//Ext.getCmp('xMainView').showExternalView('editprofileview');

@@ -1,6 +1,6 @@
 var isLogined = false;
 var isLoadedApp = false;
-
+var toolToGo = {};
 Ext.define('smiley360.controller.Index', {
 	extend: 'Ext.app.Controller',
 	requires: ['smiley360.store.Members', 'smiley360.model.Member'],
@@ -53,7 +53,9 @@ Ext.define('smiley360.controller.Index', {
 			detailsView: {
 				showMissionDetailsCommand: 'showMissionDetailsCommand',
 				onShareConnectTapCommand: 'onShareConnectTapCommand',
-				goSetSharingInfo: 'goSetSharingInfo'
+				goSetSharingInfo: 'goSetSharingInfo',
+				ReloadMissionSmiles: 'ReloadMissionSmiles',
+				setToolId: 'setToolId',
 			},
 			offersView: {
 				LoadOfferDetailsCommand: 'LoadOfferDetailsCommand',
@@ -130,6 +132,7 @@ Ext.define('smiley360.controller.Index', {
 						else {
 							me.loadProfileDropdowns(function () {
 								me.tryLoginUser();
+								
 							});
 						}
 					});
@@ -385,7 +388,7 @@ Ext.define('smiley360.controller.Index', {
 					//smiley360.missionData.MissionDetails = response;
 					Ext.getCmp('xOfferView').fireEvent('getMissionListCommand', this, smiley360.memberData.UserId);
 					Ext.getCmp('xOfferView').fireEvent('getOffersCommand', this, smiley360.memberData.UserId);
-
+					Ext.getCmp('xMainView').down('#xTabpanel').getTabBar().getComponent(2).enable();
 					//Ext.getCmp('xMainView').showExternalView('offerdetailsview');
 				}
 				else {
@@ -451,6 +454,24 @@ Ext.define('smiley360.controller.Index', {
 						console.log('Index -> [LoadAllMissions] left:', me.missionsCounter)
 					});
 		};
+	},
+
+	ReloadMissionSmiles: function (memberID, missionID) {
+		smiley360.preventLoadIndicator = true;
+		smiley360.services.getMissionDetails(missionID, memberID,
+			function (response) {
+				if (response.success) {
+					delete response.success;
+					Ext.getCmp('xDetailsView').updateMissionDetails(response, missionID);
+					console.log('Missiondetails is updated for mission' + missionID);
+					smiley360.preventLoadIndicator = false;
+				}
+				else {
+					console.log('Missiondetails is corrupted for mission' + missionID);
+					smiley360.preventLoadIndicator = false;
+					//show error on view
+				};		
+			});
 	},
 
 	showMissionDetailsCommand: function (image, missionID, isShare) {
@@ -830,6 +851,29 @@ Ext.define('smiley360.controller.Index', {
 		}
 	},
 
+	setToolId: function (toolId_toSet) {
+		var toolsStore = Ext.getStore('toolsStore');
+			//var toolId = toolsStore.getAt(0).data.toolId;
+			//toolsStore.removeAll();
+		toolsStore.add({ toolId: toolId_toSet });
+			toolsStore.sync();
+
+			console.log('Index -> setToolId: ' + toolsStore.getAt(0).data.toolId);
+		
+	},
+	getToolId: function () {
+		var toolsStore = Ext.getStore('toolsStore');
+		
+		if (toolsStore.getCount() > 0) {
+			var toolId = toolsStore.getAt(0).data.toolId;			
+			toolToGo = toolId;			
+			console.log('Index -> getToolId: ' + toolId);
+		}
+		else console.log('Index -> getToolId: nodata');
+		toolsStore.removeAll();
+		return toolToGo;
+	},
+
 	doJavascriptLoad: function (jsPath, callback) {
 		var onload = function () {
 			console.log('Index -> [' + jsPath + '] loading done!');
@@ -874,6 +918,7 @@ Ext.define('smiley360.controller.Index', {
 	},
 
 	tryLoginUser: function () {
+		var me = this;
 		var membersStore = Ext.getStore('membersStore');
 		if (membersStore.getCount() > 0) {
 			var memberId = membersStore.getAt(0).data.memberId;
@@ -882,10 +927,20 @@ Ext.define('smiley360.controller.Index', {
 			if (memberId) {
 				console.log('Index -> [tryLoginUser] with stored memberId:' + memberId);
 
-				this.loadMemberData(memberId, function () {
+				this.loadMemberData(memberId, function () {	
 					smiley360.animateViewLeft('mainview');
 					smiley360.destroySplash();
 					isLoadedApp = true;
+					var cmp_tool = me.getToolId();
+					if (cmp_tool == 'sharetofacebookview') {
+						//Ext.getCmp('xMainView').showExternalView('detailsview');
+						//Ext.widget('sharetofacebookview').show();
+					};
+
+					if (cmp_tool == 'sharetotwitterview') {
+						//Ext.getCmp('xMainView').showExternalView('detailsview');
+						//Ext.widget('sharetotwitterview').show();
+					};
 				});
 
 				return;
@@ -906,6 +961,16 @@ Ext.define('smiley360.controller.Index', {
                     			smiley360.animateViewLeft('mainview');
                     			smiley360.destroySplash();
                     			isLoadedApp = true;
+                    			var cmp_tool = me.getToolId();
+                    			if (cmp_tool == 'sharetofacebookview') {
+                    				//Ext.getCmp('xMainView').showExternalView('detailsview');
+                    				//Ext.widget('sharetofacebookview').show();
+                    			};
+
+                    			if (cmp_tool == 'sharetotwitterview') {
+                    				//Ext.getCmp('xMainView').showExternalView('detailsview');
+                    				//Ext.widget('sharetotwitterview').show();
+                    			};
                     		});
                     	}
                     	else {
@@ -943,6 +1008,7 @@ smiley360.AllMissionsList = [];
 smiley360.slideShowImages = {};
 smiley360.postReview = {};
 smiley360.fromRemove = false;
+smiley360.preventLoadIndicator = false;
 //changeuserProfileImage
 smiley360.userProfileImage = 'http://uat.smiley360.com/images/default-profile.jpg';
 
@@ -975,7 +1041,7 @@ smiley360.sharingType =
 	pinterest: '12',
 };
 
-smiley360.setResponseStatus = function (view, response, states, updateSmileBtn) {
+smiley360.setResponseStatus = function (view, response, states, updateSmileBtn, missionUpdID) {
 	var status = (response.success || response.status == 'success') ?
         smiley360.viewStatus.successful :
         smiley360.viewStatus.unsuccessful;
@@ -983,10 +1049,13 @@ smiley360.setResponseStatus = function (view, response, states, updateSmileBtn) 
 		status = smiley360.viewStatus.unsuccessful;
 	};
 
-	if (updateSmileBtn && response.points) {
-		updateSmileBtn.setSmilesDone(response.points);
-	};
 
+	if (updateSmileBtn && response.points) {
+		updateSmileBtn.setSmilesDone(response.points);		
+	};
+	if (missionUpdID) {
+		Ext.getCmp('xDetailsView').fireEvent('ReloadMissionSmiles', smiley360.memberData.UserId, missionUpdID);
+	};
 	smiley360.setViewStatus(view, status, states);
 }
 

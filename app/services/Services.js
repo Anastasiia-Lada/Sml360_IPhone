@@ -771,7 +771,7 @@ smiley360.services.ajax = function (method, params, onCompleted) {
 		if (noSpecialLoadMethods[method_key] == method)
 			preventLoadIndicator = true;
 
-	if (isLoadedApp && !preventLoadIndicator)
+	if (isLoadedApp && !preventLoadIndicator && !smiley360.preventLoadIndicator)
 		if (!Ext.Viewport.getMasked() || Ext.Viewport.getMasked()) {
 			Ext.Viewport.setMasked({ xtype: 'loadmask', indicator: true, message: 'We are fetching data for you...<br>Please, wait...' });
 		}

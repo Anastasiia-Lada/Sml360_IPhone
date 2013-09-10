@@ -481,6 +481,60 @@ Ext.define('smiley360.view.Details', {
         }
     },
 
+    updateMissionDetails: function (data, missionId) {
+    	console.log(data.valueOf());
+    	var missionIndex = this.getMissionIndex(missionId);
+    	var missionDetails = data;
+    	smiley360.AllMissionsList[missionIndex] = data;
+    	if (missionDetails) {
+    		var xSharePanel = this.down('#xSharePanel');
+    		if (!xSharePanel.getHidden()) {
+    			xSharePanel.setShareButtons(missionDetails);
+    		}
+
+    		this.down('#xDetailsTitleLabel').setHtml(missionDetails.MissionDetails.title);
+    		this.down('#xDetailsWhatYoullRecieve').setHtml(missionDetails.MissionDetails.youllReceive);
+    		this.down('#xDetailsTryNew').setHtml(missionDetails.MissionDetails.tryNewThings);
+
+    		if (this.down('#' + missionDetails.MissionId)) {
+    			this.down('#xMissionsCarousel').setActiveItem(this.down('#' + missionDetails.MissionId));
+    		}
+
+    		this.down('#xMissionSmileScore').removeAll(true, true);
+
+    		var detailsArray = missionDetails.MissionDetails;
+    		if (detailsArray.mission_promo_Activated == '1') {
+    			this.down('#xDetailsPromo').setHtml(detailsArray.promo_message);
+    		}
+    		else {
+    			this.down('#xDetailsPromo').setHtml('');
+    		}
+
+    		if (detailsArray.mission_shipment_active == '1') {
+    			this.down('#xDetailsShipment').setHtml('Your package will ship ' + detailsArray.mission_shipment_message);
+    		}
+    		else {
+    			this.down('#xDetailsShipment').setHtml('');
+    		}
+
+    		var smilesArray = missionDetails.MissionPoints.sharingToolScore;
+    		for (var key in smilesArray) {
+    			var oneItem = smilesArray[key];
+    			this.setSmileItem(oneItem.sharingTool_name, oneItem.sharingTool_current_smiles + '/' + oneItem.sharingTool_max_smiles, 'padding: 3px 15px;');
+
+    		};
+
+    		var pointsArray = missionDetails.MissionPoints;
+
+    		this.setSmileItem('Bonus', pointsArray.mission_bonus_smiles, 'padding: 3px 15px;');
+    		this.setSmileItem('Mission Total', pointsArray.mission_current_smiles + '/' + pointsArray.mission_max_smiles, 'padding: 10px 15px; font-weight: bold;');
+    		this.setSmileItem('Total Smiles', pointsArray.mission_total_smiles, 'padding: 10px 15px;');
+
+    		this.down('#xTopMissionScore').setHtml(pointsArray.mission_current_smiles + '/' + pointsArray.mission_max_smiles);
+    	}
+    },
+
+
     getMissionIndex: function (missionId) {
         for (var key in smiley360.AllMissionsList) {
             if (smiley360.AllMissionsList[key].MissionId == missionId) {

@@ -18,10 +18,15 @@ Ext.define('smiley360.view.Survey', {
 			listeners: {
 				painted: function () {
 					window.addEventListener("message", function (evt) {
-						if (evt.data) {
-							Ext.getCmp('xMainView').showExternalView(evt.data);
-						};
-						
+						if (evt.data)
+							if (evt.data == "offersview") {
+								smiley360.fromRemove = true;
+								Ext.getCmp('xOfferView').fireEvent('getOffersCommand', this, smiley360.memberData.UserId);
+							}
+							else {
+								Ext.getCmp('xMainView').showExternalView(evt.data);
+							}
+
 					}, true);
 				}
 			}
