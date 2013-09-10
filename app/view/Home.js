@@ -243,11 +243,13 @@ Ext.define('smiley360.view.Home', {
 					element: 'element',
 					tap: function () {
 						if (this.config.myLink && this.config.myLink != "") {
-							if (app.isAndroid()) {
-								navigator.app.loadUrl(this.config.myLink);
-							} else {
-								window.location.href = this.config.myLink;
-							};
+							
+							window.open(this.config.myLink, '_system', 'location=yes');
+							////if (app.isAndroid()) {
+							////	navigator.app.loadUrl(this.config.myLink);
+							////} else {
+							////	window.location.href = this.config.myLink;
+							////};
 						//try {
 						//	Ext.device.Device.openURL(this.config.myLink);
 						//}

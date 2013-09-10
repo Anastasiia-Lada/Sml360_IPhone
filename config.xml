@@ -19,7 +19,9 @@
 	<!-- ios: external links should open in the default browser, 'true' would use the webview the app lives in -->
 	<preference name="exit-on-suspend"            value="true" />
 	<!-- ios: if set to true, app will terminate when home button is pressed -->
-	
+	<preference name="prerendered-icon" value="true" />
+
+	<plugin name="InAppBrowser" value="CDVInAppBrowser" />
 	<!-- Plugins can also be added here. -->
 	<!--
         <gap:plugin name="Example" />
@@ -37,7 +39,6 @@
         Otherwise, you can specify specific domains:
     -->
 	<access origin="*" browserOnly="true" />
-	<access origin="http://bit.ly*" browserOnly="true" />
 
 	<!-- allow local pages -->
 	<!--
