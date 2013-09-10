@@ -47,11 +47,12 @@
                 items: [{
                     xtype: 'label',
                     cls: 'popup-top-text',
-                    html: 'Copy the following link',
+                    html: 'Copy the following link and paste anywhere on the internet',
                 }, {
                     xtype: 'textfield',
                     id: 'xLinkField',
                     cls: 'cust-input',
+					style: 'font-size: 0.75em;',
                     value: '',
                 }]
             }, {
@@ -96,9 +97,10 @@
     {
     	var xLinkField = this.down('#xLinkField');
     	xLinkField.setValue(link_to_set);
+    	
     	xLinkField.focus();
-    	xLinkField.select();
-    	//xLinkField.click(); android
+    	xLinkField.select();    	
+    	xLinkField.click(); //android
     	
     }
 });

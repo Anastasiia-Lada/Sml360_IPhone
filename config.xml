@@ -21,7 +21,7 @@
 	<!-- ios: if set to true, app will terminate when home button is pressed -->
 	<preference name="prerendered-icon" value="true" />
 
-	<plugin name="InAppBrowser" value="CDVInAppBrowser" />
+	<plugin name="InAppBrowser" value="org.apache.cordova.InAppBrowser" />
 	<!-- Plugins can also be added here. -->
 	<!--
         <gap:plugin name="Example" />
@@ -38,7 +38,19 @@
 
         Otherwise, you can specify specific domains:
     -->
-	<access origin="*" browserOnly="true" />
+	<access origin="http://127.0.0.1*" />
+	<access origin="http://uat.smiley360.com*" />
+	<access origin="http://ajax.googleapis.com*" />
+
+	<access origin="http://connect.facebook.net*" />
+
+	<access origin="http://static.ak.facebook.com*" />
+
+	<access origin="https://s-static.ak.facebook.com*" />
+
+	<access origin="https://www.facebook.com*" />
+
+	<access origin="https://fbstatic-a.akamaihd.net*" />
 
 	<!-- allow local pages -->
 	<!--
