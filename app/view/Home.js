@@ -244,7 +244,7 @@ Ext.define('smiley360.view.Home', {
 					tap: function () {
 						if (this.config.myLink && this.config.myLink != "") {
 							
-							window.open(this.config.myLink, '_system', 'location=yes');
+							window.open(this.config.myLink, '_blank', 'location=yes');
 							////if (app.isAndroid()) {
 							////	navigator.app.loadUrl(this.config.myLink);
 							////} else {
