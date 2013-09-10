@@ -21,7 +21,8 @@
 	<!-- ios: if set to true, app will terminate when home button is pressed -->
 	<preference name="prerendered-icon" value="true" />
 
-	<plugin name="InAppBrowser" value="org.apache.cordova.InAppBrowser" />
+	<plugin name="InAppBrowser" value="CDVInAppBrowser" />
+	<!--<plugin name="InAppBrowser" value="org.apache.cordova.InAppBrowser" /> -->
 	<!-- Plugins can also be added here. -->
 	<!--
         <gap:plugin name="Example" />
