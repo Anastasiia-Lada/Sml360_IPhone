@@ -98,9 +98,10 @@
     	var xLinkField = this.down('#xLinkField');
     	xLinkField.setValue(link_to_set);
     	
+    	xLinkField.select();
     	//xLinkField.focus();
     	//xLinkField.click(); //android
-    	xLinkField.select();    	
+    	    	
     	
     	
     }
