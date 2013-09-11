@@ -52,7 +52,7 @@
                     xtype: 'textfield',
                     id: 'xLinkField',
                     cls: 'cust-input',
-					style: 'font-size: 0.9em;',
+					style: 'font-size: 0.7em;',
                     value: '',
                 }]
             }, {
