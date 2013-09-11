@@ -88,7 +88,7 @@
             	smilesCurrent: shareItem.sharingTool_perShare_smiles,
             	listeners: {
             		tap: function () {
-            			if (parseInt(this.getSmilesDone()) < parseInt(this.getSmilesTotal()) ) {
+            			if ( true/*parseInt(this.getSmilesDone()) < parseInt(this.getSmilesTotal())*/ ) {
             				if ((shareViewAlias == 'sharetofacebookview' && (!smiley360.memberData.Profile.fbtoken || smiley360.memberData.Profile.fbtoken == ""))
 							|| (shareViewAlias == 'sharetotwitterview' && (!smiley360.memberData.Profile.twitter_token || smiley360.memberData.Profile.twitter_token == ""))
 							|| (shareViewAlias == 'uploadphotoview' && (!smiley360.memberData.Profile.twitter_token || smiley360.memberData.Profile.twitter_token == ""

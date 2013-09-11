@@ -27,6 +27,8 @@
         <gap:plugin name="Example" />
         A list of available plugins are available at https://build.phonegap.com/docs/plugins
     -->
+	
+	<gap:splash src="resources/images/loadingimage-r2.png" />
 
 	<!-- Define app icon for each platform. -->
 	<icon src="resources/icons/Icon.png" />	
