@@ -1194,3 +1194,9 @@
 .offeracceptaddress-message-text {
     font-family: 'din medium';
 }
+
+
+.prevent-hs .x-innerhtml h1,.prevent-hs .x-innerhtml h2,.prevent-hs .x-innerhtml h3,.prevent-hs .x-innerhtml h4,.prevent-hs .x-innerhtml h5,.prevent-hs .x-innerhtml h6,.prevent-hs .x-innerhtml p{
+	font-size: 1em;
+	line-height: normal;
+}

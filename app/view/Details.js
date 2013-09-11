@@ -111,7 +111,8 @@ Ext.define('smiley360.view.Details', {
                     }, {
                         xtype: 'label',
                         id: 'xDetailsPromo',
-                        style: 'font-family: din bold; font-size:1em;padding: 50px 20px 0px; margin: -113px 0px 50px 0px;',
+						cls: 'prevent-hs',
+						style: 'font-family: din bold; font-size:1em;padding: 50px 20px 0px; margin: -87px 0px 20px;',//margin: -113px 0px 50px 0px;',
                         html: '',
                         padding: '10px 20px',
                     }, {
