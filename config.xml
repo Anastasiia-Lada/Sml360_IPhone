@@ -30,6 +30,17 @@
 	
 	<gap:splash src="resources/images/loadingimage-r2.png" />
 
+	<gap:splash src="resources/images/loadingimage-r2.png" gap:platform="android" gap:density="ldpi" />
+	<gap:splash src="resources/images/loadingimage-r2.png" gap:platform="android" gap:density="mdpi" />
+	<gap:splash src="resources/images/loadingimage-r2.png" gap:platform="android" gap:density="hdpi" />
+	<gap:splash src="resources/images/loadingimage-r2.png" gap:platform="android" gap:density="xhdpi" />
+
+	<gap:splash src="resources/images/loadingimage-r2.png" gap:platform="ios" width="320" height="480" />
+	<gap:splash src="resources/images/loadingimage-r2.png" gap:platform="ios" width="640" height="960" />
+	<gap:splash src="resources/images/loadingimage-r2.png" gap:platform="ios" width="640" height="1136" />
+	<gap:splash src="resources/images/loadingimage-r2.png" gap:platform="ios" width="1024" height="748" />
+	<gap:splash src="resources/images/loadingimage-r2.png" gap:platform="ios" width="768" height="1004" />
+
 	<!-- Define app icon for each platform. -->
 	<icon src="resources/icons/Icon.png" />	
 	<!--
