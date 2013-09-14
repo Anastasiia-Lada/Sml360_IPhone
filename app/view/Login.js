@@ -55,7 +55,13 @@ Ext.define('smiley360.view.Login', {
 				itemId: 'xLogin',
 				id: 'login_btn',
 				cls: 'cust-btn login-btn',
-				text: 'LOG IN'
+				text: 'LOG IN',
+				listeners:
+					{
+						painted: function () {
+							this.enable();
+						}
+					}
 			}, {
 				xtype: 'label',
 				id: 'xForgetPassword',

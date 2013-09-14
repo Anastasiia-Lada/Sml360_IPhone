@@ -127,13 +127,24 @@ Ext.define('smiley360.controller.Index', {
 										me.tryLoginUser();
 									});
 								});
-
 						}
 						else {
-							me.loadProfileDropdowns(function () {
-								me.tryLoginUser();
-								
-							});
+							try {
+								Ext.getStore('membersStore').load(function () {
+									me.loadProfileDropdowns(function () {
+										me.tryLoginUser();
+
+									});
+								});
+							}
+							catch (err) {
+								Ext.Msg.alert('ERROR', 'Something is wrong! Please, login again!');
+								me.loadProfileDropdowns(function () {
+									me.tryLoginUser();
+
+								});
+							};
+							
 						}
 					});
 			});
@@ -470,7 +481,7 @@ Ext.define('smiley360.controller.Index', {
 					console.log('Missiondetails is corrupted for mission' + missionID);
 					smiley360.preventLoadIndicator = false;
 					//show error on view
-				};		
+				};
 			});
 	},
 
@@ -839,39 +850,43 @@ Ext.define('smiley360.controller.Index', {
             });
 	},
 
-	updateMemberId: function (memberId) {
+	updateMemberId: function (memberID) {
 		var membersStore = Ext.getStore('membersStore');
 		if (membersStore.getCount() > 0) {
 			var deviceId = membersStore.getAt(0).data.deviceId;
 			membersStore.removeAll();
-			membersStore.add({ memberId: memberId, deviceId: deviceId });
-			membersStore.sync();
+			Ext.getStore('membersStore').getProxy().clear();
+			//membersStore.insert(membersStore.getAt(0), { memberId: memberId, deviceId: deviceId });
+			membersStore.add({ memberId: memberID, deviceId: deviceId });
+
 
 			console.log('Index -> updateMemberId: ' + membersStore.getAt(0).data.memberId);
 		}
+		membersStore.sync();
 	},
 
 	setToolId: function (toolId_toSet) {
-		var toolsStore = Ext.getStore('toolsStore');
-			//var toolId = toolsStore.getAt(0).data.toolId;
-			//toolsStore.removeAll();
-		toolsStore.add({ toolId: toolId_toSet });
-			toolsStore.sync();
+		//var toolsStore = Ext.getStore('toolsStore');
+		//	//var toolId = toolsStore.getAt(0).data.toolId;
+		//	//toolsStore.removeAll();
+		//toolsStore.add({ toolId: toolId_toSet });
+		//	toolsStore.sync();
 
-			console.log('Index -> setToolId: ' + toolsStore.getAt(0).data.toolId);
-		
+		//	console.log('Index -> setToolId: ' + toolsStore.getAt(0).data.toolId);
+
 	},
 	getToolId: function () {
-		var toolsStore = Ext.getStore('toolsStore');
-		
-		if (toolsStore.getCount() > 0) {
-			var toolId = toolsStore.getAt(0).data.toolId;			
-			toolToGo = toolId;			
-			console.log('Index -> getToolId: ' + toolId);
-		}
-		else console.log('Index -> getToolId: nodata');
-		toolsStore.removeAll();
-		return toolToGo;
+		//var toolsStore = Ext.getStore('toolsStore');
+
+		//if (toolsStore.getCount() > 0) {
+		//	var toolId = toolsStore.getAt(0).data.toolId;			
+		//	toolToGo = toolId;			
+		//	console.log('Index -> getToolId: ' + toolId);
+		//}
+		//else console.log('Index -> getToolId: nodata');
+		//toolsStore.removeAll();
+		//return toolToGo;
+		return "";
 	},
 
 	doJavascriptLoad: function (jsPath, callback) {
@@ -909,17 +924,41 @@ Ext.define('smiley360.controller.Index', {
 
 	generateDeviceId: function () {
 		var membersStore = Ext.getStore('membersStore');
-
-		membersStore.removeAll();
-		membersStore.add({ deviceId: guid() });
-		membersStore.sync();
+		if (membersStore.getCount() == 0)
+			//membersStore.removeAll();
+		{
+			membersStore.add({ deviceId: guid() });
+			membersStore.sync();
+		}
 
 		console.log('Index -> generateDeviceId: ' + membersStore.getAt(0).data.deviceId);
 	},
 
+	updateDeviceId: function () {
+		var membersStore = Ext.getStore('membersStore');
+		if (membersStore.getCount() > 0) {
+			function recover_guid() {
+				return guid_s4() + guid_s4() + '-' + guid_s4() + '-' + guid_s4() + '-' + guid_s4() + '-' + guid_s4() + guid_s4() + guid_s4();
+
+			}
+			function guid_s4() {
+				return Math.floor((1 + Math.random()) * 0x10000).toString(16).substring(1);
+			}
+			var deviceID = recover_guid();
+			membersStore.removeAll();
+			Ext.getStore('membersStore').getProxy().clear();
+			membersStore.add({ deviceId: deviceID });
+		};
+		membersStore.sync();
+
+
+		console.log('Index -> updateDeviceId: ' + membersStore.getAt(0).data.deviceId);
+	},
 	tryLoginUser: function () {
 		var me = this;
+
 		var membersStore = Ext.getStore('membersStore');
+		//alert(Ext.getStore('membersStore').getAt(0).data.memberId + '_' + Ext.getStore('membersStore').getAt(0).data.deviceId);
 		if (membersStore.getCount() > 0) {
 			var memberId = membersStore.getAt(0).data.memberId;
 			var deviceId = membersStore.getAt(0).data.deviceId;
@@ -927,7 +966,7 @@ Ext.define('smiley360.controller.Index', {
 			if (memberId) {
 				console.log('Index -> [tryLoginUser] with stored memberId:' + memberId);
 
-				this.loadMemberData(memberId, function () {	
+				this.loadMemberData(memberId, function () {
 					smiley360.animateViewLeft('mainview');
 					smiley360.destroySplash();
 					isLoadedApp = true;
@@ -975,7 +1014,10 @@ Ext.define('smiley360.controller.Index', {
                     	}
                     	else {
                     		console.log('Index -> [tryLoginUser] don\'t received memberId for deviceId:' + deviceId);
-
+                    		if (response.memberID == 0) {
+                    			Ext.Msg.alert('ERROR', 'You are using wrong or expired guid. Please, try again!');
+                    			me.updateDeviceId();
+                    		};
                     		smiley360.animateViewLeft('loginview');
                     		smiley360.destroySplash();
                     		isLoadedApp = true;
@@ -1051,7 +1093,7 @@ smiley360.setResponseStatus = function (view, response, states, updateSmileBtn, 
 
 
 	if (updateSmileBtn && response.points) {
-		updateSmileBtn.setSmilesDone(response.points);		
+		updateSmileBtn.setSmilesDone(response.points);
 	};
 	if (missionUpdID) {
 		Ext.getCmp('xDetailsView').fireEvent('ReloadMissionSmiles', smiley360.memberData.UserId, missionUpdID);
@@ -1227,3 +1269,4 @@ smiley360.destroySplash = function () {
 		console.log('Index -> [appLoadingIndicator] is NULL!');
 	}
 }
+

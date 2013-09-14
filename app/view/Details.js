@@ -439,7 +439,7 @@ Ext.define('smiley360.view.Details', {
             if (!xSharePanel.getHidden()) {
                 xSharePanel.setShareButtons(missionDetails);
             }
-
+            missionDetails.MissionDetails.title = missionDetails.MissionDetails.title || "&nbsp;";
             this.down('#xDetailsTitleLabel').setHtml(missionDetails.MissionDetails.title);
             this.down('#xDetailsWhatYoullRecieve').setHtml(missionDetails.MissionDetails.youllReceive);
             this.down('#xDetailsTryNew').setHtml(missionDetails.MissionDetails.tryNewThings);

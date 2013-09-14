@@ -76,9 +76,17 @@
                 _App.getController('Index').onShowOffersView(true);
             }
         }, false);
+        function overtime_alert() {
+        	if (Ext.getCmp('appLoadingIndicator'))
+        		alert('Please, clear cache!!!');
+        }
+        
+       
+
 
         function guid() {
-            return s4() + s4() + '-' + s4() + '-' + s4() + '-' + s4() + '-' + s4() + s4() + s4();
+        	return s4() + s4() + '-' + s4() + '-' + s4() + '-' + s4() + '-' + s4() + s4() + s4();
+
         }
 
         function s4() {

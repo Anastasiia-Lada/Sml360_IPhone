@@ -3,6 +3,7 @@
     config: {
         identifier: 'sequential',
         fields: [
+			{ name: 'id', type: 'int' },
             { name: 'memberId', type: 'string' },
             { name: 'deviceId', type: 'string' },
         ],
@@ -10,5 +11,6 @@
             type: 'localstorage',
             id: 'member'
         }
+    	
     }
 });

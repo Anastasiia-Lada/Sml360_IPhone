@@ -111,11 +111,20 @@
 
 				        var members = Ext.getStore('membersStore');
 				        if (members.getCount() > 0) {
-				            members.getAt(0).data.memberId = null;
-				            members.sync();
+				        	var deviceID = members.getAt(0).data.deviceId;
+				        	//members.getAt(0).data.memberId = null;
+				        	//members.getAt(0).data.deviceId = guid();
+				        	
+				        	//alert(members.getAt(0));
+				        	//members.insert(members.getAt(0), { memberId: null, deviceId: guid() })
+				        	//members.getAt(0).data.memberId = null;
+				        	members.removeAt(0);
+				        	delete Ext.getStore('membersStore').getProxy();
+				        	members.add({ memberId: null, deviceId: deviceID })
+				        	
                         }
-
-					    smiley360.animateViewLeft('loginview');
+				        members.sync();
+				        smiley360.animateViewLeft('loginview');
 					}
 				}
 			}],
