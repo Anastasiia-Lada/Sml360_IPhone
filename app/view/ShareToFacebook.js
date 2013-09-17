@@ -176,9 +176,9 @@
 					cls: 'popup-post-button',
 					disabled: true,
 					listeners: {
-						
-						tap: function () {							
-								this.up('#xView').doShare();
+
+						tap: function () {
+							this.up('#xView').doShare();
 						}
 					},
 				}],
@@ -215,10 +215,23 @@
 			imageID: ''
 		};
 
-		smiley360.setViewStatus(shareView, smiley360.viewStatus.progress);
-		smiley360.services.postToFacebook(shareData, function (response) {
-			smiley360.setResponseStatus(shareView, response, '', shareView.config.btn_from, shareView.missionId);
-		});
+
+		//query fb does member have permissions
+		if (smiley360.permissionsList.publish_stream) {
+			smiley360.setViewStatus(shareView, smiley360.viewStatus.progress);
+			smiley360.services.postToFacebook(shareData, function (response) {
+				smiley360.setResponseStatus(shareView, response, '', shareView.config.btn_from, shareView.missionId);
+			});
+		}
+		else {
+			//ask for publish stream permissions
+
+			var shareView = Ext.widget('connectpopupview').show();
+			if (shareView.setToolName)
+				shareView.setToolName('Facebook');
+
+			this.onFacebookSignin_forToken();
+		}
 	},
 
 	doShareValidation: function () {
@@ -248,4 +261,14 @@
 	},
 
 	missionId: undefined,
+
+	onFacebookSignin_forToken: function () {
+		var deviceId = smiley360.services.getDeviceId();
+
+		console.log('Login -> login to Facebook to store token with deviceId: ', deviceId);
+
+		window.location =
+            smiley360.configuration.getServerDomain() +
+            'oauth/Facebook.html?deviceId=' + deviceId + '&scope=offline_access,email,read_stream,publish_stream';
+	},
 });

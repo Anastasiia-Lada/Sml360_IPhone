@@ -113,17 +113,17 @@ Ext.define('smiley360.view.Login', {
 	},
 
 	onFacebookLoginTap: function () {
-		var deviceId = Ext.getStore('membersStore').getAt(0).data.deviceId;
+		var deviceId = smiley360.services.getDeviceId();
 
 		console.log('Login -> login to Facebook with deviceId: ', deviceId);
 
 		window.location =
             smiley360.configuration.getServerDomain() +
-            'oauth/Facebook.html?deviceId=' + deviceId;
+            'oauth/Facebook.html?deviceId=' + deviceId + '&scope=offline_access,email,read_stream';
 	},
 
 	onTwitterLoginTap: function () {
-		var deviceId = Ext.getStore('membersStore').getAt(0).data.deviceId;
+		var deviceId = smiley360.services.getDeviceId();
 
 		console.log('Login -> login to Twitter with deviceId: ', deviceId);
 

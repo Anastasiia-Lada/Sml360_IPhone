@@ -25,6 +25,7 @@ Ext.define('smiley360.controller.Index', {
 			browseInstrumentsView: 'browseinstrumentsview',
 			connectView: 'connectview',
 			brandView: 'brandview',
+			sidemenu: 'sidemenu'
 		},
 		control: {
 
@@ -54,6 +55,7 @@ Ext.define('smiley360.controller.Index', {
 				showMissionDetailsCommand: 'showMissionDetailsCommand',
 				onShareConnectTapCommand: 'onShareConnectTapCommand',
 				goSetSharingInfo: 'goSetSharingInfo',
+				goAskPermissions: 'goAskPermissions',
 				ReloadMissionSmiles: 'ReloadMissionSmiles',
 				setToolId: 'setToolId',
 			},
@@ -91,6 +93,10 @@ Ext.define('smiley360.controller.Index', {
 			brandView: {
 				goFollow: 'goFollow',
 				goUnFollow: 'goUnFollow'
+			},
+			sidemenu:
+			{
+				updateDeviceId: 'updateDeviceId'
 			}
 		}
 	},
@@ -144,7 +150,7 @@ Ext.define('smiley360.controller.Index', {
 
 								});
 							};
-							
+
 						}
 					});
 			});
@@ -572,6 +578,27 @@ Ext.define('smiley360.controller.Index', {
             });
 
 	},
+	goAskPermissions: function (view, memberID) {
+		var me = this;
+		console.log('Checking permissions...');
+		smiley360.services.checkfacebookpermissions(memberID,
+            function (response) {
+            	if (response.success && response.status == "success" && response.fb_scope != "null") {
+            		
+            		for (var key in smiley360.permissionsList) {
+            			var item = smiley360.permissionsList[key]
+
+            			if (response.fb_scope.indexOf('publish_stream') != -1) {
+            				smiley360.permissionsList.publish_stream = true;
+            			}
+            			else smiley360.permissionsList.publish_stream = false;
+            		}
+            	}
+            	else {
+            		console.log('Permissions deprecated!');
+            	}
+            });
+	},
 
 	goSetSharingInfo: function (view, missionID, memberID, sharingTool_typeID, shareView) {
 		var me = this;
@@ -851,16 +878,17 @@ Ext.define('smiley360.controller.Index', {
 	},
 
 	updateMemberId: function (memberID) {
-		var membersStore = Ext.getStore('membersStore');
+		var membersStore = smiley360.services.getMemberStore();
 		if (membersStore.getCount() > 0) {
-			var deviceId = membersStore.getAt(0).data.deviceId;
+
+			var deviceId = smiley360.services.getDeviceId();
 			membersStore.removeAll();
-			Ext.getStore('membersStore').getProxy().clear();
+			membersStore.getProxy().clear();
 			//membersStore.insert(membersStore.getAt(0), { memberId: memberId, deviceId: deviceId });
 			membersStore.add({ memberId: memberID, deviceId: deviceId });
 
 
-			console.log('Index -> updateMemberId: ' + membersStore.getAt(0).data.memberId);
+			console.log('Index -> updateMemberId: ' + smiley360.services.getMemberId());
 		}
 		membersStore.sync();
 	},
@@ -935,7 +963,7 @@ Ext.define('smiley360.controller.Index', {
 	},
 
 	updateDeviceId: function () {
-		var membersStore = Ext.getStore('membersStore');
+		var membersStore = smiley360.services.getMemberStore();
 		if (membersStore.getCount() > 0) {
 			function recover_guid() {
 				return guid_s4() + guid_s4() + '-' + guid_s4() + '-' + guid_s4() + '-' + guid_s4() + '-' + guid_s4() + guid_s4() + guid_s4();
@@ -946,22 +974,22 @@ Ext.define('smiley360.controller.Index', {
 			}
 			var deviceID = recover_guid();
 			membersStore.removeAll();
-			Ext.getStore('membersStore').getProxy().clear();
+			membersStore.getProxy().clear();
 			membersStore.add({ deviceId: deviceID });
 		};
 		membersStore.sync();
 
 
-		console.log('Index -> updateDeviceId: ' + membersStore.getAt(0).data.deviceId);
+		console.log('Index -> updateDeviceId: ' + smiley360.services.getDeviceId());
 	},
 	tryLoginUser: function () {
 		var me = this;
 
-		var membersStore = Ext.getStore('membersStore');
+		var membersStore = smiley360.services.getMemberStore();//Ext.getStore('membersStore');
 		//alert(Ext.getStore('membersStore').getAt(0).data.memberId + '_' + Ext.getStore('membersStore').getAt(0).data.deviceId);
 		if (membersStore.getCount() > 0) {
-			var memberId = membersStore.getAt(0).data.memberId;
-			var deviceId = membersStore.getAt(0).data.deviceId;
+			var memberId = smiley360.services.getMemberId();//membersStore.getAt(0).data.memberId;
+			var deviceId = smiley360.services.getDeviceId();//membersStore.getAt(0).data.deviceId;
 
 			if (memberId) {
 				console.log('Index -> [tryLoginUser] with stored memberId:' + memberId);
@@ -985,7 +1013,6 @@ Ext.define('smiley360.controller.Index', {
 				return;
 			}
 			else if (deviceId) {
-				//alert(deviceId);
 				var me = this;
 
 				console.log('Index -> [tryLoginUser] with cached deviceId:' + deviceId);
@@ -1015,7 +1042,7 @@ Ext.define('smiley360.controller.Index', {
                     	else {
                     		console.log('Index -> [tryLoginUser] don\'t received memberId for deviceId:' + deviceId);
                     		if (response.memberID == 0) {
-                    			Ext.Msg.alert('ERROR', 'You are using wrong or expired guid. Please, try again!');
+                    			//Ext.Msg.alert('ERROR', 'You are using wrong or expired guid. Please, try again!');
                     			me.updateDeviceId();
                     		};
                     		smiley360.animateViewLeft('loginview');
@@ -1053,6 +1080,17 @@ smiley360.fromRemove = false;
 smiley360.preventLoadIndicator = false;
 //changeuserProfileImage
 smiley360.userProfileImage = 'http://uat.smiley360.com/images/default-profile.jpg';
+
+smiley360.permissionsList =
+{
+	///login with fb
+	offline_access: false,
+	email: false,
+	read_stream: false,
+	///sharing permission
+	publish_stream: false
+
+};
 
 smiley360.viewStatus =
 {

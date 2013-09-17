@@ -10,7 +10,7 @@ Ext.define('smiley360.view.Home', {
 	],
 	config: {
 		id: 'xHomeView',
-		title: 'HOME',
+		title: 'HOME',		
 		items: [{
 			xtype: 'container',
 			id: 'home-left',

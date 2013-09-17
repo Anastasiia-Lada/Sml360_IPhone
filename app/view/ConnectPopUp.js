@@ -26,7 +26,7 @@ Ext.define('smiley360.view.ConnectPopUp', {
 					tap: function () {
 						if ((showUploadDialog || Ext.getCmp('xSubmitButton').getText() == 'OK') &&
 							((smiley360.memberData.Profile.twitter_token && smiley360.memberData.Profile.twitter_token != "")
-								|| (smiley360.memberData.Profile.fbtoken && smiley360.memberData.Profile.fbtoken != ""))) {
+								|| (smiley360.memberData.Profile.facebookID && smiley360.memberData.Profile.facebookID != ""))) {
 
 							var shareView = Ext.widget('uploadphotoview').show();
 							//var shareItem.sharingTool_typeID = 9;
@@ -85,7 +85,7 @@ Ext.define('smiley360.view.ConnectPopUp', {
 						tap: function () {
 							if (this.getText() == 'OK') {
 								showUploadDialog = true;
-								if (!smiley360.memberData.Profile.fbtoken || smiley360.memberData.Profile.fbtoken == "") {
+								if (!smiley360.memberData.Profile.facebookID || smiley360.memberData.Profile.facebookID == "") {
 									local_name = 'Facebook';
 									this.up('#xViewPopup').setText(Ext.String.format('Connect {0} <br> to share!', 'Facebook'), Ext.String.format('Click the button below to connect to {0}, otherwise close this prompt to continue sharing without {0}.', 'Facebook'), 'Connect!');
 								}
@@ -129,7 +129,7 @@ Ext.define('smiley360.view.ConnectPopUp', {
 			hide: function () {
 				if ((showUploadDialog || Ext.getCmp('xSubmitButton').getText() == 'OK') &&
 					((smiley360.memberData.Profile.twitter_token && smiley360.memberData.Profile.twitter_token != "")
-							|| (smiley360.memberData.Profile.fbtoken && smiley360.memberData.Profile.fbtoken != ""))) {
+							|| (smiley360.memberData.Profile.facebookID && smiley360.memberData.Profile.facebookID != ""))) {
 					var shareView = Ext.widget('uploadphotoview').show();
 					//var shareItem.sharingTool_typeID = 9;
 					Ext.getCmp('xDetailsView').fireEvent('goSetSharingInfo', this, Ext.getCmp('xSharePanel').missionDetails.MissionId, smiley360.memberData.UserId, 9, shareView);
@@ -174,17 +174,17 @@ Ext.define('smiley360.view.ConnectPopUp', {
 		local_name = name;
 	},
 	onFacebookLoginTap: function () {
-		var deviceId = Ext.getStore('membersStore').getAt(0).data.deviceId;
+		var deviceId = smiley360.services.getDeviceId();
 
 		console.log('Login -> login to Facebook with deviceId: ', deviceId);
 
 		window.location =
             smiley360.configuration.getServerDomain() +
-            'oauth/Facebook.html?deviceId=' + deviceId;
+            'oauth/Facebook.html?deviceId=' + deviceId + '&scope=offline_access,email,read_stream,publish_stream';
 	},
 
 	onTwitterLoginTap: function () {
-		var deviceId = Ext.getStore('membersStore').getAt(0).data.deviceId;
+		var deviceId = smiley360.services.getDeviceId();
 
 		console.log('Login -> login to Twitter with deviceId: ', deviceId);
 

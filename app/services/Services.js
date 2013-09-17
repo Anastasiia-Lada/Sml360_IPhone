@@ -197,7 +197,15 @@ smiley360.services.getMissionSharingToolDetails = function (missionID, memberID,
 			onCompleted
 		);
 }
-
+smiley360.services.checkfacebookpermissions = function (memberID, onCompleted) {
+	smiley360.services.ajax(
+		"checkfacebookpermissions",
+		{
+			memberID: memberID
+		},
+			onCompleted
+		);
+}
 
 smiley360.services.getConnectBrand = function (memberID, brandID, start, howmany, onCompleted) {
 	var brandResponse = { BrandId: brandID };
@@ -798,4 +806,28 @@ smiley360.services.ajax = function (method, params, onCompleted) {
 			}
 		}
 	});
+}
+
+smiley360.services.getDeviceId = function () {
+	var deviceId = smiley360.services.getMemberRecord().get("deviceId");
+	return deviceId;
+}
+
+smiley360.services.getMemberId = function () {
+	var memberId = smiley360.services.getMemberRecord().get("memberId");
+	return memberId;
+}
+
+smiley360.services.getMemberStore = function () {
+	memberStore = Ext.getStore('membersStore');
+	return memberStore;
+}
+
+smiley360.services.getMemberRecord = function () {
+	var st = smiley360.services.getMemberStore();
+	//if (st.getCount() == 0) {
+	//	var record = st.add({ memberId: null, deviceId: null });
+	//	smiley360.services.save();
+	//}
+	return st.getAt(0);
 }

@@ -7,7 +7,11 @@
 		layout: 'fit',
 		html: '<div id="xShareButtons" align="center"></div>'
 	},
-
+	listeners: {
+		painted: function() {
+			
+		}	
+	},
 	missionDetails: {},
 
 	setShareButtons: function (missionDetails) {
@@ -88,16 +92,16 @@
             	smilesCurrent: shareItem.sharingTool_perShare_smiles,
             	listeners: {
             		tap: function () {
-            			if ( true/*parseInt(this.getSmilesDone()) < parseInt(this.getSmilesTotal())*/ ) {
-            				if ((shareViewAlias == 'sharetofacebookview' && (!smiley360.memberData.Profile.fbtoken || smiley360.memberData.Profile.fbtoken == ""))
+            			if (true/*parseInt(this.getSmilesDone()) < parseInt(this.getSmilesTotal())*/) {
+            				if ((shareViewAlias == 'sharetofacebookview' && (!smiley360.memberData.Profile.facebookID || smiley360.memberData.Profile.facebookID == "" || !smiley360.permissionsList.publish_stream))
 							|| (shareViewAlias == 'sharetotwitterview' && (!smiley360.memberData.Profile.twitter_token || smiley360.memberData.Profile.twitter_token == ""))
 							|| (shareViewAlias == 'uploadphotoview' && (!smiley360.memberData.Profile.twitter_token || smiley360.memberData.Profile.twitter_token == ""
-							|| !smiley360.memberData.Profile.fbtoken || smiley360.memberData.Profile.fbtoken == "")
+							|| !smiley360.memberData.Profile.facebookID || smiley360.memberData.Profile.facebookID == "" || !smiley360.permissionsList.publish_stream)
 								)) {
 
             					if (shareViewAlias == 'uploadphotoview') {
             						Ext.getCmp('xDetailsView').fireEvent('goSetSharingInfo', this, me.missionDetails.MissionId, smiley360.memberData.UserId, shareItem.sharingTool_typeID, 'uploadphotoview');
-
+            						
             						var saved_smilesCurrent = this.getSmilesCurrent();
 
             						var saved_missionId = me.missionDetails.MissionId;
@@ -115,18 +119,19 @@
             						if (shareView.setToolName)
             							if (shareViewAlias == 'sharetofacebookview') {
             								shareView.setToolName('Facebook');
-            								
+
             							}
             							else {
             								shareView.setToolName('Twitter');
-            								
+
             							};
-            						
+
             					};
             				}
 
             				else {
             					var shareView = Ext.widget(shareViewAlias).show();
+            					
             					Ext.getCmp('xDetailsView').fireEvent('goSetSharingInfo', this, me.missionDetails.MissionId, smiley360.memberData.UserId, shareItem.sharingTool_typeID, shareView);
 
             					if (shareView.config.btn_from)
