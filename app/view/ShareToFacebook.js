@@ -230,7 +230,7 @@
 			if (shareView.setToolName)
 				shareView.setToolName('Facebook');
 
-			this.onFacebookSignin_forToken();
+			//this.onFacebookSignin_forToken();
 		}
 	},
 
