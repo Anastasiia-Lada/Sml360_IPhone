@@ -14,6 +14,10 @@
 //@require @packageOverrides
 
 //<debug>
+Ext.Loader.setConfig({
+	disableCaching: false
+});
+
 Ext.Loader.setPath({
     'Ext': 'touch/src',
     'Ext.ux': 'src/ux',

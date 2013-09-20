@@ -263,6 +263,7 @@
 
 .popup-post-icon {
     background-size: contain;
+	width: 1.5em !important;
 }
 
 .popup-help-button {

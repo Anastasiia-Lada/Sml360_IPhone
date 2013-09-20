@@ -127,31 +127,43 @@
 					items: [{
 						xtype: 'checkboxfield',
 						id: 'xToProfileCheckbox',
-						label: 'Post to Profile Wall.',
+						label: 'Post to Profile Wall',
 						labelCls: 'popup-checkbox-grey-label',
 						cls: 'popup-checkbox',
+						hidden: false,
+						width: '50%',
 						listeners: {
 							check: function () {
 								this.up('#xView').doShareValidation();
 							},
 							uncheck: function () {
+								if (Ext.getCmp('xToBrandPageCheckbox').getChecked() == false) {
+									this.setLabelCls('popup-checkbox-red-label');
+									Ext.getCmp('xToBrandPageCheckbox').setLabelCls('popup-checkbox-red-label');
+								};
 								this.up('#xView').doShareValidation();
 							}
 						}
-						//}, {
-						//    xtype: 'checkboxfield',
-						//    id: 'xToBrandPageCheckbox',
-						//    label: 'Post to Brand Page.',
-						//    labelCls: 'popup-checkbox-grey-label',
-						//    cls: 'popup-checkbox',
-						//    listeners: {
-						//        check: function () {
-						//            this.up('#xView').doShareValidation();
-						//        },
-						//        uncheck: function () {
-						//            this.up('#xView').doShareValidation();
-						//        }
-						//    }
+					}, {
+						xtype: 'checkboxfield',
+						id: 'xToBrandPageCheckbox',
+						label: 'Post to Brand Page',
+						labelCls: 'popup-checkbox-grey-label',
+						cls: 'popup-checkbox',
+						hidden: false,
+						width: '50%',
+						listeners: {
+							check: function () {
+								this.up('#xView').doShareValidation();
+							},
+							uncheck: function () {
+								if (Ext.getCmp('xToProfileCheckbox').getChecked() == false) {
+									this.setLabelCls('popup-checkbox-red-label');
+									Ext.getCmp('xToProfileCheckbox').setLabelCls('popup-checkbox-red-label');
+								};
+								this.up('#xView').doShareValidation();
+							}
+						}
 					}],
 				}, {
 					xtype: 'label',
@@ -237,8 +249,8 @@
 	doShareValidation: function () {
 		if (this.down('#xRating').getValue() > -1 &&
             this.down('#xPostText').getValue().length >= 70 && (
-            this.down('#xToProfileCheckbox').getChecked() == true/* ||
-            this.down('#xToBrandPageCheckbox').getChecked() == true*/)) {
+            this.down('#xToProfileCheckbox').getChecked() == true ||
+            this.down('#xToBrandPageCheckbox').getChecked() == true)) {
 			this.down('#xShareButton').enable();
 		}
 		else {

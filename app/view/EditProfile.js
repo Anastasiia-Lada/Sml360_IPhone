@@ -483,6 +483,7 @@ Ext.define('smiley360.view.EditProfile', {
 					listeners: {
 						tap: function () {
 							this.up('#xEditProfile').fireEvent('onbtnSavechangesCommandProfile', this);
+							
 							console.log('editprofiletap');
 						}
 					}

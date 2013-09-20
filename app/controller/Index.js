@@ -45,7 +45,8 @@ Ext.define('smiley360.controller.Index', {
 			},
 			editProfileView: {
 				onbtnSavechangesCommandProfile: 'onbtnSavechangesCommandProfile',
-				getLocationCommand: 'getLocationCommand'
+				getLocationCommand: 'getLocationCommand',
+				getOffersCommand: 'getOffersCommand'
 			},
 			missionsView:
             {
@@ -587,480 +588,493 @@ Ext.define('smiley360.controller.Index', {
 
             		if (response.fb_scope.indexOf('publish_stream') != -1)
             			smiley360.permissionsList.publish_stream = true
-            			
+
             		else smiley360.permissionsList.publish_stream = false;
             	}
-            
-		else {
+
+            	else {
             		console.log('Permissions deprecated!');
-	}
-});
-},
+            	}
+            });
+	},
 
-goSetSharingInfo: function (view, missionID, memberID, sharingTool_typeID, shareView) {
-	var me = this;
-	console.log('Setted seed phrase successfully!');
-	smiley360.services.getMissionSharingToolDetails(missionID, memberID, sharingTool_typeID,
-		function (response) {
-			if (response.success) {
-				//delete response.success;
-				if (response) {
-
-					if (response[0].link != null)
-						if (shareView.setLink) {
-							shareView.setLink(response[0].link);
-						};
-					if (response[0].seedphrase != null) {
-
-						if (shareView != 'uploadphotoview') {
-							if (shareView.down('#xCharacterMaximum')) {
-								shareView.setCharacterMaximum(140 - response[0].seedphrase.length);
-							}
-						}
-						else {
-							Ext.getCmp('xViewPopup').config.saved_seedPhrase = response[0].seedphrase;
-							Ext.getCmp('xViewPopup').config.saved_seedLength = 140 - response[0].seedphrase.length;
-						}
-
-						if (shareView.setSeedPhrase) {
-							shareView.setSeedPhrase(response[0].seedphrase);
-						};
-
-
-					}
-
-				};
-			}
-			else {
-				console.log('Setted seed phrase deprecated!');//show error on view
-
-			}
-		});
-
-},
-
-AuthentificateCommand: function (view, login, password, viewId) {
-	var me = this;
-	//adding to localstorage;
-	smiley360.services.authenticateservice(login, password, Ext.getStore('membersStore').getAt(0).data.deviceId,
-		function (response) {
-			isLogined = response.success;
-			if (isLogined) {
-				console.log('Index -> Login Successful!');
-
-				me.updateMemberId(response.ID);
-				me.loadMemberData(response.ID, function () {
-					if (viewId == 'Signup') { smiley360.animateViewLeft('tutorialiew'); }
-					else smiley360.animateViewLeft('mainview');
-				});
-			}
-			else {
-				console.log('Login unsuccessful!');
-				Ext.Msg.alert('ERROR', 'Wrong login or password!<br>Try again!<br>');
-				Ext.getCmp('login_btn').enable();//show error on view
-			};
-		});
-},
-
-ShowSignupViewCommand: function () {
-	//================================
-	console.log('ShowSignupViewCommand');
-	//================================
-	smiley360.animateViewLeft('signupview');
-	//Ext.getCmp('xMainView').showExternalView('signupview');
-	//Ext.Viewport.animateActiveItem(this.getSignupView(), this.slideLeftTransition);
-},
-
-onbtnSavechangesCommandProfile: function () {
-	//================================
-	console.log('SavechangesCommand');
-
-	var fields = new Array(
-		'fName',
-		'lName',
-		'email',
-		'dob',
-		'gender',
-		'blogURL',
-		'aboutself',
-		'address1',
-		'address2',
-		'city',
-		'stateID',
-		'zip',
-		'marital',
-		'children',
-		'howmanychildren',
-		'income',
-		'race');
-
-	var profArray = {};
-
-	for (var field in fields) {
-		if (fields[field] == 'dob' || fields[field] == 'race') {
-			console.log('Datebirthfield or Race')
-		}
-		else {
-			profArray[fields[field]] = Ext.ComponentQuery.query('#' + fields[field])[0].getValue();
-		}
-		if (fields[field] == 'dob')
-			profArray[fields[field]] = Ext.ComponentQuery.query('#' + 'birthdate')[0].getFormattedValue();
-
-		if (fields[field] == 'race') {
-			profArray[fields[field]] = '';
-
-			var chbArray = Ext.ComponentQuery.query('#ddlCheckboxes checkboxfield');
-
-			for (var chbItem in chbArray) {
-				if (chbArray[chbItem].isChecked()) {
-					var chbItemString = chbArray[chbItem].getId().toString();
-
-					if (profArray[fields[field]] == '') {
-						profArray[fields[field]] += chbItemString.substr(chbItemString.length - 1, chbItemString.length - 1);
-					}
-					else {
-						profArray[fields[field]] += ',' + chbItemString.substr(chbItemString.length - 1, chbItemString.length - 1);
-					}
-				}
-			}
-			//alert(profArray[fields[field]]);
-			if (!Ext.getCmp('ddlCheckboxes').isHidden()) {
-				profArray['aboutself'] = smiley360.memberData.Profile.aboutself;
-				profArray['blogURL'] = smiley360.memberData.Profile.blogURL;
-			}
-		}
-	}
-
-	smiley360.services.setProfile(smiley360.memberData.UserId, profArray,
-		function (response) {
-			if (response.success) {
-				console.log('Your changes aplied successfully!');
-				Ext.getCmp('xHomeView').setUser();
-			}
-			else {
-				console.log('Set Profile return error!');//show error on view
-			}
-		});
-
-
-	Ext.getCmp('xMainView').showExternalView('homeview');
-},
-
-onShowOffersView: function (reloadData) {
-	console.log("onShowOffersView -> reloadData:", reloadData === true);
-	//if (smiley360.memberData.isProfileComplete.complete)
-	if (reloadData === true) {
+	goSetSharingInfo: function (view, missionID, memberID, sharingTool_typeID, shareView) {
 		var me = this;
-
-		smiley360.services.getOffers(smiley360.memberData.UserId,
+		console.log('Setted seed phrase successfully!');
+		smiley360.services.getMissionSharingToolDetails(missionID, memberID, sharingTool_typeID,
 			function (response) {
 				if (response.success) {
-					delete response.success;
-					smiley360.memberData.Offers = response;
+					//delete response.success;
+					if (response) {
+						if (response[0].sharingTool_typeID == 2) {
+							var post_options = response[0].channelOptions;
+							var fb_check = Ext.getCmp('xToProfileCheckbox');
+							var bp_check = Ext.getCmp('xToBrandPageCheckbox');
 
-					Ext.getCmp('xMainView').showExternalView('offersview');
+							if (fb_check && bp_check && response[0].channelOptions.length > 1)
+								for (var key in response[0].channelOptions) {
+									if (response[0].channelOptions[key] == 1)
+										fb_check.show();
+									if (response[0].channelOptions[key] == 2)
+										bp_check.show();
+								};
+						}
+						if (response[0].link != null)
+							if (shareView.setLink) {
+								shareView.setLink(response[0].link);
+							};
+						if (response[0].seedphrase != null) {
+
+							if (shareView != 'uploadphotoview') {
+								if (shareView.down('#xCharacterMaximum')) {
+									shareView.setCharacterMaximum(140 - response[0].seedphrase.length);
+								}
+							}
+							else {
+								Ext.getCmp('xViewPopup').config.saved_seedPhrase = response[0].seedphrase;
+								Ext.getCmp('xViewPopup').config.saved_seedLength = 140 - response[0].seedphrase.length;
+							}
+
+							if (shareView.setSeedPhrase) {
+								shareView.setSeedPhrase(response[0].seedphrase);
+							};
+
+
+						}
+
+					};
 				}
 				else {
-					console.log('getOffers is corrupted!');//show error on view
+					console.log('Setted seed phrase deprecated!');//show error on view
+
 				}
 			});
-	}
-	else {
-		Ext.getCmp('xMainView').showExternalView('offersview');
-	}
 
-	//smiley360.services.getOffers(function (response) {
-	//	if (response.success) {
-	//		//alert('Get an offer: ' + response.userOffers[0].text);//provess/close view
-	//		//Ext.getCmp('offers_label_text').setHtml(response.userOffers[0].text.toString());
-	//	}
-	//else {
-	//	Ext.widget('missingoffersview').show();//alert('smth wrong');//show error on view
-	//};
-	//});
-},
+	},
 
-ShowSurveyViewCommand: function (fromView, missionID, link) {
-	//=========================================================
-	console.log('ShowSurveyViewCommand -> offerId: ', missionID);
-	//=========================================================
+	AuthentificateCommand: function (view, login, password, viewId) {
+		var me = this;
+		//adding to localstorage;
+		smiley360.services.authenticateservice(login, password, Ext.getStore('membersStore').getAt(0).data.deviceId,
+			function (response) {
+				isLogined = response.success;
+				if (isLogined) {
+					console.log('Index -> Login Successful!');
 
-	var surveyView = Ext.getCmp('xMainView').showExternalView('surveyview');
-	var surveyFrame = Ext.get('xSurveyFrame');
-	//var surveyFrameUrl = 'http://uat.smiley360.com/mobile_survey/pms000.php?deviceID='
-	//   + Ext.getStore('membersStore').getAt(0).data.deviceId + '&offerID=' + missionID;
-	//new to test
-	var surveyFrameUrl = link + '?deviceID=' +
-	Ext.getStore('membersStore').getAt(0).data.deviceId + '&offerID=' + missionID;
-
-	surveyFrame.dom.src = surveyFrameUrl;
-
-	Ext.Viewport.animateActiveItem(surveyView, this.slideLeftTransition);
-
-},
-
-signupCommand: function () {
-	console.log("signupCommand");
-	//Ext.Viewport.animateActiveItem(this.getHomeView(), this.slideLeftTransition);
-	console.log('SignUpCommand');
-	var me = this;
-	var fields = new Array(
-	   'first',
-	   'last',
-	   'username',
-	   'password',
-	   'email',
-	   'zip',
-	   'birthdate',
-	   'gender',
-	   'guid');
-
-	var profArray = {};
-
-	for (var field in fields) {
-		if ((fields[field] != 'username') && (fields[field] != 'birthdate') && (fields[field] != 'guid'))
-			profArray[fields[field]] = Ext.ComponentQuery.query('#' + fields[field] + '_signup')[0].getValue();
-		if (fields[field] == 'birthdate') {
-			profArray[fields[field]] = Ext.ComponentQuery.query('#' + fields[field] + '_signup')[0].getFormattedValue();
-			//alert(profArray[fields[field]]);
-		};
-		if (fields[field] == 'username')
-			profArray['username'] = Ext.ComponentQuery.query('#' + 'email' + '_signup')[0].getValue();
-		if (fields[field] == 'guid')
-			profArray['guid'] = Ext.getStore('membersStore').getAt(0).data.deviceId;
-	}
-	//alert(profArray.username);
-	smiley360.services.signupMember(profArray.first,
-									profArray.last,
-									profArray.username,
-									profArray.password,
-									profArray.email,
-									profArray.zip,
-									profArray.birthdate,
-									profArray.gender,
-									profArray.guid,
-		function (response) {
-			if (response.success && (response.status == 'Signup successful.')) {
-				Ext.Msg.alert('SUCCESS!', response.status);
-				Ext.getCmp('Signup').fireEvent('AuthentificateCommand', this, profArray.email, profArray.password, 'Signup');
-				console.log('Member signup is done successfully!');
-			}
-			else {
-				if (response.success) Ext.Msg.alert('Hold up! There was a problem with <br>your sign up information.', '<br>' + response.status);
-				console.log('Member signup returned an error!');
-			}
-		});
-
-},
-
-loadMemberData: function (memberId, success) {
-	var me = this;
-
-	smiley360.services.getMemberData(memberId,
-		function (response) {
-			if (response.success) {
-				isLogined = true;
-				smiley360.memberData = response;
-
-				me.LoadAllMissions(me, memberId);
-
-				if (success)
-					success();
-			}
-			else {
-				//TODO: show error message on view
-				console.log('Index -> [getMemberData] return error!');
-			}
-		});
-},
-
-updateMemberId: function (memberID) {
-	var membersStore = smiley360.services.getMemberStore();
-	if (membersStore.getCount() > 0) {
-
-		var deviceId = smiley360.services.getDeviceId();
-		membersStore.removeAll();
-		membersStore.getProxy().clear();
-		//membersStore.insert(membersStore.getAt(0), { memberId: memberId, deviceId: deviceId });
-		membersStore.add({ memberId: memberID, deviceId: deviceId });
-
-
-		console.log('Index -> updateMemberId: ' + smiley360.services.getMemberId());
-	}
-	membersStore.sync();
-},
-
-setToolId: function (toolId_toSet) {
-	//var toolsStore = Ext.getStore('toolsStore');
-	//	//var toolId = toolsStore.getAt(0).data.toolId;
-	//	//toolsStore.removeAll();
-	//toolsStore.add({ toolId: toolId_toSet });
-	//	toolsStore.sync();
-
-	//	console.log('Index -> setToolId: ' + toolsStore.getAt(0).data.toolId);
-
-},
-getToolId: function () {
-	//var toolsStore = Ext.getStore('toolsStore');
-
-	//if (toolsStore.getCount() > 0) {
-	//	var toolId = toolsStore.getAt(0).data.toolId;			
-	//	toolToGo = toolId;			
-	//	console.log('Index -> getToolId: ' + toolId);
-	//}
-	//else console.log('Index -> getToolId: nodata');
-	//toolsStore.removeAll();
-	//return toolToGo;
-	return "";
-},
-
-doJavascriptLoad: function (jsPath, callback) {
-	var onload = function () {
-		console.log('Index -> [' + jsPath + '] loading done!');
-
-		callback({ success: true });
-	}
-
-	var onerror = function () {
-		console.log('Index -> [' + jsPath + '] loading error!');
-
-		callback({ success: false });
-	}
-
-	Ext.Loader.injectScriptElement(jsPath, onload, onerror, this);
-},
-
-loadProfileDropdowns: function (success) {
-	smiley360.services.getProfileDropdowns(
-		function (response) {
-			if (response.success) {
-				smiley360.ProfileDropdowns = response;
-				console.log('Index -> [loadProfileDropdowns] completed!');
-
-				if (success) {
-					success();
+					me.updateMemberId(response.ID);
+					me.loadMemberData(response.ID, function () {
+						if (viewId == 'Signup') { smiley360.animateViewLeft('tutorialiew'); }
+						else smiley360.animateViewLeft('mainview');
+					});
 				}
-			}
-			else {
-				console.log('Index -> [loadProfileDropdowns] corrupted!');
-			}
-		});
-},
-
-generateDeviceId: function () {
-	var membersStore = Ext.getStore('membersStore');
-	if (membersStore.getCount() == 0)
-		//membersStore.removeAll();
-	{
-		membersStore.add({ deviceId: guid() });
-		membersStore.sync();
-	}
-
-	console.log('Index -> generateDeviceId: ' + membersStore.getAt(0).data.deviceId);
-},
-
-updateDeviceId: function () {
-	var membersStore = smiley360.services.getMemberStore();
-	if (membersStore.getCount() > 0) {
-		function recover_guid() {
-			return guid_s4() + guid_s4() + '-' + guid_s4() + '-' + guid_s4() + '-' + guid_s4() + '-' + guid_s4() + guid_s4() + guid_s4();
-
-		}
-		function guid_s4() {
-			return Math.floor((1 + Math.random()) * 0x10000).toString(16).substring(1);
-		}
-		var deviceID = recover_guid();
-		membersStore.removeAll();
-		membersStore.getProxy().clear();
-		membersStore.add({ deviceId: deviceID });
-	};
-	membersStore.sync();
-
-
-	console.log('Index -> updateDeviceId: ' + smiley360.services.getDeviceId());
-},
-tryLoginUser: function () {
-	var me = this;
-
-	var membersStore = smiley360.services.getMemberStore();//Ext.getStore('membersStore');
-	//alert(Ext.getStore('membersStore').getAt(0).data.memberId + '_' + Ext.getStore('membersStore').getAt(0).data.deviceId);
-	if (membersStore.getCount() > 0) {
-		var memberId = smiley360.services.getMemberId();//membersStore.getAt(0).data.memberId;
-		var deviceId = smiley360.services.getDeviceId();//membersStore.getAt(0).data.deviceId;
-
-		if (memberId) {
-			console.log('Index -> [tryLoginUser] with stored memberId:' + memberId);
-
-			this.loadMemberData(memberId, function () {
-				smiley360.animateViewLeft('mainview');
-				smiley360.destroySplash();
-				isLoadedApp = true;
-				var cmp_tool = me.getToolId();
-				if (cmp_tool == 'sharetofacebookview') {
-					//Ext.getCmp('xMainView').showExternalView('detailsview');
-					//Ext.widget('sharetofacebookview').show();
-				};
-
-				if (cmp_tool == 'sharetotwitterview') {
-					//Ext.getCmp('xMainView').showExternalView('detailsview');
-					//Ext.widget('sharetotwitterview').show();
+				else {
+					console.log('Login unsuccessful!');
+					Ext.Msg.alert('ERROR', 'Wrong login or password!<br>Try again!<br>');
+					Ext.getCmp('login_btn').enable();//show error on view
 				};
 			});
+	},
 
-			return;
+	ShowSignupViewCommand: function () {
+		//================================
+		console.log('ShowSignupViewCommand');
+		//================================
+		smiley360.animateViewLeft('signupview');
+		//Ext.getCmp('xMainView').showExternalView('signupview');
+		//Ext.Viewport.animateActiveItem(this.getSignupView(), this.slideLeftTransition);
+	},
+
+	onbtnSavechangesCommandProfile: function () {
+		//================================
+		console.log('SavechangesCommand');
+
+		var fields = new Array(
+			'fName',
+			'lName',
+			'email',
+			'dob',
+			'gender',
+			'blogURL',
+			'aboutself',
+			'address1',
+			'address2',
+			'city',
+			'stateID',
+			'zip',
+			'marital',
+			'children',
+			'howmanychildren',
+			'income',
+			'race');
+
+		var profArray = {};
+
+		for (var field in fields) {
+			if (fields[field] == 'dob' || fields[field] == 'race') {
+				console.log('Datebirthfield or Race')
+			}
+			else {
+				profArray[fields[field]] = Ext.ComponentQuery.query('#' + fields[field])[0].getValue();
+			}
+			if (fields[field] == 'dob')
+				profArray[fields[field]] = Ext.ComponentQuery.query('#' + 'birthdate')[0].getFormattedValue();
+
+			if (fields[field] == 'race') {
+				profArray[fields[field]] = '';
+
+				var chbArray = Ext.ComponentQuery.query('#ddlCheckboxes checkboxfield');
+
+				for (var chbItem in chbArray) {
+					if (chbArray[chbItem].isChecked()) {
+						var chbItemString = chbArray[chbItem].getId().toString();
+
+						if (profArray[fields[field]] == '') {
+							profArray[fields[field]] += chbItemString.substr(chbItemString.length - 1, chbItemString.length - 1);
+						}
+						else {
+							profArray[fields[field]] += ',' + chbItemString.substr(chbItemString.length - 1, chbItemString.length - 1);
+						}
+					}
+				}
+				//alert(profArray[fields[field]]);
+				if (!Ext.getCmp('ddlCheckboxes').isHidden()) {
+					profArray['aboutself'] = smiley360.memberData.Profile.aboutself;
+					profArray['blogURL'] = smiley360.memberData.Profile.blogURL;
+				}
+			}
 		}
-		else if (deviceId) {
+
+		smiley360.services.setProfile(smiley360.memberData.UserId, profArray,
+			function (response) {
+				if (response.success) {
+					console.log('Your changes aplied successfully!');
+					Ext.getCmp('xHomeView').setUser();
+					Ext.getCmp('xEditProfile').fireEvent('getOffersCommand', this, smiley360.memberData.UserId);
+				}
+				else {
+					console.log('Set Profile return error!');//show error on view
+				}
+			});
+
+
+		Ext.getCmp('xMainView').showExternalView('homeview');
+	},
+
+	onShowOffersView: function (reloadData) {
+		console.log("onShowOffersView -> reloadData:", reloadData === true);
+		//if (smiley360.memberData.isProfileComplete.complete)
+		if (reloadData === true) {
 			var me = this;
 
-			console.log('Index -> [tryLoginUser] with cached deviceId:' + deviceId);
-
-			smiley360.services.getMemberIdByDeviceId(deviceId,
+			smiley360.services.getOffers(smiley360.memberData.UserId,
 				function (response) {
 					if (response.success) {
-						console.log('Index -> [tryLoginUser] with received memberId:' + response.ID);
+						delete response.success;
+						smiley360.memberData.Offers = response;
 
-						me.updateMemberId(response.ID);
-						me.loadMemberData(response.ID, function () {
-							smiley360.animateViewLeft('mainview');
-							smiley360.destroySplash();
-							isLoadedApp = true;
-							var cmp_tool = me.getToolId();
-							if (cmp_tool == 'sharetofacebookview') {
-								//Ext.getCmp('xMainView').showExternalView('detailsview');
-								//Ext.widget('sharetofacebookview').show();
-							};
-
-							if (cmp_tool == 'sharetotwitterview') {
-								//Ext.getCmp('xMainView').showExternalView('detailsview');
-								//Ext.widget('sharetotwitterview').show();
-							};
-						});
+						Ext.getCmp('xMainView').showExternalView('offersview');
 					}
 					else {
-						console.log('Index -> [tryLoginUser] don\'t received memberId for deviceId:' + deviceId);
-						if (response.memberID == 0) {
-							//Ext.Msg.alert('ERROR', 'You are using wrong or expired guid. Please, try again!');
-							me.updateDeviceId();
-						};
-						smiley360.animateViewLeft('loginview');
-						smiley360.destroySplash();
-						isLoadedApp = true;
+						console.log('getOffers is corrupted!');//show error on view
 					}
 				});
-
-			return;
 		}
-	}
+		else {
+			Ext.getCmp('xMainView').showExternalView('offersview');
+		}
 
-	// if no data stored generate device id and show login view
-	this.generateDeviceId();
+		//smiley360.services.getOffers(function (response) {
+		//	if (response.success) {
+		//		//alert('Get an offer: ' + response.userOffers[0].text);//provess/close view
+		//		//Ext.getCmp('offers_label_text').setHtml(response.userOffers[0].text.toString());
+		//	}
+		//else {
+		//	Ext.widget('missingoffersview').show();//alert('smth wrong');//show error on view
+		//};
+		//});
+	},
 
-	smiley360.animateViewLeft('loginview');
-	smiley360.destroySplash();
-	isLoadedApp = true;
-},
+	ShowSurveyViewCommand: function (fromView, missionID, link) {
+		//=========================================================
+		console.log('ShowSurveyViewCommand -> offerId: ', missionID);
+		//=========================================================
 
-missionsCounter: 0,
+		var surveyView = Ext.getCmp('xMainView').showExternalView('surveyview');
+		var surveyFrame = Ext.get('xSurveyFrame');
+		//var surveyFrameUrl = 'http://uat.smiley360.com/mobile_survey/pms000.php?deviceID='
+		//   + Ext.getStore('membersStore').getAt(0).data.deviceId + '&offerID=' + missionID;
+		//new to test
+		var surveyFrameUrl = link + '?deviceID=' +
+		Ext.getStore('membersStore').getAt(0).data.deviceId + '&offerID=' + missionID;
+
+		surveyFrame.dom.src = surveyFrameUrl;
+
+		Ext.Viewport.animateActiveItem(surveyView, this.slideLeftTransition);
+
+	},
+
+	signupCommand: function () {
+		console.log("signupCommand");
+		//Ext.Viewport.animateActiveItem(this.getHomeView(), this.slideLeftTransition);
+		console.log('SignUpCommand');
+		var me = this;
+		var fields = new Array(
+		   'first',
+		   'last',
+		   'username',
+		   'password',
+		   'email',
+		   'zip',
+		   'birthdate',
+		   'gender',
+		   'guid');
+
+		var profArray = {};
+
+		for (var field in fields) {
+			if ((fields[field] != 'username') && (fields[field] != 'birthdate') && (fields[field] != 'guid'))
+				profArray[fields[field]] = Ext.ComponentQuery.query('#' + fields[field] + '_signup')[0].getValue();
+			if (fields[field] == 'birthdate') {
+				profArray[fields[field]] = Ext.ComponentQuery.query('#' + fields[field] + '_signup')[0].getFormattedValue();
+				//alert(profArray[fields[field]]);
+			};
+			if (fields[field] == 'username')
+				profArray['username'] = Ext.ComponentQuery.query('#' + 'email' + '_signup')[0].getValue();
+			if (fields[field] == 'guid')
+				profArray['guid'] = Ext.getStore('membersStore').getAt(0).data.deviceId;
+		}
+		//alert(profArray.username);
+		smiley360.services.signupMember(profArray.first,
+										profArray.last,
+										profArray.username,
+										profArray.password,
+										profArray.email,
+										profArray.zip,
+										profArray.birthdate,
+										profArray.gender,
+										profArray.guid,
+			function (response) {
+				if (response.success && (response.status == 'Signup successful.')) {
+					Ext.Msg.alert('SUCCESS!', response.status);
+					Ext.getCmp('Signup').fireEvent('AuthentificateCommand', this, profArray.email, profArray.password, 'Signup');
+					console.log('Member signup is done successfully!');
+				}
+				else {
+					if (response.success) Ext.Msg.alert('Hold up! There was a problem with <br>your sign up information.', '<br>' + response.status);
+					console.log('Member signup returned an error!');
+				}
+			});
+
+	},
+
+	loadMemberData: function (memberId, success) {
+		var me = this;
+
+		smiley360.services.getMemberData(memberId,
+			function (response) {
+				if (response.success) {
+					isLogined = true;
+					smiley360.memberData = response;
+
+					me.LoadAllMissions(me, memberId);
+
+					if (success)
+						success();
+				}
+				else {
+					//TODO: show error message on view
+					console.log('Index -> [getMemberData] return error!');
+				}
+			});
+	},
+
+	updateMemberId: function (memberID) {
+		var membersStore = smiley360.services.getMemberStore();
+		if (membersStore.getCount() > 0) {
+
+			var deviceId = smiley360.services.getDeviceId();
+			membersStore.removeAll();
+			membersStore.getProxy().clear();
+			//membersStore.insert(membersStore.getAt(0), { memberId: memberId, deviceId: deviceId });
+			membersStore.add({ memberId: memberID, deviceId: deviceId });
+
+
+			console.log('Index -> updateMemberId: ' + smiley360.services.getMemberId());
+		}
+		membersStore.sync();
+	},
+
+	setToolId: function (toolId_toSet) {
+		//var toolsStore = Ext.getStore('toolsStore');
+		//	//var toolId = toolsStore.getAt(0).data.toolId;
+		//	//toolsStore.removeAll();
+		//toolsStore.add({ toolId: toolId_toSet });
+		//	toolsStore.sync();
+
+		//	console.log('Index -> setToolId: ' + toolsStore.getAt(0).data.toolId);
+
+	},
+	getToolId: function () {
+		//var toolsStore = Ext.getStore('toolsStore');
+
+		//if (toolsStore.getCount() > 0) {
+		//	var toolId = toolsStore.getAt(0).data.toolId;			
+		//	toolToGo = toolId;			
+		//	console.log('Index -> getToolId: ' + toolId);
+		//}
+		//else console.log('Index -> getToolId: nodata');
+		//toolsStore.removeAll();
+		//return toolToGo;
+		return "";
+	},
+
+	doJavascriptLoad: function (jsPath, callback) {
+		var onload = function () {
+			console.log('Index -> [' + jsPath + '] loading done!');
+
+			callback({ success: true });
+		}
+
+		var onerror = function () {
+			console.log('Index -> [' + jsPath + '] loading error!');
+
+			callback({ success: false });
+		}
+
+		Ext.Loader.injectScriptElement(jsPath, onload, onerror, this);
+	},
+
+	loadProfileDropdowns: function (success) {
+		smiley360.services.getProfileDropdowns(
+			function (response) {
+				if (response.success) {
+					smiley360.ProfileDropdowns = response;
+					console.log('Index -> [loadProfileDropdowns] completed!');
+
+					if (success) {
+						success();
+					}
+				}
+				else {
+					console.log('Index -> [loadProfileDropdowns] corrupted!');
+				}
+			});
+	},
+
+	generateDeviceId: function () {
+		var membersStore = Ext.getStore('membersStore');
+		if (membersStore.getCount() == 0)
+			//membersStore.removeAll();
+		{
+			membersStore.add({ deviceId: guid() });
+			membersStore.sync();
+		}
+
+		console.log('Index -> generateDeviceId: ' + membersStore.getAt(0).data.deviceId);
+	},
+
+	updateDeviceId: function () {
+		var membersStore = smiley360.services.getMemberStore();
+		if (membersStore.getCount() > 0) {
+			function recover_guid() {
+				return guid_s4() + guid_s4() + '-' + guid_s4() + '-' + guid_s4() + '-' + guid_s4() + '-' + guid_s4() + guid_s4() + guid_s4();
+
+			}
+			function guid_s4() {
+				return Math.floor((1 + Math.random()) * 0x10000).toString(16).substring(1);
+			}
+			var deviceID = recover_guid();
+			membersStore.removeAll();
+			membersStore.getProxy().clear();
+			membersStore.add({ deviceId: deviceID });
+		};
+		membersStore.sync();
+
+
+		console.log('Index -> updateDeviceId: ' + smiley360.services.getDeviceId());
+	},
+	tryLoginUser: function () {
+		var me = this;
+
+		var membersStore = smiley360.services.getMemberStore();//Ext.getStore('membersStore');
+		//alert(Ext.getStore('membersStore').getAt(0).data.memberId + '_' + Ext.getStore('membersStore').getAt(0).data.deviceId);
+		if (membersStore.getCount() > 0) {
+			var memberId = smiley360.services.getMemberId();//membersStore.getAt(0).data.memberId;
+			var deviceId = smiley360.services.getDeviceId();//membersStore.getAt(0).data.deviceId;
+
+			if (memberId) {
+				console.log('Index -> [tryLoginUser] with stored memberId:' + memberId);
+
+				this.loadMemberData(memberId, function () {
+					smiley360.animateViewLeft('mainview');
+					smiley360.destroySplash();
+					isLoadedApp = true;
+					var cmp_tool = me.getToolId();
+					if (cmp_tool == 'sharetofacebookview') {
+						//Ext.getCmp('xMainView').showExternalView('detailsview');
+						//Ext.widget('sharetofacebookview').show();
+					};
+
+					if (cmp_tool == 'sharetotwitterview') {
+						//Ext.getCmp('xMainView').showExternalView('detailsview');
+						//Ext.widget('sharetotwitterview').show();
+					};
+				});
+
+				return;
+			}
+			else if (deviceId) {
+				var me = this;
+
+				console.log('Index -> [tryLoginUser] with cached deviceId:' + deviceId);
+
+				smiley360.services.getMemberIdByDeviceId(deviceId,
+					function (response) {
+						if (response.success) {
+							console.log('Index -> [tryLoginUser] with received memberId:' + response.ID);
+
+							me.updateMemberId(response.ID);
+							me.loadMemberData(response.ID, function () {
+								smiley360.animateViewLeft('mainview');
+								smiley360.destroySplash();
+								isLoadedApp = true;
+								var cmp_tool = me.getToolId();
+								if (cmp_tool == 'sharetofacebookview') {
+									//Ext.getCmp('xMainView').showExternalView('detailsview');
+									//Ext.widget('sharetofacebookview').show();
+								};
+
+								if (cmp_tool == 'sharetotwitterview') {
+									//Ext.getCmp('xMainView').showExternalView('detailsview');
+									//Ext.widget('sharetotwitterview').show();
+								};
+							});
+						}
+						else {
+							console.log('Index -> [tryLoginUser] don\'t received memberId for deviceId:' + deviceId);
+							if (response.memberID == 0) {
+								//Ext.Msg.alert('ERROR', 'You are using wrong or expired guid. Please, try again!');
+								me.updateDeviceId();
+							};
+							smiley360.animateViewLeft('loginview');
+							smiley360.destroySplash();
+							isLoadedApp = true;
+						}
+					});
+
+				return;
+			}
+		}
+
+		// if no data stored generate device id and show login view
+		this.generateDeviceId();
+
+		smiley360.animateViewLeft('loginview');
+		smiley360.destroySplash();
+		isLoadedApp = true;
+	},
+
+	missionsCounter: 0,
 });
 
 /* Global models and methods */

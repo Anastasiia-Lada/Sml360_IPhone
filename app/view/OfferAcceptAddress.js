@@ -171,7 +171,8 @@ Ext.define('smiley360.view.OfferAcceptAddress', {
 							//go accept mission
 							Ext.getCmp('xOfferView').fireEvent('acceptMissionCommand', this, smiley360.memberData.UserId, smiley360.missionData.MissionDetails.MissionId);
 							//if accepted to go
-
+							Ext.getCmp('xOfferView').fireEvent('getOffersCommand', this, smiley360.memberData.UserId);
+							//reload offers
 
 							if (smiley360.missionData.MissionDetails.MissionDetails.mission_full) {
 								//if (Ext.widget('offeracceptview')) Ext.widget('offeracceptview').hide();

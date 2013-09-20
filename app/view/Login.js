@@ -7,6 +7,7 @@ Ext.define('smiley360.view.Login', {
         'Ext.form.FieldSet',
         'Ext.form.Password',
         'Ext.field.Text',
+		'Ext.field.Email'
 	],
 	config: {
 		id: 'xLoginView',
@@ -27,7 +28,7 @@ Ext.define('smiley360.view.Login', {
 			height: '254px',
 			items: [{
 				xtype: 'emailfield',
-				placeHolder: 'Username',
+				placeHolder: 'Email',
 				itemId: 'txtUserName',
 				id: 'txtLogin',
 				name: 'txtUserName',
