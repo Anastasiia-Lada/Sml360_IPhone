@@ -240,6 +240,9 @@
 		if (this.down('#xToBrandPageCheckbox').getChecked() == true) {
 			shareOptions.push(2);
 		}
+		if (this.down('#xToProfileCheckbox').isHidden() == true) {
+			shareOptions.push(1);
+		}
 
 		var shareData = {
 			missionID: shareView.missionId,

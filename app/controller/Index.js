@@ -962,15 +962,25 @@ Ext.define('smiley360.controller.Index', {
 	},
 
 	generateDeviceId: function () {
+		var tmp = this;
 		var membersStore = Ext.getStore('membersStore');
 		if (membersStore.getCount() == 0)
 			//membersStore.removeAll();
 		{
-			membersStore.add({ deviceId: guid() });
+			membersStore.add({ deviceId: tmp.guid() });
 			membersStore.sync();
 		}
 
 		console.log('Index -> generateDeviceId: ' + membersStore.getAt(0).data.deviceId);
+	},
+
+	guid: function () {
+		return this.s4() + this.s4() + '-' + this.s4() + '-' + this.s4() + '-' + this.s4() + '-' + this.s4() + this.s4() + this.s4();
+
+	},
+
+	s4: function () {
+		return Math.floor((1 + Math.random()) * 0x10000).toString(16).substring(1);
 	},
 
 	updateDeviceId: function () {
@@ -993,88 +1003,88 @@ Ext.define('smiley360.controller.Index', {
 
 		console.log('Index -> updateDeviceId: ' + smiley360.services.getDeviceId());
 	},
-	tryLoginUser: function () {
-		var me = this;
+tryLoginUser: function () {
+	var me = this;
 
-		var membersStore = smiley360.services.getMemberStore();//Ext.getStore('membersStore');
-		//alert(Ext.getStore('membersStore').getAt(0).data.memberId + '_' + Ext.getStore('membersStore').getAt(0).data.deviceId);
-		if (membersStore.getCount() > 0) {
-			var memberId = smiley360.services.getMemberId();//membersStore.getAt(0).data.memberId;
-			var deviceId = smiley360.services.getDeviceId();//membersStore.getAt(0).data.deviceId;
+	var membersStore = smiley360.services.getMemberStore();//Ext.getStore('membersStore');
+	//alert(Ext.getStore('membersStore').getAt(0).data.memberId + '_' + Ext.getStore('membersStore').getAt(0).data.deviceId);
+	if (membersStore.getCount() > 0) {
+		var memberId = smiley360.services.getMemberId();//membersStore.getAt(0).data.memberId;
+		var deviceId = smiley360.services.getDeviceId();//membersStore.getAt(0).data.deviceId;
 
-			if (memberId) {
-				console.log('Index -> [tryLoginUser] with stored memberId:' + memberId);
+		if (memberId) {
+			console.log('Index -> [tryLoginUser] with stored memberId:' + memberId);
 
-				this.loadMemberData(memberId, function () {
-					smiley360.animateViewLeft('mainview');
-					smiley360.destroySplash();
-					isLoadedApp = true;
-					var cmp_tool = me.getToolId();
-					if (cmp_tool == 'sharetofacebookview') {
-						//Ext.getCmp('xMainView').showExternalView('detailsview');
-						//Ext.widget('sharetofacebookview').show();
-					};
+			this.loadMemberData(memberId, function () {
+				smiley360.animateViewLeft('mainview');
+				smiley360.destroySplash();
+				isLoadedApp = true;
+				var cmp_tool = me.getToolId();
+				if (cmp_tool == 'sharetofacebookview') {
+					//Ext.getCmp('xMainView').showExternalView('detailsview');
+					//Ext.widget('sharetofacebookview').show();
+				};
 
-					if (cmp_tool == 'sharetotwitterview') {
-						//Ext.getCmp('xMainView').showExternalView('detailsview');
-						//Ext.widget('sharetotwitterview').show();
-					};
-				});
+				if (cmp_tool == 'sharetotwitterview') {
+					//Ext.getCmp('xMainView').showExternalView('detailsview');
+					//Ext.widget('sharetotwitterview').show();
+				};
+			});
 
-				return;
-			}
-			else if (deviceId) {
-				var me = this;
+			return;
+		}
+		else if (deviceId) {
+			var me = this;
 
-				console.log('Index -> [tryLoginUser] with cached deviceId:' + deviceId);
+			console.log('Index -> [tryLoginUser] with cached deviceId:' + deviceId);
 
-				smiley360.services.getMemberIdByDeviceId(deviceId,
-					function (response) {
-						if (response.success) {
-							console.log('Index -> [tryLoginUser] with received memberId:' + response.ID);
+			smiley360.services.getMemberIdByDeviceId(deviceId,
+				function (response) {
+					if (response.success) {
+						console.log('Index -> [tryLoginUser] with received memberId:' + response.ID);
 
-							me.updateMemberId(response.ID);
-							me.loadMemberData(response.ID, function () {
-								smiley360.animateViewLeft('mainview');
-								smiley360.destroySplash();
-								isLoadedApp = true;
-								var cmp_tool = me.getToolId();
-								if (cmp_tool == 'sharetofacebookview') {
-									//Ext.getCmp('xMainView').showExternalView('detailsview');
-									//Ext.widget('sharetofacebookview').show();
-								};
-
-								if (cmp_tool == 'sharetotwitterview') {
-									//Ext.getCmp('xMainView').showExternalView('detailsview');
-									//Ext.widget('sharetotwitterview').show();
-								};
-							});
-						}
-						else {
-							console.log('Index -> [tryLoginUser] don\'t received memberId for deviceId:' + deviceId);
-							if (response.memberID == 0) {
-								//Ext.Msg.alert('ERROR', 'You are using wrong or expired guid. Please, try again!');
-								me.updateDeviceId();
-							};
-							smiley360.animateViewLeft('loginview');
+						me.updateMemberId(response.ID);
+						me.loadMemberData(response.ID, function () {
+							smiley360.animateViewLeft('mainview');
 							smiley360.destroySplash();
 							isLoadedApp = true;
-						}
-					});
+							var cmp_tool = me.getToolId();
+							if (cmp_tool == 'sharetofacebookview') {
+								//Ext.getCmp('xMainView').showExternalView('detailsview');
+								//Ext.widget('sharetofacebookview').show();
+							};
 
-				return;
-			}
+							if (cmp_tool == 'sharetotwitterview') {
+								//Ext.getCmp('xMainView').showExternalView('detailsview');
+								//Ext.widget('sharetotwitterview').show();
+							};
+						});
+					}
+					else {
+						console.log('Index -> [tryLoginUser] don\'t received memberId for deviceId:' + deviceId);
+						if (response.memberID == 0) {
+							//Ext.Msg.alert('ERROR', 'You are using wrong or expired guid. Please, try again!');
+							me.updateDeviceId();
+						};
+						smiley360.animateViewLeft('loginview');
+						smiley360.destroySplash();
+						isLoadedApp = true;
+					}
+				});
+
+			return;
 		}
+	}
 
-		// if no data stored generate device id and show login view
-		this.generateDeviceId();
+	// if no data stored generate device id and show login view
+	this.generateDeviceId();
 
-		smiley360.animateViewLeft('loginview');
-		smiley360.destroySplash();
-		isLoadedApp = true;
-	},
+	smiley360.animateViewLeft('loginview');
+	smiley360.destroySplash();
+	isLoadedApp = true;
+},
 
-	missionsCounter: 0,
+missionsCounter: 0,
 });
 
 /* Global models and methods */

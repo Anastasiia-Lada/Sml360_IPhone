@@ -29,12 +29,17 @@
         A list of available plugins are available at https://build.phonegap.com/docs/plugins
     -->
 	
-	<gap:splash src="resources/images/splash.png" />
+	<gap:splash src="resources/images/splash.png" gap:platform="ios" width="320" height="480" />
+	<gap:splash src="resources/images/splash.png" gap:platform="ios" width="640" height="960" />
+	<gap:splash src="resources/images/splash.png" gap:platform="ios" width="640" height="1136" />
+	<gap:splash src="resources/images/splash.png" gap:platform="ios" width="1024" height="748" />
+	<gap:splash src="resources/images/splash.png" gap:platform="ios" width="768" height="1004" />
 
-	<gap:splash src="resources/images/splash.png" width="640" height="960" />
-    	<gap:splash src="resources/images/splash.png" width="320" height="460" />
-    	<gap:splash src="resources/images/splash.png" width="786" height="1024" />
-    	<gap:splash src="resources/images/splash.png" width="400" height="800" />
+<!-- retina iPad support: PhoneGap 2.5.0+ only -->
+	<gap:splash src="resources/images/splash.png" gap:platform="ios" width="2048" height="1496" />
+	<gap:splash src="resources/images/splash.png" gap:platform="ios" width="1536" height="2008" />
+
+	
 
 	<!-- Define app icon for each platform. -->
 	<icon src="resources/icons/Icon.png" />	
