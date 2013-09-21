@@ -58,7 +58,7 @@
 					itemHoverCls: 'x-rating-star-hover',
 					listeners: {
 						initialize: function () {
-							this.addCls('x-rating-field-required');
+							//this.addCls('x-rating-field-required');
 						},
 						change: function (rate, value, currentValue) {
 							var logMessage = Ext.String.format(
@@ -98,6 +98,7 @@
 					xtype: 'textareafield',
 					id: 'xPostText',
 					cls: 'popup-input popup-input-text',
+					style: 'font-size: 0.9em;',
 					maxRows: 5,
 					minLength: 70,
 					isFocused: false,
@@ -135,6 +136,8 @@
 						listeners: {
 							check: function () {
 								this.up('#xView').doShareValidation();
+								this.setLabelCls('popup-checkbox-grey-label');
+								Ext.getCmp('xToBrandPageCheckbox').setLabelCls('popup-checkbox-grey-label');
 							},
 							uncheck: function () {
 								if (Ext.getCmp('xToBrandPageCheckbox').getChecked() == false) {
@@ -155,6 +158,8 @@
 						listeners: {
 							check: function () {
 								this.up('#xView').doShareValidation();
+								this.setLabelCls('popup-checkbox-grey-label');
+								Ext.getCmp('xToProfileCheckbox').setLabelCls('popup-checkbox-grey-label');
 							},
 							uncheck: function () {
 								if (Ext.getCmp('xToProfileCheckbox').getChecked() == false) {
@@ -186,11 +191,29 @@
 					iconCls: 'popup-post-icon',
 					id: 'xShareButton',
 					cls: 'popup-post-button',
-					disabled: true,
+					allowPost: false,
+					disabled: false,
 					listeners: {
 
 						tap: function () {
-							this.up('#xView').doShare();
+							if (this.config.allowPost)
+								this.up('#xView').doShare()
+							else {
+								this.up('#xView').doShareValidation();
+
+								if (this.up('#xView').down('#xRating').getValue() < 0)
+									this.up('#xView').down('#xRating').addCls('x-rating-field-required');
+
+								if (!this.up('#xView').down('#xToProfileCheckbox').getChecked() &&
+									!this.up('#xView').down('#xToBrandPageCheckbox').getChecked()) {
+
+									this.up('#xView').down('#xToProfileCheckbox').setLabelCls('popup-checkbox-red-label');
+									this.up('#xView').down('#xToBrandPageCheckbox').setLabelCls('popup-checkbox-red-label');
+								};
+
+								if (this.config.allowPost)
+									this.up('#xView').doShare();
+							}
 						}
 					},
 				}],
@@ -214,9 +237,9 @@
 			shareOptions.push(1);
 		}
 
-		//if (this.down('#xToBrandPageCheckbox').getChecked() == true) {
-		//    shareOptions.push(2);
-		//}
+		if (this.down('#xToBrandPageCheckbox').getChecked() == true) {
+			shareOptions.push(2);
+		}
 
 		var shareData = {
 			missionID: shareView.missionId,
@@ -251,10 +274,12 @@
             this.down('#xPostText').getValue().length >= 70 && (
             this.down('#xToProfileCheckbox').getChecked() == true ||
             this.down('#xToBrandPageCheckbox').getChecked() == true)) {
-			this.down('#xShareButton').enable();
+			this.down('#xShareButton').config.allowPost = true;
+			//this.down('#xShareButton').enable();
 		}
 		else {
-			this.down('#xShareButton').disable();
+			this.down('#xShareButton').config.allowPost = false;
+			//this.down('#xShareButton').disable();
 		}
 	},
 

@@ -69,7 +69,7 @@ Ext.define('smiley360.view.Brand', {
                     id: 'xBrandImage',
                     cls: 'has-shadow browse-pict',
                     src: 'resources/images/fender.png',
-                    style: 'background-color: white; border-style:inset; border-width: 1px; border-radius: 5px; margin-top: -20px;',
+                    style: 'background-color: white; border-color: white; border-style: solid; border-width: 1px; border-radius: 5px; margin-top: -20px;',
                     height: 120,
                 }, {
                     xtype: 'rating',
@@ -85,7 +85,7 @@ Ext.define('smiley360.view.Brand', {
                     xtype: 'button',
                     cls: 'has-shadow follow-btn',
                     id: 'xBrandIsFollow',
-                    style: 'font-family: franklin; font-size: 0.8em; margin: 5px;',
+                    style: 'font-family: franklin; font-size: 0.8em; margin: 5px; border: 0;',
                     height: 30,
                     text: 'FOLLOW',
                     listeners: {
@@ -104,7 +104,7 @@ Ext.define('smiley360.view.Brand', {
                 }, {
                     xtype: 'button',
                     cls: 'has-shadow add-review-btn',
-                    style: 'font-family: franklin; font-size: 0.8em; margin: 5px;',
+                    style: 'font-family: franklin; font-size: 0.8em; margin: 5px; border: 0;',
                     height: 30,
                     text: 'ADD REVIEW',
                     listeners: {

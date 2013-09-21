@@ -52,7 +52,7 @@ Ext.define('smiley360.view.ReviewForFender', {
 					xtype: 'fileupload',
 					id: 'xAddPhotoButton',
 					cls: 'popup-photo-button',
-					style: 'height: 30px; padding: 5px; margin-top: -3px;',
+					style: 'height: 30px; padding: 5px; margin-top: -3px; border: 0;',
 					autoUpload: true,
 					states: {
 						browse: {
@@ -100,6 +100,7 @@ Ext.define('smiley360.view.ReviewForFender', {
 						isFocused: false,
 						id: 'xReviewText',
 						cls: 'popup-input popup-input-text',
+						style: 'font-size: 0.9em;',
 						listeners: {
 							keyup: function () {
 								var xReviewView = this.up('#xReviewView');

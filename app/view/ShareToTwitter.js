@@ -71,6 +71,7 @@ Ext.define('smiley360.view.ShareToTwitter', {
 					//maxLength: 84,
 					isFocused: false,
 					cls: 'popup-input popup-input-text',
+					style: 'font-size: 0.9em;',
 					listeners: {
 						keyup: function () {
 							var postLenght = this.getValue().length;

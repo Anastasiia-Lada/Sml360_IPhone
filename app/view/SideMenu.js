@@ -82,7 +82,7 @@
 				ui: 'plain',
 				listeners: {
 					tap: function () {
-					    smiley360.animateViewLeft('tutorialiew');
+						smiley360.animateViewLeft('tutorialiew');
 					}
 				}
 			}, {
@@ -106,11 +106,11 @@
 				cls: 'listmenuitem',
 				ui: 'plain',
 				listeners: {
-				    tap: function () {
-				        Ext.getCmp('xMainView').hideSidePanel();
+					tap: function () {
+						Ext.getCmp('xMainView').hideSidePanel();
 
-				        Ext.getCmp('xSideMenu').fireEvent('updateDeviceId');
-				        smiley360.animateViewLeft('loginview');
+						Ext.getCmp('xSideMenu').fireEvent('updateDeviceId');
+						smiley360.animateViewLeft('loginview');
 					}
 				}
 			}],

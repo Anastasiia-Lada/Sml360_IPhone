@@ -1275,6 +1275,7 @@ smiley360.setViewStatus = function (view, status, states) {
 }
 
 smiley360.adjustPopupSize = function (view, extraSize) {
+
 	var contentHeight = view.down('#xRootPanel').element.getHeight() + (extraSize | 0);
 	var containerHeight = Ext.Viewport.element.getHeight() * 0.9;
 

@@ -8,9 +8,9 @@
 		html: '<div id="xShareButtons" align="center"></div>'
 	},
 	listeners: {
-		painted: function() {
-			
-		}	
+		painted: function () {
+
+		}
 	},
 	missionDetails: {},
 
@@ -101,7 +101,7 @@
 
             					if (shareViewAlias == 'uploadphotoview') {
             						Ext.getCmp('xDetailsView').fireEvent('goSetSharingInfo', this, me.missionDetails.MissionId, smiley360.memberData.UserId, shareItem.sharingTool_typeID, 'uploadphotoview');
-            						
+
             						var saved_smilesCurrent = this.getSmilesCurrent();
 
             						var saved_missionId = me.missionDetails.MissionId;
@@ -131,7 +131,7 @@
 
             				else {
             					var shareView = Ext.widget(shareViewAlias).show();
-            					
+
             					Ext.getCmp('xDetailsView').fireEvent('goSetSharingInfo', this, me.missionDetails.MissionId, smiley360.memberData.UserId, shareItem.sharingTool_typeID, shareView);
 
             					if (shareView.config.btn_from)

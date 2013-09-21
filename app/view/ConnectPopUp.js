@@ -14,7 +14,7 @@ Ext.define('smiley360.view.ConnectPopUp', {
 		saved_seedLength: 0,
 		id: 'xViewPopup',
 		scrollable: 'vertical',
-		cls: 'popup-panel',
+		cls: 'popup-panel connect-popup-panel',
 		items: [{
 			xtype: 'panel',
 			id: 'xRootPanel',
@@ -124,7 +124,6 @@ Ext.define('smiley360.view.ConnectPopUp', {
 				smiley360.adjustPopupSize(this, 20);
 			},
 			painted: function () {
-
 			},
 			hide: function () {
 				if ((showUploadDialog || Ext.getCmp('xSubmitButton').getText() == 'OK') &&

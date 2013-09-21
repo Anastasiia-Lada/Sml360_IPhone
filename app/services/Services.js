@@ -60,75 +60,59 @@ smiley360.services.getMemberData = function (memberId, onCompleted) {
         	else { delete response.success; }
 
         	globalResponse.Profile = response;
-
-        	smiley360.services.ajax("get_member_level", memberRequest,
-                function (response) {
-                	if (!response.success) { onCompleted(response) }
-                	else { delete response.success; }
-
-                	globalResponse.UserLevel = response.level;
-
-                	smiley360.services.ajax("getWhatsHappening", memberRequest,
-                        function (response) {
-                        	if (!response.success) { onCompleted(response) }
-                        	else { delete response.success; }
-
-                        	globalResponse.WhatsHappening = response;
-
-                        	smiley360.services.ajax("getSpecialOffers", memberRequest,
-                                function (response) {
-                                	if (!response.success) { onCompleted(response) }
-                                	else { delete response.success; }
-
-                                	globalResponse.SpecialOffers = response;
-
-                                	smiley360.services.ajax("getOffers", memberRequest,
-										function (response) {
-											if (!response.success) { onCompleted(response) }
-											else { delete response.success; }
-
-											globalResponse.Offers = response;
-
-											smiley360.services.ajax("getMissionList", memberRequest,
-												function (response) {
-													if (!response.success) { onCompleted(response) }
-													else { delete response.success; }
-
-													globalResponse.MissionList = response;
-
-													smiley360.services.ajax("isProfileComplete", memberRequest,
-														function (response) {
-															if (!response.success) { onCompleted(response) }
-															else { delete response.success; }
-
-															globalResponse.isProfileComplete = response;
-															globalResponse.specialOffersBrands = [];
-															for (var key in globalResponse.SpecialOffers) {
-																smiley360.services.ajax("get_smileyConnect_details",
-																{
-																	memberID: memberId,
-																	brandID: globalResponse.SpecialOffers[key].brandID
-																},
-																function (response) {
-																	if (!response.success) { onCompleted(response) }
-																	else { delete response.success; }
-
-																	globalResponse.specialOffersBrands.push(response);
-																	//alert(response.smileyConnect_detailsImage_URL);
-																	globalResponse.success = true;
-																	onCompleted(globalResponse);
-																});
-
-															};
-
-
-														});
-												});
-										});
-                                });
-                        });
-                });
         });
+
+	smiley360.services.ajax("getWhatsHappening", memberRequest,
+        function (response) {
+        	if (!response.success) { onCompleted(response) }
+        	else { delete response.success; }
+
+        	globalResponse.WhatsHappening = response;
+        });
+
+	smiley360.services.ajax("get_member_level", memberRequest,
+        function (response) {
+        	if (!response.success) { onCompleted(response) }
+        	else { delete response.success; }
+
+        	globalResponse.UserLevel = response.level;
+        });
+
+	smiley360.services.ajax("getSpecialOffers", memberRequest,
+        function (response) {
+        	if (!response.success) { onCompleted(response) }
+        	else { delete response.success; }
+
+        	globalResponse.SpecialOffers = response;
+        });
+
+	smiley360.services.ajax("getOffers", memberRequest,
+		function (response) {
+			if (!response.success) { onCompleted(response) }
+			else { delete response.success; }
+
+			globalResponse.Offers = response;
+
+		});
+
+
+	smiley360.services.ajax("getMissionList", memberRequest,
+		function (response) {
+			if (!response.success) { onCompleted(response) }
+			else { delete response.success; }
+
+			globalResponse.MissionList = response;
+
+		});
+	smiley360.services.ajax("isProfileComplete", memberRequest,
+		function (response) {
+			if (!response.success) { onCompleted(response) }
+			else { delete response.success; }
+
+			globalResponse.isProfileComplete = response;
+			globalResponse.success = true;
+			onCompleted(globalResponse);
+		});
 }
 
 smiley360.services.updateMemberData = function (memberId, onCompleted) {
