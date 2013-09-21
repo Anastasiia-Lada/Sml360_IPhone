@@ -20,7 +20,7 @@
 	<preference name="exit-on-suspend"            value="true" />
 	<!-- ios: if set to true, app will terminate when home button is pressed -->
 	<preference name="prerendered-icon" value="true" />
-	<preference name="show-splash-screen-spinner" value="false" />
+	<preference name="show-splash-screen-spinner" value="true" />
 
 	<plugin name="InAppBrowser" value="org.apache.cordova.InAppBrowser" />
 	<!-- Plugins can also be added here. -->
@@ -31,7 +31,12 @@
 	
 	<gap:splash src="resources/images/loadingimage-r2.png" />
 
-	<!-- Define app icon for each platform. -->
+	<gap:splash src="resources/images/loadingimage-r2.png" width="640" height="960" />
+    	<gap:splash src="resources/images/loadingimage-r2.png" width="320" height="460" />
+    	<gap:splash src="resources/images/loadingimage-r2.png" width="786" height="1024" />
+    	<gap:splash src="resources/images/loadingimage-r2.png" width="400" height="800" />
+
+    	<!-- Define app icon for each platform. -->
 	<icon src="resources/icons/Icon.png" />	
 	<!--
         Define access to external domains.
