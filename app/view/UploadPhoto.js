@@ -1,4 +1,6 @@
 ﻿var photoAdded = false;
+var shareResponse = [];
+
 Ext.define('smiley360.view.UploadPhoto', {
 	extend: 'Ext.Container',
 	alias: 'widget.uploadphotoview',
@@ -211,7 +213,10 @@ Ext.define('smiley360.view.UploadPhoto', {
 					disabled: true,
 					listeners: {
 						tap: function () {
-							this.up('#xView').doShare();
+							var doShareAll = Ext.Function.createSequence(this.up('#xView').doShare(), function () {
+								alert(shareResponse.valueOf());
+							});
+							;
 						}
 					},
 				}],
@@ -269,12 +274,11 @@ Ext.define('smiley360.view.UploadPhoto', {
 	doShare: function () {
 		var shareView = this;
 		var shareOptions = [];
-		var shareResponse = [];
 
 		smiley360.setViewStatus(shareView, smiley360.viewStatus.progress);
 		///////////////facebook
 		if (this.down('#xFacebookCheckbox').getChecked() == true && !this.down('#xFacebookCheckbox').isHidden()) {
-			this.down('#xTwitterCheckbox').setChecked(false);
+			
 			shareOptions.push(1);
 			var shareDataFB = {
 				missionID: shareView.missionId,
@@ -287,16 +291,15 @@ Ext.define('smiley360.view.UploadPhoto', {
 
 
 			smiley360.services.postToFacebook(shareDataFB, function (responseFB) {
-				//if (!response.success || response.status != 'success')
-				//	shareResponse.push(0);
+				if (response.success || response.status == 'success')
+					shareResponse.push('fb');
 				smiley360.setResponseStatus(shareView, responseFB, '', shareView.config.btn_from);
 			});
 		};
 
-
 		///////////////twitter
 		if (this.down('#xTwitterCheckbox').getChecked() == true && !this.down('#xTwitterCheckbox').isHidden()) {
-			this.down('#xFacebookCheckbox').setChecked(false);
+			
 			shareOptions.push(3);
 			var shareDataTW = {
 				missionID: shareView.missionId,
@@ -306,8 +309,8 @@ Ext.define('smiley360.view.UploadPhoto', {
 			};
 
 			smiley360.services.postToTwitter(shareDataTW, function (responseTW) {
-				//if (!response.success || response.status != 'success')
-				//	shareResponse.push(1);
+				if (response.success || response.status == 'success')
+					shareResponse.push('twi');
 				smiley360.setResponseStatus(shareView, responseTW, '', shareView.config.btn_from);
 			});
 		};

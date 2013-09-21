@@ -26,6 +26,7 @@ Ext.Loader.setPath({
 //</debug>
 
 Ext.application({
+	phoneStartupScreen:'resources/images/splash.png',
     name: 'smiley360',
     requires: [
         'Ext.Anim',

@@ -29,14 +29,14 @@
         A list of available plugins are available at https://build.phonegap.com/docs/plugins
     -->
 	
-	<gap:splash src="resources/images/loadingimage-r2.png" />
+	<gap:splash src="resources/images/splash.png" />
 
-	<gap:splash src="resources/images/loadingimage-r2.png" width="640" height="960" />
-    	<gap:splash src="resources/images/loadingimage-r2.png" width="320" height="460" />
-    	<gap:splash src="resources/images/loadingimage-r2.png" width="786" height="1024" />
-    	<gap:splash src="resources/images/loadingimage-r2.png" width="400" height="800" />
+	<gap:splash src="resources/images/splash.png" width="640" height="960" />
+    	<gap:splash src="resources/images/splash.png" width="320" height="460" />
+    	<gap:splash src="resources/images/splash.png" width="786" height="1024" />
+    	<gap:splash src="resources/images/splash.png" width="400" height="800" />
 
-    	<!-- Define app icon for each platform. -->
+	<!-- Define app icon for each platform. -->
 	<icon src="resources/icons/Icon.png" />	
 	<!--
         Define access to external domains.

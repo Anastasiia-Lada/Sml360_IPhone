@@ -403,82 +403,90 @@ smiley360.services.getProfileDropdowns = function (onCompleted) {
 			if (!response.success) { onCompleted(response) }
 			else { delete response.success; }
 
-			dropdownValues.gender = response;
-			smiley360.services.ajax(
-				"get_country_options",
-				{
-				},
-				function (response) {
-					if (!response.success) { onCompleted(response) }
-					else { delete response.success; }
+			dropdownValues.gender = response;			
+		});
+	smiley360.services.ajax(
+		"get_country_options",
+		{
+		},
+		function (response) {
+			if (!response.success) { onCompleted(response) }
+			else { delete response.success; }
 
-					dropdownValues.country = response;
-					smiley360.services.ajax(
-						"get_marriageStatus_options",
-						{
-						},
-						function (response) {
-							if (!response.success) { onCompleted(response) }
-							else { delete response.success; }
+			dropdownValues.country = response;
 
-							dropdownValues.marital = response;
+		});
+	smiley360.services.ajax(
+		"get_marriageStatus_options",
+		{
+		},
+		function (response) {
+			if (!response.success) { onCompleted(response) }
+			else { delete response.success; }
 
-							smiley360.services.ajax(
-								"get_haveChildren_options",
-								{
-								},
-								function (response) {
-									if (!response.success) { onCompleted(response) }
-									else { delete response.success; }
+			dropdownValues.marital = response;
+		});
 
-									dropdownValues.children = response;
-									smiley360.services.ajax(
-										"get_numberChildren_options",
-										{
-										},
-										function (response) {
-											if (!response.success) { onCompleted(response) }
-											else { delete response.success; }
+	smiley360.services.ajax(
+		"get_haveChildren_options",
+		{
+		},
+		function (response) {
+			if (!response.success) { onCompleted(response) }
+			else { delete response.success; }
 
-											dropdownValues.howmanychildren = response;
-											smiley360.services.ajax(
-												"get_householdIncome_options",
-												{
-												},
-												function (response) {
-													if (!response.success) { onCompleted(response) }
-													else { delete response.success; }
+			dropdownValues.children = response;
 
-													dropdownValues.income = response;
-													smiley360.services.ajax(
-														"get_raceEthnicity_options",
-														{
-														},
-														function (response) {
-															if (!response.success) { onCompleted(response) }
-															else { delete response.success; }
+		});
+	smiley360.services.ajax(
+		"get_numberChildren_options",
+		{
+		},
+		function (response) {
+			if (!response.success) { onCompleted(response) }
+			else { delete response.success; }
 
-															dropdownValues.race = response;
-															smiley360.services.ajax(
-																"get_state_options",
-																{
-																},
-																function (response) {
-																	if (!response.success) { onCompleted(response) }
-																	else { delete response.success; }
+			dropdownValues.howmanychildren = response;
 
-																	dropdownValues.stateID = response;
+		});
 
-																	dropdownValues.success = true;
+	smiley360.services.ajax(
+		"get_householdIncome_options",
+		{
+		},
+		function (response) {
+			if (!response.success) { onCompleted(response) }
+			else { delete response.success; }
 
-																	onCompleted(dropdownValues);
-																});
-														});
-												});
-										});
-								});
-						});
-				});
+			dropdownValues.income = response;
+
+		});
+
+	smiley360.services.ajax(
+		"get_raceEthnicity_options",
+		{
+		},
+		function (response) {
+			if (!response.success) { onCompleted(response) }
+			else { delete response.success; }
+
+			dropdownValues.race = response;
+
+		});
+
+	smiley360.services.ajax(
+		"get_state_options",
+		{
+		},
+		function (response) {
+			if (!response.success) { onCompleted(response) }
+			else { delete response.success; }
+
+			dropdownValues.stateID = response;
+
+			dropdownValues.success = true;
+
+			onCompleted(dropdownValues);
 		});
 }
 

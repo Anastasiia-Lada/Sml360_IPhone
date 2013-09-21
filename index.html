@@ -10,7 +10,7 @@
          * while other resources are still being loaded for the first time
          */
         html, body {
-            background: url("resources/images/loadingimage-r2.jpg") no-repeat center center;
+            background: url("resources/images/loadingimage-r2.png") no-repeat center center;
             background-size:cover;
         }
 
@@ -58,31 +58,7 @@
     </style>
     <!-- The line below must be kept intact for Sencha Command to build your application -->
     <script id="microloader" type="text/javascript" src="touch/microloader/development.js"></script>
-    <script type="text/javascript">
-        // Global variable for Sencha Application object
-        var _App = undefined;
-
-        // Create IE + others compatible event handler
-        var eventMethod = window.addEventListener ? "addEventListener" : "attachEvent";
-        var eventer = window[eventMethod];
-        var messageEvent = eventMethod == "attachEvent" ? "onmessage" : "message";
-
-        // Listen to message from child window
-        eventer(messageEvent, function (e) {
-            //check the origin, to make sure it comes from a trusted source.
-            if (event.origin === 'http://smileys.ekonx.net.ua') {
-                console.log('Index -> received message from: ', e.origin);
-
-                _App.getController('Index').onShowOffersView(true);
-            }
-        }, false);
-        function overtime_alert() {
-        	if (Ext.getCmp('appLoadingIndicator'))
-        		alert('Please, clear cache!!!');
-        }
-        
-       
-
+    <script type="text/javascript"> 
 
         function guid() {
         	return s4() + s4() + '-' + s4() + '-' + s4() + '-' + s4() + '-' + s4() + s4() + s4();
