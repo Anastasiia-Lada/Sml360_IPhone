@@ -20,7 +20,7 @@
 	<preference name="exit-on-suspend"            value="true" />
 	<!-- ios: if set to true, app will terminate when home button is pressed -->
 	<preference name="prerendered-icon" value="true" />
-	<preference name="show-splash-screen-spinner" value="false" />
+	<preference name="show-splash-screen-spinner" value="true" />
 
 	<plugin name="InAppBrowser" value="org.apache.cordova.InAppBrowser" />
 	<!-- Plugins can also be added here. -->
@@ -29,7 +29,12 @@
         A list of available plugins are available at https://build.phonegap.com/docs/plugins
     -->
 	
-	<gap:splash src="resources/images/loadingimage-r2.png" />
+	<gap:splash src="resources/images/loadingimage-r2.jpg" />
+
+	<gap:splash src="resources/images/loadingimage-r2.jpg" width="640" height="960" />
+   	<gap:splash src="resources/images/loadingimage-r2.jpg" width="320" height="460" />
+   	<gap:splash src="resources/images/loadingimage-r2.jpg" width="786" height="1024" />
+    	<gap:splash src="resources/images/loadingimage-r2.jpg" width="400" height="800" />
 
 	<!-- Define app icon for each platform. -->
 	<icon src="resources/icons/Icon.png" />	
