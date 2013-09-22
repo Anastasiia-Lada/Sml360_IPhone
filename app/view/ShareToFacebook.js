@@ -12,7 +12,7 @@
 		id: 'xView',
 		btn_from: {},
 		scrollable: 'vertical',
-		cls: 'popup-panel',
+		cls: 'popup-panel connect-popup-panel',
 		items: [{
 			xtype: 'panel',
 			id: 'xRootPanel',
@@ -131,7 +131,7 @@
 						label: 'Post to Profile Wall',
 						labelCls: 'popup-checkbox-grey-label',
 						cls: 'popup-checkbox',
-						hidden: false,
+						hidden: true,
 						width: '50%',
 						listeners: {
 							check: function () {
@@ -153,7 +153,7 @@
 						label: 'Post to Brand Page',
 						labelCls: 'popup-checkbox-grey-label',
 						cls: 'popup-checkbox',
-						hidden: false,
+						hidden: true,
 						width: '50%',
 						listeners: {
 							check: function () {
@@ -276,7 +276,8 @@
 		if (this.down('#xRating').getValue() > -1 &&
             this.down('#xPostText').getValue().length >= 70 && (
             this.down('#xToProfileCheckbox').getChecked() == true ||
-            this.down('#xToBrandPageCheckbox').getChecked() == true)) {
+            this.down('#xToBrandPageCheckbox').getChecked() == true ||
+			this.down('#xToProfileCheckbox').isHidden() == true)) {
 			this.down('#xShareButton').config.allowPost = true;
 			//this.down('#xShareButton').enable();
 		}

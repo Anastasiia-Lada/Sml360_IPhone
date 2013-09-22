@@ -107,7 +107,12 @@ Ext.define('smiley360.view.ConnectPopUp', {
 								else if (local_name == 'Twitter') {
 									Ext.getCmp('xDetailsView').fireEvent('setToolId', 'sharetotwitterview');
 									this.up('#xViewPopup').onTwitterLoginTap();
-								};
+								}
+								else if (local_name == 'Facebook and Twitter') {
+									Ext.getCmp('xDetailsView').fireEvent('setToolId', 'uploadphotoview');
+									this.up('#xViewPopup').onFacebookLoginTap();
+								}
+
 
 								this.up('#xViewPopup').destroy();
 

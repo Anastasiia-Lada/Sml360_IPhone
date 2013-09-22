@@ -66,7 +66,7 @@
                     labelAlign: 'right',
                     labelWidth: '100%',
                     labelWrap: true,
-                    labelCls: 'popup-checkbox-red-label',
+                    labelCls: 'popup-checkbox-grey-label',
                     //inputCls: 'popup-checkbox-input',
                     cls: 'popup-checkbox',
                     listeners: {

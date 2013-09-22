@@ -3,6 +3,15 @@ smiley360.services = smiley360.services || {};
 var mask = false;
 
 
+smiley360.services.guid = function () {
+	return smiley360.services.s4() + smiley360.services.s4() + '-' + smiley360.services.s4() + '-' + smiley360.services.s4() + '-' + smiley360.services.s4() + '-' + smiley360.services.s4() + smiley360.services.s4() + smiley360.services.s4();
+
+}
+
+smiley360.services.s4 = function () {
+	return Math.floor((1 + Math.random()) * 0x10000).toString(16).substring(1);
+}
+
 smiley360.services.authenticateservice = function (login, password, deviceId, onCompleted) {
 	smiley360.services.ajax(
 		"authenticate",
@@ -403,7 +412,7 @@ smiley360.services.getProfileDropdowns = function (onCompleted) {
 			if (!response.success) { onCompleted(response) }
 			else { delete response.success; }
 
-			dropdownValues.gender = response;			
+			dropdownValues.gender = response;
 		});
 	smiley360.services.ajax(
 		"get_country_options",
@@ -758,7 +767,7 @@ function delayedUnMask() {
 		if (mask == false) {
 			Ext.Viewport.setMasked(false);
 		}
-	}, 3500);
+	}, 1000);
 }
 
 smiley360.services.ajax = function (method, params, onCompleted) {
@@ -783,18 +792,27 @@ smiley360.services.ajax = function (method, params, onCompleted) {
 			if (response == null) {
 				onCompleted(Ext.apply({ success: false }, response));
 				mask = false;
-				delayedUnMask();
+				if (method != 'checkfacebookpermissions') {
+					delayedUnMask()
+				}
+				else Ext.Viewport.setMasked(false);
 			}
 			else if (response.error == 'Error. This method requires authorization') {
 				Ext.Msg.alert('You are not authorized or your session is expired.');
 				smiley360.animateViewLeft('loginview');
 				mask = false;
-				delayedUnMask();
+				if (method != 'checkfacebookpermissions') {
+					delayedUnMask()
+				}
+				else Ext.Viewport.setMasked(false);
 			}
 			else {
 				onCompleted(Ext.apply({ success: (result && !response.error) }, response));
 				mask = false;
-				delayedUnMask();
+				if (method != 'checkfacebookpermissions') {
+					delayedUnMask()
+				}
+				else Ext.Viewport.setMasked(false);
 			}
 		}
 	});

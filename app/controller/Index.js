@@ -1003,88 +1003,88 @@ Ext.define('smiley360.controller.Index', {
 
 		console.log('Index -> updateDeviceId: ' + smiley360.services.getDeviceId());
 	},
-tryLoginUser: function () {
-	var me = this;
+	tryLoginUser: function () {
+		var me = this;
 
-	var membersStore = smiley360.services.getMemberStore();//Ext.getStore('membersStore');
-	//alert(Ext.getStore('membersStore').getAt(0).data.memberId + '_' + Ext.getStore('membersStore').getAt(0).data.deviceId);
-	if (membersStore.getCount() > 0) {
-		var memberId = smiley360.services.getMemberId();//membersStore.getAt(0).data.memberId;
-		var deviceId = smiley360.services.getDeviceId();//membersStore.getAt(0).data.deviceId;
+		var membersStore = smiley360.services.getMemberStore();//Ext.getStore('membersStore');
+		//alert(Ext.getStore('membersStore').getAt(0).data.memberId + '_' + Ext.getStore('membersStore').getAt(0).data.deviceId);
+		if (membersStore.getCount() > 0) {
+			var memberId = smiley360.services.getMemberId();//membersStore.getAt(0).data.memberId;
+			var deviceId = smiley360.services.getDeviceId();//membersStore.getAt(0).data.deviceId;
 
-		if (memberId) {
-			console.log('Index -> [tryLoginUser] with stored memberId:' + memberId);
+			if (memberId) {
+				console.log('Index -> [tryLoginUser] with stored memberId:' + memberId);
 
-			this.loadMemberData(memberId, function () {
-				smiley360.animateViewLeft('mainview');
-				smiley360.destroySplash();
-				isLoadedApp = true;
-				var cmp_tool = me.getToolId();
-				if (cmp_tool == 'sharetofacebookview') {
-					//Ext.getCmp('xMainView').showExternalView('detailsview');
-					//Ext.widget('sharetofacebookview').show();
-				};
+				this.loadMemberData(memberId, function () {
+					smiley360.animateViewLeft('mainview');
+					smiley360.destroySplash();
+					isLoadedApp = true;
+					var cmp_tool = me.getToolId();
+					if (cmp_tool == 'sharetofacebookview') {
+						//Ext.getCmp('xMainView').showExternalView('detailsview');
+						//Ext.widget('sharetofacebookview').show();
+					};
 
-				if (cmp_tool == 'sharetotwitterview') {
-					//Ext.getCmp('xMainView').showExternalView('detailsview');
-					//Ext.widget('sharetotwitterview').show();
-				};
-			});
-
-			return;
-		}
-		else if (deviceId) {
-			var me = this;
-
-			console.log('Index -> [tryLoginUser] with cached deviceId:' + deviceId);
-
-			smiley360.services.getMemberIdByDeviceId(deviceId,
-				function (response) {
-					if (response.success) {
-						console.log('Index -> [tryLoginUser] with received memberId:' + response.ID);
-
-						me.updateMemberId(response.ID);
-						me.loadMemberData(response.ID, function () {
-							smiley360.animateViewLeft('mainview');
-							smiley360.destroySplash();
-							isLoadedApp = true;
-							var cmp_tool = me.getToolId();
-							if (cmp_tool == 'sharetofacebookview') {
-								//Ext.getCmp('xMainView').showExternalView('detailsview');
-								//Ext.widget('sharetofacebookview').show();
-							};
-
-							if (cmp_tool == 'sharetotwitterview') {
-								//Ext.getCmp('xMainView').showExternalView('detailsview');
-								//Ext.widget('sharetotwitterview').show();
-							};
-						});
-					}
-					else {
-						console.log('Index -> [tryLoginUser] don\'t received memberId for deviceId:' + deviceId);
-						if (response.memberID == 0) {
-							//Ext.Msg.alert('ERROR', 'You are using wrong or expired guid. Please, try again!');
-							me.updateDeviceId();
-						};
-						smiley360.animateViewLeft('loginview');
-						smiley360.destroySplash();
-						isLoadedApp = true;
-					}
+					if (cmp_tool == 'sharetotwitterview') {
+						//Ext.getCmp('xMainView').showExternalView('detailsview');
+						//Ext.widget('sharetotwitterview').show();
+					};
 				});
 
-			return;
+				return;
+			}
+			else if (deviceId) {
+				var me = this;
+
+				console.log('Index -> [tryLoginUser] with cached deviceId:' + deviceId);
+
+				smiley360.services.getMemberIdByDeviceId(deviceId,
+					function (response) {
+						if (response.success) {
+							console.log('Index -> [tryLoginUser] with received memberId:' + response.ID);
+
+							me.updateMemberId(response.ID);
+							me.loadMemberData(response.ID, function () {
+								smiley360.animateViewLeft('mainview');
+								smiley360.destroySplash();
+								isLoadedApp = true;
+								var cmp_tool = me.getToolId();
+								if (cmp_tool == 'sharetofacebookview') {
+									//Ext.getCmp('xMainView').showExternalView('detailsview');
+									//Ext.widget('sharetofacebookview').show();
+								};
+
+								if (cmp_tool == 'sharetotwitterview') {
+									//Ext.getCmp('xMainView').showExternalView('detailsview');
+									//Ext.widget('sharetotwitterview').show();
+								};
+							});
+						}
+						else {
+							console.log('Index -> [tryLoginUser] don\'t received memberId for deviceId:' + deviceId);
+							if (response.memberID == 0) {
+								Ext.Msg.alert('ERROR', 'Oops something went wrong! The email address on your Facebook account may already be in use, or Facebook may be blocking the operation. Please contact us for details!');
+								me.updateDeviceId();
+							};
+							smiley360.animateViewLeft('loginview');
+							smiley360.destroySplash();
+							isLoadedApp = true;
+						}
+					});
+
+				return;
+			}
 		}
-	}
 
-	// if no data stored generate device id and show login view
-	this.generateDeviceId();
+		// if no data stored generate device id and show login view
+		this.generateDeviceId();
 
-	smiley360.animateViewLeft('loginview');
-	smiley360.destroySplash();
-	isLoadedApp = true;
-},
+		smiley360.animateViewLeft('loginview');
+		smiley360.destroySplash();
+		isLoadedApp = true;
+	},
 
-missionsCounter: 0,
+	missionsCounter: 0,
 });
 
 /* Global models and methods */
@@ -1099,6 +1099,7 @@ smiley360.slideShowImages = {};
 smiley360.postReview = {};
 smiley360.fromRemove = false;
 smiley360.preventLoadIndicator = false;
+smiley360.failedShares = [];
 //changeuserProfileImage
 smiley360.userProfileImage = 'http://uat.smiley360.com/images/default-profile.jpg';
 
@@ -1263,6 +1264,27 @@ smiley360.setViewStatus = function (view, status, states) {
 								shareView.setToolName('Facebook')
 							else shareView.setToolName('Twitter');
 					}
+					if (viewName == 'smiley360.view.UploadPhoto') {
+
+						var shareView = Ext.widget('connectpopupview').show();
+						if (shareView.setToolName)
+							if (smiley360.failedShares.length == 2) {
+								if ((smiley360.failedShares[0] == 'fb_f' && smiley360.failedShares[1] == 'twi_f')
+									||
+									(smiley360.failedShares[1] == 'fb_f' && smiley360.failedShares[0] == 'twi_f')) {
+									shareView.setToolName('Facebook and Twitter');
+								}
+								else {
+									if (smiley360.failedShares[0] == 'fb_f' || smiley360.failedShares[1] == 'fb_f')
+										shareView.setToolName('Facebook');
+									if (smiley360.failedShares[0] == 'twi_f' || smiley360.failedShares[1] == 'twi_f')
+										shareView.setToolName('Twitter');
+								}
+							}
+						smiley360.failedShares = [];
+					}
+
+
 					if (xShareButton.getIcon()) {
 						xShareButton.setIcon('resources/images/share-initial.png');
 					}
