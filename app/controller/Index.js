@@ -36,7 +36,9 @@ Ext.define('smiley360.controller.Index', {
 			loginView: {
 				AuthentificateCommand: 'AuthentificateCommand',
 				ShowSignupViewCommand: 'ShowSignupViewCommand',
-				ShowSurveyViewCommand: 'ShowSurveyViewCommand'
+				ShowSurveyViewCommand: 'ShowSurveyViewCommand',
+				setToolId: 'setToolId',
+
 			},
 			signupView: {
 				// The commands fired by the signup view.
@@ -905,27 +907,26 @@ Ext.define('smiley360.controller.Index', {
 	},
 
 	setToolId: function (toolId_toSet) {
-		//var toolsStore = Ext.getStore('toolsStore');
-		//	//var toolId = toolsStore.getAt(0).data.toolId;
-		//	//toolsStore.removeAll();
-		//toolsStore.add({ toolId: toolId_toSet });
-		//	toolsStore.sync();
+		var toolsStore = Ext.getStore('toolsStore');
+		toolsStore.removeAll();
+		toolsStore.getProxy().clear();
+		toolsStore.add({ toolId: toolId_toSet });
 
 		//	console.log('Index -> setToolId: ' + toolsStore.getAt(0).data.toolId);
 
 	},
 	getToolId: function () {
-		//var toolsStore = Ext.getStore('toolsStore');
+		var toolsStore = Ext.getStore('toolsStore');
 
-		//if (toolsStore.getCount() > 0) {
-		//	var toolId = toolsStore.getAt(0).data.toolId;			
-		//	toolToGo = toolId;			
-		//	console.log('Index -> getToolId: ' + toolId);
-		//}
-		//else console.log('Index -> getToolId: nodata');
-		//toolsStore.removeAll();
-		//return toolToGo;
-		return "";
+		if (toolsStore.getCount() > 0) {
+			var toolId = toolsStore.getAt(0).data.toolId;
+			toolToGo = toolId;
+			console.log('Index -> getToolId: ' + toolId);
+		}
+		else console.log('Index -> getToolId: nodata');
+		toolsStore.removeAll();
+		toolsStore.getProxy().clear();
+		return toolToGo;
 	},
 
 	doJavascriptLoad: function (jsPath, callback) {
@@ -1021,12 +1022,22 @@ Ext.define('smiley360.controller.Index', {
 					isLoadedApp = true;
 					var cmp_tool = me.getToolId();
 					if (cmp_tool == 'sharetofacebookview') {
-						//Ext.getCmp('xMainView').showExternalView('detailsview');
+						Ext.getCmp('xMainView').showExternalView('detailsview');
+						Ext.getCmp('xMainView').down('#xTabpanel').down('#xDetailsView').showSharePanel();
+
 						//Ext.widget('sharetofacebookview').show();
 					};
 
 					if (cmp_tool == 'sharetotwitterview') {
-						//Ext.getCmp('xMainView').showExternalView('detailsview');
+						Ext.getCmp('xMainView').showExternalView('detailsview');
+						Ext.getCmp('xMainView').down('#xTabpanel').down('#xDetailsView').showSharePanel();
+
+						//Ext.widget('sharetotwitterview').show();
+					};
+					if (cmp_tool == 'uploadphotoview') {
+						Ext.getCmp('xMainView').showExternalView('detailsview');
+						Ext.getCmp('xMainView').down('#xTabpanel').down('#xDetailsView').showSharePanel();
+
 						//Ext.widget('sharetotwitterview').show();
 					};
 				});
@@ -1050,21 +1061,33 @@ Ext.define('smiley360.controller.Index', {
 								isLoadedApp = true;
 								var cmp_tool = me.getToolId();
 								if (cmp_tool == 'sharetofacebookview') {
-									//Ext.getCmp('xMainView').showExternalView('detailsview');
-									//Ext.widget('sharetofacebookview').show();
+									Ext.getCmp('xMainView').showExternalView('detailsview');
+									Ext.getCmp('xMainView').down('#xTabpanel').down('#xDetailsView').showSharePanel();
 								};
 
 								if (cmp_tool == 'sharetotwitterview') {
-									//Ext.getCmp('xMainView').showExternalView('detailsview');
-									//Ext.widget('sharetotwitterview').show();
+									Ext.getCmp('xMainView').showExternalView('detailsview');
+									Ext.getCmp('xMainView').down('#xTabpanel').down('#xDetailsView').showSharePanel();
+								};
+								if (cmp_tool == 'uploadphotoview') {
+									Ext.getCmp('xMainView').showExternalView('detailsview');
+									Ext.getCmp('xMainView').down('#xTabpanel').down('#xDetailsView').showSharePanel();
+
 								};
 							});
 						}
 						else {
 							console.log('Index -> [tryLoginUser] don\'t received memberId for deviceId:' + deviceId);
+							var cmp_tool = me.getToolId();
 							if (response.memberID == 0) {
-								Ext.Msg.alert('ERROR', 'Oops something went wrong! The email address on your Facebook account may already be in use, or Facebook may be blocking the operation. Please contact us for details!');
-								me.updateDeviceId();
+								if (cmp_tool == 'login') {
+									Ext.Msg.alert('ERROR', 'Oops something went wrong! <br>You reopen the app after you was redirected to Facebook and closed app without logging in.'+
+										'<br>Or'+
+										'<br>The email address on your Facebook account may already be in use, or Facebook may be blocking the operation. Please contact us for details!')
+									me.updateDeviceId();
+								}
+								else
+									me.updateDeviceId();
 							};
 							smiley360.animateViewLeft('loginview');
 							smiley360.destroySplash();

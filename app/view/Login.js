@@ -118,6 +118,9 @@ Ext.define('smiley360.view.Login', {
 
 		console.log('Login -> login to Facebook with deviceId: ', deviceId);
 
+		Ext.getCmp('xLoginView').fireEvent('setToolId', 'login');
+		Ext.getStore('toolsStore').sync();
+
 		window.location =
             smiley360.configuration.getServerDomain() +
             'oauth/Facebook.html?deviceId=' + deviceId + '&scope=offline_access,email,read_stream';

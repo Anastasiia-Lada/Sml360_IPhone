@@ -102,14 +102,17 @@ Ext.define('smiley360.view.ConnectPopUp', {
 									allow_twitter = true;
 								if (local_name == 'Facebook') {
 									Ext.getCmp('xDetailsView').fireEvent('setToolId', 'sharetofacebookview');
+									Ext.getStore('toolsStore').sync();
 									this.up('#xViewPopup').onFacebookLoginTap();
 								}
 								else if (local_name == 'Twitter') {
 									Ext.getCmp('xDetailsView').fireEvent('setToolId', 'sharetotwitterview');
+									Ext.getStore('toolsStore').sync();
 									this.up('#xViewPopup').onTwitterLoginTap();
 								}
 								else if (local_name == 'Facebook and Twitter') {
 									Ext.getCmp('xDetailsView').fireEvent('setToolId', 'uploadphotoview');
+									Ext.getStore('toolsStore').sync();
 									this.up('#xViewPopup').onFacebookLoginTap();
 								}
 
