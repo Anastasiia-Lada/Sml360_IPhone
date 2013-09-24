@@ -1081,9 +1081,8 @@ Ext.define('smiley360.controller.Index', {
 							var cmp_tool = me.getToolId();
 							if (response.memberID == 0) {
 								if (cmp_tool == 'login') {
-									Ext.Msg.alert('ERROR', 'Oops something went wrong! <br>You reopen the app after you was redirected to Facebook and closed app without logging in.'+
-										'<br>Or'+
-										'<br>The email address on your Facebook account may already be in use, or Facebook may be blocking the operation. Please contact us for details!')
+									Ext.Msg.alert('ERROR', 'Oops something went wrong!' +
+										'<br>The email address on your Facebook account may already be in use, or Facebook may be blocking the operation. Please contact us for details!');
 									me.updateDeviceId();
 								}
 								else
@@ -1123,6 +1122,8 @@ smiley360.postReview = {};
 smiley360.fromRemove = false;
 smiley360.preventLoadIndicator = false;
 smiley360.failedShares = [];
+
+
 //changeuserProfileImage
 smiley360.userProfileImage = 'http://uat.smiley360.com/images/default-profile.jpg';
 

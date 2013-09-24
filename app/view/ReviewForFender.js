@@ -123,6 +123,7 @@ Ext.define('smiley360.view.ReviewForFender', {
 					items: [{
 						xtype: 'label',
 						cls: 'popup-post-bottom-text',
+						id: 'xReviewLabel',
 						style: 'color: #878789;',
 						html: 'Post must contain at least 70 characters.',
 					}, {
@@ -295,6 +296,10 @@ Ext.define('smiley360.view.ReviewForFender', {
 								xReviewView.showReviewForm();
 								xReviewView.validateForm();
 							}
+							if (this.up('#xView').down('#xReviewText').getValue().length < 70) {
+								this.up('#xView').down('#xReviewCountLabel').setStyle('color: red;');
+								this.up('#xView').down('#xReviewLabel').setStyle('color: red;');
+							}
 						}
 					},
 				}],
@@ -308,7 +313,7 @@ Ext.define('smiley360.view.ReviewForFender', {
 				this.destroy();
 			},
 			painted: function () {
-				var fileName = guid();
+				//var fileName = smiley360.services.guid();
 				var uploadUrl = smiley360.configuration.getServerDomain() +
                     'getfile.php?memberID=' + smiley360.memberData.UserId +
                     '&deviceID=' + Ext.getStore('membersStore').getAt(0).data.deviceId;
@@ -380,6 +385,10 @@ Ext.define('smiley360.view.ReviewForFender', {
 		}
 		else {
 			this.down('#xShareButton').enable();
+		}
+		if (this.down('#xReviewText').getValue().length >= 70) {
+			this.down('#xReviewCountLabel').setStyle('color: #878789;');
+			this.down('#xReviewLabel').setStyle('color: #878789;');
 		}
 	},
 

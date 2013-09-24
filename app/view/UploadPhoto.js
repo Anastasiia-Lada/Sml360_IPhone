@@ -66,6 +66,7 @@ Ext.define('smiley360.view.UploadPhoto', {
 							id: 'xBrowsePhotoButton',
 							cls: 'popup-photo-button has-shadow',
 							autoUpload: true,
+							loadAsDataUrl: false,
 							style: 'border: 0;',
 							states: {
 								browse: {
@@ -231,7 +232,7 @@ Ext.define('smiley360.view.UploadPhoto', {
 
 				smiley360.failedShares = [];
 				photoAdded = false;
-				var fileName = smiley360.services.guid();
+				//var fileName = smiley360.services.guid();
 				var uploadUrl = smiley360.configuration.getServerDomain() +
                     'getfile.php?memberID=' + smiley360.memberData.UserId +
                     '&deviceID=' + Ext.getStore('membersStore').getAt(0).data.deviceId;

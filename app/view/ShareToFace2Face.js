@@ -95,6 +95,7 @@
 					layout: 'hbox',
 					items: [{
 						xtype: 'label',
+						id: 'xPostLabel',
 						cls: 'popup-post-bottom-text',
 						style: 'color: #878789;',
 						html: 'Post must contain at least 70 characters.',
@@ -159,6 +160,11 @@
 								this.up('#xView').doShareValidation();
 							};
 
+							if (this.up('#xView').down('#xReviewText').getValue().length < 70) {
+								this.up('#xView').down('#xPostCountLabel').setStyle('color: red;');
+								this.up('#xView').down('#xPostLabel').setStyle('color: red;');
+							}
+
 							if (!(this.up('#xView').down('#xPeoplesSelector').getValue() > 0))
 								this.up('#xView').down('#xPeoplesSelector').addCls('popup-input-required')
 							else this.up('#xView').down('#xPeoplesSelector').removeCls('popup-input-required');
@@ -171,8 +177,7 @@
 								this.up('#xView').down('#xReviewText').addCls('popup-input-required')
 							else this.up('#xView').down('#xReviewText').removeCls('popup-input-required');
 
-							if (this.up('#xView').down('#xReviewText').getValue().length >= 70)
-							{ /*do smthing xView.down('#xReviewText').addCls('popup-input-required');*/ };
+							
 						}
 					},
 				}],
@@ -222,6 +227,10 @@
 		}
 		else {
 			this.down('#xShareButton').config.allowPost = false;
+		}
+		if (this.down('#xReviewText').getValue().length >= 70) {
+			this.down('#xPostCountLabel').setStyle('color: #878789;');
+			this.down('#xPostLabel').setStyle('color: #878789;');
 		}
 	},
 

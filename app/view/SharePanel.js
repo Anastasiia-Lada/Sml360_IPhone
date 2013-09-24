@@ -112,7 +112,7 @@
             						shareView.config.saved_missionId = saved_missionId;
 
             						if (shareView.setText)
-            							shareView.setText('Connect to Facebook and Twitter!', 'You can use the Facebook and Twitter<br> sharing tools to connect so you can<br> upload photos to both social<br> networks!', 'OK');
+            							shareView.setText('Connect to Facebook and Twitter!', 'You can use the Facebook and Twitter<br> sharing tools to connect so you can<br> upload photos to both social<br> networks!', 'Connect!');
             					}
             					else {
             						var shareView = Ext.widget('connectpopupview').show();

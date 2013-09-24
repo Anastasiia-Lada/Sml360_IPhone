@@ -26,7 +26,7 @@ Ext.Loader.setPath({
 //</debug>
 
 Ext.application({
-	phoneStartupScreen: 'resources/images/loadingimage-r2.png',
+	phoneStartupScreen: 'resources/images/loadingimage-iphone.png',
     name: 'smiley360',
     requires: [
         'Ext.Anim',

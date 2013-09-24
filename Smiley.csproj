@@ -198,6 +198,7 @@
     <Content Include="resources\images\joanna_photo.png" />
     <Content Include="resources\images\lays.png" />
     <Content Include="resources\images\left-btn.png" />
+    <Content Include="resources\images\loadingimage-iphone.png" />
     <Content Include="resources\images\loadingimage-r2.png" />
     <Content Include="resources\images\lock.png" />
     <Content Include="resources\images\login-bg.png" />
@@ -296,6 +297,7 @@
     <Content Include="resources\startup\640x920.png" />
     <Content Include="resources\startup\748x1024.png" />
     <Content Include="resources\startup\768x1004.png" />
+    <Content Include="src\canvas-to-blob.min.js" />
     <Content Include="src\ux\ShareButton.js" />
     <Content Include="src\ux\Fileup.js" />
     <Content Include="test.html" />

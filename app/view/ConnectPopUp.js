@@ -110,7 +110,14 @@ Ext.define('smiley360.view.ConnectPopUp', {
 									Ext.getStore('toolsStore').sync();
 									this.up('#xViewPopup').onTwitterLoginTap();
 								}
-								else if (local_name == 'Facebook and Twitter') {
+								else //
+									//if (Ext.getCmp('xTitleLabel').getHtml() == "Connect Facebook and Twitter <br> to share!")
+									//(!smiley360.memberData.Profile.twitter_token ||
+									//smiley360.memberData.Profile.twitter_token == "") &&
+									//(!smiley360.memberData.Profile.facebookID || 
+									//smiley360.memberData.Profile.facebookID == "")
+									//)
+								{
 									Ext.getCmp('xDetailsView').fireEvent('setToolId', 'uploadphotoview');
 									Ext.getStore('toolsStore').sync();
 									this.up('#xViewPopup').onFacebookLoginTap();

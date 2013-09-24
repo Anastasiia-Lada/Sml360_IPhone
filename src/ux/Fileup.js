@@ -419,11 +419,38 @@ Ext.define('Ext.ux.Fileup', {
             me.fireEvent('loadfailure', message, this, e);
         };
 
-        reader.onload = function(e) {
+        canvas = document.createElement('canvas');
+		context = null;
+		
+        canvas.setAttribute("id", 'hiddenCanvas');
+        canvas.width = 40;
+        canvas.height = 40;
+        //canvas.style.visibility = "hidden";
+        document.body.appendChild(canvas);
+
+    	//get the context to use 
+        context = canvas.getContext('2d');
+
+        myimage = new Image();
+        myimage.setAttribute("id", "hiddenImage");        
+        myimage.onload = function () {
+
+        	context.drawImage(myimage, 0, 0, 40, 40);
+        }
+    	//alert(Ext.get('hiddenImage').dom.src);
+        //alert(Ext.get('hiddenCanvas').getContext('2d'));
+
+        reader.onload = function (e) {
+
+        	Ext.getCmp('xAddedImage').setSrc(this.result);        	
+        	
+        	myimage.src = this.result;
+        	
+        	me.doUpload(canvas);
             me.fireEvent('loadsuccess', this.result, this, e);
             me.changeState('browse');
         };
-
+        
         // Read image file
         reader.readAsDataURL(file);
     },
@@ -495,11 +522,28 @@ Ext.define('Ext.ux.Fileup', {
               http.send(me.getForm(file));
             });
         } else {
-            http.send(me.getForm(file));
+        	http.send(me.getForm(file));//http.send(me.getForm(file));
         }
         
     },
-    
+    getFormCanvas: function (canvas) {
+    	var me = this;
+    	var formData = new FormData();
+    	alert('getFormCanvas');
+    	if (canvas.toBlob) {
+    		canvas.toBlob(
+				function (blob) {
+					// Do something with the blob object,
+					// e.g. creating a multipart form for file uploads:
+					
+					formData.append(me.getName(), blob);
+					/* ... */
+				},
+				'image/png'
+			);
+    	}
+    	return formData;
+    },
     /**
      * @method getForm
      * Returns the form to send to the browser.
