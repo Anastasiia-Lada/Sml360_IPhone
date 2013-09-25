@@ -38,9 +38,8 @@ Ext.define('smiley360.view.ConnectPopUp', {
 
 							if (shareView.setMissionId)
 								shareView.setMissionId(Ext.getCmp('xViewPopup').config.saved_missionId);
-
-							shareView.config.btn_from = Ext.getCmp('xViewPopup').config.saved_button;
-							alert(shareView.config.btn_from.getId());
+							if (shareView.config.btn_from)
+								shareView.config.btn_from = Ext.getCmp('xViewPopup').config.saved_button;
 						};
 						showUploadDialog = false;
 						Ext.getCmp('xSubmitButton').setText('Connect!');
@@ -147,8 +146,8 @@ Ext.define('smiley360.view.ConnectPopUp', {
 					if (shareView.setMissionId)
 						shareView.setMissionId(Ext.getCmp('xViewPopup').config.saved_missionId);
 
-					shareView.config.btn_from = Ext.getCmp('xViewPopup').config.saved_button;
-					alert(shareView.config.btn_from.getId());
+					if (shareView.config.btn_from)
+						shareView.config.btn_from = Ext.getCmp('xViewPopup').config.saved_button;
 
 				};
 				showUploadDialog = false;
