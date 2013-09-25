@@ -165,14 +165,15 @@ Ext.define('smiley360.view.OfferAcceptAddress', {
 												Ext.getCmp('address_stateID').getValue(),
 												Ext.getCmp('address_zip').getValue(),
 												Ext.getCmp('address_countryID').getValue()
+												//reload offers
 												);
 							//verify on need		
 							Ext.getCmp('xOfferView').fireEvent('verifyAddressCommand', this, smiley360.memberData.UserId);
 							//go accept mission
 							Ext.getCmp('xOfferView').fireEvent('acceptMissionCommand', this, smiley360.memberData.UserId, smiley360.missionData.MissionDetails.MissionId);
 							//if accepted to go
-							Ext.getCmp('xOfferView').fireEvent('getOffersCommand', this, smiley360.memberData.UserId);
-							//reload offers
+
+
 
 							if (smiley360.missionData.MissionDetails.MissionDetails.mission_full) {
 								//if (Ext.widget('offeracceptview')) Ext.widget('offeracceptview').hide();

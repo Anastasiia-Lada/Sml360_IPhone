@@ -52,7 +52,7 @@
 					autoSelect: false,
 					value: null,
 					required: true,
-					placeHolder: 'How many people you talked to?',
+					placeHolder: 'How many people did you talk to?',
 					cls: 'popup-input popup-input-selector',
 					style: 'font-size: 0.9em',
 					listeners: {

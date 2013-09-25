@@ -62,45 +62,65 @@ smiley360.services.sendMessage = function (messageData, onCompleted) {
 smiley360.services.getMemberData = function (memberId, onCompleted) {
 	var memberRequest = { memberID: memberId };
 	var globalResponse = { UserId: memberId };
-
+	var success_counter = 0;
 	smiley360.services.ajax("getProfile", memberRequest,
         function (response) {
         	if (!response.success) { onCompleted(response) }
         	else { delete response.success; }
-
+        	success_counter++;
         	globalResponse.Profile = response;
+        	if (success_counter == 7) {
+        		globalResponse.success = true;
+        		onCompleted(globalResponse);
+        	}
         });
 
 	smiley360.services.ajax("getWhatsHappening", memberRequest,
         function (response) {
         	if (!response.success) { onCompleted(response) }
         	else { delete response.success; }
-
+        	success_counter++;
         	globalResponse.WhatsHappening = response;
+        	if (success_counter == 7) {
+        		globalResponse.success = true;
+        		onCompleted(globalResponse);
+        	}
         });
 
 	smiley360.services.ajax("get_member_level", memberRequest,
         function (response) {
         	if (!response.success) { onCompleted(response) }
         	else { delete response.success; }
-
+        	success_counter++;
         	globalResponse.UserLevel = response.level;
+        	if (success_counter == 7) {
+        		globalResponse.success = true;
+        		onCompleted(globalResponse);
+        	}
         });
 
 	smiley360.services.ajax("getSpecialOffers", memberRequest,
         function (response) {
         	if (!response.success) { onCompleted(response) }
         	else { delete response.success; }
-
+        	success_counter++;
         	globalResponse.SpecialOffers = response;
+        	if (success_counter == 7) {
+        		globalResponse.success = true;
+        		onCompleted(globalResponse);
+        	}
         });
 
 	smiley360.services.ajax("getOffers", memberRequest,
 		function (response) {
 			if (!response.success) { onCompleted(response) }
 			else { delete response.success; }
-
+			success_counter++;
 			globalResponse.Offers = response;
+			if (success_counter == 7) {
+				globalResponse.success = true;
+				onCompleted(globalResponse);
+			}
 
 		});
 
@@ -109,19 +129,27 @@ smiley360.services.getMemberData = function (memberId, onCompleted) {
 		function (response) {
 			if (!response.success) { onCompleted(response) }
 			else { delete response.success; }
-
+			success_counter++;
 			globalResponse.MissionList = response;
+			if (success_counter == 7) {
+				globalResponse.success = true;
+				onCompleted(globalResponse);
+			}
 
 		});
 	smiley360.services.ajax("isProfileComplete", memberRequest,
 		function (response) {
 			if (!response.success) { onCompleted(response) }
 			else { delete response.success; }
-
+			success_counter++;
 			globalResponse.isProfileComplete = response;
-			globalResponse.success = true;
-			onCompleted(globalResponse);
+			if (success_counter == 7) {
+				globalResponse.success = true;
+				onCompleted(globalResponse);
+			}
+			
 		});
+	
 }
 
 smiley360.services.updateMemberData = function (memberId, onCompleted) {

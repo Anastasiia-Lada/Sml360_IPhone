@@ -198,8 +198,8 @@
     <Content Include="resources\images\joanna_photo.png" />
     <Content Include="resources\images\lays.png" />
     <Content Include="resources\images\left-btn.png" />
-    <Content Include="resources\images\loadingimage-iphone.png" />
     <Content Include="resources\images\loadingimage-r2.png" />
+    <Content Include="resources\images\loadingimage_x1_iphone.png" />
     <Content Include="resources\images\lock.png" />
     <Content Include="resources\images\login-bg.png" />
     <Content Include="resources\images\login-btn.png" />

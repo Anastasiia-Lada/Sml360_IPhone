@@ -8,6 +8,7 @@ Ext.define('smiley360.view.ConnectPopUp', {
 		centered: true,
 		fullscreen: true,
 		hideOnMaskTap: true,
+		saved_button: {},
 		saved_smilesCurrent: 0,
 		saved_missionId: 0,
 		saved_seedPhrase: '',
@@ -38,6 +39,8 @@ Ext.define('smiley360.view.ConnectPopUp', {
 							if (shareView.setMissionId)
 								shareView.setMissionId(Ext.getCmp('xViewPopup').config.saved_missionId);
 
+							shareView.config.btn_from = Ext.getCmp('xViewPopup').config.saved_button;
+							alert(shareView.config.btn_from.getId());
 						};
 						showUploadDialog = false;
 						Ext.getCmp('xSubmitButton').setText('Connect!');
@@ -96,7 +99,6 @@ Ext.define('smiley360.view.ConnectPopUp', {
 								};
 							}
 							else if (this.getText() == 'Connect!') {
-
 								allow_fb = true;
 								if (smiley360.memberData.Profile.twitter_token && smiley360.memberData.Profile.twitter_token != "")
 									allow_twitter = true;
@@ -110,20 +112,11 @@ Ext.define('smiley360.view.ConnectPopUp', {
 									Ext.getStore('toolsStore').sync();
 									this.up('#xViewPopup').onTwitterLoginTap();
 								}
-								else //
-									//if (Ext.getCmp('xTitleLabel').getHtml() == "Connect Facebook and Twitter <br> to share!")
-									//(!smiley360.memberData.Profile.twitter_token ||
-									//smiley360.memberData.Profile.twitter_token == "") &&
-									//(!smiley360.memberData.Profile.facebookID || 
-									//smiley360.memberData.Profile.facebookID == "")
-									//)
-								{
+								else if (local_name == 'Facebook and Twitter') {
 									Ext.getCmp('xDetailsView').fireEvent('setToolId', 'uploadphotoview');
 									Ext.getStore('toolsStore').sync();
 									this.up('#xViewPopup').onFacebookLoginTap();
 								}
-
-
 								this.up('#xViewPopup').destroy();
 
 							};
@@ -154,6 +147,9 @@ Ext.define('smiley360.view.ConnectPopUp', {
 					if (shareView.setMissionId)
 						shareView.setMissionId(Ext.getCmp('xViewPopup').config.saved_missionId);
 
+					shareView.config.btn_from = Ext.getCmp('xViewPopup').config.saved_button;
+					alert(shareView.config.btn_from.getId());
+
 				};
 				showUploadDialog = false;
 				Ext.getCmp('xSubmitButton').setText('Connect!');
@@ -178,13 +174,15 @@ Ext.define('smiley360.view.ConnectPopUp', {
 	setToolName: function (name) {
 		var xTitleLabel = this.down('#xTitleLabel');
 
+
 		xTitleLabel.setHtml(Ext.String.format(
-            xTitleLabel.getHtml(), name));
+			xTitleLabel.getHtml(), name));
 
 		var xMessageText = this.down('#xMessageText');
 
+
 		xMessageText.setHtml(Ext.String.format(
-            xMessageText.getHtml(), name));
+			xMessageText.getHtml(), name));
 		local_name = name;
 	},
 	onFacebookLoginTap: function () {

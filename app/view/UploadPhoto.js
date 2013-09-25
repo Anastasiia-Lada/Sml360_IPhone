@@ -274,7 +274,7 @@ Ext.define('smiley360.view.UploadPhoto', {
 
 	doShare: function () {
 		var shareView = this;
-		var shareOptions = [];		
+		var shareOptions = [];
 
 		smiley360.setViewStatus(shareView, smiley360.viewStatus.progress);
 		///////////////facebook
@@ -296,6 +296,7 @@ Ext.define('smiley360.view.UploadPhoto', {
 					smiley360.failedShares.push('fb_s')
 				else smiley360.failedShares.push('fb_f');
 				smiley360.setResponseStatus(shareView, responseFB, '', shareView.config.btn_from);
+				console.log(shareView.config.btn_from.valueOf());
 				//shareView.checkResponse();
 			});
 		};
@@ -316,6 +317,7 @@ Ext.define('smiley360.view.UploadPhoto', {
 					smiley360.failedShares.push('twi_s')
 				else smiley360.failedShares.push('twi_f');
 				smiley360.setResponseStatus(shareView, responseTW, '', shareView.config.btn_from);
+				console.log(shareView.config.btn_from.valueOf());
 				//shareView.checkResponse();
 			});
 		};
@@ -323,7 +325,7 @@ Ext.define('smiley360.view.UploadPhoto', {
 		if (Ext.getCmp('xView')) Ext.getCmp('xView').doValidation();
 	},
 
-	
+
 	setEarnSmiles: function (smiles) {
 		var xTitleLabel = this.down('#xTitleLabel');
 

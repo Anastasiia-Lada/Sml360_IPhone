@@ -92,6 +92,7 @@
             	smilesCurrent: shareItem.sharingTool_perShare_smiles,
             	listeners: {
             		tap: function () {
+            			var me_tmp = this;
             			if (true/*parseInt(this.getSmilesDone()) < parseInt(this.getSmilesTotal())*/) {
             				if ((shareViewAlias == 'sharetofacebookview' && (!smiley360.memberData.Profile.facebookID || smiley360.memberData.Profile.facebookID == "" || !smiley360.permissionsList.publish_stream))
 							|| (shareViewAlias == 'sharetotwitterview' && (!smiley360.memberData.Profile.twitter_token || smiley360.memberData.Profile.twitter_token == ""))
@@ -106,26 +107,25 @@
 
             						var saved_missionId = me.missionDetails.MissionId;
 
+            						var saved_button = me_tmp;
 
             						var shareView = Ext.widget('connectpopupview').show();
             						shareView.config.saved_smilesCurrent = saved_smilesCurrent;
             						shareView.config.saved_missionId = saved_missionId;
+            						shareView.config.saved_button = saved_button;
 
             						if (shareView.setText)
-            							shareView.setText('Connect to Facebook and Twitter!', 'You can use the Facebook and Twitter<br> sharing tools to connect so you can<br> upload photos to both social<br> networks!', 'Connect!');
+            							shareView.setText('Connect to Facebook and Twitter!', 'You can use the Facebook and Twitter<br> sharing tools to connect so you can<br> upload photos to both social<br> networks!', 'OK');
             					}
             					else {
             						var shareView = Ext.widget('connectpopupview').show();
             						if (shareView.setToolName)
             							if (shareViewAlias == 'sharetofacebookview') {
             								shareView.setToolName('Facebook');
-
             							}
             							else {
             								shareView.setToolName('Twitter');
-
             							};
-
             					};
             				}
 

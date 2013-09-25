@@ -29,9 +29,9 @@
         A list of available plugins are available at https://build.phonegap.com/docs/plugins
     -->
 	
-	<gap:splash src="resources/images/loadingimage-iphone.png" gap:platform="ios" width="320" height="480" />
-	<gap:splash src="resources/images/loadingimage-iphone.png" gap:platform="ios" width="640" height="960" />
-	<gap:splash src="resources/images/loadingimage-iphone.png" gap:platform="ios" width="640" height="1136" />
+	<gap:splash src="resources/images/loadingimage_x1_iphone.png" gap:platform="ios" width="320" height="480" />
+	<gap:splash src="resources/images/loadingimage_x1_iphone.png" gap:platform="ios" width="640" height="960" />
+	<gap:splash src="resources/images/loadingimage_x1_iphone.png" gap:platform="ios" width="640" height="1136" />
 	<gap:splash src="resources/images/loadingimage-r2.png" gap:platform="ios" width="1024" height="748" />
 	<gap:splash src="resources/images/loadingimage-r2.png" gap:platform="ios" width="768" height="1004" />
 

@@ -374,7 +374,7 @@ Ext.define('smiley360.controller.Index', {
 					delete response.success;
 					console.log('Address is set successfully!');
 					//smiley360.missionData.MissionDetails = response;
-
+					Ext.getCmp('xOfferView').fireEvent('getOffersCommand', this, smiley360.memberData.UserId);
 					//Ext.getCmp('xMainView').showExternalView('offerdetailsview');
 				}
 				else {
