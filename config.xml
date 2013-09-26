@@ -30,8 +30,11 @@
     -->
 	
 	<gap:splash src="resources/images/loadingimage_x1_iphone.png" gap:platform="ios" width="320" height="480" />
-	<gap:splash src="resources/images/loadingimage_x1_iphone.png" gap:platform="ios" width="640" height="960" />
-	<gap:splash src="resources/images/loadingimage_x1_iphone.png" gap:platform="ios" width="640" height="1136" />
+	<gap:splash src="resources/images/loadingimage_1_landscape.png" gap:platform="ios" width="500" height="300" />
+	<gap:splash src="resources/images/iphone4LoadingImage.png" gap:platform="ios" width="640" height="960" />
+	<gap:splash src="resources/images/4iphone_landscape_.png" gap:platform="ios" width="980" height="620" />
+	<gap:splash src="resources/images/iPhone5LoadingImage.png" gap:platform="ios" width="640" height="1136" />
+	<gap:splash src="resources/images/5iphone_landscape.png" gap:platform="ios" width="1156" height="620" />
 	<gap:splash src="resources/images/loadingimage-r2.png" gap:platform="ios" width="1024" height="748" />
 	<gap:splash src="resources/images/loadingimage-r2.png" gap:platform="ios" width="768" height="1004" />
 
@@ -39,7 +42,10 @@
 	<gap:splash src="resources/images/loadingimage-r2.png" gap:platform="ios" width="2048" height="1496" />
 	<gap:splash src="resources/images/loadingimage-r2.png" gap:platform="ios" width="1536" height="2008" />
 
-	
+	<gap:plugin name="com.phonegap.plugins.facebookconnect">
+    		<param name="APP_ID" value="104171846376854" />
+    		<param name="APP_NAME" value="Smiley360 Staging" />
+	</gap:plugin>
 
 	<!-- Define app icon for each platform. -->
 	<icon src="resources/icons/Icon.png" />	

@@ -243,7 +243,7 @@ Ext.define('smiley360.view.UploadPhoto', {
 					this.down('#xTwitterCheckbox').show()
 				else this.down('#xTwitterCheckbox').hide();
 
-				if (smiley360.memberData.Profile.facebookID && smiley360.memberData.Profile.facebookID != "")
+				if (smiley360.memberData.Profile.facebookID && smiley360.memberData.Profile.facebookID != "" && smiley360.permissionsList.publish_stream)
 					this.down('#xFacebookCheckbox').show()
 				else this.down('#xFacebookCheckbox').hide();
 			}

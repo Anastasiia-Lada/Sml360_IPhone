@@ -608,19 +608,20 @@ Ext.define('smiley360.controller.Index', {
 				if (response.success) {
 					//delete response.success;
 					if (response) {
-						if (response[0].sharingTool_typeID == 2) {
-							var post_options = response[0].channelOptions;
-							var fb_check = Ext.getCmp('xToProfileCheckbox');
-							var bp_check = Ext.getCmp('xToBrandPageCheckbox');
+					    if (response[0].sharingTool_typeID == 2) {
+					        var post_options = response[0].channelOptions;
+					        var fb_check = Ext.getCmp('xToProfileCheckbox');
+					        var bp_check = Ext.getCmp('xToBrandPageCheckbox');
 
-							if (fb_check && bp_check && response[0].channelOptions.length > 1)
-								for (var key in response[0].channelOptions) {
-									if (response[0].channelOptions[key] == 1)
-										fb_check.show();
-									if (response[0].channelOptions[key] == 2)
-										bp_check.show();
-								};
-						}
+					        if (fb_check && bp_check && response[0].channelOptions.length > 1)
+					            for (var key in response[0].channelOptions) {
+					                if (response[0].channelOptions[key] == 1)
+					                    fb_check.show();
+					                if (response[0].channelOptions[key] == 2)
+					                    bp_check.show();
+					            };
+					    };
+
 						if (response[0].link != null)
 							if (shareView.setLink) {
 								shareView.setLink(response[0].link);
