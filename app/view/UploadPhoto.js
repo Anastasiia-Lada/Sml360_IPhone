@@ -1,6 +1,6 @@
 ﻿var photoAdded = false;
 var shareResponse = [];
-
+var uploader = {};
 Ext.define('smiley360.view.UploadPhoto', {
 	extend: 'Ext.Container',
 	alias: 'widget.uploadphotoview',
@@ -200,6 +200,31 @@ Ext.define('smiley360.view.UploadPhoto', {
 					cls: 'popup-post-comment-text',
 					id: 'xSeedPhrase',
 					html: 'Try Campbell\'s Slow Kettle Style Soups and be sure to use this $1.00 off coupon! http://bit.ly/YxVW1D',
+				},
+				{
+					xtype: 'container',
+					html: //'<form id="submit-form" method="post" action="dump.php">' +
+					
+					
+					'<div id="filelist">Your browser doesn\'t have Flash, Silverlight or HTML5 support.</div>'+
+					'<br />'+
+					'<div id="container">'+
+					'<a id="pickfiles" href="javascript:;">Select and Resize</a>'+ 
+					'<a id="uploadfiles" href="javascript:;">Upload files</a>'+
+					'</div>'+
+					'<br />'+
+					'<pre id="console"></pre>'
+
+//					'<h1>Custom example</h1>' +
+//					'<p>Shows you how to use the core plupload API.</p>' +
+//					'<div>' +
+//					'<div id="filelist">No runtime found.</div>' +
+//					'<br />' +
+//					'<a id="pickfiles" href="#">[Select files]</a>' +
+//					'<a id="uploadfiles" href="#">---[Upload files]</a>' +
+//					'</div>' +
+					//'<input type="submit" />' +
+					//'</form>'
 				}],
 			}, {
 				xtype: 'panel',
@@ -229,6 +254,49 @@ Ext.define('smiley360.view.UploadPhoto', {
 				this.destroy();
 			},
 			painted: function () {
+				uploader = new plupload.Uploader({
+					runtimes: 'html5,flash,silverlight,html4',
+					browse_button: 'pickfiles', // you can pass in id...
+					container: document.getElementById('container'), // ... or DOM Element itself
+					url: 'upload.php',
+					flash_swf_url: '../js/Moxie.swf',
+					silverlight_xap_url: '../js/Moxie.xap',
+
+					filters: {
+						max_file_size: '10mb',
+						mime_types: [
+							{ title: "Image files", extensions: "jpg,gif,png" },
+							{ title: "Zip files", extensions: "zip" }
+						]
+					},
+
+					init: {
+						PostInit: function () {
+							document.getElementById('filelist').innerHTML = '';
+
+							document.getElementById('uploadfiles').onclick = function () {
+								uploader.start();
+								return false;
+							};
+						},
+
+						FilesAdded: function (up, files) {
+							plupload.each(files, function (file) {
+								document.getElementById('filelist').innerHTML += '<div id="' + file.id + '">' + file.name + ' (' + plupload.formatSize(file.size) + ') <b></b></div>';
+							});
+						},
+
+						UploadProgress: function (up, file) {
+							document.getElementById(file.id).getElementsByTagName('b')[0].innerHTML = '<span>' + file.percent + "%</span>";
+						},
+
+						Error: function (up, err) {
+							document.getElementById('console').innerHTML += "\nError #" + err.code + ": " + err.message;
+						}
+					}
+				});
+
+				uploader.init();
 
 				smiley360.failedShares = [];
 				photoAdded = false;
