@@ -173,8 +173,10 @@ alert("session: " + JSON.stringify(FB.getSession()));
     }
 
     function login() {
+        alert(FB);
         FB.login(
-                 function (response) {
+        function (response) {
+            alert('login' + response);
                      if (response.session) {
                          alert('logged in');
                      } else {
