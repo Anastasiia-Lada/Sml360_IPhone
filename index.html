@@ -93,6 +93,21 @@
     if (typeof CDV == 'undefined') alert('CDV variable does not exist. Check that you have included cdv-plugin-fb-connect.js correctly');
     if (typeof FB == 'undefined') alert('FB variable does not exist. Check that you have included the Facebook JS SDK file.');
 
+    //window.FBConfig = {};
+    //window.FBConfig.rootDomain = "http://uat.smiley360.com/ws/includes/";
+    //window.FBConfig.domain = window.FBConfig.rootDomain + "oauth/";
+    window.FBConfig.appId = '104171846376854';
+    //var channelUrl = '//' + window.FBConfig.domain + 'channel.php';
+
+    FB.init({
+        appId: window.FBConfig.appId,           // App ID from the app dashboard
+        //channelUrl: channelUrl, // Channel file for x-domain comms
+        status: true,           // Check Facebook Login status
+        cookie: true,           // enable cookies to allow the server to access the session
+        oauth: true,            // enable OAuth 2.0
+        xfbml: false,           // Look for social plugins on the page
+    });
+
     FB.Event.subscribe('auth.login', function (response) {
         alert('auth.login event');
     });
