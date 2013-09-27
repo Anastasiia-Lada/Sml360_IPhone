@@ -70,7 +70,7 @@
 <body style="background-color: #1f88c0">
     	<button onclick="login()">Login</button>
 <button onclick="me()">Me</button>
-<!--<button onclick="getSession()">Get session</button>-->
+<button onclick="getSession()">Get session</button>
 <button onclick="getLoginStatus()">Get login</button>
 <button onclick="logout()">Logout</button>
 <button onclick="facebookWallPost()">facebookWallPost</button>
@@ -96,11 +96,11 @@
     //window.FBConfig = {};
     //window.FBConfig.rootDomain = "http://uat.smiley360.com/ws/includes/";
     //window.FBConfig.domain = window.FBConfig.rootDomain + "oauth/";
-    window.FBConfig.appId = '104171846376854';
+    //window.FBConfig.appId = '104171846376854';
     //var channelUrl = '//' + window.FBConfig.domain + 'channel.php';
 
     FB.init({
-        appId: window.FBConfig.appId,           // App ID from the app dashboard
+        appId: '104171846376854',           // App ID from the app dashboard
         //channelUrl: channelUrl, // Channel file for x-domain comms
         status: true,           // Check Facebook Login status
         cookie: true,           // enable cookies to allow the server to access the session
@@ -124,10 +124,10 @@
         alert('auth.statusChange event');
     });
 
-    /*function getSession() {
-alert("session: " + JSON.stringify(FB.getSession()));
-}
-*/
+    function getSession() {
+    alert("session: " + JSON.stringify(FB.getSession()));
+    }
+
     function getLoginStatus() {
         FB.getLoginStatus(function (response) {
             if (response.status == 'connected') {
