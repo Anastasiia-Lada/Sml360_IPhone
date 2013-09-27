@@ -113,6 +113,7 @@
       <SubType>Designer</SubType>
     </Content>
     <Content Include="index.html" />
+    <Content Include="plupload.full.min.js" />
     <Content Include="resources\css\app.css" />
     <Content Include="resources\css\level.css" />
     <Content Include="resources\css\rating.css" />
@@ -195,6 +196,8 @@
     <Content Include="resources\images\hobbies_c.png" />
     <Content Include="resources\images\home smiley.png" />
     <Content Include="resources\images\home_c.png" />
+    <Content Include="resources\images\iphone4LoadingImage.PNG" />
+    <Content Include="resources\images\iPhone5LoadingImage.PNG" />
     <Content Include="resources\images\joanna_photo.png" />
     <Content Include="resources\images\lays.png" />
     <Content Include="resources\images\left-btn.png" />
@@ -1348,9 +1351,11 @@
     <Content Include="touch\resources\themes\vendor\compass-recipes\tests\recipes\ui\webfont-icons\s.scss" />
     <Content Include="touch\resources\themes\vendor\compass-recipes\tests\_tests.scss" />
     <Content Include="touch\resources\themes\vendor\compass-recipes\VERSION" />
+    <Content Include="dump.php" />
     <None Include="Properties\PublishProfiles\Viktor.pubxml" />
     <None Include="Properties\PublishProfiles\Nastya.pubxml" />
     <Content Include="resources\css\fileup.css" />
+    <Content Include="upload.php" />
     <None Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>
     </None>
