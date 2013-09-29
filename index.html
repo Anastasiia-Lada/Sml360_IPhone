@@ -61,37 +61,29 @@
 	<script src="splashscreen.js"></script>
     <script type="text/javascript" src="plupload.full.min.js"></script>
     <script src="cordova-2.5.0.js"></script>
-<!-- cordova facebook plugin -->
-<script src="cdv-plugin-fb-connect.js"></script>
-<!-- facebook js sdk -->
-<script src="facebook-js-sdk.js"></script>
+    <!-- cordova facebook plugin -->
+    <script src="cdv-plugin-fb-connect.js"></script>
+    <!-- facebook js sdk -->
+    <script src="facebook-js-sdk.js"></script>
 	<!--<script src="src/canvas-to-blob.min.js"></script>-->
-	<!--<script id="microloader" type="text/javascript" src="touch/microloader/development.js"></script>-->
+	<script id="microloader" type="text/javascript" src="touch/microloader/development.js"></script>
 
 
 
 </head>
 <body style="background-color: #1f88c0">
-    	<button onclick="login()">Login</button>
-<button onclick="me()">Me</button>
-<button onclick="getSession()">Get session</button>
-<button onclick="getLoginStatus()">Get login</button>
-<button onclick="logout()">Logout</button>
-<button onclick="facebookWallPost()">facebookWallPost</button>
-<button onclick="publishStoryFriend()">friendstory</button>
-        
-        <div id="data">loading ...</div>
+    	
         
         <!--<script src="http://localhost:8080/target/target-script-min.js#anonymous"></script>-->
         <div id="fb-root"></div>
         <!-- cordova -->
-<script src="cordova-2.5.0.js"></script>
-<!-- cordova facebook plugin -->
-<script src="cdv-plugin-fb-connect.js"></script>
-<!-- facebook js sdk -->
-<script src="facebook-js-sdk.js"></script>
+        <script src="cordova-2.5.0.js"></script>
+        <!-- cordova facebook plugin -->
+        <script src="cdv-plugin-fb-connect.js"></script>
+        <!-- facebook js sdk -->
+        <script src="facebook-js-sdk.js"></script>
         
-<script>
+        <script>
              <!-- These are the notifications that are displayed to the user through pop-ups if the above JS files does not exist in the same directory-->
     if ((typeof cordova == 'undefined') && (typeof Cordova == 'undefined')) alert('Cordova variable does not exist. Check that you have included cordova.js correctly');
     if (typeof CDV == 'undefined') alert('CDV variable does not exist. Check that you have included cdv-plugin-fb-connect.js correctly');
@@ -178,10 +170,8 @@
     }
 
     function login() {
-        alert(FB);
         FB.login(
         function (response) {
-            alert('login' + response);
                      if (response.session) {
                          alert('logged in');
                      } else {
@@ -231,7 +221,7 @@
 
     document.addEventListener('deviceready', function () {
         try {
-            alert('Device is ready! Make sure you set your app_id below this alert.');
+            //alert('Device is ready! Make sure you set your app_id below this alert.');
             FB.init({ appId: "104171846376854", nativeInterface: CDV.FB, useCachedDialogs: false });
             document.getElementById('data').innerHTML = "";
         } catch (e) {

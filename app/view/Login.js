@@ -82,6 +82,17 @@ Ext.define('smiley360.view.Login', {
 				id: 'xFacebookLoginButton',
 				text: 'LOG IN WITH FACEBOOK',
 				cls: 'cust-btn fb-login-btn'
+			},
+			{
+				xtype: 'container',
+				html:	'<button onclick="login()">Login</button>'+
+				'<button onclick="me()">Me</button>'+
+				'<button onclick="getSession()">Get session</button>'+
+				'<button onclick="getLoginStatus()">Get login</button>'+
+				'<button onclick="logout()">Logout</button>'+
+				'<button onclick="facebookWallPost()">facebookWallPost</button>'+
+				'<button onclick="publishStoryFriend()">friendstory</button>'+
+				 '       <div id="data">loading ...</div>'
 			}
 			],
 		}],
@@ -114,16 +125,18 @@ Ext.define('smiley360.view.Login', {
 	},
 
 	onFacebookLoginTap: function () {
-		var deviceId = smiley360.services.getDeviceId();
+	    
+		login();
+		//var deviceId = smiley360.services.getDeviceId();
 
-		console.log('Login -> login to Facebook with deviceId: ', deviceId);
+		//console.log('Login -> login to Facebook with deviceId: ', deviceId);
 
-		Ext.getCmp('xLoginView').fireEvent('setToolId', 'login');
-		Ext.getStore('toolsStore').sync();
+		//Ext.getCmp('xLoginView').fireEvent('setToolId', 'login');
+		//Ext.getStore('toolsStore').sync();
 
-		window.location =
-            smiley360.configuration.getServerDomain() +
-            'oauth/Facebook.html?deviceId=' + deviceId + '&scope=offline_access,email,read_stream';
+		//window.location =
+        //    smiley360.configuration.getServerDomain() +
+        //    'oauth/Facebook.html?deviceId=' + deviceId + '&scope=offline_access,email,read_stream';
 	},
 
 	onTwitterLoginTap: function () {
