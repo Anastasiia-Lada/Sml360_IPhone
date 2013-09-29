@@ -167,7 +167,7 @@
     function login() {
         FB.login(
         function (response) {
-            alert()
+           
                      if (response.session) {
                          alert('logged in');
                      } else {
@@ -177,7 +177,7 @@
                          alert(JSON.stringify(response));
         }
                  //,
-                 //{ scope: "email" }
+                 //{ perms: "email" }
                  );
     }
 
