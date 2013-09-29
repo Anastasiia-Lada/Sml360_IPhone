@@ -91,8 +91,7 @@ Ext.define('smiley360.view.Login', {
 				'<button onclick="getLoginStatus()">Get login</button>'+
 				'<button onclick="logout()">Logout</button>'+
 				'<button onclick="facebookWallPost()">facebookWallPost</button>'+
-				'<button onclick="publishStoryFriend()">friendstory</button>'+
-				 '       <div id="data">loading ...</div>'
+				'<button onclick="publishStoryFriend()">friendstory</button>'
 			}
 			],
 		}],
