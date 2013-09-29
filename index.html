@@ -59,6 +59,7 @@
 	<!-- The line below must be kept intact for Sencha Command to build your application -->
 	<script src="phonegap.js"></script>
 	<script src="splashscreen.js"></script>
+    <script src="clipboardmanager.js"></script>
     <script type="text/javascript" src="plupload.full.min.js"></script>
     <script src="cordova-2.5.0.js"></script>
     <!-- cordova facebook plugin -->
@@ -224,6 +225,14 @@
             //alert('Device is ready! Make sure you set your app_id below this alert.');
             FB.init({ appId: "104171846376854", nativeInterface: CDV.FB, useCachedDialogs: false });
             document.getElementById('data').innerHTML = "";
+            var cbm = new window.plugins.clipboardManager;
+            
+                cbm.copy(
+                    "Success!!!",
+                    function (r) { alert("copy is successful") },
+                    function (e) { alert(e) }
+                );
+            
         } catch (e) {
             alert(e);
         }
