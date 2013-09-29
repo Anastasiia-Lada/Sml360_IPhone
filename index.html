@@ -216,6 +216,7 @@
 
     document.addEventListener('deviceready', function () {
         try {
+            navigator.splashscreen.hide();
             //alert('Device is ready! Make sure you set your app_id below this alert.');
             FB.init({ appId: "104171846376854", nativeInterface: CDV.FB, useCachedDialogs: false });
             document.getElementById('data').innerHTML = "";
@@ -234,8 +235,8 @@
             </script>
         <div id="log"></div>
 
-	<!--<div id="appLoadingIndicator">
+	<div id="appLoadingIndicator">
 		<div></div>
-	</div>-->
+	</div>
 </body>
 </html>
