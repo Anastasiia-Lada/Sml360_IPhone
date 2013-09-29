@@ -28,7 +28,6 @@
         <gap:plugin name="Example" />
         A list of available plugins are available at https://build.phonegap.com/docs/plugins
     -->
-	<gap:plugin name="clipboardmanager" value="com.saatcioglu.phonegap.clipboardmanager.ClipboardManagerPlugin.ClipboardManagerPlugin" />
 	
 	<gap:splash src="resources/images/loadingimage_x1_iphone.png" gap:platform="ios" width="320" height="480" />
 	<gap:splash src="resources/images/loadingimage_1_landscape.png" gap:platform="ios" width="500" height="300" />
