@@ -167,13 +167,17 @@
     function login() {
         FB.login(
         function (response) {
+            alert()
                      if (response.session) {
                          alert('logged in');
                      } else {
                          alert('not logged in');
                      }
-                 },
-                 { scope: "email" }
+                     if (response)
+                         alert(JSON.stringify(response));
+        }
+                 //,
+                 //{ scope: "email" }
                  );
     }
 
@@ -216,9 +220,16 @@
 
     document.addEventListener('deviceready', function () {
         try {
-            navigator.splashscreen.hide();
             //alert('Device is ready! Make sure you set your app_id below this alert.');
-            FB.init({ appId: "104171846376854", nativeInterface: CDV.FB, useCachedDialogs: false });
+            FB.init({
+                appId: "104171846376854",
+                nativeInterface: CDV.FB,
+                useCachedDialogs: false,
+                status: true,           // Check Facebook Login status
+                cookie: true,           // enable cookies to allow the server to access the session
+                oauth: true,            // enable OAuth 2.0
+                xfbml: false,  
+            });
             document.getElementById('data').innerHTML = "";
             //var cbm = new window.plugins.clipboardManager;
             
