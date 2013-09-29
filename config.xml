@@ -7,6 +7,7 @@
 	<name>Smiley360</name>
 	
 	<!-- Customize your app and platform with the preference element. -->
+	<preference name="phonegap-version" value="2.5.0" />
 	<preference name="orientation"                value="default" />
 	<!-- all: default means both landscape and portrait are enabled -->
 	<preference name="target-device"              value="universal" />
@@ -28,13 +29,11 @@
         <gap:plugin name="Example" />
         A list of available plugins are available at https://build.phonegap.com/docs/plugins
     -->
+	<!--<gap:plugin name="clipboardmanager" value="com.saatcioglu.phonegap.clipboardmanager.ClipboardManagerPlugin.ClipboardManagerPlugin" />-->
 	
 	<gap:splash src="resources/images/loadingimage_x1_iphone.png" gap:platform="ios" width="320" height="480" />
-	<gap:splash src="resources/images/loadingimage_1_landscape.png" gap:platform="ios" width="500" height="300" />
 	<gap:splash src="resources/images/iphone4LoadingImage.png" gap:platform="ios" width="640" height="960" />
-	<gap:splash src="resources/images/4iphone_landscape_.png" gap:platform="ios" width="980" height="620" />
 	<gap:splash src="resources/images/iPhone5LoadingImage.png" gap:platform="ios" width="640" height="1136" />
-	<gap:splash src="resources/images/5iphone_landscape.png" gap:platform="ios" width="1156" height="620" />
 	<gap:splash src="resources/images/loadingimage-r2.png" gap:platform="ios" width="1024" height="748" />
 	<gap:splash src="resources/images/loadingimage-r2.png" gap:platform="ios" width="768" height="1004" />
 
