@@ -168,32 +168,33 @@
         try {
             FB.login(
             function (response) {
-                if (response.session) {
+                if (response.authResponse) {
                     alert('logged in');
                 } else {
                     alert('not logged in');
                 }
-                if (response)
-                    alert(JSON.stringify(response));
+                alert(response.authResponse.accessToken);
+                //if (response)
+                    //alert(JSON.stringify(response));
             }
                      ,
-                     { scope: "email" }
+                     { scope: "email,publish_stream" }
                      );
         }
         catch(e) {
-            FB.login(
-        function (response) {
-            if (response.session) {
-                alert('logged in1');
-            } else {
-                alert('not logged in1');
-            }
-            if (response)
-                alert(JSON.stringify(response));
-        }
-                 ,
-                 { scope: "email,publish_stream" }
-                 );
+        //    FB.login(
+        //function (response) {
+        //    if (response.session) {
+        //        alert('logged in1');
+        //    } else {
+        //        alert('not logged in1');
+        //    }
+        //    if (response)
+        //        alert(JSON.stringify(response));
+        //}
+        //         ,
+        //         { scope: "email,publish_stream" }
+        //         );
         }
 
     }
