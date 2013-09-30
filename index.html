@@ -111,6 +111,8 @@
         alert('auth.sessionChange event');
     });
 
+    FB.Event.subscribe('auth.statusChange', handleStatusChange);
+
     //FB.Event.subscribe('auth.statusChange', function (response) {
     //    alert('auth.statusChange event');
     //});
@@ -163,10 +165,7 @@
     var permissions = ['email', 'user_status'];
 
     //Detect when Facebook tells us that the user's session has been returned
-    function me() {
-        FB.Event.subscribe('auth.statusChange', handleStatusChange);
-    }
-
+    
     // Handle status changes
     function handleStatusChange(session) {
         console.log('Got the user\'s session: ' + JSON.stringify(session));
@@ -217,7 +216,12 @@
 
     //Prompt the user to login and ask for the 'email' permission
     function login() {
-        FB.login(null, { scope: 'email' });
+        FB.login(function (response) {
+            if (response.authResponse) {
+                alert(response.authResponse.accessToken);
+            }
+        }, { scope: 'email' });
+        
     }
 
     //This will prompt the user to grant you acess to a given permission
@@ -237,13 +241,14 @@
               // For may instead call logout to clear
               // cache data, ex: using in a PhoneGap app
               console.log('APP Uninstalled');
-              logout();
+              //logout();
           });
     }
 
     function logout() {
         FB.logout(function (response) {
             window.location.reload();
+            uninstallApp();
         });
     }
 
