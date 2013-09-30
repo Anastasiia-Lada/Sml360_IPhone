@@ -117,6 +117,14 @@
     //    alert('auth.statusChange event');
     //});
 
+    FB.Event.subscribe('auth.authResponseChange',
+        function (response) {
+            alert('auth.ResponseChange');
+            alert(response.status);
+            alert(response.authResponse.accessToken + '<br>' + response.authResponse.expiresIn + '<br>' + response.authResponse.userID);
+
+        });
+
     function getSession() {
     alert("session: " + JSON.stringify(FB.getSession()));
     }
@@ -162,12 +170,13 @@
     
     var user = [];
 
-    var permissions = ['email', 'user_status'];
+    var permissions = ['email', 'offline_access', 'read_stream'];
 
     //Detect when Facebook tells us that the user's session has been returned
     
     // Handle status changes
     function handleStatusChange(session) {
+        alert('auth.statusChange event');
         console.log('Got the user\'s session: ' + JSON.stringify(session));
 
         if (session.authResponse) {
@@ -234,21 +243,20 @@
     }
 
 
-    function uninstallApp() {
+    function logout() {
         FB.api('/me/permissions', 'DELETE',
           function (response) {
-              window.location.reload();
+              //window.location.reload();
               // For may instead call logout to clear
               // cache data, ex: using in a PhoneGap app
               alert('APP Uninstalled');
-              //logout();
+              logout();
           });
     }
 
-    function logout() {
+    function logout_() {
         FB.logout(function (response) {
-            //window.location.reload();
-            uninstallApp();
+            window.location.reload();
         });
     }
 
