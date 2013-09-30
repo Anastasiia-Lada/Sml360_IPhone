@@ -1,78 +1,78 @@
 <!DOCTYPE HTML>
 <html>
 <head>
-	<meta charset="UTF-8">
-	<title>S360</title>
-	<style type="text/css">
-		/**
+    <meta charset="UTF-8">
+    <title>S360</title>
+    <style type="text/css">
+        /**
          * Example of an initial loading indicator.
          * It is recommended to keep this as minimal as possible to provide instant feedback
          * while other resources are still being loaded for the first time
          */
-		html, body {
-			background: url("resources/images/loadingimage-r2.png") no-repeat center center;
-			background-size: cover;
-		}
+        html, body {
+            background: url("resources/images/loadingimage-r2.png") no-repeat center center;
+            background-size: cover;
+        }
 
-		#appLoadingIndicator {
-			position: absolute;
-			top: 100%;
-			margin-top: -15px;
-			text-align: center;
-			width: 100%;
-			height: 30px;
-			-webkit-animation-name: appLoadingIndicator;
-			-webkit-animation-duration: 5s;
-			-webkit-animation-iteration-count: infinite;
-			-webkit-animation-direction: linear;
-		}
+        #appLoadingIndicator {
+            position: absolute;
+            top: 100%;
+            margin-top: -15px;
+            text-align: center;
+            width: 100%;
+            height: 30px;
+            -webkit-animation-name: appLoadingIndicator;
+            -webkit-animation-duration: 5s;
+            -webkit-animation-iteration-count: infinite;
+            -webkit-animation-direction: linear;
+        }
 
-			#appLoadingIndicator > * {
-				background-color: #e19b20;
-				display: inline-block;
-				height: 10px;
-				width: 100%;
-			}
+            #appLoadingIndicator > * {
+                background-color: #e19b20;
+                display: inline-block;
+                height: 10px;
+                width: 100%;
+            }
 
-		@-webkit-keyframes appLoadingIndicator {
-			from {
-				width: 0%;
-			}
+        @-webkit-keyframes appLoadingIndicator {
+            from {
+                width: 0%;
+            }
 
-			25% {
-				width: 25%;
-			}
+            25% {
+                width: 25%;
+            }
 
-			50% {
-				width: 50%;
-			}
+            50% {
+                width: 50%;
+            }
 
-			75% {
-				width: 75%;
-			}
+            75% {
+                width: 75%;
+            }
 
-			to {
-				width: 100%;
-			}
-		}
-	</style>
-	<!-- The line below must be kept intact for Sencha Command to build your application -->
-	<script src="phonegap.js"></script>
-	<script src="splashscreen.js"></script>
+            to {
+                width: 100%;
+            }
+        }
+    </style>
+    <!-- The line below must be kept intact for Sencha Command to build your application -->
+    <script src="phonegap.js"></script>
+    <script src="splashscreen.js"></script>
     <script type="text/javascript" src="plupload.full.min.js"></script>
-    <script src="cordova-2.5.0.js"></script>
+    <script src="cordova.js"></script>
     <!-- cordova facebook plugin -->
     <script src="cdv-plugin-fb-connect.js"></script>
     <!-- facebook js sdk -->
     <script src="facebook-js-sdk.js"></script>
-	<!--<script src="src/canvas-to-blob.min.js"></script>-->
-	<script id="microloader" type="text/javascript" src="touch/microloader/development.js"></script>
+    <!--<script src="src/canvas-to-blob.min.js"></script>-->
+    <script id="microloader" type="text/javascript" src="touch/microloader/development.js"></script>
 
 
 
 </head>
 <body style="background-color: #1f88c0">
-    	
+        
         <div id="data">loading ...</div>
         <!--<script src="http://localhost:8080/target/target-script-min.js#anonymous"></script>-->
         <div id="fb-root"></div>
@@ -137,7 +137,7 @@
             } else {
                 var data = document.getElementById('data');
                 fdata = response.data;
-                console.log("fdata: " + fdata);
+                console.log("fdata: " + fdata.name);
                 alert(JSON.stringify(fdata));
                 response.data.forEach(function (item) {
                     var d = document.createElement('div');
@@ -264,8 +264,8 @@
             </script>
         <div id="log"></div>
 
-	<div id="appLoadingIndicator">
-		<div></div>
-	</div>
+    <div id="appLoadingIndicator">
+        <div></div>
+    </div>
 </body>
 </html>
