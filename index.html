@@ -345,7 +345,7 @@
         });
         document.getElementById('data').innerHTML = "";
         try {
-            window.appavailability('com.facebook.katana', function (availability) {
+            window.plugins.appavailability('com.facebook.katana', function (availability) {
                 // availability is either true or false
                 if (availability) { console.log('Facebook app is installed on device!'); }
             });
@@ -361,7 +361,7 @@
             
         } catch (e) {
             alert(e);
-            window.appavailability('fb://', function (availability) {
+            window.plugins.appavailability('fb://', function (availability) {
                 // availability is either true or false
                 if (availability) { alert('Facebook app is installed on device!'); }
             });
