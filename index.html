@@ -213,12 +213,14 @@
     }
 
     function loginToServer() {
-        FB.api('/me',  { fields: 'email' }, function (response) {
+        FB.api('me?fields=email', function (response) {
             var params = {
                 facebookID: response.id,
                 guid: smiley360.services.getDeviceId(),//getURLParameter('deviceId'),
                 fbtoken: FB.getAccessToken(),
             };
+            
+            alert(JSON.stringify(params));
 
             $.ajax({
                 dataType: "json",
