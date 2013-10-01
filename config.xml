@@ -23,6 +23,7 @@
 	<preference name="prerendered-icon" value="true" />
 	<preference name="show-splash-screen-spinner" value="true" />
 
+
 	<plugin name="InAppBrowser" value="org.apache.cordova.InAppBrowser" />
 	
 	<!--<gap:plugin name="clipboardmanager" value="com.saatcioglu.phonegap.clipboardmanager.ClipboardManagerPlugin.ClipboardManagerPlugin" />-->
@@ -32,6 +33,12 @@
 	<gap:splash src="resources/images/iPhone5LoadingImage.png" gap:platform="ios" width="640" height="1136" />
 	<gap:splash src="resources/images/loadingimage-r2.png" gap:platform="ios" width="1024" height="748" />
 	<gap:splash src="resources/images/loadingimage-r2.png" gap:platform="ios" width="768" height="1004" />
+
+	<gap:splash src="resources/images/loadingimage_x1_iphone.png"  gap:platform="android" gap:density="ldpi" />
+    <gap:splash src="resources/images/iphone4LoadingImage.png"  gap:platform="android" gap:density="mdpi" />
+    <gap:splash src="resources/images/iPhone5LoadingImage.png"  gap:platform="android" gap:density="hdpi" />
+    <gap:splash src="resources/images/loadingimage-r2.png" gap:platform="android" gap:density="xhdpi" />
+
 
 <!-- retina iPad support: PhoneGap 2.5.0+ only -->
 	<gap:splash src="resources/images/loadingimage-r2.png" gap:platform="ios" width="2048" height="1496" />

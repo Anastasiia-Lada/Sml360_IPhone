@@ -201,19 +201,19 @@ Ext.define('smiley360.view.UploadPhoto', {
 					id: 'xSeedPhrase',
 					html: 'Try Campbell\'s Slow Kettle Style Soups and be sure to use this $1.00 off coupon! http://bit.ly/YxVW1D',
 				},
-				{
-					xtype: 'container',
-					html: //'<form id="submit-form" method="post" action="dump.php">' +
+				//{
+				//	xtype: 'container',
+				//	html: //'<form id="submit-form" method="post" action="dump.php">' +
 					
 					
-					'<div id="filelist">Your browser doesn\'t have Flash, Silverlight or HTML5 support.</div>'+
-					'<br />'+
-					'<div id="container">'+
-					'<a id="pickfiles" href="javascript:;">Select and Resize</a>'+ 
-					'<a id="uploadfiles" href="javascript:;">Upload files</a>'+
-					'</div>'+
-					'<br />'+
-					'<pre id="console"></pre>'
+				//	'<div id="filelist">Your browser doesn\'t have Flash, Silverlight or HTML5 support.</div>'+
+				//	'<br />'+
+				//	'<div id="container">'+
+				//	'<a id="pickfiles" href="javascript:;">Select and Resize</a>'+ 
+				//	'<a id="uploadfiles" href="javascript:;">Upload files</a>'+
+				//	'</div>'+
+				//	'<br />'+
+				//	'<pre id="console"></pre>'
 
 //					'<h1>Custom example</h1>' +
 //					'<p>Shows you how to use the core plupload API.</p>' +
@@ -225,7 +225,8 @@ Ext.define('smiley360.view.UploadPhoto', {
 //					'</div>' +
 					//'<input type="submit" />' +
 					//'</form>'
-				}],
+				//}
+				],
 			}, {
 				xtype: 'panel',
 				cls: 'popup-button-panel',

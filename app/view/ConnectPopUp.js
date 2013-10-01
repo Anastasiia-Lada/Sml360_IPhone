@@ -185,13 +185,21 @@ Ext.define('smiley360.view.ConnectPopUp', {
 		local_name = name;
 	},
 	onFacebookLoginTap: function () {
-		var deviceId = smiley360.services.getDeviceId();
 
-		console.log('Login -> login to Facebook with deviceId: ', deviceId);
+		FB.login(function (response) {
+			if (response.authResponse) {
+				//alert(response.authResponse.accessToken);
+				//alert('server login');
+				//loginToServer();
+			}
+		}, { scope: 'email, read_stream, publish_stream' });
+		//var deviceId = smiley360.services.getDeviceId();
 
-		window.location =
-            smiley360.configuration.getServerDomain() +
-            'oauth/Facebook.html?deviceId=' + deviceId + '&scope=offline_access,email,read_stream,publish_stream';
+		//console.log('Login -> login to Facebook with deviceId: ', deviceId);
+
+		//window.location =
+        //    smiley360.configuration.getServerDomain() +
+        //   'oauth/Facebook.html?deviceId=' + deviceId + '&scope=offline_access,email,read_stream,publish_stream';
 	},
 
 	onTwitterLoginTap: function () {
