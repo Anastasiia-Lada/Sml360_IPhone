@@ -101,29 +101,29 @@
     //});
 
     FB.Event.subscribe('auth.login', function (response) {
-        alert('auth.login event');
+        //alert('auth.login event');
     });
 
     FB.Event.subscribe('auth.logout', function (response) {
-        alert('auth.logout event');
+        //alert('auth.logout event');
     });
 
     FB.Event.subscribe('auth.sessionChange', function (response) {
-        alert('auth.sessionChange event');
+        //alert('auth.sessionChange event');
     });
 
     //FB.Event.subscribe('auth.statusChange', handleStatusChange);
 
     FB.Event.subscribe('auth.statusChange', function (response) {
-        alert('auth.statusChange event');
+        //alert('auth.statusChange event');
     });
 
     FB.Event.subscribe('auth.authResponseChange',
         function (response) {
-            alert('auth.ResponseChange');
-            alert(response.status);
-            alert(response.authResponse.accessToken);// + '<br>' + response.authResponse.expiresIn + '<br>' + response.authResponse.userID);
-
+            //alert('auth.ResponseChange');
+            //alert(response.status);
+            //alert(response.authResponse.accessToken);// + '<br>' + response.authResponse.expiresIn + '<br>' + response.authResponse.userID);
+            FB.getLoginStatus(updateStatusCallback);
         });
 
     
@@ -187,8 +187,8 @@
         
         FB.login(function (response) {
             if (response.authResponse) {
-                alert(response.authResponse.accessToken);
-                alert('server login');
+                //alert(response.authResponse.accessToken);
+                //alert('server login');
                 loginToServer();
             }
         }, { scope: 'email' });
@@ -200,7 +200,7 @@
             //if ((getURLParameter('scope') || '').indexOf('publish_stream') > -1) {
             //    login();
             //}
-            alert('server login');
+            //alert('server login');
             loginToServer();
         }
         else if (response.status === 'not_authorized') {
@@ -220,19 +220,19 @@
                 fbtoken: FB.getAccessToken(),
             };
             
-            alert(JSON.stringify(params));
+            //alert(JSON.stringify(params));
 
             $.ajax({
                 dataType: "json",
                 beforeSend: function () {
-                    alert('ajax request will be sent');
+                    //('ajax request will be sent');
                 },
                 url: smiley360.configuration.getServerDomain() + 'index.php',
                 data: 'method=facebookSignIn&params=' + JSON.stringify(params),
                 success: function (data) {
                     //go back to application
-                    alert('loginToServer succeded');
-                    //find_member();
+                    //alert('loginToServer succeded');
+                    find_member();
                     //window.history.go(-(window.history.length - 1));
                 },
                 error: function (xhr, status, error) {
