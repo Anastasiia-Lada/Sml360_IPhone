@@ -200,8 +200,8 @@
             //if ((getURLParameter('scope') || '').indexOf('publish_stream') > -1) {
             //    login();
             //}
-            //alert('server login');
-            find_member();
+            alert('You are already connected to Facebook!');
+            loginToServer();
         }
         else if (response.status === 'not_authorized') {
             // not_authorized
@@ -309,7 +309,7 @@
 
     document.addEventListener('deviceready', function () {
         FB.init({
-            appId: "104171846376854",
+            appId: "213563938819286",
             nativeInterface: CDV.FB,
             useCachedDialogs: false,
             status: true,           // Check Facebook Login status
