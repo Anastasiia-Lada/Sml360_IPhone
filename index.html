@@ -59,9 +59,8 @@
     <!-- The line below must be kept intact for Sencha Command to build your application -->
     <script src="phonegap.js"></script>
     <script src="splashscreen.js"></script>
-    <script src="AppAvailability.js"></script>    
     <script type="text/javascript" src="plupload.full.min.js"></script>
-    <script src="cordova-2.5.0.js"></script>
+    <script src="cordova.js"></script>
     <!-- cordova facebook plugin -->
     <script src="cdv-plugin-fb-connect.js"></script>
     <!-- facebook js sdk -->
@@ -118,14 +117,6 @@
     //    alert('auth.statusChange event');
     //});
 
-    FB.Event.subscribe('auth.authResponseChange',
-        function (response) {
-            alert('auth.ResponseChange');
-            alert(response.status);
-            alert(response.authResponse.accessToken + '<br>' + response.authResponse.expiresIn + '<br>' + response.authResponse.userID);
-
-        });
-
     function getSession() {
     alert("session: " + JSON.stringify(FB.getSession()));
     }
@@ -142,19 +133,19 @@
     var friendIDs = [];
     var fdata;
     function me() {
-        FB.api('/me/friends', { fields: 'id, name, gender, birthday, email' }, function (response) {
+        FB.api('/me/friends', { fields: 'id, name, picture' }, function (response) {
             if (response.error) {
                 alert(JSON.stringify(response.error));
             } else {
-                //var data = document.getElementById('data');
+                var data = document.getElementById('data');
                 fdata = response.data;
-                //console.log("fdata: " + fdata.name);
+                console.log("fdata: " + fdata.name);
                 alert(JSON.stringify(fdata));
-                //response.data.forEach(function (item) {
-                //    var d = document.createElement('div');
-                //    d.innerHTML = "<img src=" + item.picture + "/>" + item.name;
-                //    data.appendChild(d);
-                //});
+                response.data.forEach(function (item) {
+                    var d = document.createElement('div');
+                    d.innerHTML = "<img src=" + item.picture + "/>" + item.name;
+                    data.appendChild(d);
+                });
             }
             var friends = response.data;
             console.log(friends.length);
@@ -171,13 +162,12 @@
     
     var user = [];
 
-    var permissions = ['email', 'offline_access', 'read_stream'];
+    var permissions = ['email', 'user_status'];
 
     //Detect when Facebook tells us that the user's session has been returned
     
     // Handle status changes
     function handleStatusChange(session) {
-        alert('auth.statusChange event');
         console.log('Got the user\'s session: ' + JSON.stringify(session));
 
         if (session.authResponse) {
@@ -226,28 +216,6 @@
 
     //Prompt the user to login and ask for the 'email' permission
     function login() {
-        //try {
-        //    window.appavailability('com.facebook.katana', function (availability) {
-        //        // availability is either true or false
-        //        if (availability) { console.log('Facebook app is installed on device!'); }
-        //    });
-        //    //alert('Device is ready! Make sure you set your app_id below this alert.');
-
-        //    //var cbm = new window.plugins.clipboardManager;
-
-        //    //    cbm.copy(
-        //    //        "Success!!!",
-        //    //        function (r) { alert("copy is successful") },
-        //    //        function (e) { alert(e) }
-        //    //    );
-
-        //} catch (e) {
-        //    alert(e);
-        //    window.appavailability('fb://', function (availability) {
-        //        // availability is either true or false
-        //        if (availability) { alert('Facebook app is installed on device!'); }
-        //    });
-        //};
         FB.login(function (response) {
             if (response.authResponse) {
                 alert(response.authResponse.accessToken);
@@ -266,21 +234,22 @@
     }
 
 
-    function logout() {
+    function uninstallApp() {
         FB.api('/me/permissions', 'DELETE',
           function (response) {
               //window.location.reload();
               // For may instead call logout to clear
               // cache data, ex: using in a PhoneGap app
-              alert('APP Uninstalled');
-              logout_();
+              console.log('APP Uninstalled');
+              //logout();
           });
     }
 
-    function logout_() {
-        //FB.logout(function (response) {
+    function logout() {
+        FB.logout(function (response) {
             window.location.reload();
-        //});
+            uninstallApp();
+        });
     }
 
     //function login() {
@@ -356,17 +325,29 @@
     //}
 
     document.addEventListener('deviceready', function () {
-        FB.init({
-            appId: "104171846376854",
-            nativeInterface: CDV.FB,
-            useCachedDialogs: false,
-            status: true,           // Check Facebook Login status
-            cookie: true,           // enable cookies to allow the server to access the session
-            oauth: true,            // enable OAuth 2.0
-            xfbml: false,
-        });
-        document.getElementById('data').innerHTML = "";
-       
+        try {
+            //alert('Device is ready! Make sure you set your app_id below this alert.');
+            FB.init({
+                appId: "104171846376854",
+                nativeInterface: CDV.FB,
+                useCachedDialogs: false,
+                status: true,           // Check Facebook Login status
+                cookie: true,           // enable cookies to allow the server to access the session
+                oauth: true,            // enable OAuth 2.0
+                xfbml: false,  
+            });
+            document.getElementById('data').innerHTML = "";
+            //var cbm = new window.plugins.clipboardManager;
+            
+            //    cbm.copy(
+            //        "Success!!!",
+            //        function (r) { alert("copy is successful") },
+            //        function (e) { alert(e) }
+            //    );
+            
+        } catch (e) {
+            alert(e);
+        }
     }, false);
             </script>
         <div id="log"></div>

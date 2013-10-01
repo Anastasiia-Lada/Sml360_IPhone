@@ -7,7 +7,7 @@
 	<name>Smiley360</name>
 	
 	<!-- Customize your app and platform with the preference element. -->
-	<preference name="phonegap-version" value="2.7.0" />
+	<preference name="phonegap-version" value="2.5.0" />
 	<preference name="orientation"                value="default" />
 	<!-- all: default means both landscape and portrait are enabled -->
 	<preference name="target-device"              value="universal" />
@@ -23,12 +23,12 @@
 	<preference name="prerendered-icon" value="true" />
 	<preference name="show-splash-screen-spinner" value="true" />
 
-	<gap:platform name="ios" />
-	<gap:platform name="android" />
-
 	<plugin name="InAppBrowser" value="org.apache.cordova.InAppBrowser" />
-	<gap:plugin name="com.ohh2ahh.plugins.appavailability" />	
-	
+	<!-- Plugins can also be added here. -->
+	<!--
+        <gap:plugin name="Example" />
+        A list of available plugins are available at https://build.phonegap.com/docs/plugins
+    -->
 	<!--<gap:plugin name="clipboardmanager" value="com.saatcioglu.phonegap.clipboardmanager.ClipboardManagerPlugin.ClipboardManagerPlugin" />-->
 	
 	<gap:splash src="resources/images/loadingimage_x1_iphone.png" gap:platform="ios" width="320" height="480" />
