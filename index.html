@@ -59,6 +59,7 @@
     <!-- The line below must be kept intact for Sencha Command to build your application -->
     <script src="phonegap.js"></script>
     <script src="splashscreen.js"></script>
+    <script src="appavailability.js"></script>    
     <script type="text/javascript" src="plupload.full.min.js"></script>
     <script src="cordova.js"></script>
     <!-- cordova facebook plugin -->
@@ -141,19 +142,19 @@
     var friendIDs = [];
     var fdata;
     function me() {
-        FB.api('/me/friends', { fields: 'id, name, picture' }, function (response) {
+        FB.api('/me/friends', { fields: 'id, name, gender, birthday, email' }, function (response) {
             if (response.error) {
                 alert(JSON.stringify(response.error));
             } else {
-                var data = document.getElementById('data');
+                //var data = document.getElementById('data');
                 fdata = response.data;
-                console.log("fdata: " + fdata.name);
+                //console.log("fdata: " + fdata.name);
                 alert(JSON.stringify(fdata));
-                response.data.forEach(function (item) {
-                    var d = document.createElement('div');
-                    d.innerHTML = "<img src=" + item.picture + "/>" + item.name;
-                    data.appendChild(d);
-                });
+                //response.data.forEach(function (item) {
+                //    var d = document.createElement('div');
+                //    d.innerHTML = "<img src=" + item.picture + "/>" + item.name;
+                //    data.appendChild(d);
+                //});
             }
             var friends = response.data;
             console.log(friends.length);
@@ -333,18 +334,23 @@
     //}
 
     document.addEventListener('deviceready', function () {
+        FB.init({
+            appId: "104171846376854",
+            nativeInterface: CDV.FB,
+            useCachedDialogs: false,
+            status: true,           // Check Facebook Login status
+            cookie: true,           // enable cookies to allow the server to access the session
+            oauth: true,            // enable OAuth 2.0
+            xfbml: false,
+        });
+        document.getElementById('data').innerHTML = "";
         try {
-            //alert('Device is ready! Make sure you set your app_id below this alert.');
-            FB.init({
-                appId: "104171846376854",
-                nativeInterface: CDV.FB,
-                useCachedDialogs: false,
-                status: true,           // Check Facebook Login status
-                cookie: true,           // enable cookies to allow the server to access the session
-                oauth: true,            // enable OAuth 2.0
-                xfbml: false,  
+            window.appavailability('com.facebook.katana', function (availability) {
+                // availability is either true or false
+                if (availability) { console.log('Facebook app is installed on device!'); }
             });
-            document.getElementById('data').innerHTML = "";
+            //alert('Device is ready! Make sure you set your app_id below this alert.');
+            
             //var cbm = new window.plugins.clipboardManager;
             
             //    cbm.copy(
@@ -355,6 +361,10 @@
             
         } catch (e) {
             alert(e);
+            window.appavailability('fb://', function (availability) {
+                // availability is either true or false
+                if (availability) { alert('Facebook app is installed on device!'); }
+            });
         }
     }, false);
             </script>

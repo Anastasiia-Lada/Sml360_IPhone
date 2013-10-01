@@ -24,6 +24,7 @@
 	<preference name="show-splash-screen-spinner" value="true" />
 
 	<plugin name="InAppBrowser" value="org.apache.cordova.InAppBrowser" />
+	<gap:plugin name="com.ohh2ahh.plugins.appavailability" />
 	<!-- Plugins can also be added here. -->
 	<!--
         <gap:plugin name="Example" />

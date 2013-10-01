@@ -66,7 +66,7 @@ Ext.define('smiley360.view.UploadPhoto', {
 							id: 'xBrowsePhotoButton',
 							cls: 'popup-photo-button has-shadow',
 							autoUpload: true,
-							loadAsDataUrl: true,
+							loadAsDataUrl: false,
 							style: 'border: 0;',
 							states: {
 								browse: {
