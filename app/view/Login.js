@@ -82,7 +82,7 @@ Ext.define('smiley360.view.Login', {
 				id: 'xFacebookLoginButton',
 				text: 'LOG IN WITH FACEBOOK',
 				cls: 'cust-btn fb-login-btn'
-			}
+			},			
 			],
 		}],
 
@@ -114,8 +114,9 @@ Ext.define('smiley360.view.Login', {
 	},
 
 	onFacebookLoginTap: function () {
-	    
 		fb_login();
+		
+		//login();
 		//var deviceId = smiley360.services.getDeviceId();
 
 		//console.log('Login -> login to Facebook with deviceId: ', deviceId);

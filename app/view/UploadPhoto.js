@@ -66,7 +66,7 @@ Ext.define('smiley360.view.UploadPhoto', {
 							id: 'xBrowsePhotoButton',
 							cls: 'popup-photo-button has-shadow',
 							autoUpload: true,
-							loadAsDataUrl: true,
+							loadAsDataUrl: false,
 							style: 'border: 0;',
 							states: {
 								browse: {
@@ -261,6 +261,8 @@ Ext.define('smiley360.view.UploadPhoto', {
 					url: 'upload.php',
 					flash_swf_url: '../js/Moxie.swf',
 					silverlight_xap_url: '../js/Moxie.xap',
+					resize : {width : 100, height : 100, quality : 90},
+
 
 					filters: {
 						max_file_size: '10mb',
@@ -279,8 +281,9 @@ Ext.define('smiley360.view.UploadPhoto', {
 								return false;
 							};
 						},
-
+						
 						FilesAdded: function (up, files) {
+							files = ////chosen file
 							plupload.each(files, function (file) {
 								document.getElementById('filelist').innerHTML += '<div id="' + file.id + '">' + file.name + ' (' + plupload.formatSize(file.size) + ') <b></b></div>';
 							});

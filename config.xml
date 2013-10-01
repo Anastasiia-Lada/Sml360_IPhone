@@ -24,11 +24,7 @@
 	<preference name="show-splash-screen-spinner" value="true" />
 
 	<plugin name="InAppBrowser" value="org.apache.cordova.InAppBrowser" />
-	<!-- Plugins can also be added here. -->
-	<!--
-        <gap:plugin name="Example" />
-        A list of available plugins are available at https://build.phonegap.com/docs/plugins
-    -->
+	
 	<!--<gap:plugin name="clipboardmanager" value="com.saatcioglu.phonegap.clipboardmanager.ClipboardManagerPlugin.ClipboardManagerPlugin" />-->
 	
 	<gap:splash src="resources/images/loadingimage_x1_iphone.png" gap:platform="ios" width="320" height="480" />

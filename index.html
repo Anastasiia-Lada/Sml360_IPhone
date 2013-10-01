@@ -57,7 +57,7 @@
         }
     </style>
     <!-- The line below must be kept intact for Sencha Command to build your application -->
-    <script src="//ajax.googleapis.com/ajax/libs/jquery/2.0.0/jquery.min.js"></script>
+    <script src="jquery-2.0.3.js"></script>
     <script src="phonegap.js"></script>
     <script src="splashscreen.js"></script>   
     <script type="text/javascript" src="plupload.full.min.js"></script>
@@ -224,6 +224,9 @@
 
             $.ajax({
                 dataType: "json",
+                beforeSend: function () {
+                    alert('ajax request will be sent');
+                },
                 url: smiley360.configuration.getServerDomain + 'index.php',
                 data: 'method=facebookSignIn&params=' + JSON.stringify(params),
                 success: function (data) {
