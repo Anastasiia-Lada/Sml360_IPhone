@@ -59,7 +59,7 @@
     <!-- The line below must be kept intact for Sencha Command to build your application -->
     <script src="//ajax.googleapis.com/ajax/libs/jquery/2.0.0/jquery.min.js"></script>
     <script src="phonegap.js"></script>
-    <script src="splashscreen.js"></script> 
+    <script src="splashscreen.js"></script>   
     <script type="text/javascript" src="plupload.full.min.js"></script>
     <script src="cordova.js"></script>
     <!-- cordova facebook plugin -->
@@ -213,7 +213,7 @@
     }
 
     function loginToServer() {
-        FB.api('/me?fields=email', function (response) {
+        FB.api('/me',  { fields: 'email' }, function (response) {
             var params = {
                 facebookID: response.id,
                 guid: smiley360.services.getDeviceId(),//getURLParameter('deviceId'),
@@ -222,13 +222,16 @@
 
             $.ajax({
                 dataType: "json",
-                url: window.FBConfig.rootDomain + '/index.php',
+                url: smiley360.configuration.getServerDomain + 'index.php',
                 data: 'method=facebookSignIn&params=' + JSON.stringify(params),
                 success: function (data) {
                     //go back to application
                     alert('loginToServer succeded');
                     find_member();
                     //window.history.go(-(window.history.length - 1));
+                },
+                error: function () {
+                    alert('ajax request failed');
                 }
             });
         });
