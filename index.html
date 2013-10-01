@@ -227,7 +227,7 @@
                 beforeSend: function () {
                     alert('ajax request will be sent');
                 },
-                url: smiley360.configuration.getServerDomain + 'index.php',
+                url: smiley360.configuration.getServerDomain() + 'index.php',
                 data: 'method=facebookSignIn&params=' + JSON.stringify(params),
                 success: function (data) {
                     //go back to application
