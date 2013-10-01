@@ -223,6 +223,51 @@
                 success: function (data) {
                     //go back to application
                     alert('loginToServer succeded');
+                    var me = Ext.getCmp('ParentController');
+                    smiley360.services.getMemberIdByDeviceId(deviceId,
+                    function (response) {
+                        if (response.success) {
+                            console.log('Index -> [tryLoginUser] with received memberId:' + response.ID);
+
+                            me.updateMemberId(response.ID);
+                            me.loadMemberData(response.ID, function () {
+                                smiley360.animateViewLeft('mainview');
+                                smiley360.destroySplash();
+                                isLoadedApp = true;
+                                var cmp_tool = me.getToolId();
+                                if (cmp_tool == 'sharetofacebookview') {
+                                    Ext.getCmp('xMainView').showExternalView('detailsview');
+                                    Ext.getCmp('xMainView').down('#xTabpanel').down('#xDetailsView').showSharePanel();
+                                };
+
+                                if (cmp_tool == 'sharetotwitterview') {
+                                    Ext.getCmp('xMainView').showExternalView('detailsview');
+                                    Ext.getCmp('xMainView').down('#xTabpanel').down('#xDetailsView').showSharePanel();
+                                };
+                                if (cmp_tool == 'uploadphotoview') {
+                                    Ext.getCmp('xMainView').showExternalView('detailsview');
+                                    Ext.getCmp('xMainView').down('#xTabpanel').down('#xDetailsView').showSharePanel();
+
+                                };
+                            });
+                        }
+                        else {
+                            console.log('Index -> [tryLoginUser] don\'t received memberId for deviceId:' + deviceId);
+                            var cmp_tool = me.getToolId();
+                            if (response.memberID == 0) {
+                                if (cmp_tool == 'login') {
+                                    Ext.Msg.alert('ERROR', 'Oops something went wrong!' +
+                                        '<br>The email address on your Facebook account may already be in use, or Facebook may be blocking the operation. Please contact us for details!');
+                                    me.updateDeviceId();
+                                }
+                                else
+                                    me.updateDeviceId();
+                            };
+                            smiley360.animateViewLeft('loginview');
+                            smiley360.destroySplash();
+                            isLoadedApp = true;
+                        }
+                    });
                     //window.history.go(-(window.history.length - 1));
                 }
             });
@@ -259,6 +304,7 @@
         });
         document.getElementById('data').innerHTML = "";
         
+       
     }, false);
             </script>
         <div id="log"></div>
