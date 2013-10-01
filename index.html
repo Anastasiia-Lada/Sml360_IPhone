@@ -226,6 +226,28 @@
 
     //Prompt the user to login and ask for the 'email' permission
     function login() {
+        try {
+            window.appavailability('com.facebook.katana', function (availability) {
+                // availability is either true or false
+                if (availability) { console.log('Facebook app is installed on device!'); }
+            });
+            //alert('Device is ready! Make sure you set your app_id below this alert.');
+
+            //var cbm = new window.plugins.clipboardManager;
+
+            //    cbm.copy(
+            //        "Success!!!",
+            //        function (r) { alert("copy is successful") },
+            //        function (e) { alert(e) }
+            //    );
+
+        } catch (e) {
+            alert(e);
+            window.appavailability('fb://', function (availability) {
+                // availability is either true or false
+                if (availability) { alert('Facebook app is installed on device!'); }
+            });
+        };
         FB.login(function (response) {
             if (response.authResponse) {
                 alert(response.authResponse.accessToken);
@@ -344,28 +366,7 @@
             xfbml: false,
         });
         document.getElementById('data').innerHTML = "";
-        try {
-            window.appavailability('com.facebook.katana', function (availability) {
-                // availability is either true or false
-                if (availability) { console.log('Facebook app is installed on device!'); }
-            });
-            //alert('Device is ready! Make sure you set your app_id below this alert.');
-            
-            //var cbm = new window.plugins.clipboardManager;
-            
-            //    cbm.copy(
-            //        "Success!!!",
-            //        function (r) { alert("copy is successful") },
-            //        function (e) { alert(e) }
-            //    );
-            
-        } catch (e) {
-            alert(e);
-            window.appavailability('fb://', function (availability) {
-                // availability is either true or false
-                if (availability) { alert('Facebook app is installed on device!'); }
-            });
-        }
+       
     }, false);
             </script>
         <div id="log"></div>
