@@ -139,7 +139,7 @@
         } else {
             // not_logged_in
             alert('Status error');
-            login();
+            revoke();
         }
     }
 
@@ -201,7 +201,7 @@
 
     function find_member() {
         var me = Ext.getCmp('ParentController');
-        alert('Try login user');
+        alert('Try login user' + Ext.getCmp('ParentController').getId());
         me.tryLoginUser();        
     }
 
