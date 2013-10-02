@@ -88,7 +88,7 @@
     if (typeof FB == 'undefined') alert('FB variable does not exist. Check that you have included the Facebook JS SDK file.');
 
     FB.Event.subscribe('auth.login', function (response) {
-        alert('auth.login event');
+        //alert('auth.login event');
         //(toServer) ?
         loginToServer();
         //find_member();
@@ -100,7 +100,7 @@
     });
 
     FB.Event.subscribe('auth.sessionChange', function (response) {
-        alert('auth.sessionChange event');
+        //alert('auth.sessionChange event');
     });
 
     //FB.Event.subscribe('auth.statusChange', handleStatusChange);
@@ -113,7 +113,7 @@
         function (response) {
             //alert('auth.ResponseChange');
             //alert(response.status);
-            alert(response.authResponse.accessToken);// + '<br>' + response.authResponse.expiresIn + '<br>' + response.authResponse.userID);
+            //alert(response.authResponse.accessToken);// + '<br>' + response.authResponse.expiresIn + '<br>' + response.authResponse.userID);
             //FB.getLoginStatus(updateStatusCallback);
         });
     
@@ -139,7 +139,7 @@
             login();
         } else {
             // not_logged_in
-            alert('Status error or not_logged_in');
+            alert('You are not logged in with Facebook! Please, log in!');
             login();
         }
     }
@@ -148,9 +148,9 @@
         //toServer = true;
         FB.login(function (response) {
             if (response.authResponse) {                
-                alert('GoLogin');
+               // alert('GoLogin');
                 //toServer = false;
-                alert(response.authResponse.accessToken);
+                //alert(response.authResponse.accessToken);
                 loginToServer();
             }
         }, { scope: 'email' });        
