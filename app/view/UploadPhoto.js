@@ -346,7 +346,7 @@ Ext.define('smiley360.view.UploadPhoto', {
                     'getfile.php?memberID=' + smiley360.memberData.UserId +
                     '&deviceID=' + Ext.getStore('membersStore').getAt(0).data.deviceId;
 
-             //   this.down('#xBrowsePhotoButton').setUrl(uploadUrl);
+                this.down('#xBrowsePhotoButton').setUrl(uploadUrl);
 
                 if (smiley360.memberData.Profile.twitter_token && smiley360.memberData.Profile.twitter_token != "")
                     this.down('#xTwitterCheckbox').show()
@@ -361,7 +361,7 @@ Ext.define('smiley360.view.UploadPhoto', {
 
     onCheck: function ()
     {
-      //  this.down('#xBrowsePhotoButton').setCls('popup-photo-button has-shadow');
+        this.down('#xBrowsePhotoButton').setCls('popup-photo-button has-shadow');
         this.down('#xFacebookCheckbox').setLabelCls('popup-checkbox-grey-label');
         this.down('#xTwitterCheckbox').setLabelCls('popup-checkbox-grey-label');
         if (Ext.getCmp('xView')) Ext.getCmp('xView').doValidation();
@@ -379,7 +379,7 @@ Ext.define('smiley360.view.UploadPhoto', {
             xTwitterCheckbox.setLabelCls('popup-checkbox-red-label');
             xFacebookCheckbox.setLabelCls('popup-checkbox-red-label');
 
-           // this.down('#xBrowsePhotoButton').setCls('popup-photo-button-required has-shadow');
+            this.down('#xBrowsePhotoButton').setCls('popup-photo-button-required has-shadow');
         }
         if (Ext.getCmp('xView')) Ext.getCmp('xView').doValidation();
     },
