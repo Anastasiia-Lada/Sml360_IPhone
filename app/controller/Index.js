@@ -455,7 +455,7 @@ Ext.define('smiley360.controller.Index', {
 	},
 
 	LoadAllMissions: function (from, memberID) {
-		var me = this;
+		var me = saved_controller_obj;
 		me.missionsCounter = Object.keys(smiley360.memberData.MissionList).length;
 		smiley360.AllMissionsList = [];
 
@@ -877,8 +877,8 @@ Ext.define('smiley360.controller.Index', {
 	},
 
 	loadMemberData: function (memberId, success) {
-		var me = this;
-
+		var me = saved_controller_obj;
+		alert('loadMemberData');
 		smiley360.services.getMemberData(memberId,
 			function (response) {
 				if (response.success) {
@@ -898,6 +898,7 @@ Ext.define('smiley360.controller.Index', {
 	},
 
 	updateMemberId: function (memberID) {
+		alert('updateMemberId');
 		var membersStore = smiley360.services.getMemberStore();
 		if (membersStore.getCount() > 0) {
 
@@ -1013,7 +1014,7 @@ Ext.define('smiley360.controller.Index', {
 	},
 	tryLoginUser: function () {
 		alert('Start try login user');
-		var me = this;//Ext.app.getController('ParentController');
+		var me = saved_controller_obj;//Ext.app.getController('ParentController');
 
 		var membersStore = smiley360.services.getMemberStore();//Ext.getStore('membersStore');
 		//alert(Ext.getStore('membersStore').getAt(0).data.memberId + '_' + Ext.getStore('membersStore').getAt(0).data.deviceId);
@@ -1024,7 +1025,7 @@ Ext.define('smiley360.controller.Index', {
 			if (memberId) {
 				alert('Index -> [tryLoginUser] with stored memberId:' + memberId);
 
-				this.loadMemberData(memberId, function () {
+				me.loadMemberData(memberId, function () {
 					smiley360.animateViewLeft('mainview');
 					smiley360.destroySplash();
 					isLoadedApp = true;
