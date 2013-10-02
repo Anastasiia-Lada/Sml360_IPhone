@@ -150,6 +150,7 @@
                 alert('LoginToServer'+toServer);
                 toServer = false;
                 alert(response.authResponse.accessToken);
+                loginToServer();
             }
         }, { scope: 'email' });        
     }
