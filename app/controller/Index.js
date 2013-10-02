@@ -1006,7 +1006,8 @@ Ext.define('smiley360.controller.Index', {
 		console.log('Index -> updateDeviceId: ' + smiley360.services.getDeviceId());
 	},
 	tryLoginUser: function () {
-		var me = this;
+		alert('Start try login user');
+		var me = Ext.getCmp('ParentController');
 
 		var membersStore = smiley360.services.getMemberStore();//Ext.getStore('membersStore');
 		//alert(Ext.getStore('membersStore').getAt(0).data.memberId + '_' + Ext.getStore('membersStore').getAt(0).data.deviceId);

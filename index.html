@@ -109,13 +109,8 @@
             alert(response.authResponse.accessToken);// + '<br>' + response.authResponse.expiresIn + '<br>' + response.authResponse.userID);
             //FB.getLoginStatus(updateStatusCallback);
         });
-
     
-    var friendIDs = [];
-    var fdata;
     function me() { };
-    
-    var user = [];
 
     var permissions = ['email', 'offline_access', 'read_stream'];
    
@@ -131,13 +126,16 @@
             //    login();
             //}
             alert('You are already connected to Facebook!');
-            loginToServer();
+            revoke();
+            //loginToServer();
         }
         else if (response.status === 'not_authorized') {
+            alert('You are not authorized on Facebook!');
             // not_authorized
             login();
         } else {
             // not_logged_in
+            alert('Status error');
             login();
         }
     }
@@ -145,13 +143,22 @@
     function login() {
         
         FB.login(function (response) {
-            if (response.authResponse) {
-                //alert(response.authResponse.accessToken);
+            if (response.authResponse) {                
                 alert('LoginToServer');
+                alert(response.authResponse.accessToken);
                 loginToServer();
             }
         }, { scope: 'email' });        
-    }    
+    }
+    function revoke() {
+
+        FB.login(function (response) {
+            if (response.authResponse) {                
+                alert('Revoke');
+                alert(response.authResponse.accessToken);
+            }
+        }, { scope: 'email, offline_access, read_stream, publish_stream' });
+    }
 
     function loginToServer() {
         FB.api('me?fields=email', function (response) {
@@ -189,7 +196,7 @@
 
     document.addEventListener('deviceready', function () {
         FB.init({
-            appId: "104171846376854",
+            appId: "213563938819286",
             nativeInterface: CDV.FB,
             useCachedDialogs: false,
             status: true,           // Check Facebook Login status
