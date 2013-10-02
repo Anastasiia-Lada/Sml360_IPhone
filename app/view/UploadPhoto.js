@@ -124,7 +124,7 @@ Ext.define('smiley360.view.UploadPhoto', {
                             },
                             {
                                 xtype: 'label',
-                                html: 'sss'
+                                html: '<canvas/>'
                             }
                         ]
                     }, {
