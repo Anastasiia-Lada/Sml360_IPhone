@@ -79,13 +79,19 @@
         <div id="fb-root"></div>
                
         <script>
+            
              <!-- These are the notifications that are displayed to the user through pop-ups if the above JS files does not exist in the same directory-->
+    var toServer = false;
     if ((typeof cordova == 'undefined') && (typeof Cordova == 'undefined')) alert('Cordova variable does not exist. Check that you have included cordova.js correctly');
     if (typeof CDV == 'undefined') alert('CDV variable does not exist. Check that you have included cdv-plugin-fb-connect.js correctly');
     if (typeof FB == 'undefined') alert('FB variable does not exist. Check that you have included the Facebook JS SDK file.');
 
     FB.Event.subscribe('auth.login', function (response) {
         alert('auth.login event');
+        (toServer) ?
+        loginToServer():
+        find_member();
+
     });
 
     FB.Event.subscribe('auth.logout', function (response) {
@@ -121,10 +127,7 @@
 
     function updateStatusCallback(response) {
         if (response.status === 'connected') {
-            // connected
-            //if ((getURLParameter('scope') || '').indexOf('publish_stream') > -1) {
-            //    login();
-            //}
+            
             alert('You are already connected to Facebook!');
             revoke();
             //loginToServer();
@@ -141,12 +144,12 @@
     }
 
     function login() {
-        
+        toServer = true;
         FB.login(function (response) {
             if (response.authResponse) {                
-                alert('LoginToServer');
+                alert('LoginToServer'+toServer);
+                toServer = false;
                 alert(response.authResponse.accessToken);
-                loginToServer();
             }
         }, { scope: 'email' });        
     }
