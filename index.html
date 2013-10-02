@@ -81,7 +81,8 @@
         <script>
             
              <!-- These are the notifications that are displayed to the user through pop-ups if the above JS files does not exist in the same directory-->
-    var toServer = false;
+            var toServer = false;
+            var saved_controller_obj = {};
     if ((typeof cordova == 'undefined') && (typeof Cordova == 'undefined')) alert('Cordova variable does not exist. Check that you have included cordova.js correctly');
     if (typeof CDV == 'undefined') alert('CDV variable does not exist. Check that you have included cdv-plugin-fb-connect.js correctly');
     if (typeof FB == 'undefined') alert('FB variable does not exist. Check that you have included the Facebook JS SDK file.');
@@ -201,9 +202,8 @@
     }
 
     function find_member() {
-        var me = Ext.getCmp('ParentController');
-        alert('Try login user' + Ext.getCmp('ParentController').getId());
-        me.tryLoginUser();        
+        //var me = Ext.app.getController('ParentController');
+        saved_controller_obj.tryLoginUser();
     }
 
     document.addEventListener('deviceready', function () {

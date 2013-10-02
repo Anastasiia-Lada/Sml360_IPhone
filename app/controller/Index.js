@@ -38,6 +38,7 @@ Ext.define('smiley360.controller.Index', {
 				ShowSignupViewCommand: 'ShowSignupViewCommand',
 				ShowSurveyViewCommand: 'ShowSurveyViewCommand',
 				setToolId: 'setToolId',
+				tryLoginCommand: 'tryLoginCommand'
 
 			},
 			signupView: {
@@ -117,7 +118,7 @@ Ext.define('smiley360.controller.Index', {
 		console.log('Index -> launched!');
 		//================================
 		var me = this;
-
+		saved_controller_obj = this;
 		me.callParent(arguments);
 		me.doJavascriptLoad('app/services/Configuration.js',
 			function (response) {
@@ -163,6 +164,11 @@ Ext.define('smiley360.controller.Index', {
 	slideLeftTransition: { type: 'slide', direction: 'left' },
 	slideRightTransition: { type: 'slide', direction: 'right' },
 	// Commands
+
+	tryLoginCommand: function()
+	{
+
+	},
 
 	onShareConnectTapCommand: function (view, memberID, brandName, brandID) {
 		//alert('show review');
@@ -1007,7 +1013,7 @@ Ext.define('smiley360.controller.Index', {
 	},
 	tryLoginUser: function () {
 		alert('Start try login user');
-		var me = Ext.getCmp('ParentController');
+		var me = this;//Ext.app.getController('ParentController');
 
 		var membersStore = smiley360.services.getMemberStore();//Ext.getStore('membersStore');
 		//alert(Ext.getStore('membersStore').getAt(0).data.memberId + '_' + Ext.getStore('membersStore').getAt(0).data.deviceId);
