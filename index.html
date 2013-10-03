@@ -98,7 +98,7 @@
     });
 
     FB.Event.subscribe('auth.logout', function (response) {
-        //alert('auth.logout event');
+        alert('auth.logout event');
     });
 
     FB.Event.subscribe('auth.sessionChange', function (response) {
@@ -115,7 +115,7 @@
         function (response) {
             //alert('auth.ResponseChange');
             //alert(response.status);
-            //alert(response.authResponse.accessToken);// + '<br>' + response.authResponse.expiresIn + '<br>' + response.authResponse.userID);
+            alert(response.authResponse.accessToken);// + '<br>' + response.authResponse.expiresIn + '<br>' + response.authResponse.userID);
             //FB.getLoginStatus(updateStatusCallback);
         });
     
@@ -148,7 +148,8 @@
 
     function login() {
         //toServer = true;
-        alert(FB.getAccessToken());       
+        if (FB.getAccessToken() == null)
+            revoke();
 
         FB.login(function (response) {
             if (response.authResponse) {                
