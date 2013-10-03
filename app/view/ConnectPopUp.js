@@ -185,16 +185,20 @@ Ext.define('smiley360.view.ConnectPopUp', {
 		local_name = name;
 	},
 	onFacebookLoginTap: function () {
+		if (!smiley360.permissionsList.publish_stream) {
+			FB.login(function (response) {
+				if (response.error)
+					revoke();
+				if (response.authResponse) {
+					//alert(response.authResponse.accessToken);
+					//alert('server login');
+					//loginToServer();
+				}
+			}, { scope: 'email, read_stream, publish_stream' });
 
-		FB.login(function (response) {
-			if (response.authResponse) {
-				//alert(response.authResponse.accessToken);
-				//alert('server login');
-				//loginToServer();
-			}
-		}, { scope: 'email, read_stream, publish_stream' });
-
-		smiley360.permissionsList.publish_stream = true;
+			smiley360.permissionsList.publish_stream = true;
+		}
+		else revoke();
 		//var deviceId = smiley360.services.getDeviceId();
 
 		//console.log('Login -> login to Facebook with deviceId: ', deviceId);

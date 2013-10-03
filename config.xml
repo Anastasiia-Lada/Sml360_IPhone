@@ -8,7 +8,7 @@
 	
 	<!-- Customize your app and platform with the preference element. -->
 	<preference name="phonegap-version" value="2.5.0" />
-	<preference name="orientation"                value="default" />
+	<preference name="orientation"                value="portrait" />
 	<!-- all: default means both landscape and portrait are enabled -->
 	<preference name="target-device"              value="universal" />
 	<!-- all: possible values handset, tablet, or universal -->
@@ -28,7 +28,7 @@
 	
 	<!--<gap:plugin name="clipboardmanager" value="com.saatcioglu.phonegap.clipboardmanager.ClipboardManagerPlugin.ClipboardManagerPlugin" />-->
 	
-	<gap:splash src="resources/images/loadingimage_x1_iphone.png" gap:platform="ios" width="320" height="480" />
+	<gap:splash src="resources/images/splash.png" gap:platform="ios" width="320" height="480" />
 	<gap:splash src="resources/images/iphone4LoadingImage.png" gap:platform="ios" width="640" height="960" />
 	<gap:splash src="resources/images/iPhone5LoadingImage.png" gap:platform="ios" width="640" height="1136" />
 	<gap:splash src="resources/images/loadingimage-r2.png" gap:platform="ios" width="1024" height="748" />

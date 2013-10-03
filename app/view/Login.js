@@ -21,7 +21,6 @@ Ext.define('smiley360.view.Login', {
 			cls: 'logo',
 			listeners: {
 				painted: function () {
-					this.focus();
 					this.select();
 				}
 			},
