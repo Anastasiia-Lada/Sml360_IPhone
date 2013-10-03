@@ -43,6 +43,7 @@ Ext.define('smiley360.view.Main', {
                 cls: 'toolbar-btn-size toolbar-btn-menu-size',
                 width: '4em',
                 padding: '0em 0em 0em 1em',
+				margin: '0em',
                 iconCls: 'menu-btn',
                 iconMask: true,
                 listeners: {
