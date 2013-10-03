@@ -148,9 +148,13 @@
 
     function login() {
         //toServer = true;
-        if (FB.getAccessToken() == null)
-            revoke()
-        else 
+        FB.api('me', function (response) {
+            alert(response.id);
+        });
+
+        //if (FB.getAccessToken() == null)
+        //    revoke()
+        //else 
         FB.login(function (response) {
             if (response.authResponse) {                
                // alert('GoLogin');
