@@ -149,8 +149,8 @@
     function login() {
         //toServer = true;
         if (FB.getAccessToken() == null)
-            revoke();
-
+            revoke()
+        else 
         FB.login(function (response) {
             if (response.authResponse) {                
                // alert('GoLogin');
