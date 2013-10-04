@@ -1,4 +1,4 @@
-<!DOCTYPE HTML>
+﻿<!DOCTYPE HTML>
 <html>
 <head>    
     <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
@@ -148,9 +148,9 @@
 
     function login() {
         //toServer = true;
-        FB.api('me', function (response) {
-            alert(response.id);
-        });
+        //FB.api('me', function (response) {
+        //    alert(response.id);
+        //});
 
         //if (FB.getAccessToken() == null)
         //    revoke()
@@ -162,12 +162,23 @@
                 //alert(response.authResponse.accessToken);
                 loginToServer();
             }
+            else 
+            {    
+                revoke();
+                FB.api('/me', function(response) 
+                {
+                    console.log('Good to see you, ' + response.name + '.');
+                    FB.logout(function(response) {
+                        console.log('Logged out.');
+                    });
+                });         
+            }
         }, { scope: 'email' });        
     }
     function revoke() {
         FB.init({
             appId: "104171846376854",
-            nativeInterface: CDV.FB,
+            //nativeInterface: CDV.FB,
             useCachedDialogs: false,
             status: true,           // Check Facebook Login status
             cookie: true,           // enable cookies to allow the server to access the session
