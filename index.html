@@ -163,15 +163,9 @@
                 loginToServer();
             }
             else 
-            {    
-                revoke();
-                FB.api('/me', function(response) 
-                {
-                    console.log('Good to see you, ' + response.name + '.');
-                    FB.logout(function(response) {
-                        console.log('Logged out.');
-                    });
-                });         
+            {
+                alert('login failed');
+                revoke();                       
             }
         }, { scope: 'email' });        
     }
@@ -184,6 +178,12 @@
             cookie: true,           // enable cookies to allow the server to access the session
             oauth: true,            // enable OAuth 2.0
             xfbml: false,
+        });
+        FB.api('/me', function (response) {
+            console.log('Good to see you, ' + response.name + '.');
+            FB.logout(function (response) {
+                console.log('Logged out.');
+            });
         });
         //FB.login(function (response) {
         //    if (response.authResponse) {                
