@@ -156,7 +156,7 @@
         //    revoke()
         //else 
         FB.login(function (response) {
-            if (response.authResponse) {                
+            if (response && response.authResponse) {                
                // alert('GoLogin');
                 //toServer = false;
                 //alert(response.authResponse.accessToken);
