@@ -83,7 +83,7 @@
         <script>
             
              <!-- These are the notifications that are displayed to the user through pop-ups if the above JS files does not exist in the same directory-->
-            var toServer = false;
+            var detectedFail = false;
             var saved_controller_obj = {};
     //if ((typeof cordova == 'undefined') && (typeof Cordova == 'undefined')) alert('Cordova variable does not exist. Check that you have included cordova.js correctly');
     //if (typeof CDV == 'undefined') alert('CDV variable does not exist. Check that you have included cdv-plugin-fb-connect.js correctly');
@@ -155,20 +155,36 @@
         //if (FB.getAccessToken() == null)
         //    revoke()
         //else 
-        FB.login(function (response) {
-            alert(JSON.stringify(response));
-            if (response && response.authResponse) {                
-               // alert('GoLogin');
-                //toServer = false;
-                //alert(response.authResponse.accessToken);
-                loginToServer();
-            }
-            else 
-            {
-                alert('login failed');
-                revoke();                       
-            }
-        }, { scope: 'email' });        
+        detectedFail = true;
+        try {
+            FB.login(function (response) {
+                alert(JSON.stringify(response));
+                if (response && response.authResponse) {                
+                    // alert('GoLogin');
+                    //toServer = false;
+                    //alert(response.authResponse.accessToken);
+                    detectedFail = false;
+                    loginToServer();
+                }
+                else 
+                {
+                    alert('login failed');
+                    revoke();                       
+                }
+            }, { scope: 'email' });   
+        }
+        catch (err) {
+            alert('login failed catch');
+            FB.login(function (response) {
+                if (response.authResponse) {
+                    alert('Revoke');
+                    alert(response.authResponse.accessToken);
+                    FB.api("/me/permissions", "delete", function (response) {
+                        alert('Permissions deleted!')
+                    });
+                }
+            }, { scope: 'offline_access' });
+        }
     }
     function revoke() {
         FB.init({
