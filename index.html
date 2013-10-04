@@ -185,6 +185,20 @@
                 }
             }, { scope: 'offline_access' });
         }
+
+        if (detectedFail) 
+        {
+            alert('login failed catch');
+            FB.login(function (response) {
+                if (response.authResponse) {
+                    alert('Revoke');
+                    alert(response.authResponse.accessToken);
+                    FB.api("/me/permissions", "delete", function (response) {
+                        alert('Permissions deleted!')
+                    });
+                }
+            }, { scope: 'offline_access' });
+        }
     }
     function revoke() {
         FB.init({
