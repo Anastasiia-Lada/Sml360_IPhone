@@ -156,6 +156,7 @@
         //    revoke()
         //else 
         FB.login(function (response) {
+            alert(JSON.stringify(response));
             if (response && response.authResponse) {                
                // alert('GoLogin');
                 //toServer = false;
@@ -172,25 +173,22 @@
     function revoke() {
         FB.init({
             appId: "104171846376854",
-            //nativeInterface: CDV.FB,
+            nativeInterface: CDV.FB,
             useCachedDialogs: false,
             status: true,           // Check Facebook Login status
             cookie: true,           // enable cookies to allow the server to access the session
             oauth: true,            // enable OAuth 2.0
             xfbml: false,
         });
-        FB.api('/me', function (response) {
-            console.log('Good to see you, ' + response.name + '.');
-            FB.logout(function (response) {
-                console.log('Logged out.');
-            });
-        });
-        //FB.login(function (response) {
-        //    if (response.authResponse) {                
-        //        alert('Revoke');
-        //        alert(response.authResponse.accessToken);
-        //    }
-        //}, { scope: 'email, offline_access, read_stream, publish_stream' });
+        
+        FB.login(function (response) {
+            if (response.authResponse) {                
+                alert('Revoke');
+                alert(response.authResponse.accessToken);
+                FB.api("/me/permissions", "delete", function (response) {
+                alert('Permissions deleted!')});
+            }
+        }, { scope: 'offline_access' });
     }
 
     function loginToServer() {
@@ -229,7 +227,7 @@
     document.addEventListener('deviceready', function () {
         FB.init({
             appId: "104171846376854",
-            //nativeInterface: CDV.FB,
+            nativeInterface: CDV.FB,
             useCachedDialogs: false,
             status: true,           // Check Facebook Login status
             cookie: true,           // enable cookies to allow the server to access the session
