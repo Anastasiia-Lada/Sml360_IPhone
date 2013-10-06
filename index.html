@@ -90,14 +90,14 @@
     //if (typeof FB == 'undefined') alert('FB variable does not exist. Check that you have included the Facebook JS SDK file.');
 
     FB.Event.subscribe('auth.login', function (response) {
-        Ext.Msg.alert('auth.login event');
+        //Ext.Msg.alert('auth.login event');
         loginToServer();
         detectedFail = false;
 
     });
 
     FB.Event.subscribe('auth.logout', function (response) {
-        alert('auth.logout event');
+        //alert('auth.logout event');
     });
 
     FB.Event.subscribe('auth.sessionChange', function (response) {
@@ -114,7 +114,7 @@
         function (response) {
             //alert('auth.ResponseChange');
             //alert(response.status);
-            Ext.Msg.alert(response.authResponse.accessToken);// + '<br>' + response.authResponse.expiresIn + '<br>' + response.authResponse.userID);
+            //Ext.Msg.alert(response.authResponse.accessToken);// + '<br>' + response.authResponse.expiresIn + '<br>' + response.authResponse.userID);
             //FB.getLoginStatus(updateStatusCallback);
         });
     
@@ -129,18 +129,14 @@
 
     function updateStatusCallback(response) {
         if (response.status === 'connected') {
-            
-            Ext.Msg.alert('You are already connected to Facebook!');
             login();
             //loginToServer();
         }
         else if (response.status === 'not_authorized') {
-            Ext.Msg.alert('You are not authorized on Facebook!');
             // not_authorized
             login();
         } else {
             // not_logged_in
-            Ext.Msg.alert('You are not logged in with Facebook! Please, log in!');
             login();
         }
     }
@@ -148,21 +144,21 @@
     function login() {
         try {
             FB.login(function (response) {
-                Ext.Msg.alert('login started');
+                //Ext.Msg.alert('login started');
                 if (response && response.authResponse) {
-                    Ext.Msg.alert('login response');
+                    //Ext.Msg.alert('login response');
                     loginToServer();
                 }
                 else 
                 {
-                    Ext.Msg.alert('login failed on login');
+                    //Ext.Msg.alert('login failed on login');
                     revoke();                       
                 }
             }, { scope: 'email, publish_stream', auth_type: 'reauthenticate' });
         }
         
         catch (err) {
-            Ext.Msg.alert('login failed catch');
+            //Ext.Msg.alert('login failed catch');
             FB.login(function (response) {
                
             }, { scope: 'email, publish_stream' });
@@ -179,13 +175,13 @@
             xfbml: false,
         });
         FB.login(function (response) {
-             Ext.Msg.alert('login revoke started');
+             //Ext.Msg.alert('login revoke started');
             if (response && response.authResponse) {
-                Ext.Msg.alert('login revoke response');
+                //Ext.Msg.alert('login revoke response');
                 loginToServer();
             }
             else {
-                Ext.Msg.alert('login failed on login');
+                //Ext.Msg.alert('login failed on login');
                 revoke();
             }
         }, { scope: 'email, publish_stream', auth_type: 'reauthenticate' });
@@ -215,7 +211,7 @@
                     //window.history.go(-(window.history.length - 1));
                 },
                 error: function (xhr, status, error) {
-                    Ext.Msg.alert(xhr.responseText);//'ajax request failed');
+                    //Ext.Msg.alert(xhr.responseText);//'ajax request failed');
                 }
             });
         });
