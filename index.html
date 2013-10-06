@@ -131,7 +131,7 @@
         if (response.status === 'connected') {
             
             alert('You are already connected to Facebook!');
-            revoke();
+            login();
             //loginToServer();
         }
         else if (response.status === 'not_authorized') {
@@ -141,12 +141,12 @@
         } else {
             // not_logged_in
             alert('You are not logged in with Facebook! Please, log in!');
-            revoke();
+            login();
         }
     }
 
     function login() {
-        
+        alert('try login');
         try {
             FB.login(function (response) {
                 alert('login started');
