@@ -149,6 +149,7 @@
         
         try {
             FB.login(function (response) {
+                alert('login started');
                 if (response && response.authResponse) {
                     alert('login response');
                     loginToServer();
@@ -179,7 +180,9 @@
             xfbml: false,
         });
         FB.login(function (response) {
+             alert('login revoke started');
             if (response && response.authResponse) {
+                alert('login revoke response');
                 loginToServer();
             }
             else {
