@@ -17,7 +17,7 @@ Ext.define('smiley360.controller.Share',
 	{
 	    'share.upload': function (command, me)
 	    {
-	        var previewSize = { w: 200, h: 150 };
+	        var previewSize = { w: 150, h: 150 };
 	        var mainSize = { w: 400, h: 400 };
 	        var oFileIn = me.fileElement.dom;
 	        var canvPreview = me.up().down('[xtype=label]').element.dom.firstChild.firstChild;
