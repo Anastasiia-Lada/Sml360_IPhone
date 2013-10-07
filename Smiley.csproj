@@ -62,6 +62,7 @@
     <Content Include=".sencha\workspace\plugin.xml" />
     <Content Include="app.js" />
     <Content Include="app\controller\Index.js" />
+    <Content Include="app\controller\Share.js" />
     <Content Include="app\model\ShareTool.js" />
     <Content Include="app\model\UrlModel.js" />
     <Content Include="app\model\Member.js" />

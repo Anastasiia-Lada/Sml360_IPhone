@@ -64,54 +64,6 @@ Ext.define('smiley360.view.UploadPhoto', {
                         layout: 'vbox',
                         items:
                         [
-                        /*{
-                            xtype: 'fileupload',
-                            id: 'xBrowsePhotoButton',
-                            cls: 'popup-photo-button has-shadow',
-                            autoUpload: true,
-                            loadAsDataUrl: false,
-                            style: 'border: 0;',
-                            states: {
-                                browse: {
-                                    text: 'ADD PHOTO'
-                                },
-                                uploading: {
-                                    text: 'Uploading',
-                                    loading: true// Enable loading spinner on button
-                                }
-                            },
-                            listeners: {
-                                tap: function ()
-                                {
-                                    this.up('#xView').down('#xShareButton').disable();
-                                    photoAdded = true;
-                                    this.up('#xView').doValidation();
-                                },
-                                success: function (response)
-                                {
-                                    this.hide();
-                                    this.up('#xView').config.imageID = response.imageID;
-                                    this.up('#xView').down('#xShareButton').enable();
-
-
-                                    var xView = this.up('#xView');
-                                    var xAddedImage = xView.down('#xAddedImage');
-                                    var xPostText = xView.down('#xPostText');
-
-                                    xAddedImage.show();
-                                    xAddedImage.setHeight(xPostText.element.getHeight());
-                                    xAddedImage.setWidth(xPostText.element.getWidth() * 0.4);
-
-                                    xAddedImage.setSrc(response.url);
-                                },
-
-                            }
-                        }, {
-                            xtype: 'image',
-                            id: 'xAddedImage',
-                            cls: 'popup-photo-image',
-                            hidden: true,
-                        }*/
                         {
                             xtype: 'fileupload',
                             html: '<input type="file"/>',
