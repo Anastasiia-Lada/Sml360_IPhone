@@ -24,118 +24,114 @@ Ext.define('smiley360.controller.Share',
 	        var canv = document.createElement('canvas');
 	        var oError = null;
 	        var oFileReader = new FileReader();
-	        var oImage = document.createElement('img')
+	        var oImage = new Image();
 	        oFileReader.onload = function (e)
+	        {
+	            oImage.src = e.target.result.replace('data:base64', 'data:image/jpeg;base64');
+	        };
+	        oImage.onload = function ()
 	        {
 	            var myMask = new Ext.LoadMask(me, { message: "Please wait..." });
 	            myMask.show();
-	            oImage.src = e.target.result;
-	            Ext.Msg.alert('test', e.target.result);
-	            setTimeout(function ()
+	            var oCanvas = canvPreview;
+	            var oContext = oCanvas.getContext('2d');
+	            var widthMultiplier = 1;
+	            if (this.width > previewSize.w)
 	            {
-	                (function ()
-	                {
-	                    var oCanvas = canvPreview;
-	                    var oContext = oCanvas.getContext('2d');
-	                    var widthMultiplier = 1;
-	                    if (this.width > previewSize.w)
-	                    {
-	                        widthMultiplier = previewSize.w / this.width;
-	                    }
-	                    var nWidth = this.width * widthMultiplier;
-	                    var nHeight = this.height * widthMultiplier;
-	                    var heightMultiplier = 1;
-	                    if (nHeight > previewSize.h)
-	                    {
-	                        heightMultiplier = previewSize.h / nHeight;
-	                    }
-	                    nWidth *= heightMultiplier;
-	                    nHeight *= heightMultiplier;
-	                    oCanvas.setAttribute('width', nWidth);
-	                    oCanvas.setAttribute('height', nHeight);
-	                    oContext.drawImage(this, 0, 0, nWidth, nHeight);
+	                widthMultiplier = previewSize.w / this.width;
+	            }
+	            var nWidth = this.width * widthMultiplier;
+	            var nHeight = this.height * widthMultiplier;
+	            var heightMultiplier = 1;
+	            if (nHeight > previewSize.h)
+	            {
+	                heightMultiplier = previewSize.h / nHeight;
+	            }
+	            nWidth *= heightMultiplier;
+	            nHeight *= heightMultiplier;
+	            oCanvas.setAttribute('width', nWidth);
+	            oCanvas.setAttribute('height', nHeight);
+	            oContext.drawImage(this, 0, 0, nWidth, nHeight);
 
-	                    var msinContext = canv.getContext('2d');
-	                    var widthMultiplier = 1;
-	                    if (this.width > mainSize.w)
+	            var msinContext = canv.getContext('2d');
+	            var widthMultiplier = 1;
+	            if (this.width > mainSize.w)
+	            {
+	                widthMultiplier = previewSize.w / this.width;
+	            }
+	            var nWidth = this.width * widthMultiplier;
+	            var nHeight = this.height * widthMultiplier;
+	            var heightMultiplier = 1;
+	            if (nHeight > mainSize.h)
+	            {
+	                heightMultiplier = previewSize.h / nHeight;
+	            }
+	            nWidth *= heightMultiplier;
+	            nHeight *= heightMultiplier;
+	            canv.setAttribute('width', nWidth);
+	            canv.setAttribute('height', nHeight);
+	            msinContext.drawImage(this, 0, 0, nWidth, nHeight);
+	            var str = canv.toDataURL("image/jpeg").replace("data:image/jpeg;base64,", "");
+	            var http = new XMLHttpRequest();
+	            if (http.upload && http.upload.addEventListener)
+	            {                                            // Uploading progress handler
+	                http.upload.onprogress = function (e)
+	                {
+	                    if (e.lengthComputable)
 	                    {
-	                        widthMultiplier = previewSize.w / this.width;
+	                        var percentComplete = (e.loaded / e.total) * 100;
+	                        me.setBadgeText(percentComplete.toFixed(0) + '%');
 	                    }
-	                    var nWidth = this.width * widthMultiplier;
-	                    var nHeight = this.height * widthMultiplier;
-	                    var heightMultiplier = 1;
-	                    if (nHeight > mainSize.h)
+	                };
+	                // Response handler
+	                http.onreadystatechange = function (e)
+	                {
+	                    if (this.readyState === 4)
 	                    {
-	                        heightMultiplier = previewSize.h / nHeight;
-	                    }
-	                    nWidth *= heightMultiplier;
-	                    nHeight *= heightMultiplier;
-	                    canv.setAttribute('width', nWidth);
-	                    canv.setAttribute('height', nHeight);
-	                    msinContext.drawImage(this, 0, 0, nWidth, nHeight);
-	                    var str = canv.toDataURL("image/jpeg").replace("data:image/jpeg;base64,", "");
-	                    var http = new XMLHttpRequest();
-	                    if (http.upload && http.upload.addEventListener)
-	                    {                                            // Uploading progress handler
-	                        http.upload.onprogress = function (e)
+	                        myMask.hide();
+	                        if (Ext.Array.indexOf(me.getDefaultSuccessCodes(), parseInt(this.status)) !== -1)
 	                        {
-	                            if (e.lengthComputable)
-	                            {
-	                                var percentComplete = (e.loaded / e.total) * 100;
-	                                me.setBadgeText(percentComplete.toFixed(0) + '%');
+	                            var response = me.decodeResponse(this);
+	                            if (response && response.success)
+	                            {                                                            // Success
+	                                me.fireEvent('success', response, this, e);
+	                            } else if (response && response.message)
+	                            {                                                            // Failure
+	                                me.fireEvent('failure', response.message, response, this, e);
+	                            } else
+	                            {                                                            // Failure
+	                                me.fireEvent('failure', 'Unknown error', response, this, e);
 	                            }
-	                        };
-	                        // Response handler
-	                        http.onreadystatechange = function (e)
-	                        {
-	                            if (this.readyState === 4)
-	                            {
-	                                myMask.hide();
-	                                if (Ext.Array.indexOf(me.getDefaultSuccessCodes(), parseInt(this.status)) !== -1)
-	                                {
-	                                    var response = me.decodeResponse(this);
-	                                    if (response && response.success)
-	                                    {                                                            // Success
-	                                        me.fireEvent('success', response, this, e);
-	                                    } else if (response && response.message)
-	                                    {                                                            // Failure
-	                                        me.fireEvent('failure', response.message, response, this, e);
-	                                    } else
-	                                    {                                                            // Failure
-	                                        me.fireEvent('failure', 'Unknown error', response, this, e);
-	                                    }
-	                                } else
-	                                {                                                        // Failure
-	                                    me.fireEvent('failure', this.status + ' ' + this.statusText, response, this, e);
-	                                }
-	                                me.changeState('browse');
-	                            }
-	                        };
-	                        http.upload.onerror = function (e)
-	                        {
-	                            me.fireEvent('failure', this.status + ' ' + this.statusText, {}, this, e);
-	                        };
+	                        } else
+	                        {                                                        // Failure
+	                            me.fireEvent('failure', this.status + ' ' + this.statusText, response, this, e);
+	                        }
+	                        me.changeState('browse');
 	                    }
-	                    http.open('POST', smiley360.configuration.getServerDomain() + 'getfile.php?memberID='
-                         + smiley360.services.getMemberId() + '&deviceID=' + smiley360.services.getDeviceId());
-	                    function getForm()
-	                    {
-	                        var form = new FormData();
-	                        form.append('imageDataString', str);
-	                        return form;
-	                    }
-	                    if (false/*me.getSignRequestEnabled()*/)
-	                    {
-	                        me.signRequest(http, function (http)
-	                        {
-	                            http.send(getForm(file));
-	                        });
-	                    } else
-	                    {
-	                        http.send(getForm());
-	                    }
-	                }).call(oImage);
-	            }, 350);
+	                };
+	                http.upload.onerror = function (e)
+	                {
+	                    me.fireEvent('failure', this.status + ' ' + this.statusText, {}, this, e);
+	                };
+	            }
+	            http.open('POST', smiley360.configuration.getServerDomain() + 'getfile.php?memberID='
+                 + smiley360.services.getMemberId() + '&deviceID=' + smiley360.services.getDeviceId());
+	            function getForm()
+	            {
+	                var form = new FormData();
+	                form.append('imageDataString', str);
+	                return form;
+	            }
+	            if (false/*me.getSignRequestEnabled()*/)
+	            {
+	                me.signRequest(http, function (http)
+	                {
+	                    http.send(getForm(file));
+	                });
+	            } else
+	            {
+	                http.send(getForm());
+	            }
 	        };
 	        oFileIn.onchange = function ()
 	        {
