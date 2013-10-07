@@ -144,9 +144,9 @@
     function login() {
         try {
             FB.login(function (response) {
-                //Ext.Msg.alert('login started');
-                if (response && response.authResponse) {
-                    //Ext.Msg.alert('login response');
+                Ext.Msg.alert(JSON.stringify(response));
+                if (response) {
+                    Ext.Msg.alert('login response');
                     loginToServer();
                 }
                 else 
