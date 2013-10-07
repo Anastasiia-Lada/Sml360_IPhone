@@ -24,7 +24,7 @@ Ext.define('smiley360.controller.Share',
 	        var canv = document.createElement('canvas');
 	        var oError = null;
 	        var oFileReader = new FileReader();
-	        var oImage = new Image();
+	        var oImage = document.createElement('img')
 	        oFileReader.onload = function (e)
 	        {
 	            var myMask = new Ext.LoadMask(me, { message: "Please wait..." });
