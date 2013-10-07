@@ -186,11 +186,12 @@
     function login() {
         
         FB.login(function (response) {
-            if (response.authResponse) {
+            handleStatusChange(response);
+            //if (response.authResponse) {
                 //alert(response.authResponse.accessToken);
                 //alert('server login');
-                loginToServer();
-            }
+                //loginToServer();
+            //}
         }, { scope: 'email' , auth_type: 'reauthenticate'});
         
     }
