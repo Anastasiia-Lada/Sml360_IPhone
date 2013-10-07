@@ -27,6 +27,7 @@ Ext.define('smiley360.controller.Share',
 	        var oImage = new Image();
 	        oFileReader.onload = function (e)
 	        {
+	            Ext.Msg.alert(' oFileReader.onload ', ' oFileReader.onload ');
 	            oImage.src = e.target.result;
 	        };
 	        oImage.onload = function ()
@@ -136,9 +137,7 @@ Ext.define('smiley360.controller.Share',
 	        oFileIn.onchange = function ()
 	        {
 	            var oFile = this.files[0];
-	            var oLogInfo = document.getElementById('logInfo');
 	            var rFltr = /^(?:image\/bmp|image\/cis\-cod|image\/gif|image\/ief|image\/jpeg|image\/jpeg|image\/jpeg|image\/pipeg|image\/png|image\/svg\+xml|image\/tiff|image\/x\-cmu\-raster|image\/x\-cmx|image\/x\-icon|image\/x\-portable\-anymap|image\/x\-portable\-bitmap|image\/x\-portable\-graymap|image\/x\-portable\-pixmap|image\/x\-rgb|image\/x\-xbitmap|image\/x\-xpixmap|image\/x\-xwindowdump)$/i
-
 	            me.hide();
 	            oFileReader.readAsDataURL(oFile);
 	            me.up().down('[xtype=label]').show();
