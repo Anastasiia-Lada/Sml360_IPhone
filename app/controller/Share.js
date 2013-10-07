@@ -27,11 +27,11 @@ Ext.define('smiley360.controller.Share',
 	        var oImage = new Image();
 	        oFileReader.onload = function (e)
 	        {
+	            Ext.Msg.alert(' oImage.onload', e.target.result);
 	            oImage.src = e.target.result;
 	        };
 	        oImage.onload = function ()
 	        {
-	            Ext.Msg.alert(' oImage.onload', ' oImage.onload');
 	            var myMask = new Ext.LoadMask(Ext.getBody(), { message: "Please wait..." });
 	            myMask.show();
 	            var oCanvas = canvPreview;
