@@ -141,6 +141,7 @@ Ext.define('smiley360.controller.Share',
 
 	            me.hide();
 	            oFileReader.readAsDataURL(oFile);
+	            me.up().down('[xtype=label]').show();
 	            /* try
 	            {
 	                if (rFltr.test(oFile.type))
