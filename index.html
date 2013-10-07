@@ -91,7 +91,7 @@
 
     FB.Event.subscribe('auth.login', function (response) {
         //Ext.Msg.alert('auth.login event');
-        loginToServer();
+        //loginToServer();
         detectedFail = false;
 
     });
@@ -124,7 +124,8 @@
    
 
     function fb_login() {
-        FB.getLoginStatus(updateStatusCallback);
+        alert(JSON.stringify(FB.getLoginStatus()));
+        //FB.getLoginStatus(updateStatusCallback);
     }
 
     function updateStatusCallback(response) {
@@ -157,7 +158,7 @@
                     Ext.Msg.alert('login failed on login');
                                            
                 }
-            }, { scope: 'email, publish_stream', auth_type: 'reauthenticate' });
+            }, { scope: 'email, publish_stream'/*, auth_type: 'reauthenticate'*/ });
         }
         
         catch (err) {
@@ -236,7 +237,7 @@
             xfbml: false,
         });
         document.getElementById('data').innerHTML = "";
-        navigator.splashscreen.hide();
+        //navigator.splashscreen.hide();
        
     }, false);
             </script>
