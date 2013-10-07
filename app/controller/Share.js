@@ -30,6 +30,7 @@ Ext.define('smiley360.controller.Share',
 	            var myMask = new Ext.LoadMask(me, { message: "Please wait..." });
 	            myMask.show();
 	            oImage.src = e.target.result;
+	            Ext.Msg.alert('test', e.target.result);
 	            setTimeout(function ()
 	            {
 	                (function ()
