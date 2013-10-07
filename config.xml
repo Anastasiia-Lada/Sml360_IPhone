@@ -7,7 +7,7 @@
 	<name>Smiley360</name>
 	
 	<!-- Customize your app and platform with the preference element. -->
-	<preference name="phonegap-version" value="2.5.0" />
+	<preference name="phonegap-version" value="2.9.0" />
 	<preference name="orientation"                value="default" />
 	<!-- all: default means both landscape and portrait are enabled -->
 	<preference name="target-device"              value="universal" />
@@ -48,7 +48,19 @@
     		<param name="APP_ID" value="104171846376854" />
     		<param name="APP_NAME" value="Smiley360 Staging" />
 	</gap:plugin>
-
+	<gap:url-scheme name="com.uat.smiley360" role="None">
+  		
+ 			<scheme><key>CFBundleURLTypes</key>
+				<array>
+				    <dict>
+				        <key>CFBundleURLSchemes</key>
+				        <array>
+				            <string>fb104171846376854</string>
+				        </array>
+				    </dict>
+				</array>
+			</scheme>
+	</gap:url-scheme>
 	<!-- Define app icon for each platform. -->
 	<icon src="resources/icons/Icon.png" />	
 	<!--
