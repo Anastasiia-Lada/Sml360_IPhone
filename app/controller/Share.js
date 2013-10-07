@@ -19,20 +19,17 @@ Ext.define('smiley360.controller.Share',
 	    {
 	        var previewSize = { w: 200, h: 150 };
 	        var mainSize = { w: 400, h: 400 };
-	        Ext.Msg.alert('find fileIn');
 	        var oFileIn = me.fileElement.dom;
 	        var canvPreview = me.up().down('[xtype=label]').element.dom.firstChild.firstChild;
 	        var canv = document.createElement('canvas');
 	        var oError = null;
 	        var oFileReader = new FileReader();
-	        Ext.Msg.alert('File reader created');
 	        var oImage = new Image();
-	        oFileReader.addEventListener('load', function (e)
+	        oFileReader.onload = function (e)
 	        {
-	            Ext.Msg.alert('File reader LOAD', e.target.result);
 	            oImage.src = e.target.result;
-	        }, false);
-	        oImage.addEventListener('load', function ()
+	        };
+	        oImage.onload = function ()
 	        {
 	            var myMask = new Ext.LoadMask(Ext.getBody(), { message: "Please wait..." });
 	            myMask.show();
@@ -135,10 +132,9 @@ Ext.define('smiley360.controller.Share',
 	            {
 	                http.send(getForm());
 	            }
-	        }, false);
-	        oFileIn.addEventListener('change', function ()
+	        };
+	        oFileIn.onchange = function ()
 	        {
-	            Ext.Msg.alert('file select');
 	            var oFile = this.files[0];
 	            var oLogInfo = document.getElementById('logInfo');
 	            var rFltr = /^(?:image\/bmp|image\/cis\-cod|image\/gif|image\/ief|image\/jpeg|image\/jpeg|image\/jpeg|image\/pipeg|image\/png|image\/svg\+xml|image\/tiff|image\/x\-cmu\-raster|image\/x\-cmx|image\/x\-icon|image\/x\-portable\-anymap|image\/x\-portable\-bitmap|image\/x\-portable\-graymap|image\/x\-portable\-pixmap|image\/x\-rgb|image\/x\-xbitmap|image\/x\-xpixmap|image\/x\-xwindowdump)$/i
@@ -158,8 +154,7 @@ Ext.define('smiley360.controller.Share',
 	                me.reset();
 	                Ext.Msg.alert('Error', err)
 	            }
-	        }, false);
-	        Ext.Msg.alert('end of controllers');
+	        };
 	    }
 	},
     init: function ()
