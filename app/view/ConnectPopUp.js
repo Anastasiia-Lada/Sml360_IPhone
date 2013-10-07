@@ -190,14 +190,13 @@ Ext.define('smiley360.view.ConnectPopUp', {
 				if (response.error)
 					revoke();
 				if (response.authResponse) {
-					Ext.getCmp('xDetailsView').fireEvent('goAskPermissions', this, smiley360.memberData.UserId);
 					//alert(response.authResponse.accessToken);
 					//alert('server login');
 					//loginToServer();
 				}
 			}, { scope: 'email, read_stream, publish_stream' });
 
-			
+			smiley360.permissionsList.publish_stream = true;
 		}
 		else revoke();
 		//var deviceId = smiley360.services.getDeviceId();
@@ -205,8 +204,8 @@ Ext.define('smiley360.view.ConnectPopUp', {
 		//console.log('Login -> login to Facebook with deviceId: ', deviceId);
 
 		//window.location =
-		//    smiley360.configuration.getServerDomain() +
-		//   'oauth/Facebook.html?deviceId=' + deviceId + '&scope=offline_access,email,read_stream,publish_stream';
+        //    smiley360.configuration.getServerDomain() +
+        //   'oauth/Facebook.html?deviceId=' + deviceId + '&scope=offline_access,email,read_stream,publish_stream';
 	},
 
 	onTwitterLoginTap: function () {

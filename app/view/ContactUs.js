@@ -34,7 +34,7 @@ Ext.define('smiley360.view.ContactUs', {
 			}, {
 				xtype: 'panel',
 				cls: 'popup-status-indicator',
-				style: 'background-color: #E2DDDA; z-index: 0; margin-bottom: -5px;'
+				style: 'background-color: #E2DDDA; z-index: 0; margin-bottom: -5px;'				
 			}, {
 				xtype: 'panel',
 				id: 'xStatusIndicator',
@@ -94,7 +94,7 @@ Ext.define('smiley360.view.ContactUs', {
 					cls: 'popup-submit-button',
 					listeners: {
 						tap: function () {
-							Ext.getCmp('xView').doSendMessage();
+							Ext.getCmp('xView').doSendMessage();							
 						}
 					},
 				}],
