@@ -112,11 +112,11 @@
         //alert('auth.sessionChange event');
     });
 
-    //FB.Event.subscribe('auth.statusChange', handleStatusChange);
+    FB.Event.subscribe('auth.statusChange', handleStatusChange);
 
-    FB.Event.subscribe('auth.statusChange', function (response) {
-        //alert('auth.statusChange event');
-    });
+    //FB.Event.subscribe('auth.statusChange', function (response) {
+    //    //alert('auth.statusChange event');
+    //});
 
     FB.Event.subscribe('auth.authResponseChange',
         function (response) {
@@ -147,7 +147,7 @@
 
             //Fetch user's id, name, and picture
             FB.api('/me', {
-                fields: 'name, picture'
+                fields: 'name'
             },
             function (response) {
                 if (!response.error) {
@@ -155,7 +155,7 @@
                     alert('connected');
                     user = response;
 
-                    alert('Got the user\'s name and picture: ' + JSON.stringify(response.name));
+                    alert('Got the user\'s name : ' + JSON.stringify(response.name));
                 } else {
                     alert('not_connected');
                     console.log('Error getting user info: ' + JSON.stringify(response.error));
@@ -191,7 +191,7 @@
                 //alert('server login');
                 loginToServer();
             }
-        }, { scope: 'email' });
+        }, { scope: 'email' , auth_type: 'reauthenticate'});
         
     }
     function updateStatusCallback(response) {
