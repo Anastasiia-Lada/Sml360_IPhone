@@ -118,13 +118,13 @@
     //    //alert('auth.statusChange event');
     //});
 
-    FB.Event.subscribe('auth.authResponseChange',
-        function (response) {
+    FB.Event.subscribe('auth.authResponseChange', handleStatusChange);
+        //function (response) {
             //alert('auth.ResponseChange');
             //alert(response.status);
             //alert(response.authResponse.accessToken);// + '<br>' + response.authResponse.expiresIn + '<br>' + response.authResponse.userID);
-            FB.getLoginStatus(updateStatusCallback);
-        });
+            
+        //});
 
     
     var friendIDs = [];
@@ -140,6 +140,7 @@
     // Handle status changes
     function handleStatusChange(session) {
         alert('auth.statusChange event');
+        //FB.getLoginStatus(updateStatusCallback);
         console.log('Got the user\'s session: ' + JSON.stringify(session));
 
         if (session.authResponse) {
@@ -187,15 +188,13 @@
         
         FB.login(function (response) {
             handleStatusChange(response);
-            //if (response.authResponse) {
-                //alert(response.authResponse.accessToken);
-                //alert('server login');
-                //loginToServer();
-            //}
         }, { scope: 'email' , auth_type: 'reauthenticate'});
         
     }
     function updateStatusCallback(response) {
+        FB.invalidateAccessToken(function (response) {
+            alert(JSON.stringify(response));
+        });
         if (response.status === 'connected') {
             // connected
             //if ((getURLParameter('scope') || '').indexOf('publish_stream') > -1) {
