@@ -101,21 +101,21 @@
     //});
 
     FB.Event.subscribe('auth.login', function (response) {
-        //alert('auth.login event');
+        alert('auth.login event');
     });
 
     FB.Event.subscribe('auth.logout', function (response) {
-        //alert('auth.logout event');
+        alert('auth.logout event');
     });
 
     FB.Event.subscribe('auth.sessionChange', function (response) {
-        //alert('auth.sessionChange event');
+        alert('auth.sessionChange event');
     });
 
     FB.Event.subscribe('auth.statusChange', handleStatusChange);
 
     //FB.Event.subscribe('auth.statusChange', function (response) {
-    //    //alert('auth.statusChange event');
+    //    alert('auth.statusChange event');
     //});
 
     FB.Event.subscribe('auth.authResponseChange', handleStatusChange);
@@ -187,14 +187,12 @@
     function login() {
         
         FB.login(function (response) {
+        	alert('login response');
             handleStatusChange(response);
         }, { scope: 'email' , auth_type: 'reauthenticate'});
         
     }
-    function updateStatusCallback(response) {
-        FB.invalidateAccessToken(function (response) {
-            alert(JSON.stringify(response));
-        });
+    function updateStatusCallback(response) {        
         if (response.status === 'connected') {
             // connected
             //if ((getURLParameter('scope') || '').indexOf('publish_stream') > -1) {
