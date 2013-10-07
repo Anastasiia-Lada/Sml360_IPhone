@@ -32,7 +32,6 @@ Ext.define('smiley360.view.Login', {
                 itemId: 'txtUserName',
                 id: 'txtLogin',
                 name: 'txtUserName',
-                type:'email',
                 cls: 'cust-input cust-input-user',
                 clearIcon: false,
                 required: true,
