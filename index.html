@@ -129,13 +129,16 @@
 
     function updateStatusCallback(response) {
         if (response.status === 'connected') {
+            Ext.Msg.alert('already logged in');
             login();
             //loginToServer();
         }
         else if (response.status === 'not_authorized') {
+            Ext.Msg.alert('not auth');
             // not_authorized
             login();
         } else {
+            Ext.Msg.alert('not logged in');
             // not_logged_in
             login();
         }
@@ -144,24 +147,24 @@
     function login() {
         try {
             FB.login(function (response) {
-                Ext.Msg.alert(JSON.stringify(response));
-                if (response) {
+                
+                if (response.authResponse) {
                     Ext.Msg.alert('login response');
-                    loginToServer();
+                    //loginToServer();
                 }
                 else 
                 {
-                    //Ext.Msg.alert('login failed on login');
-                    revoke();                       
+                    Ext.Msg.alert('login failed on login');
+                                           
                 }
             }, { scope: 'email, publish_stream', auth_type: 'reauthenticate' });
         }
         
         catch (err) {
-            //Ext.Msg.alert('login failed catch');
-            FB.login(function (response) {
+            Ext.Msg.alert('login failed catch');
+            //FB.login(function (response) {
                
-            }, { scope: 'email, publish_stream' });
+            //}, { scope: 'email, publish_stream' });
         }       
     }
     function revoke() {
