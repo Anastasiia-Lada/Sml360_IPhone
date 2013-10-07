@@ -25,7 +25,7 @@ Ext.define('smiley360.view.Login', {
 		}, {
 			xtype: 'panel',
 			cls: 'login-box',
-			height: '254px',			
+			height: '254px',
 			items: [{
 				xtype: 'emailfield',
 				placeHolder: 'Email',
