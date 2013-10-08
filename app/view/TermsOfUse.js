@@ -8,7 +8,7 @@ Ext.define('smiley360.view.TermsOfUse', {
         hideOnMaskTap: true,
         id: 'xView',
         scrollable: 'vertical',
-        cls: 'popup-panel',
+        cls: 'popup-panel connect-popup-panel',
         items: [{
             xtype: 'panel',
             id: 'xRootPanel',
@@ -39,7 +39,7 @@ Ext.define('smiley360.view.TermsOfUse', {
             		xtype: 'label',
             		html: 'SMILEY360.COM TERMS OF SERVICE AGREEMENT',
             		cls: 'heading-text active-sign',
-            		style: 'padding-left: 15px;',
+            		style: 'padding-left: 15px; height: 20px !important;',
             		flex: 1
             	}],
             }, {

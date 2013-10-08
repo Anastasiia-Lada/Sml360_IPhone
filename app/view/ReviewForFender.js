@@ -16,7 +16,7 @@ Ext.define('smiley360.view.ReviewForFender', {
         id: 'xReviewView',
         btn_from: {},
         scrollable: 'vertical',
-        cls: 'popup-panel',
+        cls: 'popup-panel connect-popup-panel',
         items: [{
             xtype: 'panel',
             id: 'xRootPanel',
