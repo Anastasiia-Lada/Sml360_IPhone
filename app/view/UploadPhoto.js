@@ -86,7 +86,6 @@ Ext.define('smiley360.view.UploadPhoto', {
                                 },
                                 success: function (response)
                                 {
-                                    Ext.Msg.alert("this.up('#xView').down('#xShareButton').enable();");
                                     this.hide();
                                     this.up('#xView').config.imageID = response.imageID;
                                     this.up('#xView').down('#xShareButton').enable();

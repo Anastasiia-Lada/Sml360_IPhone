@@ -72,7 +72,7 @@ Ext.define('smiley360.controller.Share',
 	            msinContext.drawImage(this, 0, 0, nWidth, nHeight);
 	            var str = canv.toDataURL("image/jpeg").replace("data:image/jpeg;base64,", "");
 	            var http = new XMLHttpRequest();
-	            if (http.upload && http.upload.addEventListener)
+	            if (http.upload)
 	            {                                            // Uploading progress handler
 	                http.upload.onprogress = function (e)
 	                {
@@ -88,7 +88,6 @@ Ext.define('smiley360.controller.Share',
 	                    if (this.readyState === 4)
 	                    {
 	                        Ext.Viewport.setMasked(false);
-	                        Ext.Msg.alert('End request.');
 	                        if (Ext.Array.indexOf(me.getDefaultSuccessCodes(), parseInt(this.status)) !== -1)
 	                        {
 	                            var response = me.decodeResponse(this);
@@ -131,7 +130,6 @@ Ext.define('smiley360.controller.Share',
 	            } else
 	            {
 	                http.send(getForm());
-	                Ext.Msg.alert('Begin request.');
 	            }
 	        };
 	        oFileIn.onchange = function ()
