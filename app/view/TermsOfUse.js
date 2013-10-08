@@ -34,6 +34,7 @@ Ext.define('smiley360.view.TermsOfUse', {
             }, {
             	xtype: 'container',
             	cls: 'has-shadow',
+            	style: 'height: 20px !important;',
             	layout: 'hbox',
             	items: [{
             		xtype: 'label',

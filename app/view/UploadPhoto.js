@@ -19,7 +19,7 @@ Ext.define('smiley360.view.UploadPhoto', {
         imageID: '',
         btn_from: {},
         scrollable: 'vertical',
-        cls: 'popup-panel',
+        cls: 'popup-panel connect-popup-panel',
         items: [{
             xtype: 'panel',
             id: 'xRootPanel',
