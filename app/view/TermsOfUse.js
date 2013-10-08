@@ -47,8 +47,8 @@ Ext.define('smiley360.view.TermsOfUse', {
                 cls: 'popup-middle-panel',
                 items: [{
                 	xtype: 'container',
-                	style: '-webkit-overflow-scrolling: touch ; height: 100%; width: 100%; overflow-y: auto; overflow-x: hidden;',
-                	html: '<iframe frameborder="0" scrolling="yes" style="margin-left: 17px;" src="resources/htmls/termsContent_mobile.html" class="popup-survey-iframe"></iframe>'
+                	style: '-webkit-overflow-scrolling: touch ; height: 80%; width: 100%; overflow-y: auto; overflow-x: hidden;',
+                	html: '<iframe frameborder="0" scrolling="yes" src="resources/htmls/termsContent_mobile.html" class="popup-survey-iframe"></iframe>'
 					}],
             }, {
                 xtype: 'panel',
