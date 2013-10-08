@@ -88,6 +88,7 @@ Ext.define('smiley360.controller.Share',
 	                    if (this.readyState === 4)
 	                    {
 	                        Ext.Viewport.setMasked(false);
+	                        Ext.Msg.alert('End request.');
 	                        if (Ext.Array.indexOf(me.getDefaultSuccessCodes(), parseInt(this.status)) !== -1)
 	                        {
 	                            var response = me.decodeResponse(this);
@@ -130,6 +131,7 @@ Ext.define('smiley360.controller.Share',
 	            } else
 	            {
 	                http.send(getForm());
+	                Ext.Msg.alert('Begin request.');
 	            }
 	        };
 	        oFileIn.onchange = function ()
