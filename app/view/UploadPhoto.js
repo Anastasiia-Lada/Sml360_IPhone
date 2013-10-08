@@ -66,7 +66,7 @@ Ext.define('smiley360.view.UploadPhoto', {
                         [
                         {
                             xtype: 'fileupload',
-                            html: '<input type="file"/>',
+                            autoUpload: false,
                             cls: 'popup-photo-button has-shadow',
                             states:
                             {
