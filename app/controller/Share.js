@@ -31,7 +31,8 @@ Ext.define('smiley360.controller.Share',
 	        };
 	        oImage.onload = function ()
 	        {
-	            (me.up('#xView') ? me.up('#xView') : me.up('#xReviewView')).setMasked({ message: 'Please wait, image is uploading.' });
+	            if (me.up('#xView'))
+	                (me.up('#xView') ? me.up('#xView') : me.up('#xReviewView')).setMasked({ message: 'Please wait, image is uploading.' });
 	            var oCanvas = canvPreview;
 	            var oContext = oCanvas.getContext('2d');
 	            var widthMultiplier = 1;
@@ -87,7 +88,8 @@ Ext.define('smiley360.controller.Share',
 	                {
 	                    if (this.readyState === 4)
 	                    {
-	                        (me.up('#xView') ? me.up('#xView') : me.up('#xReviewView')).setMasked(false);
+	                        if (me.up('#xView'))
+	                            (me.up('#xView') ? me.up('#xView') : me.up('#xReviewView')).setMasked(false);
 	                        me.reset();
 	                        if (Ext.Array.indexOf(me.getDefaultSuccessCodes(), parseInt(this.status)) !== -1)
 	                        {
@@ -106,11 +108,12 @@ Ext.define('smiley360.controller.Share',
 	                        {                                                        // Failure
 	                            me.fireEvent('failure', this.status + ' ' + this.statusText, response, this, e);
 	                        }
-	                        me.changeState('browse');
 	                    }
 	                };
 	                http.upload.onerror = function (e)
 	                {
+	                    (me.up('#xView') ? me.up('#xView') : me.up('#xReviewView')).setMasked(false);
+	                    me.reset();
 	                    me.fireEvent('failure', this.status + ' ' + this.statusText, {}, this, e);
 	                };
 	            }

@@ -83,6 +83,7 @@ Ext.define('smiley360.view.UploadPhoto', {
                                 painted: function (me)
                                 {
                                     this.fireEvent('share.command', 'share.upload', this);
+                                    me.reset();
                                 },
                                 success: function (response)
                                 {
