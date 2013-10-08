@@ -92,7 +92,7 @@ Ext.define('smiley360.view.UploadPhoto', {
                                 },
                                 failure: function (error, response)
                                 {
-                                    Ext.Msg.alert(error, response.message)
+                                    Ext.Msg.alert(error, response.message);
                                 }
                             }
                         },
