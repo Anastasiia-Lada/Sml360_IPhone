@@ -100,32 +100,32 @@
     //    xfbml: false,           // Look for social plugins on the page
     //});
 
-    FB.Event.subscribe('auth.login', function (response) {
-        alert('auth.login event');
-        saved_controller_obj.tryLoginUser();
-    });
-
-    FB.Event.subscribe('auth.logout', function (response) {
-        alert('auth.logout event');
-    });
-
-    FB.Event.subscribe('auth.sessionChange', function (response) {
-        alert('auth.sessionChange event');
-    });
-
-    FB.Event.subscribe('auth.statusChange', handleStatusChange);
-
-    //FB.Event.subscribe('auth.statusChange', function (response) {
-    //    alert('auth.statusChange event');
+    //FB.Event.subscribe('auth.login', function (response) {
+    //    alert('auth.login event');
+    //    saved_controller_obj.tryLoginUser();
     //});
 
-    FB.Event.subscribe('auth.authResponseChange', handleStatusChange);
-        //function (response) {
-            //alert('auth.ResponseChange');
-            //alert(response.status);
-            //alert(response.authResponse.accessToken);// + '<br>' + response.authResponse.expiresIn + '<br>' + response.authResponse.userID);
+    //FB.Event.subscribe('auth.logout', function (response) {
+    //    alert('auth.logout event');
+    //});
+
+    //FB.Event.subscribe('auth.sessionChange', function (response) {
+    //    alert('auth.sessionChange event');
+    //});
+
+    //FB.Event.subscribe('auth.statusChange', handleStatusChange);
+
+    ////FB.Event.subscribe('auth.statusChange', function (response) {
+    ////    alert('auth.statusChange event');
+    ////});
+
+    //FB.Event.subscribe('auth.authResponseChange', handleStatusChange);
+    //    //function (response) {
+    //        //alert('auth.ResponseChange');
+    //        //alert(response.status);
+    //        //alert(response.authResponse.accessToken);// + '<br>' + response.authResponse.expiresIn + '<br>' + response.authResponse.userID);
             
-        //});
+    //    //});
 
     var saved_controller_obj = {};
     var friendIDs = [];
