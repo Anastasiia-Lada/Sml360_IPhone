@@ -31,8 +31,7 @@ Ext.define('smiley360.controller.Share',
 	        };
 	        oImage.onload = function ()
 	        {
-	            var myMask = new Ext.LoadMask(me, { message: "Please wait..." });
-	            myMask.show();
+	            Ext.Viewport.setMasked(true);
 	            var oCanvas = canvPreview;
 	            var oContext = oCanvas.getContext('2d');
 	            var widthMultiplier = 1;
@@ -88,7 +87,7 @@ Ext.define('smiley360.controller.Share',
 	                {
 	                    if (this.readyState === 4)
 	                    {
-	                        myMask.hide();
+	                        Ext.Viewport.setMasked(false);
 	                        if (Ext.Array.indexOf(me.getDefaultSuccessCodes(), parseInt(this.status)) !== -1)
 	                        {
 	                            var response = me.decodeResponse(this);
