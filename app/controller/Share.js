@@ -31,7 +31,7 @@ Ext.define('smiley360.controller.Share',
 	        };
 	        oImage.onload = function ()
 	        {
-	            Ext.Viewport.setMasked(true);
+	            (me.up('#xView') ? me.up('#xView') : me.up('#xReviewView')).setMasked(true);
 	            var oCanvas = canvPreview;
 	            var oContext = oCanvas.getContext('2d');
 	            var widthMultiplier = 1;
@@ -70,6 +70,7 @@ Ext.define('smiley360.controller.Share',
 	            canv.setAttribute('width', nWidth);
 	            canv.setAttribute('height', nHeight);
 	            msinContext.drawImage(this, 0, 0, nWidth, nHeight);
+	            me.reset();
 	            var str = canv.toDataURL("image/jpeg").replace(/data:.*?base64,/g, '');
 	            var http = new XMLHttpRequest();
 	            if (http.upload)
@@ -87,7 +88,7 @@ Ext.define('smiley360.controller.Share',
 	                {
 	                    if (this.readyState === 4)
 	                    {
-	                        Ext.Viewport.setMasked(false);
+	                        (me.up('#xView') ? me.up('#xView') : me.up('#xReviewView')).setMasked(false);
 	                        if (Ext.Array.indexOf(me.getDefaultSuccessCodes(), parseInt(this.status)) !== -1)
 	                        {
 	                            var response = me.decodeResponse(this);
