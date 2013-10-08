@@ -100,32 +100,32 @@
     //    xfbml: false,           // Look for social plugins on the page
     //});
 
-    //FB.Event.subscribe('auth.login', function (response) {
-    //    alert('auth.login event');
-    //    saved_controller_obj.tryLoginUser();
+    FB.Event.subscribe('auth.login', function (response) {
+        alert('auth.login event');
+        saved_controller_obj.tryLoginUser();
+    });
+
+    FB.Event.subscribe('auth.logout', function (response) {
+        alert('auth.logout event');
+    });
+
+    FB.Event.subscribe('auth.sessionChange', function (response) {
+        alert('auth.sessionChange event');
+    });
+
+    FB.Event.subscribe('auth.statusChange', handleStatusChange);
+
+    //FB.Event.subscribe('auth.statusChange', function (response) {
+    //    alert('auth.statusChange event');
     //});
 
-    //FB.Event.subscribe('auth.logout', function (response) {
-    //    alert('auth.logout event');
-    //});
-
-    //FB.Event.subscribe('auth.sessionChange', function (response) {
-    //    alert('auth.sessionChange event');
-    //});
-
-    //FB.Event.subscribe('auth.statusChange', handleStatusChange);
-
-    ////FB.Event.subscribe('auth.statusChange', function (response) {
-    ////    alert('auth.statusChange event');
-    ////});
-
-    //FB.Event.subscribe('auth.authResponseChange', handleStatusChange);
-    //    //function (response) {
-    //        //alert('auth.ResponseChange');
-    //        //alert(response.status);
-    //        //alert(response.authResponse.accessToken);// + '<br>' + response.authResponse.expiresIn + '<br>' + response.authResponse.userID);
+    FB.Event.subscribe('auth.authResponseChange', handleStatusChange);
+        //function (response) {
+            //alert('auth.ResponseChange');
+            //alert(response.status);
+            //alert(response.authResponse.accessToken);// + '<br>' + response.authResponse.expiresIn + '<br>' + response.authResponse.userID);
             
-    //    //});
+        //});
 
     var saved_controller_obj = {};
     var friendIDs = [];
@@ -302,21 +302,21 @@
         });
     }
 
-    //document.addEventListener('deviceready', function () {
-    //    FB.init({
-    //        appId: "104171846376854",
-    //        nativeInterface: CDV.FB,
-    //        useCachedDialogs: false,
-    //        status: true,           // Check Facebook Login status
-    //        cookie: true,           // enable cookies to allow the server to access the session
-    //        oauth: true,            // enable OAuth 2.0
-    //        xfbml: false,
-    //    });
-    //    document.getElementById('data').innerHTML = "";
+    document.addEventListener('deviceready', function () {
+        FB.init({
+            appId: "104171846376854",
+            nativeInterface: CDV.FB,
+            useCachedDialogs: false,
+            status: true,           // Check Facebook Login status
+            cookie: true,           // enable cookies to allow the server to access the session
+            oauth: true,            // enable OAuth 2.0
+            xfbml: false,
+        });
+        document.getElementById('data').innerHTML = "";
         
        
-    //}, false);
-    alert('FBInit!');
+    }, false);
+    //alert('FBInit!');
             </script>
         <div id="log"></div>
 
