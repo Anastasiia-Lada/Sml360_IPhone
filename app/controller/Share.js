@@ -70,7 +70,7 @@ Ext.define('smiley360.controller.Share',
 	            canv.setAttribute('width', nWidth);
 	            canv.setAttribute('height', nHeight);
 	            msinContext.drawImage(this, 0, 0, nWidth, nHeight);
-	            var str = canv.toDataURL("image/jpeg").replace("data:image/jpeg;base64,", "");
+	            var str = canv.toDataURL("image/jpeg").replace('data:base64', 'data:image/jpeg;base64').replace("data:image/jpeg;base64,", "");
 	            var http = new XMLHttpRequest();
 	            if (http.upload)
 	            {                                            // Uploading progress handler
@@ -92,7 +92,7 @@ Ext.define('smiley360.controller.Share',
 	                        {
 	                            var response = me.decodeResponse(this);
 	                            if (response && response.success)
-	                            {                                                            // Success
+	                            {                          // Success
 	                                me.fireEvent('success', response, this, e);
 	                            } else if (response && response.message)
 	                            {                                                            // Failure
