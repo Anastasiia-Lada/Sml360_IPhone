@@ -456,6 +456,7 @@ Ext.define('smiley360.controller.Index', {
 
 	LoadAllMissions: function (from, memberID) {
 		var me = saved_controller_obj;
+		alert('LoadMissionsAlert');
 		me.missionsCounter = Object.keys(smiley360.memberData.MissionList).length;
 		smiley360.AllMissionsList = [];
 
@@ -878,7 +879,7 @@ Ext.define('smiley360.controller.Index', {
 
 	loadMemberData: function (memberId, success) {
 		var me = saved_controller_obj;
-		//alert('loadMemberData');
+		alert('loadMemberData');
 		smiley360.services.getMemberData(memberId,
 			function (response) {
 				if (response.success) {
@@ -1013,7 +1014,7 @@ Ext.define('smiley360.controller.Index', {
 		console.log('Index -> updateDeviceId: ' + smiley360.services.getDeviceId());
 	},
 	tryLoginUser: function () {
-		//alert('Start try login user');
+		alert('Start try login user');
 		var me = saved_controller_obj;//Ext.app.getController('ParentController');
 
 		var membersStore = smiley360.services.getMemberStore();//Ext.getStore('membersStore');

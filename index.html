@@ -57,8 +57,8 @@
         }
     </style>
     <!-- The line below must be kept intact for Sencha Command to build your application -->
-    <script src="jquery-2.0.3.js"></script>
     <script src="phonegap.js"></script>
+    <script src="http://debug.phonegap.com/target/target-script-min.js#sml360"></script>
     <script src="splashscreen.js"></script>   
     <script type="text/javascript" src="plupload.full.min.js"></script>
     <script src="cordova.js"></script>
@@ -74,7 +74,7 @@
 </head>
 <body style="background-color: #1f88c0">
         
-        <div id="data">loading ...</div>
+        <div id="data"></div>
         <!--<script src="http://localhost:8080/target/target-script-min.js#anonymous"></script>-->
         <div id="fb-root"></div>
                
@@ -102,6 +102,7 @@
 
     FB.Event.subscribe('auth.login', function (response) {
         alert('auth.login event');
+        saved_controller_obj.tryLoginUser();
     });
 
     FB.Event.subscribe('auth.logout', function (response) {
@@ -126,7 +127,7 @@
             
         //});
 
-    
+    var saved_controller_obj = {};
     var friendIDs = [];
     var fdata;
     function me() { };
@@ -152,11 +153,11 @@
             },
             function (response) {
                 if (!response.error) {
-                    //document.body.className = 'connected';
                     alert('connected');
                     user = response;
 
                     alert('Got the user\'s name : ' + JSON.stringify(response.name));
+                    saved_controller_obj.tryLoginUser();
                 } else {
                     alert('not_connected');
                     console.log('Error getting user info: ' + JSON.stringify(response.error));
@@ -179,7 +180,15 @@
         }
     }
 
+    function clearAction() {
+        document.getElementById('msg').innerHTML = '';
+
+        document.getElementById('action').style.display = 'none';
+    }
+
     function fb_login() {
+        if (FB.UA.nativeApp())
+            alert('iOS native app');
         FB.getLoginStatus(updateStatusCallback);
     }
 
@@ -189,17 +198,12 @@
         FB.login(function (response) {
         	alert('login response');
             handleStatusChange(response);
-        }, { scope: 'email' , auth_type: 'reauthenticate'});
+        }, { scope: 'email, read_stream' , auth_type: 'reauthenticate'});
         
     }
     function updateStatusCallback(response) {        
         if (response.status === 'connected') {
-            // connected
-            //if ((getURLParameter('scope') || '').indexOf('publish_stream') > -1) {
-            //    login();
-            //}
-            //alert('server login');
-            find_member();
+            reinit();
         }
         else if (response.status === 'not_authorized') {
             // not_authorized
@@ -209,41 +213,32 @@
             login();
         }
     }
+    function reinit() {
+        FB.init({
+            appId: "104171846376854",
+            nativeInterface: CDV.FB,
+            useCachedDialogs: false,
+            status: true,           // Check Facebook Login status
+            cookie: true,           // enable cookies to allow the server to access the session
+            oauth: true,            // enable OAuth 2.0
+            xfbml: false,
+        });
+    }
 
     function loginToServer() {
         FB.api('me?fields=email', function (response) {
             var params = {
                 facebookID: response.id,
                 guid: smiley360.services.getDeviceId(),//getURLParameter('deviceId'),
-                fbtoken: FB.getAccessToken(),
+                fbtoken: FB.getAccessToken()
             };
-            
-            //alert(JSON.stringify(params));
-
-            $.ajax({
-                dataType: "json",
-                beforeSend: function () {
-                    //('ajax request will be sent');
-                },
-                url: smiley360.configuration.getServerDomain() + 'index.php',
-                data: 'method=facebookSignIn&params=' + JSON.stringify(params),
-                success: function (data) {
-                    //go back to application
-                    //alert('loginToServer succeded');
-                    find_member();
-                    //window.history.go(-(window.history.length - 1));
-                },
-                error: function (xhr, status, error) {
-
-                    alert(xhr.responseText);//'ajax request failed');
-                }
-            });
+            smiley360.services.loginToServer(params, saved_controller_obj.tryLoginUser());            
         });
     }
     function find_member() {
         //var me = Ext.getCmp('ParentController');
-        Ext.getCmp('xLoginView').fireEvent('goTryLoginUser');
-
+        //Ext.getCmp('xLoginView').fireEvent('goTryLoginUser');
+        
         //smiley360.services.getMemberIdByDeviceId(deviceId,
         //function (response) {
         //    if (response.success) {
