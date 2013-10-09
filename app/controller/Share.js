@@ -17,124 +17,128 @@ Ext.define('smiley360.controller.Share',
 	{
 	    'share.upload': function (command, me)
 	    {
-	        var previewSize = { w: 150, h: 150 };
-	        var mainSize = { w: 800, h: 800 };
-	        var oFileIn = me.fileElement.dom;
-	        var canvPreview = me.up().down('[xtype=label]').element.dom.firstChild.firstChild;
-	        var canv = document.createElement('canvas');
-	        var oError = null;
-	        var oFileReader = new FileReader();
-	        var oImage = new Image();
-	        oFileReader.onload = function (e)
+	        me.on('ready', function ()
 	        {
-	            oImage.src = e.target.result.replace('data:base64', 'data:image/jpeg;base64');
-	        };
-	        oImage.onload = function ()
-	        {
-	            // if (me.up('#xView'))
-	            (me.up('#xView') ? me.up('#xView') : me.up('#xReviewView')).setMasked({ message: 'Please wait, image is uploading.' });
-	            var oCanvas = canvPreview;
-	            var oContext = oCanvas.getContext('2d');
-	            var widthMultiplier = 1;
-	            if (this.width > previewSize.w)
+	            var previewSize = { w: 150, h: 150 };
+	            var mainSize = { w: 800, h: 800 };
+	            var oFileIn = me.fileElement.dom;
+	            var canvPreview = me.up().down('[xtype=label]').element.dom.firstChild.firstChild;
+	            var canv = document.createElement('canvas');
+	            var oError = null;
+	            var oFileReader = new FileReader();
+	            var oImage = new Image();
+	            oFileReader.onload = function (e)
 	            {
-	                widthMultiplier = previewSize.w / this.width;
-	            }
-	            var nWidth = this.width * widthMultiplier;
-	            var nHeight = this.height * widthMultiplier;
-	            var heightMultiplier = 1;
-	            if (nHeight > previewSize.h)
+	                oImage.src = e.target.result.replace('data:base64', 'data:image/jpeg;base64');
+	            };
+	            oImage.onload = function ()
 	            {
-	                heightMultiplier = previewSize.h / nHeight;
-	            }
-	            nWidth *= heightMultiplier;
-	            nHeight *= heightMultiplier;
-	            oCanvas.setAttribute('width', nWidth);
-	            oCanvas.setAttribute('height', nHeight);
-	            oContext.drawImage(this, 0, 0, nWidth, nHeight);
+	                me.up('[name=maskedPanel]').setMasked({ message: 'Please wait, image is uploading.' });
+	                var oCanvas = canvPreview;
+	                var oContext = oCanvas.getContext('2d');
+	                var widthMultiplier = 1;
+	                if (this.width > previewSize.w)
+	                {
+	                    widthMultiplier = previewSize.w / this.width;
+	                }
+	                var nWidth = this.width * widthMultiplier;
+	                var nHeight = this.height * widthMultiplier;
+	                var heightMultiplier = 1;
+	                if (nHeight > previewSize.h)
+	                {
+	                    heightMultiplier = previewSize.h / nHeight;
+	                }
+	                nWidth *= heightMultiplier;
+	                nHeight *= heightMultiplier;
+	                oCanvas.setAttribute('width', nWidth);
+	                oCanvas.setAttribute('height', nHeight);
+	                oContext.drawImage(this, 0, 0, nWidth, nHeight);
 
-	            var msinContext = canv.getContext('2d');
-	            widthMultiplier = 1;
-	            if (this.width > mainSize.w)
-	            {
-	                widthMultiplier = mainSize.w / this.width;
-	            }
-	            nWidth = this.width * widthMultiplier;
-	            nHeight = this.height * widthMultiplier;
-	            heightMultiplier = 1;
-	            if (nHeight > mainSize.h)
-	            {
-	                heightMultiplier = mainSize.h / nHeight;
-	            }
-	            nWidth *= heightMultiplier;
-	            nHeight *= heightMultiplier;
-	            canv.setAttribute('width', nWidth);
-	            canv.setAttribute('height', nHeight);
-	            msinContext.drawImage(this, 0, 0, nWidth, nHeight);
-	            var str = canv.toDataURL("image/jpeg").replace(/data:.*?base64,/g, '');
-	            var http = new XMLHttpRequest();
-	            if (http.upload)
-	            {                                            // Uploading progress handler
-	                http.upload.onprogress = function (e)
+	                var msinContext = canv.getContext('2d');
+	                widthMultiplier = 1;
+	                if (this.width > mainSize.w)
 	                {
-	                    if (e.lengthComputable)
-	                    {
-	                        var percentComplete = (e.loaded / e.total) * 100;
-	                        me.setBadgeText(percentComplete.toFixed(0) + '%');
-	                    }
-	                };
-	                http.onreadystatechange = function (e)
+	                    widthMultiplier = mainSize.w / this.width;
+	                }
+	                nWidth = this.width * widthMultiplier;
+	                nHeight = this.height * widthMultiplier;
+	                heightMultiplier = 1;
+	                if (nHeight > mainSize.h)
 	                {
-	                    if (this.readyState === 4)
+	                    heightMultiplier = mainSize.h / nHeight;
+	                }
+	                nWidth *= heightMultiplier;
+	                nHeight *= heightMultiplier;
+	                canv.setAttribute('width', nWidth);
+	                canv.setAttribute('height', nHeight);
+	                msinContext.drawImage(this, 0, 0, nWidth, nHeight);
+	                var str = canv.toDataURL("image/jpeg").replace(/data:.*?base64,/g, '');
+	                var http = new XMLHttpRequest();
+	                if (http.upload)
+	                {                                            // Uploading progress handler
+	                    http.upload.onprogress = function (e)
 	                    {
-	                        if (me.up('#xView'))
-	                            (me.up('#xView') ? me.up('#xView') : me.up('#xReviewView')).setMasked(false);
-	                        me.reset();
-	                        if (Ext.Array.indexOf(me.getDefaultSuccessCodes(), parseInt(this.status)) !== -1)
+	                        if (e.lengthComputable)
 	                        {
-	                            var response = me.decodeResponse(this);
-	                            if (response && response.success)
-	                            {                          // Success
-	                                me.fireEvent('success', response, this, e);
-	                            } else if (response && response.message)
-	                            {                                                            // Failure
-	                                me.fireEvent('failure', response.message, response, this, e);
-	                            } else
-	                            {                                                            // Failure
-	                                me.fireEvent('failure', 'Unknown error', response, this, e);
-	                            }
-	                        } else
-	                        {                                                        // Failure
-	                            me.fireEvent('failure', this.status + ' ' + this.statusText, response, this, e);
+	                            var percentComplete = (e.loaded / e.total) * 100;
+	                            me.setBadgeText(percentComplete.toFixed(0) + '%');
 	                        }
+	                    };
+	                    http.onreadystatechange = function (e)
+	                    {
+	                        if (this.readyState === 4)
+	                        {
+	                            if (Ext.Array.indexOf(me.getDefaultSuccessCodes(), parseInt(this.status)) !== -1)
+	                            {
+	                                var response = me.decodeResponse(this);
+	                                if (response && response.success)
+	                                {                          // Success
+	                                    me.fireEvent('success', response, this, e);
+	                                } else if (response && response.message)
+	                                {                                                            // Failure
+	                                    me.fireEvent('failure', response.message, response, this, e);
+	                                } else
+	                                {                                                            // Failure
+	                                    me.fireEvent('failure', 'Unknown error', response, this, e);
+	                                }
+	                            } else
+	                            {                                                        // Failure
+	                                me.fireEvent('failure', this.status + ' ' + this.statusText, response, this, e);
+	                            }
+	                            me.up('[name=maskedPanel]').setMasked(false);
+	                            me.changeState('browse');
+	                        }
+	                    };
+	                    http.upload.onerror = function (e)
+	                    {
+	                        me.up('[name=maskedPanel]').setMasked(false);
 	                        me.changeState('browse');
-	                    }
-	                };
-	                http.upload.onerror = function (e)
+	                        me.fireEvent('failure', this.status + ' ' + this.statusText, {}, this, e);
+	                    };
+	                }
+	                http.open('POST', smiley360.configuration.getServerDomain() + 'getfile.php?memberID='
+                     + smiley360.services.getMemberId() + '&deviceID=' + smiley360.services.getDeviceId());
+	                function getForm()
 	                {
-	                    (me.up('#xView') ? me.up('#xView') : me.up('#xReviewView')).setMasked(false);
-	                    me.reset();
-	                    me.fireEvent('failure', this.status + ' ' + this.statusText, {}, this, e);
-	                };
-	            }
-	            http.open('POST', smiley360.configuration.getServerDomain() + 'getfile.php?memberID='
-                 + smiley360.services.getMemberId() + '&deviceID=' + smiley360.services.getDeviceId());
-	            function getForm()
+	                    var form = new FormData();
+	                    form.append('imageDataString', str);
+	                    return form;
+	                }
+	                http.send(getForm());
+	            };
+	            oFileIn.onchange = function ()
 	            {
-	                var form = new FormData();
-	                form.append('imageDataString', str);
-	                return form;
-	            }
-	            http.send(getForm());
-	        };
-	        oFileIn.onchange = function ()
-	        {
-	            var oFile = this.files[0];
-	            var rFltr = /^(?:image\/bmp|image\/cis\-cod|image\/gif|image\/ief|image\/jpeg|image\/jpeg|image\/jpeg|image\/pipeg|image\/png|image\/svg\+xml|image\/tiff|image\/x\-cmu\-raster|image\/x\-cmx|image\/x\-icon|image\/x\-portable\-anymap|image\/x\-portable\-bitmap|image\/x\-portable\-graymap|image\/x\-portable\-pixmap|image\/x\-rgb|image\/x\-xbitmap|image\/x\-xpixmap|image\/x\-xwindowdump)$/i
+	                var oFile = this.files[0];
+	                //var rFltr = /^(?:image\/bmp|image\/cis\-cod|image\/gif|image\/ief|image\/jpeg|image\/jpeg|image\/jpeg|image\/pipeg|image\/png|image\/svg\+xml|image\/tiff|image\/x\-cmu\-raster|image\/x\-cmx|image\/x\-icon|image\/x\-portable\-anymap|image\/x\-portable\-bitmap|image\/x\-portable\-graymap|image\/x\-portable\-pixmap|image\/x\-rgb|image\/x\-xbitmap|image\/x\-xpixmap|image\/x\-xwindowdump)$/i
+	                me.hide();
+	                oFileReader.readAsDataURL(oFile);
+	                me.up().down('[xtype=label]').show();
+	            };
+	            var oFile = oFileIn.files[0];
 	            me.hide();
 	            oFileReader.readAsDataURL(oFile);
 	            me.up().down('[xtype=label]').show();
-	        };
+	        });
 	    }
 	},
     init: function ()

@@ -105,15 +105,15 @@ items: [
 Ext.define('Ext.ux.Fileup', {
     extend: 'Ext.Button',
     xtype: 'fileupload',
-    
+
     requires: [
         'Ext.MessageBox',
         'Ext.device.Notification',
         'Ext.Array'
     ],
-    
+
     template: [
-        
+
         // Default button elements (do not change!)
         {
             tag: 'span',
@@ -131,14 +131,14 @@ Ext.define('Ext.ux.Fileup', {
             reference: 'textElement',
             hidden: true
         },
-        
+
         // Loading spinner
         {
             tag: 'div',
             className: Ext.baseCSSPrefix + 'loading-spinner',
             reference: 'loadingElement',
             hidden: true,
-            
+
             children: [
                 {
                     tag: 'span',
@@ -158,13 +158,13 @@ Ext.define('Ext.ux.Fileup', {
                 }
             ]
         },
-                
+
         // Hidden file element
         {
             tag: 'form',
             reference: 'formElement',
-            hidden: false,            
-            
+            hidden: false,
+
             children: [
                 {
                     tag: 'input',
@@ -178,7 +178,7 @@ Ext.define('Ext.ux.Fileup', {
             ]
         }
     ],
-    
+
     // Default button states config
     defaultStates: {
         browse: {
@@ -200,193 +200,222 @@ Ext.define('Ext.ux.Fileup', {
             loading: true
         }
     },
-    
+
     // Current button state
     currentState: null,
-    
+
     config: {
         cls: Ext.baseCSSPrefix + 'fileup',
-        
+
         /**
          * @cfg {String} name Input element name, check on server for $_FILES['userfile']
-         */        
+         */
         name: 'userfile',
-        
+
         /**
          * @cfg {Boolean} autoUpload 
          * If true then "uploading" state will start after "ready" event automatically
          */
         autoUpload: false,
-        
+
         /**
          * @cfg {Object} states 
          */
         states: true,
-        
+
         /**
          * @cfg {Boolean} loadAsDataUrl
          */
         loadAsDataUrl: false,
-        
+
         /**
          * @cfg {String} url URL to uploading handler script on server
          */
         url: '',
-        
+
         /**
          * @cfg {Boolean} signRequestEnabled Enable or disable request signing feature
          */
         signRequestEnabled: false,
-        
+
         /**
          * @cfg {String} signHeader Signing token header name
          */
         signHeader: '',
-        
+
         /**
          * @cfg {Array} defaultSuccessCodes Http response success codes
          */
         defaultSuccessCodes: [200, 201]
     },
-    
+
     // @private
-    applyStates: function(states) {
+    applyStates: function (states)
+    {
         var me = this;
-        
-        if (states) {
-            
-            if (Ext.isObject(states)) {
-                
+
+        if (states)
+        {
+
+            if (Ext.isObject(states))
+            {
+
                 // Merge custom config with default
                 return Ext.merge({}, me.defaultStates, states);
-            } else {
+            } else
+            {
                 return me.defaultStates;
             }
-        } else {
+        } else
+        {
             return me.defaultStates;
         }
     },
-    
+
     // @private
-    initialize: function() {
+    initialize: function ()
+    {
         var me = this;
         me.callParent();
-        
-        me.fileElement.dom.onchange = function() {
+
+        me.fileElement.dom.onchange = function ()
+        {
             me.onChanged.apply(me, arguments);
         };
-        
+
         me.on({
             scope: me,
             buffer: 250,// Avoid multiple tap 
             tap: me.onButtonTap
         });
-        
+
         // Stup initial button state
         me.changeState('browse');
     },
-    
+
     // @private
-    onButtonTap: function() {
+    onButtonTap: function ()
+    {
         var me = this;
-        
-        switch (me.currentState) {
-            
+
+        switch (me.currentState)
+        {
+
             // Currently we handle tap event while button in ready state
             // because in all other states button is not accessible
-            case 'ready':                
+            case 'ready':
                 me.changeState('uploading');
                 var file = me.fileElement.dom.files[0];
-                                
-                if (!me.getLoadAsDataUrl()) {
+
+                if (!me.getLoadAsDataUrl())
+                {
                     me.fireEvent('uploadstart', file);
-                    me.doUpload(file);                
-                } else {
+                    me.doUpload(file);
+                } else
+                {
                     me.doLoad(file);
                 }
                 break;
         }
     },
-    
+
     // @private
-    onChanged: function(e) {
+    onChanged: function (e)
+    {
         var me = this;
-        
-        if (e.target.files.length > 0) {
-            me.fireAction('ready', [e.target.files[0]], function() {
+
+        if (e.target.files.length > 0)
+        {
+            me.fireAction('ready', [e.target.files[0]], function ()
+            {
                 me.changeState('ready');
             }, me);
-        } else {
+        } else
+        {
             Ext.device.Notification.show({
                 title: 'Error',
                 message: 'File selected but not accessible',
                 buttons: Ext.MessageBox.OK,
-                callback: function() {
+                callback: function ()
+                {
                     me.changeState('browse');
                 }
             });
         }
     },
-    
+
     // @private
-    changeState: function(state) {
+    changeState: function (state)
+    {
         var me = this;
         var states = me.getStates();
-        
-        if (Ext.isDefined(states[state])) {
-            
+
+        if (Ext.isDefined(states[state]))
+        {
+
             // Common tasks for all states
-            if (states[state].text) {
+            if (states[state].text)
+            {
                 me.setText(states[state].text);
-            } else {
+            } else
+            {
                 me.setText('');
             }
-            
-            if (states[state].cls) {
+
+            if (states[state].cls)
+            {
                 me.setCls(states[state].cls);
-            } else {
+            } else
+            {
                 me.setCls('');
             }
-            
-            if (states[state].ui) {
+
+            if (states[state].ui)
+            {
                 me.setUi(states[state].ui);
-            } else {
+            } else
+            {
                 me.setUi('normal');
             }
-            
-            if (states[state].loading) {
+
+            if (states[state].loading)
+            {
                 me.loadingElement.show();
-            } else {
+            } else
+            {
                 me.loadingElement.hide();
             }
-            
+
             // State specific tasks
-            switch (state) {
+            switch (state)
+            {
                 case 'browse':
                     me.currentState = 'browse';
-                    me.reset();                    
+                    me.reset();
                     break;
-                    
+
                 case 'ready':
                     me.currentState = 'ready';
                     me.fileElement.hide();
-                    
-                    if (me.getAutoUpload()) {
+
+                    if (me.getAutoUpload())
+                    {
                         me.onButtonTap();
-                    }                    
+                    }
                     break;
-                    
+
                 case 'uploading':
                     me.currentState = 'uploading';
                     break;
             }
-        } else {
+        } else
+        {
             // <debug>
-            Ext.Logger.warn('Config for FileUp state "'+ state +'" not found!');
+            Ext.Logger.warn('Config for FileUp state "' + state + '" not found!');
             // </debug>
         }
     },
-    
+
     /**
      * @private
      * @method doLoad
@@ -395,13 +424,16 @@ Ext.define('Ext.ux.Fileup', {
      * then you should listen for "loadsuccess" event
      * @param {Object} file Link to loaded file element
      */
-    doLoad: function(file) {
-        var me = this;                
+    doLoad: function (file)
+    {
+        var me = this;
         var reader = new FileReader();
 
-        reader.onerror = function(e) {
+        reader.onerror = function (e)
+        {
             var message;
-            switch (e.target.error.code) {
+            switch (e.target.error.code)
+            {
                 case e.target.error.NOT_FOUND_ERR:
                     message = 'File Not Found';
                     break;
@@ -420,129 +452,149 @@ Ext.define('Ext.ux.Fileup', {
         };
 
         canvas = document.createElement('canvas');
-		context = null;
-		
+        context = null;
+
         canvas.setAttribute("id", 'hiddenCanvas');
         canvas.width = 40;
         canvas.height = 40;
         //canvas.style.visibility = "hidden";
         document.body.appendChild(canvas);
 
-    	//get the context to use 
+        //get the context to use 
         context = canvas.getContext('2d');
 
         myimage = new Image();
-        myimage.setAttribute("id", "hiddenImage");        
-        myimage.onload = function () {
+        myimage.setAttribute("id", "hiddenImage");
+        myimage.onload = function ()
+        {
 
-        	context.drawImage(myimage, 0, 0, 40, 40);
+            context.drawImage(myimage, 0, 0, 40, 40);
         }
-    	//alert(Ext.get('hiddenImage').dom.src);
+        //alert(Ext.get('hiddenImage').dom.src);
         //alert(Ext.get('hiddenCanvas').getContext('2d'));
 
-        reader.onload = function (e) {
+        reader.onload = function (e)
+        {
 
-        	Ext.getCmp('xAddedImage').setSrc(this.result);        	
-        	
-        	myimage.src = this.result;
-        	
-        	me.doUpload(canvas);
+            Ext.getCmp('xAddedImage').setSrc(this.result);
+
+            myimage.src = this.result;
+
+            me.doUpload(canvas);
             me.fireEvent('loadsuccess', this.result, this, e);
             me.changeState('browse');
         };
-        
+
         // Read image file
         reader.readAsDataURL(file);
     },
-    
+
     /**
      * @private
      * @method doUpload
      * Upload selected file using XMLHttpRequest.
      * @param {Object} file Link to loaded file element
      */
-    doUpload: function(file) {
-        var me = this;        
+    doUpload: function (file)
+    {
+        var me = this;
         var http = new XMLHttpRequest();
-        
-        if (http.upload && http.upload.addEventListener) {
-            
+
+        if (http.upload && http.upload.addEventListener)
+        {
+
             // Uploading progress handler
-            http.upload.onprogress = function(e) {
-                if (e.lengthComputable) {
-                    var percentComplete = (e.loaded / e.total) * 100; 
+            http.upload.onprogress = function (e)
+            {
+                if (e.lengthComputable)
+                {
+                    var percentComplete = (e.loaded / e.total) * 100;
                     me.setBadgeText(percentComplete.toFixed(0) + '%');
                 }
             };
-            
+
             // Response handler
-            http.onreadystatechange = function (e) {
-                if (this.readyState === 4) {
-                    
-                    if(Ext.Array.indexOf(me.getDefaultSuccessCodes(), parseInt(this.status)) !== -1 ) {
-                        
+            http.onreadystatechange = function (e)
+            {
+                if (this.readyState === 4)
+                {
+
+                    if (Ext.Array.indexOf(me.getDefaultSuccessCodes(), parseInt(this.status)) !== -1)
+                    {
+
                         var response = me.decodeResponse(this);
-                        
-                        if (response && response.success) {
+
+                        if (response && response.success)
+                        {
                             // Success
                             me.fireEvent('success', response, this, e);
-                        } else if (response && response.message) {
+                        } else if (response && response.message)
+                        {
                             // Failure
                             me.fireEvent('failure', response.message, response, this, e);
-                        } else {
+                        } else
+                        {
                             // Failure
                             me.fireEvent('failure', 'Unknown error', response, this, e);
                         }
-                        
-                    } else {
-                        
+
+                    } else
+                    {
+
                         // Failure
                         me.fireEvent('failure', this.status + ' ' + this.statusText, response, this, e);
                     }
-                    
+
                     me.changeState('browse');
                 }
             };
-            
+
             // Error handler
-            http.upload.onerror = function(e) {
+            http.upload.onerror = function (e)
+            {
                 me.fireEvent('failure', this.status + ' ' + this.statusText, {}, this, e);
             };
         }
-        
+
         // Send form with file using XMLHttpRequest POST request
         http.open('POST', me.getUrl());
-        
-        if (me.getSignRequestEnabled()) {
-            
+
+        if (me.getSignRequestEnabled())
+        {
+
             // Sign the request and then send.
-            me.signRequest(http, function(http) {
-    
-              // Send the form.
-              http.send(me.getForm(file));
+            me.signRequest(http, function (http)
+            {
+
+                // Send the form.
+                http.send(me.getForm(file));
             });
-        } else {
-        	http.send(me.getForm(file));//http.send(me.getForm(file));
+        } else
+        {
+            http.send(me.getForm(file));//http.send(me.getForm(file));
         }
-        
+
     },
-    getFormCanvas: function (canvas) {
-    	var me = this;
-    	var formData = new FormData();
-    	alert('getFormCanvas');
-    	if (canvas.toBlob) {
-    		canvas.toBlob(
-				function (blob) {
-					// Do something with the blob object,
-					// e.g. creating a multipart form for file uploads:
-					
-					formData.append(me.getName(), blob);
-					/* ... */
+    getFormCanvas: function (canvas)
+    {
+        var me = this;
+        var formData = new FormData();
+        alert('getFormCanvas');
+        if (canvas.toBlob)
+        {
+            canvas.toBlob(
+				function (blob)
+				{
+				    // Do something with the blob object,
+				    // e.g. creating a multipart form for file uploads:
+
+				    formData.append(me.getName(), blob);
+				    /* ... */
 				},
 				'image/png'
 			);
-    	}
-    	return formData;
+        }
+        return formData;
     },
     /**
      * @method getForm
@@ -550,29 +602,31 @@ Ext.define('Ext.ux.Fileup', {
      *
      * @param {Object} file Link to loaded file element
      */
-    getForm: function(file) {
-      // Create FormData object
-      var form = new FormData();
+    getForm: function (file)
+    {
+        // Create FormData object
+        var form = new FormData();
 
-      // Add selected file to form
-      form.append(this.getName(), file);
+        // Add selected file to form
+        form.append(this.getName(), file);
 
-      // Return the form.
-      return form;
+        // Return the form.
+        return form;
     },
 
     /**
      * @method reset
      * Component reset
      */
-    reset: function() {
+    reset: function ()
+    {
         var me = this;
-        
+
         me.setBadgeText(null);
         me.formElement.dom.reset();
         me.fileElement.show();
     },
-    
+
     /**
      * @private
      * @method decodeResponse
@@ -581,10 +635,11 @@ Ext.define('Ext.ux.Fileup', {
      * @param {Object} response The response from the server to decode
      * @return {Object} The response to provide to the library
      */
-    decodeResponse: function(response) {
+    decodeResponse: function (response)
+    {
         return Ext.decode(response.responseText, true);
     },
-    
+
     /**
      * @private
      * @method signRequest
@@ -593,25 +648,29 @@ Ext.define('Ext.ux.Fileup', {
      * @param {Object} http The XHR request object.
      * @param {Function} callback Called when the request has been signed.
      */
-    signRequest: function(http, callback) {
+    signRequest: function (http, callback)
+    {
         var me = this;
-        var header = me.getSignHeader(); 
-        
-        if (!header) {
+        var header = me.getSignHeader();
+
+        if (!header)
+        {
             me.fireEvent('failure', 'Request signing header is not defined');
         }
-        
-        me.signProvider( 
-            function(token) {
+
+        me.signProvider(
+            function (token)
+            {
                 http.setRequestHeader(header, token);
                 callback(http);
             },
-            function(failureText) {
-                me.fireEvent('failure', 'Request signing is failed! ' + 
+            function (failureText)
+            {
+                me.fireEvent('failure', 'Request signing is failed! ' +
                                         failureText, {}, this);
             });
     },
-    
+
     /**
      * @private
      * @method signProvider
@@ -620,7 +679,8 @@ Ext.define('Ext.ux.Fileup', {
      * @param {Function} success Signing success callback
      * @param {Function} failure Signing failure callback
      */
-    signProvider: function(success, failure) {
+    signProvider: function (success, failure)
+    {
         success('default-token');// Default behaviour
     }
 });
