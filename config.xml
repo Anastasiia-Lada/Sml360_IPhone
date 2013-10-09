@@ -7,7 +7,7 @@
 	<name>Smiley360</name>
 	
 	<!-- Customize your app and platform with the preference element. -->
-	<preference name="phonegap-version" value="2.7.0" />
+	<preference name="phonegap-version" value="2.9.0" />
 	<preference name="orientation"                value="portrait" />
 	<!-- all: default means both landscape and portrait are enabled -->
 	<preference name="target-device"              value="universal" />
@@ -45,8 +45,8 @@
 	<gap:splash src="resources/images/loadingimage-r2.png" gap:platform="ios" width="1536" height="2008" />
 
 	<gap:plugin name="com.phonegap.plugins.facebookconnect">
-    		<param name="APP_ID" value="104171846376854" />
-    		<param name="APP_NAME" value="Smiley360 Staging" />
+    		<param name="APP_ID" value="213563938819286" />
+    		<param name="APP_NAME" value="SmileyTestInt" />
 	</gap:plugin>
 	<gap:url-scheme name="com.uat.smiley360" role="None">
   		
@@ -55,7 +55,7 @@
 				    <dict>
 				        <key>CFBundleURLSchemes</key>
 				        <array>
-				            <string>fb104171846376854</string>
+				            <string>fb213563938819286</string>
 				        </array>
 				    </dict>
 				</array>
