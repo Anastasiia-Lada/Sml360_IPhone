@@ -57,7 +57,7 @@ Ext.define('smiley360.view.ReviewForFender', {
                         id: 'xAddPhotoButton',
                         cls: 'popup-photo-button',
                         style: 'height: 30px; padding: 5px; margin-top: -3px; border: 0;',
-                        autoUpload: false,
+                        autoUpload: true,
                         states: {
                             browse: {
                                 text: 'ADD PHOTO'
@@ -68,10 +68,10 @@ Ext.define('smiley360.view.ReviewForFender', {
                             }
                         },
                         listeners: {
-                            painted: function (me)
-                            {
-                                this.fireEvent('share.command', 'share.upload', this);
-                            },
+                            /*  painted: function (me)
+                              {
+                                  this.fireEvent('share.command', 'share.upload', this);
+                              },*/
                             success: function (response)
                             {
                                 this.disable();

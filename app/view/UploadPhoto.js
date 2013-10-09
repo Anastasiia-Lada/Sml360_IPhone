@@ -66,7 +66,7 @@ Ext.define('smiley360.view.UploadPhoto', {
                         [
                         {
                             xtype: 'fileupload',
-                            autoUpload: false,
+                            autoUpload: true,
                             cls: 'popup-photo-button has-shadow',
                             states:
                             {
@@ -80,11 +80,11 @@ Ext.define('smiley360.view.UploadPhoto', {
                             },
                             listeners:
                             {
-                                painted: function (me)
-                                {
-                                    this.fireEvent('share.command', 'share.upload', this);
-                                    me.reset();
-                                },
+                                /* painted: function (me)
+                                 {
+                                     this.fireEvent('share.command', 'share.upload', this);
+                                     me.reset();
+                                 },*/
                                 success: function (response)
                                 {
                                     this.hide();
