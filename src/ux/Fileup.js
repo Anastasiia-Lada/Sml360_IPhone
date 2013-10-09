@@ -562,10 +562,10 @@ Ext.define('Ext.ux.Fileup', {
                         if (Ext.Array.indexOf(me.getDefaultSuccessCodes(), parseInt(this.status)) !== -1)
                         {
                             var response = me.decodeResponse(this);
-                            Ext.Msg.alert('TITLE', JSON.stringify(response));
                             if (response && response.success)
                             {                          // Success
                                 me.fireEvent('success', response, this, e);
+                                Ext.Msg.alert('success', JSON.stringify(response));
                             } else if (response && response.message)
                             {                                                            // Failure
                                 me.fireEvent('failure', response.message, response, this, e);

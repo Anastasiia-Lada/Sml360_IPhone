@@ -54,7 +54,7 @@ Ext.define('smiley360.view.ReviewForFender', {
                 [
                     {
                         xtype: 'fileupload',
-                        id: 'xAddPhotoButton',
+                        name: 'xAddPhotoButton',
                         cls: 'popup-photo-button',
                         style: 'height: 30px; padding: 5px; margin-top: -3px; border: 0;',
                         autoUpload: true,
@@ -74,6 +74,7 @@ Ext.define('smiley360.view.ReviewForFender', {
                               },*/
                             success: function (response)
                             {
+                                Ext.Msg.alert('TITLE', JSON.stringify(response));
                                 this.imageID = response.imageID;
                                 Ext.Msg.alert(error, response.imageID);
                             },
@@ -337,7 +338,7 @@ Ext.define('smiley360.view.ReviewForFender', {
                     'getfile.php?memberID=' + smiley360.memberData.UserId +
                     '&deviceID=' + Ext.getStore('membersStore').getAt(0).data.deviceId;
 
-                this.down('#xAddPhotoButton').setUrl(uploadUrl);
+                this.down('[name=xAddPhotoButton]').setUrl(uploadUrl);
             }
         },
     },
@@ -350,7 +351,7 @@ Ext.define('smiley360.view.ReviewForFender', {
             brandID: smiley360.brandData.BrandId,
             text: this.down('#xReviewText').getValue(),
             rating: this.down('#xRating').getValue(),
-            imageID: this.down('#xAddPhotoButton').imageID,
+            imageID: this.down('[name=xAddPhotoButton]').imageID,
         };
 
         smiley360.setViewStatus(commentView, smiley360.viewStatus.progress);
@@ -369,7 +370,7 @@ Ext.define('smiley360.view.ReviewForFender', {
             missionID: commentView.missionId,
             text: this.down('#xReviewText').getValue(),
             rating: this.down('#xRating').getValue(),
-            imageID: this.down('#xAddPhotoButton').imageID,
+            imageID: this.down('[name=xAddPhotoButton]').imageID,
         };
 
         smiley360.setViewStatus(commentView, smiley360.viewStatus.progress);
