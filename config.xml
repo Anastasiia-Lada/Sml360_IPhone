@@ -31,7 +31,6 @@
 	<gap:splash src="resources/images/loadingimage_x1_iphone.png" gap:platform="ios" width="320" height="480" />
 	<gap:splash src="resources/images/iphone4LoadingImage.png" gap:platform="ios" width="640" height="960" />
 	<gap:splash src="resources/images/iPhone5LoadingImage.png" gap:platform="ios" width="640" height="1136" />
-	<gap:splash src="resources/images/loadingimage-r2.png" gap:platform="ios" width="1024" height="748" />
 	<gap:splash src="resources/images/loadingimage-r2.png" gap:platform="ios" width="768" height="1004" />
 
 	<gap:splash src="resources/images/ldpi.png"  gap:platform="android" gap:density="ldpi" />
@@ -45,9 +44,12 @@
 	<gap:splash src="resources/images/loadingimage-r2.png" gap:platform="ios" width="1536" height="2008" />
 
 	<gap:plugin name="com.phonegap.plugins.facebookconnect">
-    		<param name="APP_ID" value="104171846376854" />
-    		<param name="APP_NAME" value="Smiley360 Staging" />
+    		<param name="APP_ID" value="213563938819286" />
+    		<param name="APP_NAME" value="SmileyTestInt" />
 	</gap:plugin>
+	<feature name="org.apache.cordova.facebook.Connect">
+   		<param name="ios-package" value="FacebookConnectPlugin" />
+	</feature>
 	<gap:url-scheme name="com.uat.smiley360" role="None">
   		
  			<scheme><key>CFBundleURLTypes</key>
@@ -55,7 +57,7 @@
 				    <dict>
 				        <key>CFBundleURLSchemes</key>
 				        <array>
-				            <string>fb104171846376854</string>
+				            <string>fb213563938819286</string>
 				        </array>
 				    </dict>
 				</array>
