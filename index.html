@@ -119,6 +119,11 @@
 
     var permissions = ['email', 'offline_access', 'read_stream'];
 
+    function handleOpenURL(url) {
+    window.setTimeout(function () {
+        window.alert('handleOpenURL: ' + url);       
+    }, 1000);
+    }
 
     function fb_login() {
         FB.getLoginStatus(updateStatusCallback, true);
@@ -223,7 +228,7 @@
         });
         document.getElementById('data').innerHTML = "";
         navigator.splashscreen.hide();
-        
+
         if ('invokeString' in window) {
              window.alert('onDeviceReady: ' + invokeString);
             } else {

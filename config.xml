@@ -44,17 +44,13 @@
 	<gap:splash src="resources/images/loadingimage-r2.png" gap:platform="ios" width="2048" height="1496" />
 	<gap:splash src="resources/images/loadingimage-r2.png" gap:platform="ios" width="1536" height="2008" />
 
-	<gap:plugin name="com.phonegap.plugins.facebookconnect">
+	<gap:plugin name="FacebookConnect">
     		<param name="APP_ID" value="213563938819286" />
     		<param name="APP_NAME" value="SmileyTestInt" />
 	</gap:plugin>
 	<gap:url-scheme name="com.phonegap.smiley360" role="None">
   		
- 			<scheme><key>FacebookDisplayName</key>
-						<string>SmileyTestInt</string>
-					<key>FacebookAppID</key>
-						<string>213563938819286</string>
-					<key>CFBundleURLTypes</key>
+ 			<scheme><key>CFBundleURLTypes</key>
 				<array>
 	    				<dict>
 	        				<key>CFBundleURLName</key>
