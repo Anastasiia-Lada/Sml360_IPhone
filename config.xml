@@ -48,19 +48,7 @@
     		<param name="APP_NAME" value="SmileyTestInt" />
 	</gap:plugin>
 	
-	<gap:url-scheme name="com.uat.smiley360" role="None">
-  		
- 			<scheme><key>CFBundleURLTypes</key>
-				<array>
-				    <dict>
-				        <key>CFBundleURLSchemes</key>
-				        <array>
-				            <string>fb213563938819286</string>
-				        </array>
-				    </dict>
-				</array>
-			</scheme>
-	</gap:url-scheme>
+	
 	<!-- Define app icon for each platform. -->
 	<icon src="resources/icons/Icon.png" />	
 	<!--
