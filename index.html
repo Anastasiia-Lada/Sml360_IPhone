@@ -118,25 +118,10 @@
 
     var permissions = ['email', 'offline_access', 'read_stream'];
 
-    var op_url = 'http://www.google.com';
 
     function fb_login() {
-    	
-    	//openChildBrowser(op_url);
-        FB.getLoginStatus(updateStatusCallback, true);
+        FB.getLoginStatus(updateStatusCallback);
     }
-    //both of these should work
-    function openChildBrowser(url)                {
-    	 if (window.plugins.childBrowser != null)
-							alert('ChildBrowser exists!');
-                    try {
-                        childBrowser.showWebPage(url);
-                    }
-                    catch (err)
-                    {
-                        alert(err);						
-                    }
-   }
 
     function updateStatusCallback(response) {
         if (response.status === 'connected') {
@@ -180,7 +165,7 @@
     }
     function revoke() {
         FB.init({
-            appId: "213563938819286",
+            appId: "104171846376854",
             nativeInterface: CDV.FB,
             useCachedDialogs: false,
             status: true,           // Check Facebook Login status
@@ -227,7 +212,7 @@
 
     document.addEventListener('deviceready', function () {
         FB.init({
-            appId: "213563938819286",
+            appId: "104171846376854",
             nativeInterface: CDV.FB,
             useCachedDialogs: false,
             status: true,           // Check Facebook Login status
