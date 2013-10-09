@@ -223,6 +223,12 @@
         });
         document.getElementById('data').innerHTML = "";
         navigator.splashscreen.hide();
+        
+        if ('invokeString' in window) {
+             window.alert('onDeviceReady: ' + invokeString);
+            } else {
+        window.alert('onDeviceReady: no invokeString');
+             };
 
     }, false);
             </script>

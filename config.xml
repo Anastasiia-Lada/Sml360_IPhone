@@ -48,7 +48,7 @@
     		<param name="APP_ID" value="213563938819286" />
     		<param name="APP_NAME" value="SmileyTestInt" />
 	</gap:plugin>
-	<gap:url-scheme name="com.uat.smiley360" role="None">
+	<gap:url-scheme name="com.phonegap.smiley360" role="None">
   		
  			<scheme><key>FacebookDisplayName</key>
 						<string>SmileyTestInt</string>
@@ -58,7 +58,7 @@
 				<array>
 	    				<dict>
 	        				<key>CFBundleURLName</key>
-	        					<string>com.uat.smiley360</string>
+	        					<string>com.phonegap.smiley360</string>
 					        <key>CFBundleURLSchemes</key>
 					        <array>
 					            <string>fb213563938819286</string>
