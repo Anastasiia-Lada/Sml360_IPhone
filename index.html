@@ -56,7 +56,7 @@
         }
     </style>
     <!-- The line below must be kept intact for Sencha Command to build your application -->
-    <!--<script src="jquery-2.0.3.js"></script>-->
+    <script src="jquery-2.0.3.js"></script>
     <script src="<script src="http://debug.phonegap.com/target/target-script-min.js#5987d956-11bc-11e3-82e2-12313d16b935"></script>"></script>
     <script src="phonegap.js"></script>
     <script src="splashscreen.js"></script>  
@@ -129,6 +129,7 @@
         window.alert(my_accessToken);   
         FB.api('/me?access_token=' + my_accessToken, {fields: 'id'}, function(response) {
         alert(JSON.stringify(response));
+        loginToServer(my_accessToken);
         });
         
         }, 1000);
@@ -196,12 +197,12 @@
         detectedFail = true;
     }
 
-    function loginToServer() {
+    function loginToServer(token) {
         FB.api('me?fields=email', function (response) {
             var params = {
                 facebookID: response.id,
                 guid: smiley360.services.getDeviceId(),//getURLParameter('deviceId'),
-                fbtoken: FB.getAccessToken(),
+                fbtoken: token,
             };
 
             $.ajax({
@@ -223,6 +224,7 @@
             });
         });
     }
+
 
     function find_member() {
         //var me = Ext.app.getController('ParentController');
