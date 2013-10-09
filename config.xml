@@ -55,6 +55,8 @@
  			<scheme><key>CFBundleURLTypes</key>
 				<array>
 				    <dict>
+				    	<key>CFBundleURLName</key>
+            			<string>com.uat.smiley360</string>
 				        <key>CFBundleURLSchemes</key>
 				        <array>
 				            <string>fb213563938819286</string>
