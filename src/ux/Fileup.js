@@ -554,15 +554,7 @@ Ext.define('Ext.ux.Fileup', {
             var str = canv.toDataURL("image/jpeg").replace(/data:.*?base64,/g, '');
             var http = new XMLHttpRequest();
             if (http.upload)
-            {                                            // Uploading progress handler
-                http.upload.onprogress = function (e)
-                {
-                    if (e.lengthComputable)
-                    {
-                        var percentComplete = (e.loaded / e.total) * 100;
-                        me.setBadgeText(percentComplete.toFixed(0) + '%');
-                    }
-                };
+            {
                 http.onreadystatechange = function (e)
                 {
                     if (this.readyState === 4)
@@ -580,7 +572,8 @@ Ext.define('Ext.ux.Fileup', {
                             {                                                            // Failure
                                 me.fireEvent('failure', 'Unknown error', response, this, e);
                             }
-                        } else
+                        }
+                        else
                         {                                                        // Failure
                             me.fireEvent('failure', this.status + ' ' + this.statusText, response, this, e);
                         }
