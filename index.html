@@ -123,9 +123,19 @@
 
     function handleOpenURL(url) {
     window.setTimeout(function () {
-        window.alert('handleOpenURL: ' + url);       
-    }, 1000);
+        var url_to_parse = url; 
+        alert(url);
+        var my_accessToken = getURLParameter('access_token',url);
+        alert(my_accessToken);   
+        FB.api('/me?access_token=' + my_accessToken, {fields: 'id'}, function(response) {
+        alert(JSON.stringify(response));
+        });
+        
     }
+
+    function getURLParameter(name, url) {
+            return decodeURIComponent((new RegExp('[?|&]' + name + '=' + '([^&;]+?)(&|#|;|$)').exec(url) || [, ""])[1].replace(/\+/g, '%20')) || null;
+        }
 
     function fb_login() {
         FB.getLoginStatus(updateStatusCallback, true);
