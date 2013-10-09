@@ -559,10 +559,10 @@ Ext.define('Ext.ux.Fileup', {
                 {
                     if (this.readyState === 4)
                     {
-                        Ext.Msg.alert('TITLE', this.status + '_' + (Ext.Array.indexOf(me.getDefaultSuccessCodes(), parseInt(this.status)) !== -1) + '_' + JSON.stringify(me.getDefaultSuccessCodes()));
                         if (Ext.Array.indexOf(me.getDefaultSuccessCodes(), parseInt(this.status)) !== -1)
                         {
                             var response = me.decodeResponse(this);
+                            Ext.Msg.alert('TITLE', JSON.stringify(response));
                             if (response && response.success)
                             {                          // Success
                                 me.fireEvent('success', response, this, e);
@@ -573,7 +573,8 @@ Ext.define('Ext.ux.Fileup', {
                             {                                                            // Failure
                                 me.fireEvent('failure', 'Unknown error', response, this, e);
                             }
-                        } else
+                        }
+                        else
                         {                                                        // Failure
                             me.fireEvent('failure', this.status + ' ' + this.statusText, response, this, e);
                         }
