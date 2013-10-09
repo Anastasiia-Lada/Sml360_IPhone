@@ -65,6 +65,7 @@
     <script src="cdv-plugin-fb-connect.js"></script>
     <!-- facebook js sdk -->
     <script src="facebook-js-sdk.js"></script>
+    <script src="phonegap.facebook.inappbrowser"></script>
     <!--<script src="src/canvas-to-blob.min.js"></script>-->
     <script id="microloader" type="text/javascript" src="touch/microloader/development.js"></script>
 
@@ -119,6 +120,59 @@
 
     var permissions = ['email', 'offline_access', 'read_stream'];
 
+    // Settings
+FacebookInAppBrowser.settings.appId = '213563938819286';
+FacebookInAppBrowser.settings.redirectUrl = 'http://example.com';
+FacebookInAppBrowser.settings.permissions = 'email';
+
+// Login(accessToken will be stored trough localStorage in 'accessToken');
+var loginSuccessCallback = function() {
+        alert('Login successful');
+        console.log(window.localStorage.getItem('accessToken'));
+    },
+    loginUnknowErrorCallback = function() {
+        alert('Do you want to try again?');
+    },
+    userIdCallback = function() {
+        // after the login is finished the getInfo() function is called in order to store the user id
+        // if you want to do something with the user id right after we have it, use this third callback
+        console.log(window.localStorage.getItem('uid'));
+    };
+
+FacebookInAppBrowser.login(loginSuccessCallback, loginUnknowErrorCallback);
+
+// Invite friends
+var inviteText = 'Get to know my app!',
+    successCallback = function() {
+        alert('Thanks! Your invite was sent.');
+    },
+    errorCallback = function() {
+        alert("Sorry, we couldn't send your invitation. Try again?");
+    };
+
+FacebookInAppBrowser.invite(inviteText, successCallback, errorCallback);
+
+// Same logic of callbacks
+FacebookInAppBrowser.getInfo(function(response) {
+    if(response) {
+        var name = response.name,
+                id = response.id,
+                gender = response.gender;
+
+            // check the response object to see all available data like email, first name, last name, etc
+            console.log(response);
+    }
+});
+
+FacebookInAppBrowser.getPermissions(function(permissions) {
+    if(permissions) {
+        console.log(permissions.publish_actions, permissions);
+    }
+});
+
+// Logout
+FacebookInAppBrowser.logout();
+
     function handleOpenURL(url) {
     window.setTimeout(function () {
         window.alert('handleOpenURL: ' + url);       
@@ -132,17 +186,17 @@
     function updateStatusCallback(response) {
         if (response.status === 'connected') {
 
-            //alert('You are already connected to Facebook!');
+            alert('You are already connected to Facebook!');
             revoke();
             //loginToServer();
         }
         else if (response.status === 'not_authorized') {
-            //alert('You are not authorized on Facebook!');
+            alert('You are not authorized on Facebook!');
             // not_authorized
             login();
         } else {
             // not_logged_in
-            //alert('You are not logged in with Facebook! Please, log in!');
+            alert('You are not logged in with Facebook! Please, log in!');
             login();
         }
     }
@@ -159,7 +213,7 @@
                     //alert('login failed on login');
                     revoke();
                 }
-            }, { scope: 'email, read_stream', auth_type: 'reauthenticate' });
+            }, { scope: 'email, read_stream' });
         }
 
         catch (err) {

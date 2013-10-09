@@ -44,7 +44,7 @@
 	<gap:splash src="resources/images/loadingimage-r2.png" gap:platform="ios" width="2048" height="1496" />
 	<gap:splash src="resources/images/loadingimage-r2.png" gap:platform="ios" width="1536" height="2008" />
 
-	<gap:plugin name="FacebookConnect">
+	<gap:plugin name="com.phonegap.plugins.facebookconnect">
     		<param name="APP_ID" value="213563938819286" />
     		<param name="APP_NAME" value="SmileyTestInt" />
 	</gap:plugin>
