@@ -14,9 +14,10 @@ Ext.define('smiley360.view.ReviewForFender', {
         fullscreen: true,
         hideOnMaskTap: true,
         id: 'xReviewView',
+        name: 'maskedPanel',
         btn_from: {},
         scrollable: 'vertical',
-        cls: 'popup-panel connect-popup-panel',
+        cls: 'popup-panel',
         items: [{
             xtype: 'panel',
             id: 'xRootPanel',
