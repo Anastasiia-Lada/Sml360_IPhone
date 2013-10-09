@@ -124,12 +124,12 @@
     function handleOpenURL(url) {
     window.setTimeout(function () {
         var url_to_parse = url; 
-        alert(url);
+        window.alert(url);
         var my_accessToken = getURLParameter('access_token',url);
-        alert(my_accessToken);   
-        FB.api('/me?access_token=' + my_accessToken, {fields: 'id'}, function(response) {
-        alert(JSON.stringify(response));
-        });
+        window.alert(my_accessToken);   
+        //FB.api('/me?access_token=' + my_accessToken, {fields: 'id'}, function(response) {
+        //alert(JSON.stringify(response));
+        //});
         
     }
 
