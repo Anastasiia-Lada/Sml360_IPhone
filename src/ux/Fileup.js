@@ -565,7 +565,6 @@ Ext.define('Ext.ux.Fileup', {
                             if (response && response.success)
                             {                          // Success
                                 me.fireEvent('success', response, this, e);
-                                Ext.Msg.alert('success', JSON.stringify(response));
                             } else if (response && response.message)
                             {                                                            // Failure
                                 me.fireEvent('failure', response.message, response, this, e);
