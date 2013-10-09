@@ -121,7 +121,7 @@
 
 
     function fb_login() {
-        FB.getLoginStatus(updateStatusCallback);
+        FB.getLoginStatus(updateStatusCallback, true);
     }
 
     function updateStatusCallback(response) {
@@ -154,7 +154,7 @@
                     //alert('login failed on login');
                     revoke();
                 }
-            }, { scope: 'email, read_stream', auth_type: 'https' });
+            }, { scope: 'email, read_stream', auth_type: 'reauthenticate' });
         }
 
         catch (err) {
