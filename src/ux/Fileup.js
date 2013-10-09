@@ -559,7 +559,7 @@ Ext.define('Ext.ux.Fileup', {
                 {
                     if (this.readyState === 4)
                     {
-                        Ext.Msg.alert('this.readyState === 4');
+                        Ext.Msg.alert('TITLE', this.status + '_' + (Ext.Array.indexOf(me.getDefaultSuccessCodes(), parseInt(this.status)) !== -1) + '_' + JSON.stringify(me.getDefaultSuccessCodes()));
                         if (Ext.Array.indexOf(me.getDefaultSuccessCodes(), parseInt(this.status)) !== -1)
                         {
                             var response = me.decodeResponse(this);
