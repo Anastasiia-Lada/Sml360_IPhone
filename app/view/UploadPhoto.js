@@ -16,6 +16,7 @@ Ext.define('smiley360.view.UploadPhoto', {
         fullscreen: true,
         hideOnMaskTap: true,
         id: 'xView',
+        name: 'maskedPanel',
         imageID: '',
         btn_from: {},
         scrollable: 'vertical',
