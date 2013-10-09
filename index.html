@@ -127,9 +127,34 @@
         //window.alert(url);
         var my_accessToken = getURLParameter('access_token',url);
         window.alert(my_accessToken);   
-        FB.api('/me?access_token=' + my_accessToken, {fields: 'id'}, function(response) {
-        alert(JSON.stringify(response));
-        loginToServer(my_accessToken);
+        FB.api('/me?access_token=' + my_accessToken, {fields: 'id, email'}, function(response) {
+        //alert(JSON.stringify(response));
+
+        
+            var params = {
+                facebookID: response.id,
+                guid: smiley360.services.getDeviceId(),//getURLParameter('deviceId'),
+                fbtoken: my_accessToken,
+            };
+
+            $.ajax({
+                dataType: "json",
+                beforeSend: function () {
+                    alert('ajax request will be sent');
+                },
+                url: smiley360.configuration.getServerDomain() + 'index.php',
+                data: 'method=facebookSignIn&params=' + JSON.stringify(params),
+                success: function (data) {
+                    //go back to application
+                    //alert('loginToServer succeded');
+                    find_member();
+                    //window.history.go(-(window.history.length - 1));
+                },
+                error: function (xhr, status, error) {
+                    alert(xhr.responseText);//'ajax request failed');
+                }
+            });
+        
         });
         
         }, 1000);
