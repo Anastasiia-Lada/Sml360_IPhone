@@ -18,7 +18,7 @@ Ext.define('smiley360.controller.Share',
 	    'share.upload': function (command, me)
 	    {
 	        var previewSize = { w: 150, h: 150 };
-	        var mainSize = { w: 400, h: 400 };
+	        var mainSize = { w: 800, h: 800 };
 	        var oFileIn = me.fileElement.dom;
 	        var canvPreview = me.up().down('[xtype=label]').element.dom.firstChild.firstChild;
 	        var canv = document.createElement('canvas');
@@ -31,8 +31,8 @@ Ext.define('smiley360.controller.Share',
 	        };
 	        oImage.onload = function ()
 	        {
-	            if (me.up('#xView'))
-	                (me.up('#xView') ? me.up('#xView') : me.up('#xReviewView')).setMasked({ message: 'Please wait, image is uploading.' });
+	            // if (me.up('#xView'))
+	            (me.up('#xView') ? me.up('#xView') : me.up('#xReviewView')).setMasked({ message: 'Please wait, image is uploading.' });
 	            var oCanvas = canvPreview;
 	            var oContext = oCanvas.getContext('2d');
 	            var widthMultiplier = 1;
@@ -54,17 +54,17 @@ Ext.define('smiley360.controller.Share',
 	            oContext.drawImage(this, 0, 0, nWidth, nHeight);
 
 	            var msinContext = canv.getContext('2d');
-	            var widthMultiplier = 1;
+	            widthMultiplier = 1;
 	            if (this.width > mainSize.w)
 	            {
-	                widthMultiplier = previewSize.w / this.width;
+	                widthMultiplier = mainSize.w / this.width;
 	            }
-	            var nWidth = this.width * widthMultiplier;
-	            var nHeight = this.height * widthMultiplier;
-	            var heightMultiplier = 1;
+	            nWidth = this.width * widthMultiplier;
+	            nHeight = this.height * widthMultiplier;
+	            heightMultiplier = 1;
 	            if (nHeight > mainSize.h)
 	            {
-	                heightMultiplier = previewSize.h / nHeight;
+	                heightMultiplier = mainSize.h / nHeight;
 	            }
 	            nWidth *= heightMultiplier;
 	            nHeight *= heightMultiplier;
@@ -83,7 +83,6 @@ Ext.define('smiley360.controller.Share',
 	                        me.setBadgeText(percentComplete.toFixed(0) + '%');
 	                    }
 	                };
-	                // Response handler
 	                http.onreadystatechange = function (e)
 	                {
 	                    if (this.readyState === 4)
@@ -108,6 +107,7 @@ Ext.define('smiley360.controller.Share',
 	                        {                                                        // Failure
 	                            me.fireEvent('failure', this.status + ' ' + this.statusText, response, this, e);
 	                        }
+	                        me.changeState('browse');
 	                    }
 	                };
 	                http.upload.onerror = function (e)
@@ -125,16 +125,7 @@ Ext.define('smiley360.controller.Share',
 	                form.append('imageDataString', str);
 	                return form;
 	            }
-	            if (false/*me.getSignRequestEnabled()*/)
-	            {
-	                me.signRequest(http, function (http)
-	                {
-	                    http.send(getForm(file));
-	                });
-	            } else
-	            {
-	                http.send(getForm());
-	            }
+	            http.send(getForm());
 	        };
 	        oFileIn.onchange = function ()
 	        {
@@ -143,22 +134,6 @@ Ext.define('smiley360.controller.Share',
 	            me.hide();
 	            oFileReader.readAsDataURL(oFile);
 	            me.up().down('[xtype=label]').show();
-	            /* try
-	            {
-	                if (rFltr.test(oFile.type))
-	                {
-	                    me.hide();
-	                    oFileReader.readAsDataURL(oFile);
-	                    me.up().down('[xtype=label]').show();
-	                } else
-	                {
-	                    throw oFile.name + ' is not a valid image';
-	                }
-	            } catch (err)
-	            {
-	                me.reset();
-	                Ext.Msg.alert('Error', err)
-	            }*/
 	        };
 	    }
 	},
