@@ -1209,3 +1209,23 @@
 	font-size: 1em;
 	line-height: normal;
 }
+
+.x-label.heading-text-unsized {
+	font-family: 'din medium' !important;
+	font-size: .80em;
+	line-height: 22px;
+	padding-top: 8px;
+	background-color: #e2dddb;
+}
+
+.x-label.heading-text-unsized.active-sign#xTermsLabel:before {
+	content: '';
+	height: 60px;
+	margin-bottom: -8px;
+	width: 4px;
+	display: block;
+	background: #f8a51a;
+	position: relative;
+	top: -8px;
+	left: -17px;
+}

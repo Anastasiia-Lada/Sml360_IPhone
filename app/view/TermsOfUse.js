@@ -34,13 +34,13 @@ Ext.define('smiley360.view.TermsOfUse', {
             }, {
             	xtype: 'container',
             	cls: 'has-shadow',
-            	style: 'height: 20px !important;',
             	layout: 'hbox',
             	items: [{
             		xtype: 'label',
+					id: 'xTermsLabel',
             		html: 'SMILEY360.COM TERMS OF SERVICE AGREEMENT',
-            		cls: 'heading-text active-sign',
-            		style: 'padding-left: 15px; height: 20px !important;',
+            		cls: 'heading-text-unsized active-sign',
+            		style: 'padding-left: 15px;',
             		flex: 1
             	}],
             }, {
