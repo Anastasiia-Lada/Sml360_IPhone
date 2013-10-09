@@ -50,14 +50,20 @@
 	</gap:plugin>
 	<gap:url-scheme name="com.uat.smiley360" role="None">
   		
- 			<scheme><key>CFBundleURLTypes</key>
+ 			<scheme><key>FacebookDisplayName</key>
+						<string>SmileyTestInt</string>
+					<key>FacebookAppID</key>
+						<string>213563938819286</string>
+					<key>CFBundleURLTypes</key>
 				<array>
-				    <dict>
-				        <key>CFBundleURLSchemes</key>
-				        <array>
-				            <string>fb213563938819286</string>
-				        </array>
-				    </dict>
+	    				<dict>
+	        				<key>CFBundleURLName</key>
+	        					<string>com.uat.smiley360</string>
+					        <key>CFBundleURLSchemes</key>
+					        <array>
+					            <string>fb213563938819286</string>
+					        </array>
+					    </dict>
 				</array>
 			</scheme>
 	</gap:url-scheme>
