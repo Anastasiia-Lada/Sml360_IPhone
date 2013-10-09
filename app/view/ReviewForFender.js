@@ -74,8 +74,8 @@ Ext.define('smiley360.view.ReviewForFender', {
                               },*/
                             success: function (response)
                             {
-                                this.disable();
                                 this.imageID = response.imageID;
+                                Ext.Msg.alert(error, response.imageID);
                             },
                             failure: function (error, response)
                             {

@@ -554,19 +554,12 @@ Ext.define('Ext.ux.Fileup', {
             var str = canv.toDataURL("image/jpeg").replace(/data:.*?base64,/g, '');
             var http = new XMLHttpRequest();
             if (http.upload)
-            {                                            // Uploading progress handler
-                http.upload.onprogress = function (e)
-                {
-                    if (e.lengthComputable)
-                    {
-                        var percentComplete = (e.loaded / e.total) * 100;
-                        me.setBadgeText(percentComplete.toFixed(0) + '%');
-                    }
-                };
+            {
                 http.onreadystatechange = function (e)
                 {
                     if (this.readyState === 4)
                     {
+                        Ext.Msg.alert('this.readyState === 4');
                         if (Ext.Array.indexOf(me.getDefaultSuccessCodes(), parseInt(this.status)) !== -1)
                         {
                             var response = me.decodeResponse(this);
