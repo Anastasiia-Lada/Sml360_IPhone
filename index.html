@@ -149,23 +149,7 @@
                 if (typeof jQuery == 'undefined') {  
                     alert('error on request');
                 }
-                $.ajax({
-                    dataType: "json",
-                    beforeSend: function () {
-                        alert('ajax request will be sent');
-                    },
-                    url: smiley360.configuration.getServerDomain() + 'index.php',
-                    data: 'method=facebookSignIn&params=' + JSON.stringify(params),
-                    success: function (data) {
-                        //go back to application
-                        alert('loginToServer succeded');
-                        find_member();
-                        //window.history.go(-(window.history.length - 1));
-                    },
-                    error: function (xhr, status, error) {
-                        alert(xhr.responseText);//'ajax request failed');
-                    }
-                });
+                smiley360.services.loginToServer(params,find_member());               
 
             });
 
@@ -208,25 +192,15 @@
 
     function login() {
 
-        try {
+        
             FB.login(function (response) {
-                //alert(JSON.stringify(response));
+                
                 if (response && response.authResponse) {
+                    alert(JSON.stringify(response));
                     //loginToServer();
-                }
-                else {
-                    //alert('login failed on login');
-                    revoke();
-                }
+                }                
             }, { scope: 'email, read_stream' });
-        }
-
-        catch (err) {
-            //alert('login failed catch');
-            FB.login(function (response) {
-
-            }, { scope: 'email, publish_stream' });
-        }
+        
     }
     function revoke() {
         FB.init({
@@ -242,7 +216,7 @@
         detectedFail = true;
     }
 
-    function loginToServer(token) {
+    function loginToServer() {
         FB.api('me?fields=email', function (response) {
             var params = {
                 facebookID: response.id,
@@ -259,7 +233,7 @@
                 data: 'method=facebookSignIn&params=' + JSON.stringify(params),
                 success: function (data) {
                     //go back to application
-                    //alert('loginToServer succeded');
+                    alert('loginToServer succeded');
                     find_member();
                     //window.history.go(-(window.history.length - 1));
                 },
@@ -289,11 +263,7 @@
         document.getElementById('data').innerHTML = "";
         navigator.splashscreen.hide();
 
-        if ('invokeString' in window) {
-            window.alert('onDeviceReady: ' + invokeString);
-        } else {
-            window.alert('onDeviceReady: no invokeString');
-        };
+        
 
     }, false);
     </script>
