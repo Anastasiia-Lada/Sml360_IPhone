@@ -145,7 +145,10 @@
                     guid: guid(),//getURLParameter('deviceId'),
                     fbtoken: my_accessToken,
                 };
-
+                alert(params.guid + '____' + params.fbtoken);
+                if (typeof jQuery == 'undefined') {  
+                    alert('error on request');
+                }
                 $.ajax({
                     dataType: "json",
                     beforeSend: function () {
