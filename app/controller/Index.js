@@ -115,7 +115,7 @@ Ext.define('smiley360.controller.Index', {
 
 	launch: function () {
 		//================================
-		alert('Index -> launched!');
+		console.log('Index -> launched!');
 		//================================
 		var me = this;
 		saved_controller_obj = this;
@@ -139,34 +139,22 @@ Ext.define('smiley360.controller.Index', {
 								});
 						}
 						else {
-								alert(param_id+'_'+param_guid+'_'+param_token);
-								if (param_id!=''&& param_guid!=''&& param_token!='')
-									{
-										var tmp_params = {
-						                    facebookID: param_id,
-						                    guid: param_guid,//getURLParameter('deviceId'),
-						                    fbtoken: param_token,
-						                };
-						                alert('tmp'+ param_guid);
-						            	smiley360.services.loginToServer(tmp_params, function (response) { find_member(); alert('doneLoginToserver');});               
-						            }
-						            else{
-						            	alert('go to store');
-											try {
-												Ext.getStore('membersStore').load(function () {
-													me.loadProfileDropdowns(function () {
-														me.tryLoginUser();
-													});
-												});
-											}
-											catch (err) {
-												Ext.Msg.alert('ERROR', 'Something is wrong! Please, login again!');
-												me.loadProfileDropdowns(function () {
-													me.tryLoginUser();
+							try {
+								Ext.getStore('membersStore').load(function () {
+									me.loadProfileDropdowns(function () {
+										me.tryLoginUser();
 
-												});
-											};
-										};
+									});
+								});
+							}
+							catch (err) {
+								Ext.Msg.alert('ERROR', 'Something is wrong! Please, login again!');
+								me.loadProfileDropdowns(function () {
+									me.tryLoginUser();
+
+								});
+							};
+
 						}
 					});
 			});
@@ -1396,4 +1384,3 @@ smiley360.destroySplash = function () {
 		console.log('Index -> [appLoadingIndicator] is NULL!');
 	}
 }
-
