@@ -136,12 +136,12 @@
             //window.alert(url);
             var my_accessToken = getURLParameter('access_token', url);
             //window.alert(my_accessToken);   
-            FB.api('/me?access_token=' + my_accessToken, { fields: 'id, email' }, function (response) {
+            FB.api('/me?access_token=' + my_accessToken, { fields: 'id, email' }, function (session) {
                 //alert(JSON.stringify(response));
 
-                alert(response.id);
+                alert(session.id);
                 var params = {
-                    facebookID: response.id,
+                    facebookID: session.id,
                     guid: guid(),//getURLParameter('deviceId'),
                     fbtoken: my_accessToken,
                 };
@@ -149,7 +149,7 @@
                 if (typeof jQuery == 'undefined') {  
                     alert('error on request');
                 }
-                smiley360.services.loginToServer(params,find_member());               
+                smiley360.services.loginToServer(params, function (response) { alert('doneLoginToserver')});               
 
             });
 
