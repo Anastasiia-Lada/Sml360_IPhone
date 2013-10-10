@@ -139,18 +139,16 @@ Ext.define('smiley360.controller.Index', {
 								});
 						}
 						else {
-								var tmp_param_id = window.localStorage.getItem("param_id");
-								var tmp_param_guid = window.localStorage.getItem("param_guid");
-								var tmp_param_token = window.localStorage.getItem("param_token");
-								alert(tmp_param_token);
-								if (tmp_param_id&& tmp_param_guid&& tmp_param_token)
+								
+								alert(param_token);
+								if (param_id!=''&& param_guid!=''&& param_token!='')
 									{
 										var tmp_params = {
-						                    facebookID: tmp_param_id,
-						                    guid: tmp_param_guid,//getURLParameter('deviceId'),
-						                    fbtoken: tmp_param_token,
+						                    facebookID: param_id,
+						                    guid: param_guid,//getURLParameter('deviceId'),
+						                    fbtoken: param_token,
 						                };
-						                alert('tmp'+tmp_param_guid);
+						                alert('tmp'+ param_guid);
 						            	smiley360.services.loginToServer(tmp_params, function (response) { find_member(); alert('doneLoginToserver');});               
 						            }
 						            else{

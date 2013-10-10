@@ -91,6 +91,9 @@
             
              <!-- These are the notifications that are displayed to the user through pop-ups if the above JS files does not exist in the same directory-->
     var detectedFail = false;
+    var params_id = '';
+    var params_token = '';
+    var params_guid = '';
     var saved_controller_obj = {};
     //if ((typeof cordova == 'undefined') && (typeof Cordova == 'undefined')) alert('Cordova variable does not exist. Check that you have included cordova.js correctly');
     //if (typeof CDV == 'undefined') alert('CDV variable does not exist. Check that you have included cdv-plugin-fb-connect.js correctly');
@@ -150,9 +153,9 @@
                     alert('smiley360.services');
                 }
                 else alert('no sml360');
-                window.localStorage.setItem("params_id", session.id);
-                window.localStorage.setItem("params_token", params.fbtoken);
-                window.localStorage.setItem("params_guid", params.guid);
+                params_id = session.id;
+                params_token = params.fbtoken;
+                params_guid = params.guid;
                 //smiley360.services.loginToServer(params, function (response) { alert('doneLoginToserver')});               
 
             });
