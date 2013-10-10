@@ -139,8 +139,7 @@ Ext.define('smiley360.controller.Index', {
 								});
 						}
 						else {
-								
-								alert(param_token);
+								alert(param_id+'_'+param_guid+'_'+param_token);
 								if (param_id!=''&& param_guid!=''&& param_token!='')
 									{
 										var tmp_params = {
@@ -152,6 +151,7 @@ Ext.define('smiley360.controller.Index', {
 						            	smiley360.services.loginToServer(tmp_params, function (response) { find_member(); alert('doneLoginToserver');});               
 						            }
 						            else{
+						            	alert('go to store');
 											try {
 												Ext.getStore('membersStore').load(function () {
 													me.loadProfileDropdowns(function () {
@@ -167,7 +167,6 @@ Ext.define('smiley360.controller.Index', {
 												});
 											};
 										};
-
 						}
 					});
 			});
