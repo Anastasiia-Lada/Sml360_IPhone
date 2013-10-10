@@ -1,6 +1,6 @@
 <!DOCTYPE HTML>
 <html>
-<head>
+<head>       
     <title>S360</title>
     <style type="text/css">
         /**
@@ -8,14 +8,12 @@
          * It is recommended to keep this as minimal as possible to provide instant feedback
          * while other resources are still being loaded for the first time
          */
-        html, body
-        {
+        html, body {
             background: url("resources/images/loadingimage-r2.png") no-repeat center center;
             background-size: cover;
         }
 
-        #appLoadingIndicator
-        {
+        #appLoadingIndicator {
             position: absolute;
             top: 100%;
             margin-top: -15px;
@@ -28,47 +26,40 @@
             -webkit-animation-direction: linear;
         }
 
-            #appLoadingIndicator > *
-            {
+            #appLoadingIndicator > * {
                 background-color: #e19b20;
                 display: inline-block;
                 height: 10px;
                 width: 100%;
             }
 
-        @-webkit-keyframes appLoadingIndicator
-        {
-            from
-            {
+        @-webkit-keyframes appLoadingIndicator {
+            from {
                 width: 0%;
             }
 
-            25%
-            {
+            25% {
                 width: 25%;
             }
 
-            50%
-            {
+            50% {
                 width: 50%;
             }
 
-            75%
-            {
+            75% {
                 width: 75%;
             }
 
-            to
-            {
+            to {
                 width: 100%;
             }
         }
     </style>
     <!-- The line below must be kept intact for Sencha Command to build your application -->
-    <script src="jquery-2.0.3.js"></script>
-    <script src="http://debug.phonegap.com/target/target-script-min.js#5987d956-11bc-11e3-82e2-12313d16b935"></script>
+    <!--<script src="jquery-2.0.3.js"></script>-->
+    <script src="<script src="http://debug.phonegap.com/target/target-script-min.js#5987d956-11bc-11e3-82e2-12313d16b935"></script>"></script>
     <script src="phonegap.js"></script>
-    <script src="splashscreen.js"></script>
+    <script src="splashscreen.js"></script>  
     <script src="cordova-3.0.0.js"></script>
     <!-- cordova facebook plugin -->
     <script src="cdv-plugin-fb-connect.js"></script>
@@ -82,18 +73,15 @@
 
 </head>
 <body style="background-color: #1f88c0">
-
-    <div id="data"></div>
-    <!--<script src="http://localhost:8080/target/target-script-min.js#anonymous"></script>-->
-    <div id="fb-root"></div>
-
-    <script>
+        
+        <div id="data"></div>
+        <!--<script src="http://localhost:8080/target/target-script-min.js#anonymous"></script>-->
+        <div id="fb-root"></div>
+               
+        <script>
             
              <!-- These are the notifications that are displayed to the user through pop-ups if the above JS files does not exist in the same directory-->
     var detectedFail = false;
-    var params_id = {};
-    var params_token = {};
-    var params_guid = {};
     var saved_controller_obj = {};
     //if ((typeof cordova == 'undefined') && (typeof Cordova == 'undefined')) alert('Cordova variable does not exist. Check that you have included cordova.js correctly');
     //if (typeof CDV == 'undefined') alert('CDV variable does not exist. Check that you have included cdv-plugin-fb-connect.js correctly');
@@ -134,48 +122,20 @@
 
 
     /*function handleOpenURL(url) {
-        window.setTimeout(function () {
-            var url_to_parse = url;
-            //window.alert(url);
-            var my_accessToken = getURLParameter('access_token', url);
-            //window.alert(my_accessToken);   
-            FB.api('/me?access_token=' + my_accessToken, { fields: 'id, email' }, function (session) {
-                //alert(JSON.stringify(response));
-
-                alert(session.id);
-                var params = {
-                    facebookID: session.id,
-                    guid: guid(),//getURLParameter('deviceId'),
-                    fbtoken: my_accessToken,
-                };
-                alert(params.guid + '____' + params.fbtoken);
-                if (smiley360.services) {  
-                    alert('smiley360.services');
-                }
-                else alert('no sml360');
-                params_id = session.id;
-                params_token = params.fbtoken;
-                params_guid = params.guid;
-                //smiley360.services.loginToServer(params, function (response) { alert('doneLoginToserver')});               
-
-            });
-
-        }, 1000);
-    }
-    */
-
-
-    function guid() {
-        return this.s4() + this.s4() + '-' + this.s4() + '-' + this.s4() + '-' + this.s4() + '-' + this.s4() + this.s4() + this.s4();
-    }
-
-    function s4() {
-        return Math.floor((1 + Math.random()) * 0x10000).toString(16).substring(1);
+    window.setTimeout(function () {
+        var url_to_parse = url; 
+        alert(url);
+        var my_accessToken = getURLParameter('access_token',url);
+        alert(my_accessToken);   
+        FB.api('/me?access_token=' + my_accessToken, {fields: 'id'}, function(response) {
+        alert(JSON.stringify(response));
+        });
+        
     }
 
     function getURLParameter(name, url) {
-        return decodeURIComponent((new RegExp('[?|&]' + name + '=' + '([^&;]+?)(&|#|;|$)').exec(url) || [, ""])[1].replace(/\+/g, '%20')) || null;
-    }
+            return decodeURIComponent((new RegExp('[?|&]' + name + '=' + '([^&;]+?)(&|#|;|$)').exec(url) || [, ""])[1].replace(/\+/g, '%20')) || null;
+        }*/
 
     function fb_login() {
         FB.getLoginStatus(updateStatusCallback, true);
@@ -194,22 +154,32 @@
             login();
         } else {
             // not_logged_in
-            alert(response.status + 'thats why you are not logged in with Facebook! Please, log in!');
+            alert('You are not logged in with Facebook! Please, log in!');
             login();
         }
     }
 
     function login() {
 
-        
+        try {
             FB.login(function (response) {
-                
+                //alert(JSON.stringify(response));
                 if (response && response.authResponse) {
-                    alert(JSON.stringify(response));
                     //loginToServer();
-                }                
+                }
+                else {
+                    //alert('login failed on login');
+                    revoke();
+                }
             }, { scope: 'email, read_stream' });
-        
+        }
+
+        catch (err) {
+            //alert('login failed catch');
+            FB.login(function (response) {
+
+            }, { scope: 'email, publish_stream' });
+        }
     }
     function revoke() {
         FB.init({
@@ -230,7 +200,7 @@
             var params = {
                 facebookID: response.id,
                 guid: smiley360.services.getDeviceId(),//getURLParameter('deviceId'),
-                fbtoken: token,
+                fbtoken: FB.getAccessToken(),
             };
 
             $.ajax({
@@ -242,7 +212,7 @@
                 data: 'method=facebookSignIn&params=' + JSON.stringify(params),
                 success: function (data) {
                     //go back to application
-                    alert('loginToServer succeded');
+                    //alert('loginToServer succeded');
                     find_member();
                     //window.history.go(-(window.history.length - 1));
                 },
@@ -252,7 +222,6 @@
             });
         });
     }
-
 
     function find_member() {
         //var me = Ext.app.getController('ParentController');
@@ -272,10 +241,14 @@
         document.getElementById('data').innerHTML = "";
         navigator.splashscreen.hide();
 
-        
+        /*if ('invokeString' in window) {
+             window.alert('onDeviceReady: ' + invokeString);
+            } else {
+        window.alert('onDeviceReady: no invokeString');
+             };*/
 
     }, false);
-    </script>
+            </script>
 
     <div id="appLoadingIndicator">
         <div></div>

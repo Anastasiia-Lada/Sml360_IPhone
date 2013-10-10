@@ -1384,3 +1384,4 @@ smiley360.destroySplash = function () {
 		console.log('Index -> [appLoadingIndicator] is NULL!');
 	}
 }
+
