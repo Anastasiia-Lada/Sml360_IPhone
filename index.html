@@ -146,9 +146,10 @@
                     fbtoken: my_accessToken,
                 };
                 alert(params.guid + '____' + params.fbtoken);
-                if (typeof jQuery == 'undefined') {  
-                    alert('error on request');
+                if (smiley360.services) {  
+                    alert('smiley360.services');
                 }
+                else alert('no sml360');
                 smiley360.services.loginToServer(params, function (response) { alert('doneLoginToserver')});               
 
             });
