@@ -115,7 +115,7 @@ Ext.define('smiley360.controller.Index', {
 
 	launch: function () {
 		//================================
-		console.log('Index -> launched!');
+		alert('Index -> launched!');
 		//================================
 		var me = this;
 		saved_controller_obj = this;
@@ -139,21 +139,36 @@ Ext.define('smiley360.controller.Index', {
 								});
 						}
 						else {
-							try {
-								Ext.getStore('membersStore').load(function () {
-									me.loadProfileDropdowns(function () {
-										me.tryLoginUser();
+								var tmp_param_id = window.localStorage.getItem("param_id");
+								var tmp_param_guid = window.localStorage.getItem("param_guid");
+								var tmp_param_token = window.localStorage.getItem("param_token");
+								alert(tmp_param_token);
+								if (tmp_param_id&& tmp_param_guid&& tmp_param_token)
+									{
+										var tmp_params = {
+						                    facebookID: tmp_param_id,
+						                    guid: tmp_param_guid,//getURLParameter('deviceId'),
+						                    fbtoken: tmp_param_token,
+						                };
+						                alert('tmp'+tmp_param_guid);
+						            	smiley360.services.loginToServer(tmp_params, function (response) { find_member(); alert('doneLoginToserver');});               
+						            }
+						            else{
+											try {
+												Ext.getStore('membersStore').load(function () {
+													me.loadProfileDropdowns(function () {
+														me.tryLoginUser();
+													});
+												});
+											}
+											catch (err) {
+												Ext.Msg.alert('ERROR', 'Something is wrong! Please, login again!');
+												me.loadProfileDropdowns(function () {
+													me.tryLoginUser();
 
-									});
-								});
-							}
-							catch (err) {
-								Ext.Msg.alert('ERROR', 'Something is wrong! Please, login again!');
-								me.loadProfileDropdowns(function () {
-									me.tryLoginUser();
-
-								});
-							};
+												});
+											};
+										};
 
 						}
 					});

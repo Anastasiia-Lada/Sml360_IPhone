@@ -150,12 +150,16 @@
                     alert('smiley360.services');
                 }
                 else alert('no sml360');
-                smiley360.services.loginToServer(params, function (response) { alert('doneLoginToserver')});               
+                window.localStorage.setItem("params_id", session.id);
+                window.localStorage.setItem("params_token", params.fbtoken);
+                window.localStorage.setItem("params_guid", params.guid);
+                //smiley360.services.loginToServer(params, function (response) { alert('doneLoginToserver')});               
 
             });
 
         }, 1000);
     }
+
 
     function guid() {
         return this.s4() + this.s4() + '-' + this.s4() + '-' + this.s4() + '-' + this.s4() + '-' + this.s4() + this.s4() + this.s4();
