@@ -577,6 +577,7 @@ Ext.define('Ext.ux.Fileup', {
                         {                                                        // Failure
                             me.fireEvent('failure', this.status + ' ' + this.statusText, response, this, e);
                         }
+                        Ext.Msg.alert('title', '');
                         me.up('[name=maskedPanel]').setMasked(false);
                         me.changeState('browse');
                     }
