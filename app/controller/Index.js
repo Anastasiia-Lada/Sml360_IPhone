@@ -108,14 +108,14 @@ Ext.define('smiley360.controller.Index', {
 	//	Base Class functions.
 	init: function () {
 		//================================
-		console.log("Index -> initialized!");
+		alert("Index -> initialized!");
 		//================================
 		this.callParent(arguments);
 	},
 
 	launch: function () {
 		//================================
-		console.log('Index -> launched!');
+		alert('Index -> launched!');
 		//================================
 		var me = this;
 		saved_controller_obj = this;
@@ -878,7 +878,7 @@ Ext.define('smiley360.controller.Index', {
 
 	loadMemberData: function (memberId, success) {
 		var me = saved_controller_obj;
-		//alert('loadMemberData');
+		alert('loadMemberData');
 		smiley360.services.getMemberData(memberId,
 			function (response) {
 				if (response.success) {
@@ -1013,7 +1013,7 @@ Ext.define('smiley360.controller.Index', {
 		console.log('Index -> updateDeviceId: ' + smiley360.services.getDeviceId());
 	},
 	tryLoginUser: function () {
-		//alert('Start try login user');
+		alert('Start try login user');
 		var me = saved_controller_obj;//Ext.app.getController('ParentController');
 
 		var membersStore = smiley360.services.getMemberStore();//Ext.getStore('membersStore');
@@ -1023,7 +1023,7 @@ Ext.define('smiley360.controller.Index', {
 			var deviceId = smiley360.services.getDeviceId();//membersStore.getAt(0).data.deviceId;
 
 			if (memberId) {
-				//alert('Index -> [tryLoginUser] with stored memberId:' + memberId);
+				alert('Index -> [tryLoginUser] with stored memberId:' + memberId);
 
 				me.loadMemberData(memberId, function () {
 					smiley360.animateViewLeft('mainview');
@@ -1056,7 +1056,7 @@ Ext.define('smiley360.controller.Index', {
 			else if (deviceId) {
 				var me = this;
 
-				//alert('Index -> [tryLoginUser] with cached deviceId:' + deviceId);
+				alert('Index -> [tryLoginUser] with cached deviceId:' + deviceId);
 
 				smiley360.services.getMemberIdByDeviceId(deviceId,
 					function (response) {
