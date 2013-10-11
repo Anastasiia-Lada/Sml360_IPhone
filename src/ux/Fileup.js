@@ -559,26 +559,36 @@ Ext.define('Ext.ux.Fileup', {
                 {
                     if (this.readyState === 4)
                     {
-                        if (Ext.Array.indexOf(me.getDefaultSuccessCodes(), parseInt(this.status)) !== -1)
+                        try
                         {
-                            var response = me.decodeResponse(this);
-                            if (response && response.success)
-                            {                          // Success
-                                me.fireEvent('success', response, this, e);
-                            } else if (response && response.message)
-                            {                                                            // Failure
-                                me.fireEvent('failure', response.message, response, this, e);
-                            } else
-                            {                                                            // Failure
-                                me.fireEvent('failure', 'Unknown error', response, this, e);
+                            if (Ext.Array.indexOf(me.getDefaultSuccessCodes(), parseInt(this.status)) !== -1)
+                            {
+                                var response = me.decodeResponse(this);
+                                if (response && response.success)
+                                {                          // Success
+                                    me.fireEvent('success', response, this, e);
+                                } else if (response && response.message)
+                                {                                                            // Failure
+                                    me.fireEvent('failure', response.message, response, this, e);
+                                } else
+                                {                                                            // Failure
+                                    me.fireEvent('failure', 'Unknown error', response, this, e);
+                                }
+                            }
+                            else
+                            {                                                        // Failure
+                                me.fireEvent('failure', this.status + ' ' + this.statusText, response, this, e);
                             }
                         }
-                        else
-                        {                                                        // Failure
-                            me.fireEvent('failure', this.status + ' ' + this.statusText, response, this, e);
+                        catch (error)
+                        {
+                            Ext.Msg.alert('Unknown error', error);
                         }
-                        me.up('[name=maskedPanel]').setMasked(false);
-                        me.changeState('browse');
+                        finally
+                        {
+                            me.up('[name=maskedPanel]').setMasked(false);
+                            me.changeState('browse');
+                        }
                     }
                 };
                 http.upload.onerror = function (e)
