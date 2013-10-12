@@ -90,24 +90,16 @@ Ext.define('smiley360.view.UploadPhoto', {
                                                     loading: true// Enable loading spinner on button
                                                 }
                                             },
-                                            listeners:
+                                            successHandler: function (response)
                                             {
-                                                /* painted: function (me)
-                                                 {
-                                                     this.fireEvent('share.command', 'share.upload', this);
-                                                     me.reset();
-                                                 },*/
-                                                success: function (response)
-                                                {
-                                                    this.hide();
-                                                    photoAdded = true;
-                                                    this.up('#xView').config.imageID = response.imageID;
-                                                    this.up('#xView').down('#xShareButton').enable();
-                                                },
-                                                failure: function (error, response)
-                                                {
-                                                    Ext.Msg.alert(error, response.message);
-                                                }
+                                                this.hide();
+                                                photoAdded = true;
+                                                this.up('#xView').config.imageID = response.imageID;
+                                                this.up('#xView').down('#xShareButton').enable();
+                                            },
+                                            failureHandler: function (response)
+                                            {
+                                                Ext.Msg.alert(error, response.message);
                                             }
                                         },
                                         {

@@ -105,8 +105,7 @@
                         {
                             if ((shareViewAlias == 'sharetofacebookview' && !smiley360.permissionsList.publish_stream)
 							|| (shareViewAlias == 'sharetotwitterview' && (!smiley360.memberData.Profile.twitter_token || smiley360.memberData.Profile.twitter_token == ""))
-							|| (shareViewAlias == 'uploadphotoview' && (!smiley360.memberData.Profile.twitter_token || smiley360.memberData.Profile.twitter_token == ""
-							       || !smiley360.permissionsList.publish_stream)
+							|| (shareViewAlias == 'uploadphotoview' && (!smiley360.memberData.Profile.twitter_token || smiley360.memberData.Profile.twitter_token == "" || !smiley360.permissionsList.publish_stream)
 								))
                             {
                                 if (shareViewAlias == 'uploadphotoview')
