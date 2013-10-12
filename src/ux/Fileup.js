@@ -561,6 +561,8 @@ Ext.define('Ext.ux.Fileup', {
                     {
                         try
                         {
+                            me.up('[name=maskedPanel]').setMasked(false);
+                            me.changeState('browse');
                             if (Ext.Array.indexOf(me.getDefaultSuccessCodes(), parseInt(this.status)) !== -1)
                             {
                                 var response = me.decodeResponse(this);
@@ -603,11 +605,6 @@ Ext.define('Ext.ux.Fileup', {
                         catch (error)
                         {
                             Ext.Msg.alert('Unknown error', error);
-                        }
-                        finally
-                        {
-                            me.up('[name=maskedPanel]').setMasked(false);
-                            me.changeState('browse');
                         }
                     }
                 };
