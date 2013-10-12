@@ -68,13 +68,12 @@ Ext.define('smiley360.view.ReviewForFender', {
                             }
                         },
                         listeners: {
-                            /*  painted: function (me)
-                              {
-                                  this.fireEvent('share.command', 'share.upload', this);
-                              },*/
-                            success: function (response)
+                            painted: function (me)
                             {
-                                this.imageID = response.imageID;
+                                this.addListener('success', function (response)
+                                {
+                                    this.imageID = response.imageID;
+                                });
                             },
                             failure: function (error, response)
                             {
