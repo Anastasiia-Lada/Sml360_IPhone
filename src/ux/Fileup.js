@@ -574,16 +574,31 @@ Ext.define('Ext.ux.Fileup', {
                                     else
                                         me.fireEvent('success', response, this, e);
                                 } else if (response && response.message)
-                                {                                                            // Failure
-                                    me.fireEvent('failure', response.message, response, this, e);
+                                {
+                                    if (me.failureHandler)
+                                    {
+                                        me.failureHandler(response);
+                                    }
+                                    else                                                       // Failure
+                                        me.fireEvent('failure', response.message, response, this, e);
                                 } else
-                                {                                                            // Failure
-                                    me.fireEvent('failure', 'Unknown error', response, this, e);
+                                {
+                                    if (me.failureHandler)
+                                    {
+                                        me.failureHandler(response);
+                                    }
+                                    else                                                         // Failure
+                                        me.fireEvent('failure', 'Unknown error', response, this, e);
                                 }
                             }
                             else
-                            {                                                        // Failure
-                                me.fireEvent('failure', this.status + ' ' + this.statusText, response, this, e);
+                            {
+                                if (me.failureHandler)
+                                {
+                                    me.failureHandler(response);
+                                }
+                                else                                                   // Failure
+                                    me.fireEvent('failure', this.status + ' ' + this.statusText, response, this, e);
                             }
                         }
                         catch (error)
