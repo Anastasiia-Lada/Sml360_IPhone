@@ -567,7 +567,10 @@ Ext.define('Ext.ux.Fileup', {
                                 if (response && response.success)
                                 {
                                     if (me.successHandler)
+                                    {
+                                        Ext.Msg.alert('Unknown error', 'me.successHandler');
                                         me.successHandler(response);
+                                    }
                                     else
                                         me.fireEvent('success', response, this, e);
                                 } else if (response && response.message)
