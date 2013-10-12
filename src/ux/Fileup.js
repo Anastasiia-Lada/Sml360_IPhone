@@ -561,7 +561,6 @@ Ext.define('Ext.ux.Fileup', {
                     {
                         try
                         {
-                            Ext.Msg.alert('1');
                             if (Ext.Array.indexOf(me.getDefaultSuccessCodes(), parseInt(this.status)) !== -1)
                             {
                                 var response = me.decodeResponse(this);
@@ -569,7 +568,6 @@ Ext.define('Ext.ux.Fileup', {
                                 {
                                     if (me.successHandler)
                                     {
-                                        Ext.Msg.alert('2', JSON.stringify(response));
                                         me.successHandler(response);
                                     }
                                     else
