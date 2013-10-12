@@ -512,7 +512,8 @@ Ext.define('Ext.ux.Fileup', {
         };
         oImage.onload = function ()
         {
-            me.up('[name=maskedPanel]').setMasked({ xtype: 'loadmask', message: 'Please wait, image is uploading.' });
+            var mask = Ext.create('Ext.LoadMask', { xtype: 'loadmask', message: 'Please wait, image is uploading.' });
+            me.up('[name=maskedPanel]').setMasked(mask);
             var oCanvas = canvPreview;
             var oContext = oCanvas.getContext('2d');
             var widthMultiplier = 1;
@@ -561,8 +562,6 @@ Ext.define('Ext.ux.Fileup', {
                     {
                         try
                         {
-                            me.up('[name=maskedPanel]').setMasked(false);
-                            me.changeState('browse');
                             if (Ext.Array.indexOf(me.getDefaultSuccessCodes(), parseInt(this.status)) !== -1)
                             {
                                 var response = me.decodeResponse(this);
@@ -605,6 +604,11 @@ Ext.define('Ext.ux.Fileup', {
                         catch (error)
                         {
                             Ext.Msg.alert('Unknown error', error);
+                        }
+                        finally
+                        {
+                            mask.destroy();
+                            me.changeState('browse');
                         }
                     }
                 };
