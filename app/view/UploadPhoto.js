@@ -371,7 +371,9 @@ Ext.define('smiley360.view.UploadPhoto', {
                     && (!this.down('#xTwitterCheckbox').getChecked() && !this.down('#xTwitterCheckbox').isHidden()))
                 || (this.down('#xFacebookCheckbox').isHidden() && (!this.down('#xTwitterCheckbox').getChecked() && !this.down('#xTwitterCheckbox').isHidden()))
                 || (this.down('#xTwitterCheckbox').isHidden() && (!this.down('#xFacebookCheckbox').getChecked() && !this.down('#xFacebookCheckbox').isHidden())))
+            {
                 msg += 'Please, select one or more post methods. ';
+            }
             if (this.down('#xPostText').getValue().length > this.down('#xCharacterMaximum').config.xMax)
                 msg += 'Post text, can`t be longer than ' + this.down('#xCharacterMaximum').config.xMax + ' symbols';
             Ext.Msg.alert('Error', msg);
@@ -393,7 +395,7 @@ Ext.define('smiley360.view.UploadPhoto', {
     doValidation: function ()
     {
         if (this.down('#xPostText').getValue().length < this.down('#xCharacterMaximum').config.xMax
-            && (((!this.down('#xFacebookCheckbox').getChecked() && !this.down('#xFacebookCheckbox').isHidden())
+            && !(((!this.down('#xFacebookCheckbox').getChecked() && !this.down('#xFacebookCheckbox').isHidden())
                     && (!this.down('#xTwitterCheckbox').getChecked() && !this.down('#xTwitterCheckbox').isHidden()))
                 || (this.down('#xFacebookCheckbox').isHidden() && (!this.down('#xTwitterCheckbox').getChecked() && !this.down('#xTwitterCheckbox').isHidden()))
                 || (this.down('#xTwitterCheckbox').isHidden() && (!this.down('#xFacebookCheckbox').getChecked() && !this.down('#xFacebookCheckbox').isHidden())))
