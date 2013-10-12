@@ -512,7 +512,7 @@ Ext.define('Ext.ux.Fileup', {
         };
         oImage.onload = function ()
         {
-            me.up('[name=maskedPanel]').setMasked({ message: 'Please wait, image is uploading.' });
+            me.up('[name=maskedPanel]').setMasked({ xtype: 'loadmask', message: 'Please wait, image is uploading.' });
             var oCanvas = canvPreview;
             var oContext = oCanvas.getContext('2d');
             var widthMultiplier = 1;
@@ -565,8 +565,11 @@ Ext.define('Ext.ux.Fileup', {
                             {
                                 var response = me.decodeResponse(this);
                                 if (response && response.success)
-                                {                          // Success
-                                    me.fireEvent('success', response, this, e);
+                                {
+                                    if (me.successHandler)
+                                        me.successHandler(response);
+                                    else
+                                        me.fireEvent('success', response, this, e);
                                 } else if (response && response.message)
                                 {                                                            // Failure
                                     me.fireEvent('failure', response.message, response, this, e);
@@ -590,12 +593,6 @@ Ext.define('Ext.ux.Fileup', {
                             me.changeState('browse');
                         }
                     }
-                };
-                http.upload.onerror = function (e)
-                {
-                    me.up('[name=maskedPanel]').setMasked(false);
-                    me.changeState('browse');
-                    me.fireEvent('failure', this.status + ' ' + this.statusText, {}, this, e);
                 };
             }
             http.open('POST', smiley360.configuration.getServerDomain() + 'getfile.php?memberID='

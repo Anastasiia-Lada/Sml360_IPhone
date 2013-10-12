@@ -67,6 +67,10 @@ Ext.define('smiley360.view.ReviewForFender', {
                                 loading: true// Enable loading spinner on button
                             }
                         },
+                        successHandler: function (response)
+                        {
+                            this.imageID = response.imageID;
+                        },
                         listeners: {
                             painted: function (me)
                             {
