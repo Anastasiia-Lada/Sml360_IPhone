@@ -138,7 +138,8 @@
         }*/
 
     function fb_login() {
-        FB.getLoginStatus(updateStatusCallback, true);
+        alert('go login');
+        FB.getLoginStatus(updateStatusCallback);
     }
 
     function updateStatusCallback(response) {
