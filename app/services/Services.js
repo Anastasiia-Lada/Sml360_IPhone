@@ -789,7 +789,7 @@ smiley360.services.postToFace2face = function (postData, onCompleted) {
         onCompleted);
 }
 smiley360.services.loginToServer = function (postData, onCompleted) {
-	alert('login to server');
+	//alert('login to server');
 	smiley360.services.ajax(
         "facebookSignIn",
         {
