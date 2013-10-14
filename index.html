@@ -1,9 +1,7 @@
 <!DOCTYPE HTML>
 <html>
-<head>    
-    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
-    <meta name="format-detection" content="telephone=no" />
-    <meta name="viewport" content="user-scalable=no, initial-scale=1, maximum-scale=1, minimum-scale=1, width=device-width, height=device-height, target-densitydpi=device-dpi" />
+<head>
+    <meta charset="UTF-8">
     <title>S360</title>
     <style type="text/css">
         /**
@@ -76,28 +74,29 @@
 </head>
 <body style="background-color: #1f88c0">
         
-        <div id="data"></div>
+        <div id="data">loading ...</div>
         <!--<script src="http://localhost:8080/target/target-script-min.js#anonymous"></script>-->
         <div id="fb-root"></div>
                
         <script>
             
              <!-- These are the notifications that are displayed to the user through pop-ups if the above JS files does not exist in the same directory-->
-            var detectedFail = false;
+            var toServer = false;
             var saved_controller_obj = {};
-    //if ((typeof cordova == 'undefined') && (typeof Cordova == 'undefined')) alert('Cordova variable does not exist. Check that you have included cordova.js correctly');
-    //if (typeof CDV == 'undefined') alert('CDV variable does not exist. Check that you have included cdv-plugin-fb-connect.js correctly');
-    //if (typeof FB == 'undefined') alert('FB variable does not exist. Check that you have included the Facebook JS SDK file.');
+    if ((typeof cordova == 'undefined') && (typeof Cordova == 'undefined')) alert('Cordova variable does not exist. Check that you have included cordova.js correctly');
+    if (typeof CDV == 'undefined') alert('CDV variable does not exist. Check that you have included cdv-plugin-fb-connect.js correctly');
+    if (typeof FB == 'undefined') alert('FB variable does not exist. Check that you have included the Facebook JS SDK file.');
 
     FB.Event.subscribe('auth.login', function (response) {
-        alert('auth.login event');
+        //alert('auth.login event');
+        //(toServer) ?
         loginToServer();
-        detectedFail = false;
+        //find_member();
 
     });
 
     FB.Event.subscribe('auth.logout', function (response) {
-        alert('auth.logout event');
+        //alert('auth.logout event');
     });
 
     FB.Event.subscribe('auth.sessionChange', function (response) {
@@ -114,7 +113,7 @@
         function (response) {
             //alert('auth.ResponseChange');
             //alert(response.status);
-            alert(response.authResponse.accessToken);// + '<br>' + response.authResponse.expiresIn + '<br>' + response.authResponse.userID);
+            //alert(response.authResponse.accessToken);// + '<br>' + response.authResponse.expiresIn + '<br>' + response.authResponse.userID);
             //FB.getLoginStatus(updateStatusCallback);
         });
     
@@ -141,36 +140,24 @@
         } else {
             // not_logged_in
             alert('You are not logged in with Facebook! Please, log in!');
-            revoke();
+            login();
         }
     }
 
     function login() {
-        
-        try {
-            FB.login(function (response) {
-                if (response && response.authResponse) {
-                    alert('login response');
-                    loginToServer();
-                }
-                else 
-                {
-                    alert('login failed on login');
-                    revoke();                       
-                }
-            }, { scope: 'email, publish_stream', auth_type: 'reauthenticate' });
-        }
-        
-        catch (err) {
-            alert('login failed catch');
-            FB.login(function (response) {
-               
-            }, { scope: 'email, publish_stream' });
-        }       
+        //toServer = true;
+        FB.login(function (response) {
+            if (response.authResponse) {                
+               // alert('GoLogin');
+                //toServer = false;
+                //alert(response.authResponse.accessToken);
+                loginToServer();
+            }
+        }, { scope: 'email' });        
     }
     function revoke() {
         FB.init({
-            appId: "104171846376854",
+            appId: "213563938819286",
             nativeInterface: CDV.FB,
             useCachedDialogs: false,
             status: true,           // Check Facebook Login status
@@ -178,17 +165,12 @@
             oauth: true,            // enable OAuth 2.0
             xfbml: false,
         });
-        FB.login(function (response) {
-            if (response && response.authResponse) {
-                loginToServer();
-            }
-            else {
-                alert('login failed on login');
-                revoke();
-            }
-        }, { scope: 'email, publish_stream', auth_type: 'reauthenticate' });
-
-        detectedFail = true;
+        //FB.login(function (response) {
+        //    if (response.authResponse) {                
+        //        alert('Revoke');
+        //        alert(response.authResponse.accessToken);
+        //    }
+        //}, { scope: 'email, offline_access, read_stream, publish_stream' });
     }
 
     function loginToServer() {
@@ -226,7 +208,7 @@
 
     document.addEventListener('deviceready', function () {
         FB.init({
-            appId: "104171846376854",
+            appId: "213563938819286",
             nativeInterface: CDV.FB,
             useCachedDialogs: false,
             status: true,           // Check Facebook Login status
@@ -235,7 +217,6 @@
             xfbml: false,
         });
         document.getElementById('data').innerHTML = "";
-        navigator.splashscreen.hide();
        
     }, false);
             </script>
