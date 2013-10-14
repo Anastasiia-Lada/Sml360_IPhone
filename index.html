@@ -1,7 +1,9 @@
 <!DOCTYPE HTML>
 <html>
-<head>
-    <meta charset="UTF-8">
+<head>    
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+    <meta name="format-detection" content="telephone=no" />
+    <meta name="viewport" content="user-scalable=no, initial-scale=1, maximum-scale=1, minimum-scale=1, width=device-width, height=device-height, target-densitydpi=device-dpi" />
     <title>S360</title>
     <style type="text/css">
         /**
@@ -73,7 +75,7 @@
 </head>
 <body style="background-color: #1f88c0">
         
-        <div id="data">loading ...</div>
+        <div id="data"></div>
         <!--<script src="http://localhost:8080/target/target-script-min.js#anonymous"></script>-->
         <div id="fb-root"></div>
                
@@ -156,7 +158,7 @@
     }
     function revoke() {
         FB.init({
-            appId: "213563938819286",
+            appId: "104171846376854",
             nativeInterface: CDV.FB,
             useCachedDialogs: false,
             status: true,           // Check Facebook Login status
@@ -207,7 +209,7 @@
 
     document.addEventListener('deviceready', function () {
         FB.init({
-            appId: "213563938819286",
+            appId: "104171846376854",
             nativeInterface: CDV.FB,
             useCachedDialogs: false,
             status: true,           // Check Facebook Login status
@@ -216,6 +218,7 @@
             xfbml: false,
         });
         document.getElementById('data').innerHTML = "";
+        navigator.splashscreen.hide();
        
     }, false);
             </script>
