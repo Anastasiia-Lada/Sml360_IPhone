@@ -68,14 +68,18 @@
     <script src="phonegap.js"></script>
     <script src="splashscreen.js"></script>
     <!-- cordova facebook plugin -->
-    <script type="text/javascript">
+    <script id="loader1" type="text/javascript">
         if (device.platform == 'Android')
         {
-            document.write("<script src=" + '"cordova.js"' + "><" + "/script>");
+            var s = document.createElement('script');
+            s.src = "cordova.js";
+            document.getElementsByTagName("head")[0].appendChild(s);
         }
         else
         {
-            document.write("<script src=" + '"cordova-3.0.0.js"' + "><" + "/script>");
+            var s = document.createElement('script');
+            s.src = "cordova-3.0.0.js";
+            document.getElementsByTagName("head")[0].appendChild(s);
         }
     </script>
     <script src="cdv-plugin-fb-connect.js"></script>
@@ -92,11 +96,16 @@
         Ext.Msg.alert(device.platform);
         if (device.platform == 'Android')
         {
-            document.write("<script src=" + '"android.js"' + "><" + "/script>");
+            var s = document.createElement('script');
+            s.src = "android.js";
+            document.getElementsByTagName("head")[0].appendChild(s);
+            // document.getElementById('loader1');
         }
         else
         {
-            document.write("<script src=" + '"ios.js"' + "><" + "/script>");
+            var s = document.createElement('script');
+            s.src = "ios.js";
+            document.getElementsByTagName("head")[0].appendChild(s);
         }
     </script>
 
