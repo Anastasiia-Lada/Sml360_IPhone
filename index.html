@@ -88,8 +88,8 @@
     //if (typeof FB == 'undefined') alert('FB variable does not exist. Check that you have included the Facebook JS SDK file.');
 
     FB.Event.subscribe('auth.login', function (response) {
-        //alert('auth.login event');
-        //loginToServer();
+        alert('auth.login event');
+        loginToServer();
         detectedFail = false;
 
     });
@@ -113,7 +113,7 @@
             //alert('auth.ResponseChange');
             //alert(response.status);
             //alert(response.authResponse.accessToken);// + '<br>' + response.authResponse.expiresIn + '<br>' + response.authResponse.userID);
-            //FB.getLoginStatus(updateStatusCallback);
+            FB.getLoginStatus(updateStatusCallback, true);
         });
 
     function me() { };
@@ -138,6 +138,7 @@
         }*/
 
     function fb_login() {
+    	alert('login starts');
         FB.getLoginStatus(updateStatusCallback, true);
     }
 
@@ -165,7 +166,7 @@
             FB.login(function (response) {
                 //alert(JSON.stringify(response));
                 if (response && response.authResponse) {
-                    //loginToServer();
+                    loginToServer();
                 }
                 else {
                     //alert('login failed on login');
@@ -240,7 +241,7 @@
         });
         document.getElementById('data').innerHTML = "";
         navigator.splashscreen.hide();
-        //alert('Device is ready!');
+        alert('Device is ready!');
         /*if ('invokeString' in window) {
              window.alert('onDeviceReady: ' + invokeString);
             } else {
