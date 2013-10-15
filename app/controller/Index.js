@@ -139,7 +139,8 @@ Ext.define('smiley360.controller.Index', {
 								});
 						}
 						else {
-							try {
+							tmp_params.guid = smiley360.services.getDeviceId();
+							try {								
 								Ext.getStore('membersStore').load(function () {
 									me.loadProfileDropdowns(function () {
 										if (tmp_params.facebookID != '') {
