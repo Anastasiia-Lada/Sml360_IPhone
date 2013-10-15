@@ -143,6 +143,7 @@ Ext.define('smiley360.controller.Index', {
 								Ext.getStore('membersStore').load(function () {
 									me.loadProfileDropdowns(function () {
 										if (tmp_params.facebookID != '') {
+											tmp_params.guid = smiley360.services.getDeviceId();
 											smiley360.services.loginToServer(tmp_params, function (fb_session) {
 												//alert('doneLoginToserver');												
 												me.tryLoginUser();
@@ -1042,13 +1043,13 @@ Ext.define('smiley360.controller.Index', {
 		if (membersStore.getCount() > 0) {
 			var memberId = smiley360.services.getMemberId();//membersStore.getAt(0).data.memberId;
 			var deviceId = smiley360.services.getDeviceId();//membersStore.getAt(0).data.deviceId;
-			if (tmp_params.guid!='')
-					deviceId = tmp_params.guid;
+			//if (tmp_params.guid!='')
+			//		tmp_params.guid = deviceId;
 				tmp_params.guid = '';
 				tmp_params.facebookID = '';
 				tmp_params.token = '';
 			if (memberId) {
-				console.log('Index -> [tryLoginUser] with stored memberId:' + memberId);
+				alert('Index -> [tryLoginUser] with stored memberId:' + memberId);
 
 				me.loadMemberData(memberId, function () {
 					smiley360.animateViewLeft('mainview');
@@ -1080,12 +1081,12 @@ Ext.define('smiley360.controller.Index', {
 			}
 			else if (deviceId ) {
 				var me = this;				
-				console.log('Index -> [tryLoginUser] with cached deviceId:' + deviceId);
+				alert('Index -> [tryLoginUser] with cached deviceId:' + deviceId);
 
 				smiley360.services.getMemberIdByDeviceId(deviceId,
 					function (response) {
 						if (response.success) {
-							console.log('Index -> [tryLoginUser] with received memberId:' + response.ID);
+							alert('Index -> [tryLoginUser] with received memberId:' + response.ID);
 
 							me.updateMemberId(response.ID);
 							me.loadMemberData(response.ID, function () {
@@ -1110,7 +1111,7 @@ Ext.define('smiley360.controller.Index', {
 							});
 						}
 						else {
-							console.log('Index -> [tryLoginUser] don\'t received memberId for deviceId:' + deviceId);
+							alert('Index -> [tryLoginUser] don\'t received memberId for deviceId:' + deviceId);
 							var cmp_tool = me.getToolId();
 							if (response.memberID == 0) {
 								if (cmp_tool == 'login') {
@@ -1132,7 +1133,7 @@ Ext.define('smiley360.controller.Index', {
 		}
 
 		// if no data stored generate device id and show login view
-		if(tmp_params.guid == '')
+		//if(tmp_params.guid == '')
 			this.generateDeviceId();
 
 		smiley360.animateViewLeft('loginview');
