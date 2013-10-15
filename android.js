@@ -1,4 +1,4 @@
-﻿          
+﻿alert('using android.js');
 var toServer = false;
 var saved_controller_obj = {};
 if ((typeof cordova == 'undefined') && (typeof Cordova == 'undefined')) alert('Cordova variable does not exist. Check that you have included cordova.js correctly');
