@@ -60,6 +60,7 @@
     <Content Include=".sencha\app\build-impl.xml" />
     <Content Include=".sencha\app\plugin.xml" />
     <Content Include=".sencha\workspace\plugin.xml" />
+    <Content Include="android.js" />
     <Content Include="app.js" />
     <Content Include="app\controller\Index.js" />
     <Content Include="app\controller\Share.js" />
@@ -113,7 +114,9 @@
     <Content Include="build.xml">
       <SubType>Designer</SubType>
     </Content>
+    <Content Include="config.xml" />
     <Content Include="index.html" />
+    <Content Include="ios.js" />
     <Content Include="jquery-2.0.3.js" />
     <Content Include="plupload.full.min.js" />
     <Content Include="resources\css\app.css" />
