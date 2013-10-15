@@ -69,10 +69,10 @@
     <script src="splashscreen.js"></script>
     <!-- cordova facebook plugin -->
     <script id="loader1" type="text/javascript">
-        alert(device.platform);
-        var deviceType = (navigator.userAgent.match(/iPad/i))  == "iPad" ? "iPad" : (navigator.userAgent.match(/iPhone/i))  == "iPhone" ? "iPhone" : (navigator.userAgent.match(/Android/i)) == "Android" ? "Android" : (navigator.userAgent.match(/BlackBerry/i)) == "BlackBerry" ? "BlackBerry" : "null";
-
-        alert(deviceType);
+        alert('test');
+        alert(window.device.valueOf());
+        alert(window.device.platform);
+        
         if (device.platform == 'Android')
         {
             var fileref = document.createElement("script")
