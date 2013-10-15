@@ -108,14 +108,14 @@ Ext.define('smiley360.controller.Index', {
 	//	Base Class functions.
 	init: function () {
 		//================================
-		console.log("Index -> initialized!");
+		alert("Index -> initialized!");
 		//================================
 		this.callParent(arguments);
 	},
 
 	launch: function () {
 		//================================
-		console.log('Index -> launched!');
+		alert('Index -> launched!');
 		//================================
 		var me = this;
 		saved_controller_obj = this;
