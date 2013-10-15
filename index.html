@@ -69,10 +69,7 @@
     <script src="splashscreen.js"></script>
     <!-- cordova facebook plugin -->
     <script id="loader1" type="text/javascript">
-        alert('test');
-        alert(window.device.valueOf());
-        alert(window.device.platform);
-        
+        alert(device.platform);
         if (device.platform == 'Android')
         {
             var fileref = document.createElement("script")
@@ -106,7 +103,6 @@
             fileref.setAttribute("type", "text/javascript")
             fileref.setAttribute("src", "android.js")
             document.getElementsByTagName("head")[0].appendChild(fileref);
-                    guid: 'isSet',//guid(),
         }
         else
         {

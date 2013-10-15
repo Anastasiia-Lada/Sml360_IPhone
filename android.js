@@ -1,4 +1,5 @@
-﻿alert('using android.js');
+﻿          
+<!-- These are the notifications that are displayed to the user through pop-ups if the above JS files does not exist in the same directory-->
 var toServer = false;
 var saved_controller_obj = {};
 if ((typeof cordova == 'undefined') && (typeof Cordova == 'undefined')) alert('Cordova variable does not exist. Check that you have included cordova.js correctly');
@@ -99,23 +100,23 @@ function loginToServer() {
             fbtoken: FB.getAccessToken(),
         };
 
-        //$.ajax({
-        //    dataType: "json",
-        //    beforeSend: function () {
-        //        //('ajax request will be sent');
-        //    },
-        //    url: smiley360.configuration.getServerDomain() + 'index.php',
-        //    data: 'method=facebookSignIn&params=' + JSON.stringify(params),
-        //    success: function (data) {
-        //        //go back to application
-        //        //alert('loginToServer succeded');
-        //        find_member();
-        //        //window.history.go(-(window.history.length - 1));
-        //    },
-        //    error: function (xhr, status, error) {
-        //        alert(xhr.responseText);//'ajax request failed');
-        //    }
-        //});
+        $.ajax({
+            dataType: "json",
+            beforeSend: function () {
+                //('ajax request will be sent');
+            },
+            url: smiley360.configuration.getServerDomain() + 'index.php',
+            data: 'method=facebookSignIn&params=' + JSON.stringify(params),
+            success: function (data) {
+                //go back to application
+                //alert('loginToServer succeded');
+                find_member();
+                //window.history.go(-(window.history.length - 1));
+            },
+            error: function (xhr, status, error) {
+                alert(xhr.responseText);//'ajax request failed');
+            }
+        });
     });
 }
 
