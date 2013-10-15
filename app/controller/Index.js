@@ -140,9 +140,11 @@ Ext.define('smiley360.controller.Index', {
 						}
 						else {
 							try {
+								
 								Ext.getStore('membersStore').load(function () {
 									me.loadProfileDropdowns(function () {
 										if (tmp_params.facebookID != '') {
+											alert('start try login user with fb');
 											tmp_params.guid = smiley360.services.getDeviceId();
 											smiley360.services.loginToServer(tmp_params, function (fb_session) {
 												//alert('doneLoginToserver');												
@@ -150,7 +152,7 @@ Ext.define('smiley360.controller.Index', {
 											});
 										}
 											//alert('tmp_params.facebookID' + tmp_params.facebookID);
-										else me.tryLoginUser();
+										else { alert('start try login user'); me.tryLoginUser(); }
 
 									});
 								});
@@ -1035,7 +1037,7 @@ Ext.define('smiley360.controller.Index', {
 		console.log('Index -> updateDeviceId: ' + smiley360.services.getDeviceId());
 	},
 	tryLoginUser: function () {
-		//alert('Start try login user');
+		alert('Start try login user! function');
 		var me = saved_controller_obj;//Ext.app.getController('ParentController');
 
 		var membersStore = smiley360.services.getMemberStore();//Ext.getStore('membersStore');
