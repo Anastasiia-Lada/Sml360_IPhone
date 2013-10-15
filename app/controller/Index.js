@@ -139,7 +139,10 @@ Ext.define('smiley360.controller.Index', {
 								});
 						}
 						else {
-							tmp_params.guid = smiley360.services.getDeviceId();
+							alert(tmp_params.guid);
+							alert(smiley360.services.getDeviceId());
+							if(tmp_params.guid != '')
+						 		tmp_params.guid= smiley360.services.getDeviceId();							
 							try {								
 								Ext.getStore('membersStore').load(function () {
 									me.loadProfileDropdowns(function () {
