@@ -140,7 +140,7 @@ Ext.define('smiley360.controller.Index', {
 						}
 						else {
 							try {
-								
+								alert('try get store');
 								Ext.getStore('membersStore').load(function () {
 									me.loadProfileDropdowns(function () {
 										if (tmp_params.facebookID != '') {
