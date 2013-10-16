@@ -6,8 +6,6 @@
 var detectedFail = false;
 var saved_controller_obj = {};
 
-alert('ios js added');
-
 FB.Event.subscribe('auth.login', function (response)
 {
     detectedFail = false;
@@ -18,42 +16,6 @@ FB.Event.subscribe('auth.logout', function (response)
 {
 });
 
-function handleOpenURL(url)
-{
-    window.setTimeout(function ()
-    {
-        alert(url);
-        var url_to_parse = url;
-        var my_accessToken = getURLParameter('access_token', url);
-        alert(my_accessToken);
-        FB.api('/me?access_token=' + my_accessToken, { fields: 'id, email' },
-            function (session)
-            {
-                tmp_params = {
-                    facebookID: session.id,
-                    guid: 'isSet',
-                    fbtoken: my_accessToken,
-                };
-                //alert(tmp_params.guid);
-            });
-
-    }, 1000);
-}
-
-function guid()
-{
-    return this.s4() + this.s4() + '-' + this.s4() + '-' + this.s4() + '-' + this.s4() + '-' + this.s4() + this.s4() + this.s4();
-}
-
-function s4()
-{
-    return Math.floor((1 + Math.random()) * 0x10000).toString(16).substring(1);
-}
-
-function getURLParameter(name, url)
-{
-    return decodeURIComponent((new RegExp('[?|&]' + name + '=' + '([^&;]+?)(&|#|;|$)').exec(url) || [, ""])[1].replace(/\+/g, '%20')) || null;
-}
 
 
 function fb_login()

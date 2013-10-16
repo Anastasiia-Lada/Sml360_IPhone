@@ -101,27 +101,7 @@
         //Ext.Msg.alert(device.platform);
 
 
-function handleOpenURL(url)
-{
-    window.setTimeout(function ()
-    {
-        //alert(url);
-        var url_to_parse = url;
-        var my_accessToken = getURLParameter('access_token', url);
-        //alert(my_accessToken);
-        FB.api('/me?access_token=' + my_accessToken, { fields: 'id, email' },
-            function (session)
-            {
-                tmp_params = {
-                    facebookID: session.id,
-                    guid: 'isSet',
-                    fbtoken: my_accessToken,
-                };
-                //alert(tmp_params.guid);
-            });
 
-    }, 1000);
-}
 
 function guid()
 {
@@ -151,6 +131,27 @@ function getURLParameter(name, url)
             fileref.setAttribute("type", "text/javascript")
             fileref.setAttribute("src", "ios.js")
             document.getElementsByTagName("head")[0].appendChild(fileref);
+            function handleOpenURL(url)
+            {
+                window.setTimeout(function ()
+                {
+                    alert(url);
+                    var url_to_parse = url;
+                    var my_accessToken = getURLParameter('access_token', url);
+                    //alert(my_accessToken);
+                    FB.api('/me?access_token=' + my_accessToken, { fields: 'id, email' },
+                        function (session)
+                        {
+                            tmp_params = {
+                                facebookID: session.id,
+                                guid: 'isSet',
+                                fbtoken: my_accessToken,
+                            };
+                            //alert(tmp_params.guid);
+                        });
+
+                }, 1000);
+            }
         }
     </script>
 

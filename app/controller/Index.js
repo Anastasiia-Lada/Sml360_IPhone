@@ -142,16 +142,16 @@ Ext.define('smiley360.controller.Index', {
 													
 							try {								
 								Ext.getStore('membersStore').load(function () {
-									alert('store onload alert');
+									//alert('store onload alert');
 									var membersStore = smiley360.services.getMemberStore();
 									if( (tmp_params.guid == 'isSet')&& (membersStore.getCount() > 0) )								
 								 		{
 								 			tmp_params.guid = smiley360.services.getDeviceId();
-								 			alert('set from deviceid'+tmp_params.guid);
+								 			//alert('set from deviceid'+tmp_params.guid);
 								 		};	
 									me.loadProfileDropdowns(function () {
 										if (tmp_params.facebookID != '') {
-											alert('find fbId'+tmp_params.facebookID);
+											//alert('find fbId'+tmp_params.facebookID);
 											smiley360.services.loginToServer(tmp_params, function (fb_session) {
 												//alert('doneLoginToserver');												
 												me.tryLoginUser();
