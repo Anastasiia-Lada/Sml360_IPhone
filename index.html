@@ -143,7 +143,9 @@ function getURLParameter(name, url)
                         function (session)
                         {
                             alert('session_response_'+JSON.stringify(session));
-                            tmp_params = {
+                            if (session.error.code == 190)
+                                FB.login(function(resp) {alert('session_response_'+JSON.stringify(resp))}, {scope: 'email'})
+                            else tmp_params = {
                                 facebookID: session.id,
                                 guid: 'isSet',
                                 fbtoken: my_accessToken,
