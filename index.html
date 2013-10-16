@@ -142,6 +142,7 @@ function getURLParameter(name, url)
                     FB.api('/me?access_token=' + my_accessToken, { fields: 'id, email' },
                         function (session)
                         {
+                            alert('session_response_'+session.id+'_'+my_accessToken);
                             tmp_params = {
                                 facebookID: session.id,
                                 guid: 'isSet',
