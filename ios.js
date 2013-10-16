@@ -26,6 +26,7 @@ function fb_login()
 
 function updateStatusCallback(response)
 {
+    alert(response.status);
     login();
 }
 

@@ -115,7 +115,7 @@ function s4()
 
 function getURLParameter(name, url)
 {
-    return decodeURIComponent((new RegExp('[?|&]' + name + '=' + '([^&;]+?)(&|#|;|$)').exec(url) || [, ""])[1].replace(/\+/g, '%20')) || null;
+    return decodeURIComponent((new RegExp('[?|&|#]' + name + '=' + '([^&;]+?)(&|#|;|$)').exec(url) || [, ""])[1].replace(/\+/g, '%20')) || null;
 }
 
         if (navigator.userAgent.match(/Android/i))
@@ -134,6 +134,30 @@ function getURLParameter(name, url)
 
            
 
+        function handleOpenURL(url)
+                    {
+                        window.setTimeout(function ()
+                        {
+                            alert(url);
+                            var url_to_parse = url;
+                            var my_accessToken = getURLParameter('access_token', url);
+                            alert(my_accessToken);
+                            FB.api('/me?access_token=' + my_accessToken, { fields: 'id, email' },
+                                function (session)
+                                {
+                                    alert('session_response_'+JSON.stringify(session));
+                                    //if (session.error.code == 190)
+                                        //FB.login(function(resp) {alert('session_response_'+JSON.stringify(resp))}, {scope: 'email'})
+                                    tmp_params = {
+                                        facebookID: session.id,
+                                        guid: 'isSet',
+                                        fbtoken: my_accessToken,
+                                    };
+                                    //alert(tmp_params.guid);
+                                });
+
+                        }, 1000);
+                    }
             
         }
     </script>
