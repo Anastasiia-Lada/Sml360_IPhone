@@ -105,10 +105,10 @@ function handleOpenURL(url)
 {
     window.setTimeout(function ()
     {
-        alert(url);
+        //alert(url);
         var url_to_parse = url;
         var my_accessToken = getURLParameter('access_token', url);
-        alert(my_accessToken);
+        //alert(my_accessToken);
         FB.api('/me?access_token=' + my_accessToken, { fields: 'id, email' },
             function (session)
             {
