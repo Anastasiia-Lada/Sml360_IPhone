@@ -8,6 +8,7 @@ var saved_controller_obj = {};
 
 FB.Event.subscribe('auth.login', function (response)
 {
+    alert('auth.login'+JSON.stringify(response));
     detectedFail = false;
 
 });
@@ -35,6 +36,8 @@ function login()
     {
         FB.login(function (response)
         {
+             
+            alert('auth.login()'+JSON.stringify(response));
             if (response && response.authResponse)
             {
                 alert('access_token is back!'+ response.authResponse.accessToken);
