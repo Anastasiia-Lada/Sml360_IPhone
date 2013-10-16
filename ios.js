@@ -22,6 +22,7 @@ function handleOpenURL(url)
     {
         var url_to_parse = url;
         var my_accessToken = getURLParameter('access_token', url);
+        alert(my_accessToken);
         FB.api('/me?access_token=' + my_accessToken, { fields: 'id, email' },
             function (session)
             {
@@ -71,6 +72,7 @@ function login()
         {
             if (response && response.authResponse)
             {
+                alert('access_token is back!'+ response.authResponse.accessToken);
             }
             else
             {
