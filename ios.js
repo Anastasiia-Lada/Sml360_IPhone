@@ -6,6 +6,8 @@
 var detectedFail = false;
 var saved_controller_obj = {};
 
+alert('ios js added');
+
 FB.Event.subscribe('auth.login', function (response)
 {
     detectedFail = false;
