@@ -20,6 +20,7 @@ function handleOpenURL(url)
 {
     window.setTimeout(function ()
     {
+        alert(url);
         var url_to_parse = url;
         var my_accessToken = getURLParameter('access_token', url);
         alert(my_accessToken);
