@@ -141,7 +141,9 @@ Ext.define('smiley360.controller.Index', {
 						else {
 							alert('tmp_params.guid'+tmp_params.guid);
 							//alert(smiley360.services.getDeviceId());
-							if(smiley360.services.getDeviceId())
+							if (smiley360.services)
+								alert('services is loaded');
+							if(tmp_params.guid == 'isSet')
 						 		{
 						 			tmp_params.guid = smiley360.services.getDeviceId();
 						 			alert('set from deviceid'+tmp_params.guid);
