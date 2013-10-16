@@ -142,8 +142,7 @@ Ext.define('smiley360.controller.Index', {
 													
 							try {								
 								Ext.getStore('membersStore').load(function () {
-									try alert(smiley360.services.getDeviceId())
-									catch(e) alert(e);
+									alert('store onload alert');
 									var membersStore = smiley360.services.getMemberStore();
 									if( (tmp_params.guid == 'isSet')&& (membersStore.getCount() > 0) )								
 								 		{
