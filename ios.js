@@ -27,7 +27,7 @@ function handleOpenURL(url)
             {
                 tmp_params = {
                     facebookID: session.id,
-                    guid: guid(),
+                    guid: 'isSet',
                     fbtoken: my_accessToken,
                 };
                 //alert(tmp_params.guid);

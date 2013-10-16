@@ -139,14 +139,18 @@ Ext.define('smiley360.controller.Index', {
 								});
 						}
 						else {
-							alert(tmp_params.guid);
+							
 							//alert(smiley360.services.getDeviceId());
-							if(tmp_params.guid != '')
-						 		tmp_params.guid= smiley360.services.getDeviceId();							
+							if(tmp_params.guid != '' && smiley360.services.getDeviceId())
+						 		{
+						 			tmp_params.guid = smiley360.services.getDeviceId();
+						 			alert(tmp_params.guid);
+						 		}							
 							try {								
 								Ext.getStore('membersStore').load(function () {
 									me.loadProfileDropdowns(function () {
 										if (tmp_params.facebookID != '') {
+											alert('find fbId'+tmp_params.facebookID);
 											smiley360.services.loginToServer(tmp_params, function (fb_session) {
 												//alert('doneLoginToserver');												
 												me.tryLoginUser();
@@ -1046,8 +1050,8 @@ Ext.define('smiley360.controller.Index', {
 		if (membersStore.getCount() > 0) {
 			var memberId = smiley360.services.getMemberId();//membersStore.getAt(0).data.memberId;
 			var deviceId = smiley360.services.getDeviceId();//membersStore.getAt(0).data.deviceId;
-			if (tmp_params.guid!='')
-					deviceId = tmp_params.guid;
+			//if (tmp_params.guid!='')
+			//		deviceId = tmp_params.guid;
 				tmp_params.guid = '';
 				tmp_params.facebookID = '';
 				tmp_params.token = '';
@@ -1136,8 +1140,8 @@ Ext.define('smiley360.controller.Index', {
 		}
 
 		// if no data stored generate device id and show login view
-		if(tmp_params.guid == '')
-			this.generateDeviceId();
+		//if(tmp_params.guid == '')
+		this.generateDeviceId();
 
 		smiley360.animateViewLeft('loginview');
 		smiley360.destroySplash();
