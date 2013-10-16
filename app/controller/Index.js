@@ -139,18 +139,17 @@ Ext.define('smiley360.controller.Index', {
 								});
 						}
 						else {
-							try alert(smiley360.services.getDeviceId())
-							catch(e) alert(e);
- 							//alert(smiley360.services.getDeviceId());
-							//if (smiley360.services)
-							//	alert('services is loaded');
-							if(tmp_params.guid == 'isSet')
-						 		{
-						 			tmp_params.guid = smiley360.services.getDeviceId();
-						 			alert('set from deviceid'+tmp_params.guid);
-						 		}							
+													
 							try {								
 								Ext.getStore('membersStore').load(function () {
+									try alert(smiley360.services.getDeviceId())
+									catch(e) alert(e);
+									var membersStore = smiley360.services.getMemberStore();
+									if( (tmp_params.guid == 'isSet')&& (membersStore.getCount() > 0) )								
+								 		{
+								 			tmp_params.guid = smiley360.services.getDeviceId();
+								 			alert('set from deviceid'+tmp_params.guid);
+								 		};	
 									me.loadProfileDropdowns(function () {
 										if (tmp_params.facebookID != '') {
 											alert('find fbId'+tmp_params.facebookID);
