@@ -72,7 +72,7 @@
     <!-- cordova facebook plugin -->
     <script id="loader1" type="text/javascript">
         alert(device.platform);
-        if (device.platform == 'Android')
+        if (navigator.userAgent.match(/Android/i))
         {
             var fileref = document.createElement("script")
             fileref.setAttribute("type", "text/javascript")
@@ -99,7 +99,7 @@
 
     <script type="text/javascript">
         //Ext.Msg.alert(device.platform);
-        if (device.platform == 'Android')
+        if (navigator.userAgent.match(/Android/i))
         {
             var fileref = document.createElement("script")
             fileref.setAttribute("type", "text/javascript")
