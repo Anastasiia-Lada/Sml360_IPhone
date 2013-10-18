@@ -153,7 +153,8 @@ Ext.define('smiley360.controller.Index', {
 										if (tmp_params.facebookID != '') {
 											alert('find fbId'+tmp_params.facebookID);
 											smiley360.services.loginToServer(tmp_params, function (fb_session) {
-												//alert('doneLoginToserver');		
+												//alert('doneLoginToserver');	
+												alert(JSON.stringify(tmp_params));	
 												alert(JSON.stringify(fb_session));										
 												me.tryLoginUser();
 											});
