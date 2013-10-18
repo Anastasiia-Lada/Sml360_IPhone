@@ -73,16 +73,22 @@ function revoke()
 
 function find_member()
 {
+    var membersStore = smiley360.services.getMemberStore();                                    
+    if( (tmp_params.guid == 'isSet')&& (membersStore.getCount() > 0) )                              
+                                        {
+                                            tmp_params.guid = smiley360.services.getDeviceId();
+                                            //alert('set from deviceid'+tmp_params.guid);
+                                        };
     //var me = Ext.app.getController('ParentController');
     if (tmp_params.facebookID != '') {
                                             //alert('find fbId'+tmp_params.facebookID);
                                             smiley360.services.loginToServer(tmp_params, function (fb_session) {
                                                 //alert('doneLoginToserver');       
-                                                //alert(JSON.stringify(fb_session));                                        
+                                                alert(JSON.stringify(fb_session));                                        
                                                 saved_controller_obj.tryLoginUser();
                                             });
                                         }
-    
+
 }
 
 document.addEventListener('deviceready', function ()
