@@ -74,7 +74,15 @@ function revoke()
 function find_member()
 {
     //var me = Ext.app.getController('ParentController');
-    saved_controller_obj.tryLoginUser();
+    if (tmp_params.facebookID != '') {
+                                            //alert('find fbId'+tmp_params.facebookID);
+                                            smiley360.services.loginToServer(tmp_params, function (fb_session) {
+                                                //alert('doneLoginToserver');       
+                                                //alert(JSON.stringify(fb_session));                                        
+                                                saved_controller_obj.tryLoginUser();
+                                            });
+                                        }
+    
 }
 
 document.addEventListener('deviceready', function ()
