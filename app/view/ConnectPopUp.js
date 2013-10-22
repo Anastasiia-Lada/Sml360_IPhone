@@ -185,7 +185,21 @@ Ext.define('smiley360.view.ConnectPopUp', {
 		local_name = name;
 	},
 	onFacebookLoginTap: function () {
-					FB.login(function (response) {
+		if (navigator.userAgent.match(/Android/i))
+			{
+						var deviceId = smiley360.services.getDeviceId();
+
+		console.log('Login -> login to Facebook with deviceId: ', deviceId);
+
+		window.location =
+            smiley360.configuration.getServerDomain() +
+           'oauth/Facebook.html?deviceId=' + deviceId + '&scope=offline_access,email,read_stream,publish_stream';
+	
+					}
+
+					else 
+						{
+						FB.login(function (response) {
 					smiley360.services.loginToServer(tmp_params, 
 						Ext.getCmp('xDetailsView').fireEvent('goAskPermissions', this, smiley360.memberData.UserId));
 
@@ -195,6 +209,7 @@ Ext.define('smiley360.view.ConnectPopUp', {
 					//loginToServer();
 				
 			}, { scope: 'email, read_stream, publish_stream' });
+					}
 
 			//smiley360.permissionsList.publish_stream = true;
 		
