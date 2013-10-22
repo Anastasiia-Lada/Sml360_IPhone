@@ -38,7 +38,7 @@ function login()
         FB.login(function (response)
         {
              
-            alert('auth.login()'+JSON.stringify(response));
+            //alert('auth.login()'+JSON.stringify(response));
             if (response && response.authResponse)
             {
                 //alert('access_token is back!'+ response.authResponse.accessToken);
