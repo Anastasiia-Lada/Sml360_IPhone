@@ -59,7 +59,7 @@ function login()
 function revoke()
 {
     FB.init({
-        appId: "213563938819286",
+        appId: "104171846376854",
         nativeInterface: CDV.FB,
         useCachedDialogs: false,
         status: true,           // Check Facebook Login status
@@ -84,7 +84,7 @@ function find_member()
                                             //alert('find fbId'+tmp_params.facebookID);
                                             smiley360.services.loginToServer(tmp_params, function (fb_session) {
                                                 //alert('doneLoginToserver');       
-                                                alert(JSON.stringify(fb_session));                                        
+                                                //alert(JSON.stringify(fb_session));                                        
                                                 saved_controller_obj.tryLoginUser();
                                             });
                                         }
@@ -94,7 +94,7 @@ function find_member()
 document.addEventListener('deviceready', function ()
 {
     FB.init({
-        appId: "213563938819286",
+        appId: "104171846376854",
         nativeInterface: CDV.FB,
         useCachedDialogs: false,
         status: true,           // Check Facebook Login status
