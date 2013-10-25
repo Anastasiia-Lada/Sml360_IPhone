@@ -1413,7 +1413,7 @@ smiley360.destroySplash = function () {
 	var appLoadingIndicator = Ext.fly('appLoadingIndicator');
 	if (appLoadingIndicator) {
 		appLoadingIndicator.destroy();
-		document.body.style.background = '#000 no-repeat fixed center !important';
+		document.body.style.background = '#000 none repeat scroll 0% 0%';
 		console.log('Index -> [appLoadingIndicator] destroyed!');
 	}
 	else {
