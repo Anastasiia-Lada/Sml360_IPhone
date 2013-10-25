@@ -577,7 +577,7 @@ Ext.define('Ext.ux.Fileup', {
                                 {
                                     if (me.failureHandler)
                                     {
-                                        me.failureHandler('failure',response);
+                                    	me.failureHandler('failure',response);
                                     }
                                     else                                                       // Failure
                                         me.fireEvent('failure', response.message, response, this, e);
@@ -585,7 +585,7 @@ Ext.define('Ext.ux.Fileup', {
                                 {
                                     if (me.failureHandler)
                                     {
-                                        me.failureHandler('failure',response);
+                                    	me.failureHandler('failure',response);
                                     }
                                     else                                                         // Failure
                                         me.fireEvent('failure', 'Unknown error', response, this, e);
@@ -629,7 +629,7 @@ Ext.define('Ext.ux.Fileup', {
             //var rFltr = /^(?:image\/bmp|image\/cis\-cod|image\/gif|image\/ief|image\/jpeg|image\/jpeg|image\/jpeg|image\/pipeg|image\/png|image\/svg\+xml|image\/tiff|image\/x\-cmu\-raster|image\/x\-cmx|image\/x\-icon|image\/x\-portable\-anymap|image\/x\-portable\-bitmap|image\/x\-portable\-graymap|image\/x\-portable\-pixmap|image\/x\-rgb|image\/x\-xbitmap|image\/x\-xpixmap|image\/x\-xwindowdump)$/i
             me.hide();
             oFileReader.readAsDataURL(oFile);
-            me.up().down('[xtype=label]').setStyle('display:block;');
+            me.up().down('[xtype=label]').show();
         };
         var oFile = oFileIn.files[0];
         me.hide();
@@ -644,16 +644,16 @@ Ext.define('Ext.ux.Fileup', {
         if (canvas.toBlob)
         {
             canvas.toBlob(
-                function (blob)
-                {
-                    // Do something with the blob object,
-                    // e.g. creating a multipart form for file uploads:
+				function (blob)
+				{
+				    // Do something with the blob object,
+				    // e.g. creating a multipart form for file uploads:
 
-                    formData.append(me.getName(), blob);
-                    /* ... */
-                },
-                'image/png'
-            );
+				    formData.append(me.getName(), blob);
+				    /* ... */
+				},
+				'image/png'
+			);
         }
         return formData;
     },

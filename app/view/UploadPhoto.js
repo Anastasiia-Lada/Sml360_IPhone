@@ -2,7 +2,7 @@
 var shareResponse = [];
 var uploader = {};
 Ext.define('smiley360.view.UploadPhoto', {
-	extend: 'Ext.Panel',
+	extend: 'Ext.Container',
 	alias: 'widget.uploadphotoview',
 	requires: [
         'Ext.Anim',
@@ -72,42 +72,37 @@ Ext.define('smiley360.view.UploadPhoto', {
                             	style: 'max-width:99%;',
                             	items:
                                 [
-                                    {
-                                    	xtype: 'container',
-                                    	items:
-                                        [
-											{
-												xtype: 'fileupload',
-												autoUpload: true,
-												name: 'xBrowsePhotoButton',
-												cls: 'popup-photo-button has-shadow',
-												states:
-												{
-													browse: {
-														text: 'ADD PHOTO'
-													},
-													uploading: {
-														text: 'Uploading',
-														loading: true// Enable loading spinner on button
-													}
-												},
-												successHandler: function (response) {
-													photoAdded = true;
-													this.up('#xView').config.imageID = response.imageID;
-													//Ext.Msg.alert('iPad test', response.imageID);
-												},
-												failureHandler: function (error, response) {
-													Ext.Msg.alert(error, response.message);
-												}
+									{
+										xtype: 'fileupload',
+										autoUpload: true,
+										name: 'xBrowsePhotoButton',
+										cls: 'popup-photo-button has-shadow',
+										height:40,
+										states:
+										{
+											browse: {
+												text: 'ADD PHOTO'
 											},
-											{
-												xtype: 'label',
-												cls: 'popup-photo-image',
-												style: 'display:none;',
-												html: '<canvas style="width:150px;"/>'
+											uploading: {
+												text: 'Uploading',
+												loading: true// Enable loading spinner on button
 											}
-                                        ]
-                                    },
+										},
+										successHandler: function (response) {
+											photoAdded = true;
+											this.up('#xView').config.imageID = response.imageID;
+											//Ext.Msg.alert('iPad test', response.imageID);
+										},
+										failureHandler: function (error, response) {
+											Ext.Msg.alert(error, response.message);
+										}
+									},
+									{
+										xtype: 'label',
+										cls: 'popup-photo-image',
+										hidden:true,
+										html: '<canvas style="width:150px;"/>'
+									},
 									{
 										xtype: 'textareafield',
 										id: 'xPostText',
@@ -133,6 +128,7 @@ Ext.define('smiley360.view.UploadPhoto', {
 											}
 										}
 									}
+
                                 ]
                             }, {
                             	xtype: 'container',
@@ -257,7 +253,7 @@ Ext.define('smiley360.view.UploadPhoto', {
 					this.down('#xTwitterCheckbox').hide();
 
 				if (smiley360.memberData.Profile.facebookID && smiley360.memberData.Profile.facebookID != "" && smiley360.permissionsList.publish_stream)
-					this.down('#xFacebookCheckbox').show()
+					this.down('#xFacebookCheckbox').show();
 				else
 					this.down('#xFacebookCheckbox').hide();
 			}

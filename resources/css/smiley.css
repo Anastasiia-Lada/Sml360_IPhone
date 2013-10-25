@@ -1,4 +1,4 @@
-#xBrandView .x-scroll-scroller {
+#xBrandView .x-scroll-scroller {x-field-checkbox
 	position: relative;
 }
 
@@ -124,7 +124,7 @@
 }
 
 	.popup-checkbox .x-field-input {		
-		position: absolute;
+		position: relative;
 	}
 
 	.popup-checkbox .x-input-el {
@@ -155,6 +155,10 @@
 			-webkit-mask-repeat: no-repeat;
 			-webkit-mask-position: center;
 		}
+.popup-checkbox .x-field-mask
+{
+	width:100px;
+}
 
 .popup-checkbox-grey-label {
 	margin: 0px 0px 0px 0px;
