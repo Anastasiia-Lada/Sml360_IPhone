@@ -123,8 +123,7 @@
 	background-color: transparent !important;
 }
 
-	.popup-checkbox .x-field-input {
-		min-width: 100%;
+	.popup-checkbox .x-field-input {		
 		position: absolute;
 	}
 

@@ -180,7 +180,8 @@ Ext.define('smiley360.view.UploadPhoto', {
                                         id: 'xFacebookCheckbox',
                                         label: 'Post to Facebook',
                                         labelCls: 'popup-checkbox-grey-label',
-                                        cls: 'popup-checkbox',										
+                                        cls: 'popup-checkbox',
+                                        labelWidth: 140,
                                         checked: true,
                                         listeners: 
 										{
