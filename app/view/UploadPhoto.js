@@ -74,7 +74,6 @@ Ext.define('smiley360.view.UploadPhoto', {
                                         xtype: 'panel',
 										margin:'0 0 0 0',
 										padding:'0 0 0 0',
-                                        flex: 0.2,
                                         items:
                                         [
                                             {
@@ -113,7 +112,7 @@ Ext.define('smiley360.view.UploadPhoto', {
                                     {
                                         xtype: 'textareafield',
                                         id: 'xPostText',
-                                        flex: 0.8,
+                                        flex: 1,
                                         maxRows: 5,
                                         //maxLength: 84,
                                         isFocused: false,
@@ -169,9 +168,10 @@ Ext.define('smiley360.view.UploadPhoto', {
                                 layout: 'hbox',
                                 defaults: 
 								{
-                                    width: '45%',
-									labelWidth: '35%',
-                                    labelAlign: 'right'
+                                    flex:1,
+									labelWidth:120,
+									labelAlign:'right',
+									labelWrap:true
                                 },
                                 items:
                                 [
