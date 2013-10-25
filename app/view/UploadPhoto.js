@@ -71,45 +71,45 @@ Ext.define('smiley360.view.UploadPhoto', {
                                 layout: 'hbox',
                                 items:
                                 [
-                                    {
-                                        xtype: 'panel',
-                                        layout: 'vbox',
-                                        items:
-                                        [
-                                        {
-                                            xtype: 'fileupload',
-                                            autoUpload: true,
-                                            name: 'xBrowsePhotoButton',
-                                            cls: 'popup-photo-button has-shadow',
-                                            states:
-                                            {
-                                                browse: {
-                                                    text: 'ADD PHOTO'
-                                                },
-                                                uploading: {
-                                                    text: 'Uploading',
-                                                    loading: true// Enable loading spinner on button
-                                                }
-                                            },
-                                            successHandler: function (response)
-                                            {
-                                                photoAdded = true;
-                                                this.up('#xView').config.imageID = response.imageID;
-                                                //Ext.Msg.alert('iPad test', response.imageID);
-                                            },
-                                            failureHandler: function (error, response)
-                                            {
-                                                Ext.Msg.alert(error, response.message);
-                                            }
-                                        },
-                                        //{
-                                        //    xtype: 'label',
-                                        //    cls: 'popup-photo-image',
-                                        //    hidden: true,
-                                        //    html: '<canvas style="width:150px;"/>'
-                                        //}
-                                        ]
-                                    }, {
+                                    //{
+                                    //    xtype: 'panel',
+                                    //    items:
+                                    //    [
+                                    //    {
+                                    //        xtype: 'fileupload',
+                                    //        autoUpload: true,
+                                    //        name: 'xBrowsePhotoButton',
+                                    //        cls: 'popup-photo-button has-shadow',
+                                    //        states:
+                                    //        {
+                                    //            browse: {
+                                    //                text: 'ADD PHOTO'
+                                    //            },
+                                    //            uploading: {
+                                    //                text: 'Uploading',
+                                    //                loading: true// Enable loading spinner on button
+                                    //            }
+                                    //        },
+                                    //        successHandler: function (response)
+                                    //        {
+                                    //            photoAdded = true;
+                                    //            this.up('#xView').config.imageID = response.imageID;
+                                    //            //Ext.Msg.alert('iPad test', response.imageID);
+                                    //        },
+                                    //        failureHandler: function (error, response)
+                                    //        {
+                                    //            Ext.Msg.alert(error, response.message);
+                                    //        }
+                                    //    },
+                                    //    //{
+                                    //    //    xtype: 'label',
+                                    //    //    cls: 'popup-photo-image',
+                                    //    //    hidden: true,
+                                    //    //    html: '<canvas style="width:150px;"/>'
+                                    //    //}
+                                    //    ]
+                                    //},
+									{
                                         xtype: 'textareafield',
                                         id: 'xPostText',
                                         flex: 1,
@@ -167,9 +167,9 @@ Ext.define('smiley360.view.UploadPhoto', {
                                 xtype: 'panel',
                                 layout: 'hbox',
                                 defaults: {
-                                    width: '40%',
+                                    width: '50%',
                                     labelAlign: 'right',
-                                    labelWidth: '10%',
+                                    labelWidth: '100%',
                                 },
                                 items:
                                 [
