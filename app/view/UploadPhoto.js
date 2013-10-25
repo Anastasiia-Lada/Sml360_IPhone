@@ -102,12 +102,12 @@ Ext.define('smiley360.view.UploadPhoto', {
                                                 Ext.Msg.alert(error, response.message);
                                             }
                                         },
-                                        {
-                                            xtype: 'label',
-                                            cls: 'popup-photo-image',
-                                            hidden: true,
-                                            html: '<canvas style="width:150px;"/>'
-                                        }
+                                        //{
+                                        //    xtype: 'label',
+                                        //    cls: 'popup-photo-image',
+                                        //    hidden: true,
+                                        //    html: '<canvas style="width:150px;"/>'
+                                        //}
                                         ]
                                     }, {
                                         xtype: 'textareafield',
@@ -167,9 +167,9 @@ Ext.define('smiley360.view.UploadPhoto', {
                                 xtype: 'panel',
                                 layout: 'hbox',
                                 defaults: {
-                                    width: '50%',
+                                    width: '40%',
                                     labelAlign: 'right',
-                                    labelWidth: '40%',
+                                    labelWidth: '10%',
                                 },
                                 items:
                                 [
