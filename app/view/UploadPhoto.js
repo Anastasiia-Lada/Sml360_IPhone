@@ -74,6 +74,7 @@ Ext.define('smiley360.view.UploadPhoto', {
                                         xtype: 'panel',
 										margin:'0 0 0 0',
 										padding:'0 0 0 0',
+                                        flex: 0.2,
                                         items:
                                         [
                                             {
@@ -105,14 +106,14 @@ Ext.define('smiley360.view.UploadPhoto', {
                                                 style: 'display:none;',
 												margin:'0 0 0 0',
 												padding:'0 0 0 0',
-                                                html: '<canvas style="width:150px;"/>'
+                                                html: '<canvas />'
                                             }
                                         ]
                                     },
                                     {
                                         xtype: 'textareafield',
                                         id: 'xPostText',
-                                        flex: 1,
+                                        flex: 0.8,
                                         maxRows: 5,
                                         //maxLength: 84,
                                         isFocused: false,
@@ -169,6 +170,7 @@ Ext.define('smiley360.view.UploadPhoto', {
                                 defaults: 
 								{
                                     width: '45%',
+									labelWidth: '35%',
                                     labelAlign: 'right'
                                 },
                                 items:
@@ -178,8 +180,7 @@ Ext.define('smiley360.view.UploadPhoto', {
                                         id: 'xFacebookCheckbox',
                                         label: 'Post to Facebook',
                                         labelCls: 'popup-checkbox-grey-label',
-                                        cls: 'popup-checkbox',
-										labelWidth: 50,
+                                        cls: 'popup-checkbox',										
                                         checked: true,
                                         listeners: 
 										{
@@ -196,7 +197,6 @@ Ext.define('smiley360.view.UploadPhoto', {
                                         label: 'Post to Twitter',
                                         labelCls: 'popup-checkbox-grey-label',
                                         cls: 'popup-checkbox',
-										labelWidth: 60,
                                         listeners: 
 										{
                                             check: function () {
