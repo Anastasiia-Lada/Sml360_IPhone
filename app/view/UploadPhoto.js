@@ -169,7 +169,7 @@ Ext.define('smiley360.view.UploadPhoto', {
                                 defaults: {
                                     width: '50%',
                                     labelAlign: 'right',
-                                    labelWidth: '100%',
+                                    labelWidth: '70px',
                                 },
                                 items:
                                 [
