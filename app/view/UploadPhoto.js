@@ -48,18 +48,18 @@ Ext.define('smiley360.view.UploadPhoto', {
                                 xtype: 'label',
                                 id: 'xTitleLabel',
                                 cls: 'popup-title-text',
-                                html: 'Earn {0} Smiles uploading a Photo',
+                                html: 'Earn {0} Smiles uploading a Photo'
                             }, {
                                 xtype: 'image',
                                 docked: 'right',
                                 cls: 'popup-title-image',
-                                src: 'resources/images/photo_share.png',
+                                src: 'resources/images/photo_share.png'
                             }
                         ],
                     }, {
                         xtype: 'panel',
                         id: 'xStatusIndicator',
-                        cls: 'popup-status-indicator',
+                        cls: 'popup-status-indicator'
                     }, {
                         xtype: 'panel',
                         cls: 'popup-middle-panel popup-status-container',
@@ -68,12 +68,12 @@ Ext.define('smiley360.view.UploadPhoto', {
                             {
                                 xtype: 'panel',
                                 layout: 'hbox',
-                                width: '99%',
-                                style: 'max-width:99%;',
                                 items:
                                 [
                                     {
                                         xtype: 'panel',
+										margin:'0 0 0 0',
+										padding:'0 0 0 0',
                                         items:
                                         [
                                             {
@@ -94,7 +94,6 @@ Ext.define('smiley360.view.UploadPhoto', {
                                                 successHandler: function (response) {
                                                     photoAdded = true;
                                                     this.up('#xView').config.imageID = response.imageID;
-                                                    //Ext.Msg.alert('iPad test', response.imageID);
                                                 },
                                                 failureHandler: function (error, response) {
                                                     Ext.Msg.alert(error, response.message);
@@ -104,6 +103,8 @@ Ext.define('smiley360.view.UploadPhoto', {
                                                 xtype: 'label',
                                                 cls: 'popup-photo-image',
                                                 style: 'display:none;',
+												margin:'0 0 0 0',
+												padding:'0 0 0 0',
                                                 html: '<canvas style="width:150px;"/>'
                                             }
                                         ]
@@ -137,24 +138,27 @@ Ext.define('smiley360.view.UploadPhoto', {
                             }, {
                                 xtype: 'panel',
                                 layout: 'hbox',
-                                items: [{
-                                    xtype: 'label',
-                                    cls: 'popup-post-bottom-text',
-                                    id: 'xCharacterMaximum',
-                                    xMax: 140,
-                                    style: 'color: #878789;',
-                                    html: 'Post must contain a maximum of {0} characters.'
-                                }, {
-                                    xtype: 'label',
-                                    id: 'xPostCountLabel',
-                                    docked: 'right',
-                                    cls: 'popup-post-bottom-text',
-                                    html: '0'
-                                }
+                                items: 
+								[
+									{
+										xtype: 'label',
+										cls: 'popup-post-bottom-text',
+										id: 'xCharacterMaximum',
+										xMax: 140,
+										style: 'color: #878789;',
+										html: 'Post must contain a maximum of {0} characters.'
+									}, {
+										xtype: 'label',
+										id: 'xPostCountLabel',
+										docked: 'right',
+										cls: 'popup-post-bottom-text',
+										html: '0'
+									}
                                 ]
                             }
-                        ],
-                    }, {
+                        ]
+                    }, 
+					{
                         xtype: 'panel',
                         cls: 'popup-bottom-panel',
                         items:
@@ -162,10 +166,10 @@ Ext.define('smiley360.view.UploadPhoto', {
                             {
                                 xtype: 'panel',
                                 layout: 'hbox',
-                                defaults: {
-                                    width: '50%',
-                                    labelAlign: 'right',
-                                    labelWidth: '100%'
+                                defaults: 
+								{
+                                    width: '45%',
+                                    labelAlign: 'right'
                                 },
                                 items:
                                 [
@@ -175,8 +179,10 @@ Ext.define('smiley360.view.UploadPhoto', {
                                         label: 'Post to Facebook',
                                         labelCls: 'popup-checkbox-grey-label',
                                         cls: 'popup-checkbox',
+										labelWidth: 50,
                                         checked: true,
-                                        listeners: {
+                                        listeners: 
+										{
                                             check: function () {
                                                 this.up('#xView').onCheck();
                                             },
@@ -190,7 +196,9 @@ Ext.define('smiley360.view.UploadPhoto', {
                                         label: 'Post to Twitter',
                                         labelCls: 'popup-checkbox-grey-label',
                                         cls: 'popup-checkbox',
-                                        listeners: {
+										labelWidth: 60,
+                                        listeners: 
+										{
                                             check: function () {
                                                 this.up('#xView').onCheck();
                                             },
@@ -199,20 +207,22 @@ Ext.define('smiley360.view.UploadPhoto', {
                                             }
                                         }
                                     }
-                                ],
-                            }, {
+                                ]
+                            }, 
+							{
                                 xtype: 'label',
                                 cls: 'popup-post-comment',
                                 html: 'The following text will automatically be added to your post:'
                             },
-                        {
-                            xtype: 'label',
-                            cls: 'popup-post-comment-text',
-                            id: 'xSeedPhrase',
-                            html: 'Try Campbell\'s Slow Kettle Style Soups and be sure to use this $1.00 off coupon! http://bit.ly/YxVW1D'
-                        }
+							{
+								xtype: 'label',
+								cls: 'popup-post-comment-text',
+								id: 'xSeedPhrase',
+								html: 'Try Campbell\'s Slow Kettle Style Soups and be sure to use this $1.00 off coupon! http://bit.ly/YxVW1D'
+							}
                         ],
-                    }, {
+                    }, 
+					{
                         xtype: 'panel',
                         cls: 'popup-button-panel',
                         items:
@@ -231,9 +241,12 @@ Ext.define('smiley360.view.UploadPhoto', {
                                         this.up('#xView').doShare();
                                     }
                                 }
-                            }]
-                    }]
-            }],
+                            }
+						]
+                    }
+				]
+            }
+		],
         listeners: {
             initialize: function () {
                 smiley360.adjustPopupSize(this);
@@ -252,12 +265,12 @@ Ext.define('smiley360.view.UploadPhoto', {
                 // this.down('#xBrowsePhotoButton').setUrl(uploadUrl);
 
                 if (smiley360.memberData.Profile.twitter_token && smiley360.memberData.Profile.twitter_token != "")
-                    this.down('#xTwitterCheckbox').show()
+                    this.down('#xTwitterCheckbox').show();
                 else
                     this.down('#xTwitterCheckbox').hide();
 
                 if (smiley360.memberData.Profile.facebookID && smiley360.memberData.Profile.facebookID != "" && smiley360.permissionsList.publish_stream)
-                    this.down('#xFacebookCheckbox').show()
+                    this.down('#xFacebookCheckbox').show();
                 else
                     this.down('#xFacebookCheckbox').hide();
             }
@@ -327,7 +340,7 @@ Ext.define('smiley360.view.UploadPhoto', {
 
                 smiley360.services.postToTwitter(shareDataTW, function (responseTW) {
                     if (responseTW.success && responseTW.status == 'success')
-                        smiley360.failedShares.push('twi_s')
+                        smiley360.failedShares.push('twi_s');
                     else smiley360.failedShares.push('twi_f');
                     smiley360.setResponseStatus(shareView, responseTW, '', shareView.config.btn_from);
                     console.log(shareView.config.btn_from.valueOf());
@@ -391,5 +404,5 @@ Ext.define('smiley360.view.UploadPhoto', {
         this.missionId = missionId;
     },
 
-    missionId: undefined,
+    missionId: undefined
 });
