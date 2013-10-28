@@ -102,6 +102,6 @@ document.addEventListener('deviceready', function ()
         nativeInterface: CDV.FB,
         useCachedDialogs: false
     }
-);
+)
 
 }, false);
