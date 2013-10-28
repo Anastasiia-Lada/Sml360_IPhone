@@ -141,6 +141,7 @@
         } else {
             // not_logged_in
             alert('You are not logged in with Facebook! Please, log in!');
+            alert(FB.getAccessToken());
             revoke();
         }
     }
