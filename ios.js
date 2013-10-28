@@ -17,7 +17,7 @@ function logFB(response)
         //alert("JSON" + JSON);
         //alert(response.session);
         //alert("FBSession" + (FBSession || FB.FBSession));
-        //alert(arguments.length);
+        alert(arguments.length);
         //FB.api('/me', function(response) {
          //   alert('smth');
         //});
