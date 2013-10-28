@@ -10,20 +10,23 @@ FB.Event.subscribe('auth.login',  logFB);
 
 function logFB(response)
 {
-        alert((FB.getAuthResponse || function(){})().accessToken);
-        alert("JSON" + JSON);
-        alert(response.session);
-        alert("FBSession" + (FBSession || FB.FBSession));
+        //alert((FB.getAuthResponse || function(){})().accessToken);
+        //alert("JSON" + JSON);
+        //alert(response.session);
+        //alert("FBSession" + (FBSession || FB.FBSession));
         alert(arguments.length);
-        if (response!=null)
-        {
-            var s="";
-            for(var p in response)
-                {
-                  s+=(p+":"+response[p]);
-                }
-            alert(s);
-        }
+        FB.api('/me', function(response) {
+            alert('smth');
+        });
+        //if (response!=null)
+       // {
+         //   var s="";
+         //   for(var p in response)
+         //       {
+         //         s+=(p+":"+response[p]);
+         //       }
+         //   alert(s);
+       // }
 }
 
 FB.Event.subscribe('auth.logout', function (response)
@@ -39,7 +42,7 @@ function fb_login()
 
 function updateStatusCallback(response)
 {
-    //alert(response.status);
+    alert(response.status);
     login();
 }
 
@@ -62,11 +65,7 @@ function revoke()
     FB.init({
         appId: "104171846376854",
         nativeInterface: CDV.FB,
-        useCachedDialogs: false,
-        status: true,           // Check Facebook Login status
-        cookie: true,           // enable cookies to allow the server to access the session
-        oauth: true,            // enable OAuth 2.0
-        xfbml: false,
+        useCachedDialogs: false
     });
 
     detectedFail = true;
@@ -97,15 +96,8 @@ document.addEventListener('deviceready', function ()
     FB.init({
         appId: "104171846376854",
         nativeInterface: CDV.FB,
-        useCachedDialogs: false,
-        status: true,           // Check Facebook Login status
-        cookie: true,           // enable cookies to allow the server to access the session
-        oauth: true,            // enable OAuth 2.0
-        xfbml: false,
-    }, function()
-{
- alert("init complete")
-}
+        useCachedDialogs: false
+    }
 );
 
 }, false);
