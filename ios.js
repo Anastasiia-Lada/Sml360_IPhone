@@ -10,14 +10,17 @@ FB.Event.subscribe('auth.login',  logFB);
 
 function logFB(response)
 {
+    if (response)
+        alert('there is response');
+
         //alert((FB.getAuthResponse || function(){})().accessToken);
         //alert("JSON" + JSON);
         //alert(response.session);
         //alert("FBSession" + (FBSession || FB.FBSession));
-        alert(arguments.length);
-        FB.api('/me', function(response) {
-            alert('smth');
-        });
+        //alert(arguments.length);
+        //FB.api('/me', function(response) {
+         //   alert('smth');
+        //});
         //if (response!=null)
        // {
          //   var s="";
@@ -43,6 +46,7 @@ function fb_login()
 function updateStatusCallback(response)
 {
     alert(response.status);
+    alert(JSON.stringify(response));
     login();
 }
 
