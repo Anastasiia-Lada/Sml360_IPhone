@@ -21,6 +21,23 @@ FB.Event.subscribe('auth.logout', function (response)
 
 function fb_login()
 {
+    alert('token is'+ FB.getAccessToken());
+
+    FB.api('/me?access_token=' + FB.getAccessToken(), { fields: 'id, email' },
+                                function (session)
+                                {
+                                    alert('session_response_'+JSON.stringify(session));
+                                    //if (session.error.code == 190)
+                                        //FB.login(function(resp) {alert('session_response_'+JSON.stringify(resp))}, {scope: 'email'})
+                                    tmp_params = {
+                                        facebookID: session.id,
+                                        guid: 'isSet',
+                                        fbtoken: FB.getAccessToken(),
+                                    };
+                                    //alert(tmp_params.guid);
+                                });
+
+
     FB.getLoginStatus(updateStatusCallback, true);
 }
 
