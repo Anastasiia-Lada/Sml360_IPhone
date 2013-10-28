@@ -8,7 +8,7 @@ var saved_controller_obj = {};
 
 FB.Event.subscribe('auth.login', function (response)
 {
-    alert('auth.login'+JSON.stringify(response));
+    //alert('auth.login'+JSON.stringify(response));
     detectedFail = false;
 
 });
@@ -21,23 +21,6 @@ FB.Event.subscribe('auth.logout', function (response)
 
 function fb_login()
 {
-    alert('token is'+ FB.getAccessToken());
-
-    FB.api('/me?access_token=' + FB.getAccessToken(), { fields: 'id, email' },
-                                function (session)
-                                {
-                                    alert('session_response_'+JSON.stringify(session));
-                                    //if (session.error.code == 190)
-                                        //FB.login(function(resp) {alert('session_response_'+JSON.stringify(resp))}, {scope: 'email'})
-                                    tmp_params = {
-                                        facebookID: session.id,
-                                        guid: 'isSet',
-                                        fbtoken: FB.getAccessToken(),
-                                    };
-                                    //alert(tmp_params.guid);
-                                });
-
-
     FB.getLoginStatus(updateStatusCallback, true);
 }
 
@@ -55,10 +38,10 @@ function login()
         FB.login(function (response)
         {
              
-            alert('auth.login()'+JSON.stringify(response));
+            //alert('auth.login()'+JSON.stringify(response));
             if (response && response.authResponse)
             {
-                alert('access_token is back!'+ response.authResponse.accessToken);
+                //alert('access_token is back!'+ response.authResponse.accessToken);
             }
             else
             {
@@ -112,7 +95,7 @@ document.addEventListener('deviceready', function ()
 {
     FB.init({
         appId: "104171846376854",
-        //nativeInterface: CDV.FB,
+        nativeInterface: CDV.FB,
         useCachedDialogs: false,
         status: true,           // Check Facebook Login status
         cookie: true,           // enable cookies to allow the server to access the session
