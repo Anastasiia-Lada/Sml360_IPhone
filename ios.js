@@ -6,12 +6,25 @@
 var detectedFail = false;
 var saved_controller_obj = {};
 
-FB.Event.subscribe('auth.login', function (response)
-{
-    //alert('auth.login'+JSON.stringify(response));
-    detectedFail = false;
+FB.Event.subscribe('auth.login',  logFB);
 
-});
+function logFB(response)
+{
+        alert((FB.getAuthResponse || function(){})().accessToken);
+        alert("JSON" + JSON);
+        alert(response.session);
+        alert("FBSession" + (FBSession || FB.FBSession));
+        alert(arguments.length);
+        if (response!=null)
+        {
+            var s="";
+            for(var p in response)
+                {
+                  s+=(p+":"+response[p]);
+                }
+            alert(s);
+        }
+}
 
 FB.Event.subscribe('auth.logout', function (response)
 {
@@ -21,7 +34,7 @@ FB.Event.subscribe('auth.logout', function (response)
 
 function fb_login()
 {
-    FB.getLoginStatus(updateStatusCallback, true);
+    FB.getLoginStatus(updateStatusCallback);
 }
 
 function updateStatusCallback(response)
@@ -35,19 +48,7 @@ function login()
 
     try
     {
-        FB.login(function (response)
-        {
-             
-            //alert('auth.login()'+JSON.stringify(response));
-            if (response && response.authResponse)
-            {
-                //alert('access_token is back!'+ response.authResponse.accessToken);
-            }
-            else
-            {
-                revoke();
-            }
-        }, { scope: 'email, read_stream' });
+        FB.login(logFB, { scope: 'email' });
     }
     catch (err)
     {
@@ -101,6 +102,10 @@ document.addEventListener('deviceready', function ()
         cookie: true,           // enable cookies to allow the server to access the session
         oauth: true,            // enable OAuth 2.0
         xfbml: false,
-    });
+    }, function()
+{
+ alert("init complete")
+}
+);
 
 }, false);
