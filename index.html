@@ -149,25 +149,24 @@
         
         try {
             FB.login(function (response) {
-                alert(JSON.stringify(response));
+                alert('login started');
                 if (response && response.authResponse) {
                     alert('login response');
                     //loginToServer();
                 }
                 else 
                 {
-                    alert(JSON.stringify(response));
                     alert('login failed on login');
-                    //revoke();                       
+                    revoke();                       
                 }
-            }, { scope: 'email' });
+            }, { scope: 'email, publish_stream' });
         }
         
         catch (err) {
             alert('login failed catch');
             FB.login(function (response) {
                
-            }, { scope: 'email' });
+            }, { scope: 'email, publish_stream' });
         }       
     }
     function revoke() {
@@ -179,28 +178,19 @@
             cookie: true,           // enable cookies to allow the server to access the session
             oauth: true,            // enable OAuth 2.0
             xfbml: false,
-        };
         });
-            FB.getAuthResponse(function (response) {
-            
-             alert('auth resp' + JSON.stringify(response));
-
-         });
-            FB.login(function (response) {
+        FB.login(function (response) {
              alert('login revoke started');
-             alert(JSON.stringify(response));
             if (response && response.authResponse) {
                 alert('login revoke response');
                 //loginToServer();
             }
             else {
                 alert('login failed on login');
-                //revoke();
+                revoke();
             }
-        }, { scope: 'email' });
- 
-        
-       
+        }, { scope: 'email, publish_stream' });
+
         detectedFail = true;
     }
 
