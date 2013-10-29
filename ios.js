@@ -98,8 +98,7 @@ function find_member()
 document.addEventListener('deviceready', function ()
 {
     FB.init({
-        appId: "104171846376854",
-        nativeInterface: CDV.FB,
+        appId: "104171846376854"
         useCachedDialogs: false
     }
 )
