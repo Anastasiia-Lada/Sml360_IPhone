@@ -43,11 +43,21 @@ function updateStatusCallback(response)
 {
     alert(response.status);
     alert(JSON.stringify(response));
+    FB.init({
+        appId: "104171846376854",
+        nativeInterface: CDV.FB,
+        useCachedDialogs: false
+    },  function()
+    {
+     alert("init complete");
+    });
     login();
+
 }
 
 function login()
 {
+
 
     try
     {
