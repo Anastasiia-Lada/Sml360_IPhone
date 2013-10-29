@@ -5,6 +5,7 @@
 };
 var detectedFail = false;
 var saved_controller_obj = {};
+var isInit = false;
 
 FB.Event.subscribe('auth.login', function (response)
 {
@@ -21,13 +22,14 @@ FB.Event.subscribe('auth.logout', function (response)
 
 function fb_login()
 {
-    FB.getLoginStatus(updateStatusCallback, true);
+    FB.getLoginStatus(updateStatusCallback);
 }
 
 function updateStatusCallback(response)
 {
     //alert(response.status);
-    login();
+    if (response.status == 'unknown')
+        login();
 }
 
 function login()
@@ -35,7 +37,19 @@ function login()
 
     try
     {
-        FB.login(function (response)
+        FB.init({
+        appId: "104171846376854",
+        nativeInterface: CDV.FB,
+        useCachedDialogs: false,
+        status: true,           // Check Facebook Login status
+        cookie: true,           // enable cookies to allow the server to access the session
+        oauth: true,            // enable OAuth 2.0
+        xfbml: false,
+    });
+
+         isInit = true;
+        if (isInit)
+            FB.login(function (response)
         {
              
             //alert('auth.login()'+JSON.stringify(response));
@@ -47,13 +61,13 @@ function login()
             {
                 revoke();
             }
-        }, { scope: 'email, read_stream' });
+        }, { scope: 'email' });
     }
     catch (err)
     {
         FB.login(function (response)
         {
-        }, { scope: 'email, publish_stream' });
+        }, { scope: 'email' });
     }
 }
 function revoke()
