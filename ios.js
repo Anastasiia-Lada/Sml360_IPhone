@@ -6,10 +6,12 @@
 var detectedFail = false;
 var saved_controller_obj = {};
 
-FB.Event.subscribe('auth.login',  logFB);
+
 
 function logFB(response)
 {
+     alert('response');
+
     if (response)
         alert('there is response');
 
@@ -31,12 +33,6 @@ function logFB(response)
          //   alert(s);
        // }
 }
-
-FB.Event.subscribe('auth.logout', function (response)
-{
-});
-
-
 
 function fb_login()
 {
@@ -71,8 +67,6 @@ function revoke()
         nativeInterface: CDV.FB,
         useCachedDialogs: false
     });
-
-    detectedFail = true;
 }
 
 function find_member()
@@ -101,7 +95,10 @@ document.addEventListener('deviceready', function ()
         appId: "104171846376854",
         nativeInterface: CDV.FB,
         useCachedDialogs: false
-    }
+    },  function()
+{
+ alert("init complete");
+}
 )
 
 }, false);
