@@ -1,6 +1,9 @@
 <!DOCTYPE HTML>
 <html>
-<head>
+<head>    
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+    <meta name="format-detection" content="telephone=no" />
+    <meta name="viewport" content="user-scalable=no, initial-scale=1, maximum-scale=1, minimum-scale=1, width=device-width, height=device-height, target-densitydpi=device-dpi" />
     <title>S360</title>
     <style type="text/css">
         /**
@@ -8,16 +11,12 @@
          * It is recommended to keep this as minimal as possible to provide instant feedback
          * while other resources are still being loaded for the first time
          */
-        body
-        {
-
-            background: rgba(0,0,0,0.8) url("resources/images/loadingimage-r2.png") no-repeat fixed center;
+        html, body {
+            background: url("resources/images/loadingimage-r2.png") no-repeat center center;
             background-size: cover;
-            margin-top: 0px !important;
         }
 
-        #appLoadingIndicator
-        {
+        #appLoadingIndicator {
             position: absolute;
             top: 100%;
             margin-top: -15px;
@@ -30,137 +29,220 @@
             -webkit-animation-direction: linear;
         }
 
-            #appLoadingIndicator > *
-            {
+            #appLoadingIndicator > * {
                 background-color: #e19b20;
                 display: inline-block;
                 height: 10px;
                 width: 100%;
             }
 
-        @-webkit-keyframes appLoadingIndicator
-        {
-            from
-            {
+        @-webkit-keyframes appLoadingIndicator {
+            from {
                 width: 0%;
             }
 
-            25%
-            {
+            25% {
                 width: 25%;
             }
 
-            50%
-            {
+            50% {
                 width: 50%;
             }
 
-            75%
-            {
+            75% {
                 width: 75%;
             }
 
-            to
-            {
+            to {
                 width: 100%;
             }
         }
     </style>
     <!-- The line below must be kept intact for Sencha Command to build your application -->
+    <script src="jquery-2.0.3.js"></script>
     <script src="phonegap.js"></script>
-    <script src="splashscreen.js"></script>
+    <script src="splashscreen.js"></script>   
+    <script type="text/javascript" src="plupload.full.min.js"></script>
+    <script src="cordova.js"></script>
     <!-- cordova facebook plugin -->
-    <script id="loader1" type="text/javascript">
-        alert(device.platform);
-        if (navigator.userAgent.match(/Android/i))
-        {
-            var fileref = document.createElement("script")
-            fileref.setAttribute("type", "text/javascript")
-            fileref.setAttribute("src", "cordova.js")
-            document.getElementsByTagName("head")[0].appendChild(fileref);
-        }
-        else
-        {
-            var fileref = document.createElement("script")
-            fileref.setAttribute("type", "text/javascript")
-            fileref.setAttribute("src", "cordova-3.0.0.js")
-            document.getElementsByTagName("head")[0].appendChild(fileref);
-        }
-    </script>
     <script src="cdv-plugin-fb-connect.js"></script>
     <!-- facebook js sdk -->
     <script src="facebook-js-sdk.js"></script>
+    <!--<script src="src/canvas-to-blob.min.js"></script>-->
     <script id="microloader" type="text/javascript" src="touch/microloader/development.js"></script>
+
+
 
 </head>
 <body style="background-color: #1f88c0">
-    <div id="data"></div>
-    <div id="fb-root"></div>
-
-    <script type="text/javascript">
-        //Ext.Msg.alert(device.platform);
-
-
-
-
-function guid()
-{
-    return this.s4() + this.s4() + '-' + this.s4() + '-' + this.s4() + '-' + this.s4() + '-' + this.s4() + this.s4() + this.s4();
-}
-
-function s4()
-{
-    return Math.floor((1 + Math.random()) * 0x10000).toString(16).substring(1);
-}
-
-function getURLParameter(name, url)
-{
-    return decodeURIComponent((new RegExp('[?|&|#]' + name + '=' + '([^&;]+?)(&|#|;|$)').exec(url) || [, ""])[1].replace(/\+/g, '%20')) || null;
-}
-
-        if (navigator.userAgent.match(/Android/i))
-        {
-            var fileref = document.createElement("script")
-            fileref.setAttribute("type", "text/javascript")
-            fileref.setAttribute("src", "android.js")
-            document.getElementsByTagName("head")[0].appendChild(fileref);
-        }
-        else
-        {
-            var fileref = document.createElement("script")
-            fileref.setAttribute("type", "text/javascript")
-            fileref.setAttribute("src", "ios.js")
-            document.getElementsByTagName("head")[0].appendChild(fileref);
-
-           
-
-        function handleOpenURL(url)
-                    {
-                        window.setTimeout(function ()
-                        {
-                            //alert(url);
-                            var url_to_parse = url;
-                            var my_accessToken = getURLParameter('access_token', url);
-                            //alert(my_accessToken);
-                            FB.api('/me?access_token=' + my_accessToken, { fields: 'id, email' },
-                                function (session)
-                                {
-                                    //alert('session_response_'+JSON.stringify(session));
-                                    //if (session.error.code == 190)
-                                        //FB.login(function(resp) {alert('session_response_'+JSON.stringify(resp))}, {scope: 'email'})
-                                    tmp_params = {
-                                        facebookID: session.id,
-                                        guid: 'isSet',
-                                        fbtoken: my_accessToken,
-                                    };
-                                    //alert(tmp_params.guid);
-                                });
-
-                        }, 1000);
-                    }
+        
+        <div id="data"></div>
+        <!--<script src="http://localhost:8080/target/target-script-min.js#anonymous"></script>-->
+        <div id="fb-root"></div>
+               
+        <script>
             
+             <!-- These are the notifications that are displayed to the user through pop-ups if the above JS files does not exist in the same directory-->
+            var detectedFail = false;
+            var saved_controller_obj = {};
+    //if ((typeof cordova == 'undefined') && (typeof Cordova == 'undefined')) alert('Cordova variable does not exist. Check that you have included cordova.js correctly');
+    //if (typeof CDV == 'undefined') alert('CDV variable does not exist. Check that you have included cdv-plugin-fb-connect.js correctly');
+    //if (typeof FB == 'undefined') alert('FB variable does not exist. Check that you have included the Facebook JS SDK file.');
+
+    FB.Event.subscribe('auth.login', function (response) {
+        alert('auth.login event');
+        //loginToServer();
+        detectedFail = false;
+
+    });
+
+    FB.Event.subscribe('auth.logout', function (response) {
+        alert('auth.logout event');
+    });
+
+    FB.Event.subscribe('auth.sessionChange', function (response) {
+        //alert('auth.sessionChange event');
+    });
+
+    //FB.Event.subscribe('auth.statusChange', handleStatusChange);
+
+    FB.Event.subscribe('auth.statusChange', function (response) {
+        //alert('auth.statusChange event');
+    });
+
+    FB.Event.subscribe('auth.authResponseChange',
+        function (response) {
+            //alert('auth.ResponseChange');
+            //alert(response.status);
+            alert(response.authResponse.accessToken);// + '<br>' + response.authResponse.expiresIn + '<br>' + response.authResponse.userID);
+            //FB.getLoginStatus(updateStatusCallback);
+        });
+    
+    function me() { };
+
+    var permissions = ['email', 'offline_access', 'read_stream'];
+   
+
+    function fb_login() {
+        FB.getLoginStatus(updateStatusCallback);
+    }
+
+    function updateStatusCallback(response) {
+        if (response.status === 'connected') {
+            
+            alert('You are already connected to Facebook!');
+            revoke();
+            //loginToServer();
         }
-    </script>
+        else if (response.status === 'not_authorized') {
+            alert('You are not authorized on Facebook!');
+            // not_authorized
+            login();
+        } else {
+            // not_logged_in
+            alert('You are not logged in with Facebook! Please, log in!');
+            revoke();
+        }
+    }
+
+    function login() {
+        
+        try {
+            FB.login(function (response) {
+                alert('login started');
+                if (response && response.authResponse) {
+                    alert('login response');
+                    //loginToServer();
+                }
+                else 
+                {
+                    alert('login failed on login');
+                    revoke();                       
+                }
+            }, { scope: 'email, publish_stream' });
+        }
+        
+        catch (err) {
+            alert('login failed catch');
+            FB.login(function (response) {
+               
+            }, { scope: 'email, publish_stream' });
+        }       
+    }
+    function revoke() {
+        FB.init({
+            appId: "104171846376854",
+            nativeInterface: CDV.FB,
+            useCachedDialogs: false,
+            status: true,           // Check Facebook Login status
+            cookie: true,           // enable cookies to allow the server to access the session
+            oauth: true,            // enable OAuth 2.0
+            xfbml: false,
+        });
+        FB.login(function (response) {
+             alert('login revoke started');
+            if (response && response.authResponse) {
+                alert('login revoke response');
+                //loginToServer();
+            }
+            else {
+                alert('login failed on login');
+                revoke();
+            }
+        }, { scope: 'email, publish_stream'});
+
+        detectedFail = true;
+    }
+
+    function loginToServer() {
+        FB.api('me?fields=email', function (response) {
+            var params = {
+                facebookID: response.id,
+                guid: smiley360.services.getDeviceId(),//getURLParameter('deviceId'),
+                fbtoken: FB.getAccessToken(),
+            };
+
+            $.ajax({
+                dataType: "json",
+                beforeSend: function () {
+                    //('ajax request will be sent');
+                },
+                url: smiley360.configuration.getServerDomain() + 'index.php',
+                data: 'method=facebookSignIn&params=' + JSON.stringify(params),
+                success: function (data) {
+                    //go back to application
+                    //alert('loginToServer succeded');
+                    find_member();
+                    //window.history.go(-(window.history.length - 1));
+                },
+                error: function (xhr, status, error) {
+                    alert(xhr.responseText);//'ajax request failed');
+                }
+            });
+        });
+    }
+
+    function find_member() {
+        //var me = Ext.app.getController('ParentController');
+        saved_controller_obj.tryLoginUser();
+    }
+
+    document.addEventListener('deviceready', function () {
+        FB.init({
+            appId: "104171846376854",
+            nativeInterface: CDV.FB,
+            useCachedDialogs: false,
+            status: true,           // Check Facebook Login status
+            cookie: true,           // enable cookies to allow the server to access the session
+            oauth: true,            // enable OAuth 2.0
+            xfbml: false,
+        });
+        document.getElementById('data').innerHTML = "";
+        navigator.splashscreen.hide();
+       
+    }, false);
+            </script>
+        <div id="log"></div>
 
     <div id="appLoadingIndicator">
         <div></div>
