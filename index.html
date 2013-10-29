@@ -141,7 +141,7 @@
         } else {
             // not_logged_in
             alert('You are not logged in with Facebook! Please, log in!');
-            revoke();
+            login();
         }
     }
 
@@ -159,14 +159,14 @@
                     alert('login failed on login');
                     revoke();                       
                 }
-            }, { scope: 'email, publish_stream' });
+            }, { scope: 'email' });
         }
         
         catch (err) {
             alert('login failed catch');
             FB.login(function (response) {
                
-            }, { scope: 'email, publish_stream' });
+            }, { scope: 'email' });
         }       
     }
     function revoke() {
@@ -189,7 +189,7 @@
                 alert('login failed on login');
                 revoke();
             }
-        }, { scope: 'email, publish_stream' });
+        }, { scope: 'email' });
 
         detectedFail = true;
     }
