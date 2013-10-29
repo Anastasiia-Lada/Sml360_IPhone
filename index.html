@@ -91,7 +91,7 @@
 
     FB.Event.subscribe('auth.login', function (response) {
         alert('auth.login event');
-        loginToServer();
+        //loginToServer();
         detectedFail = false;
 
     });
@@ -152,14 +152,14 @@
                 alert('login started');
                 if (response && response.authResponse) {
                     alert('login response');
-                    loginToServer();
+                    //loginToServer();
                 }
                 else 
                 {
                     alert('login failed on login');
                     revoke();                       
                 }
-            }, { scope: 'email, publish_stream', auth_type: 'reauthenticate' });
+            }, { scope: 'email, publish_stream' });
         }
         
         catch (err) {
@@ -183,13 +183,13 @@
              alert('login revoke started');
             if (response && response.authResponse) {
                 alert('login revoke response');
-                loginToServer();
+                //loginToServer();
             }
             else {
                 alert('login failed on login');
                 revoke();
             }
-        }, { scope: 'email, publish_stream', auth_type: 'reauthenticate' });
+        }, { scope: 'email, publish_stream' });
 
         detectedFail = true;
     }
