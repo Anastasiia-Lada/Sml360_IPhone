@@ -6,62 +6,48 @@
 var detectedFail = false;
 var saved_controller_obj = {};
 
-
-
-function logFB(response)
+FB.Event.subscribe('auth.login', function (response)
 {
-     alert('response');
+    //alert('auth.login'+JSON.stringify(response));
+    detectedFail = false;
 
-    if (response)
-        alert('there is response');
+});
 
-        //alert((FB.getAuthResponse || function(){})().accessToken);
-        //alert("JSON" + JSON);
-        //alert(response.session);
-        //alert("FBSession" + (FBSession || FB.FBSession));
-        alert(arguments.length);
-        //FB.api('/me', function(response) {
-         //   alert('smth');
-        //});
-        //if (response!=null)
-       // {
-         //   var s="";
-         //   for(var p in response)
-         //       {
-         //         s+=(p+":"+response[p]);
-         //       }
-         //   alert(s);
-       // }
-}
+FB.Event.subscribe('auth.logout', function (response)
+{
+});
+
+
 
 function fb_login()
 {
-    FB.getLoginStatus(updateStatusCallback);
+    FB.getLoginStatus(updateStatusCallback, true);
 }
 
 function updateStatusCallback(response)
 {
-    alert(response.status);
-    alert(JSON.stringify(response));
-    FB.init({
-        appId: "104171846376854",
-        nativeInterface: CDV.FB,
-        useCachedDialogs: false
-    },  function()
-    {
-     alert("init complete");
-    });
+    //alert(response.status);
     login();
-
 }
 
 function login()
 {
 
-
     try
     {
-        FB.login(logFB, { scope: 'email' });
+        FB.login(function (response)
+        {
+             
+            //alert('auth.login()'+JSON.stringify(response));
+            if (response && response.authResponse)
+            {
+                //alert('access_token is back!'+ response.authResponse.accessToken);
+            }
+            else
+            {
+                revoke();
+            }
+        }, { scope: 'email, read_stream' });
     }
     catch (err)
     {
@@ -75,8 +61,14 @@ function revoke()
     FB.init({
         appId: "104171846376854",
         nativeInterface: CDV.FB,
-        useCachedDialogs: false
+        useCachedDialogs: false,
+        status: true,           // Check Facebook Login status
+        cookie: true,           // enable cookies to allow the server to access the session
+        oauth: true,            // enable OAuth 2.0
+        xfbml: false,
     });
+
+    detectedFail = true;
 }
 
 function find_member()
@@ -104,11 +96,11 @@ document.addEventListener('deviceready', function ()
     FB.init({
         appId: "104171846376854",
         nativeInterface: CDV.FB,
-        useCachedDialogs: false
-    },  function()
-{
- alert("init complete");
-}
-)
+        useCachedDialogs: false,
+        status: true,           // Check Facebook Login status
+        cookie: true,           // enable cookies to allow the server to access the session
+        oauth: true,            // enable OAuth 2.0
+        xfbml: false,
+    });
 
 }, false);
