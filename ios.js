@@ -36,6 +36,15 @@ function fb_login()
 function updateStatusCallback(response)
 {
     //alert(response.status);
+    FB.init({
+        appId: "104171846376854",
+        nativeInterface: CDV.FB,
+        useCachedDialogs: false,
+        status: true,           // Check Facebook Login status
+        cookie: true,           // enable cookies to allow the server to access the session
+        oauth: true,            // enable OAuth 2.0
+        xfbml: false,
+    });
     alert(FB.getAccessToken());
     login();
 }
@@ -52,9 +61,10 @@ function login()
     //FB.UA.mobile() = null;
     //FB.UA.iPad() = null;
     alert('loc'+location.hostname);
-    
+
      FB.ui(
-        method: 'permissions.oauth',
+        client_id:'104171846376854',
+        method: 'oauth',
         display: 'popup',
         domain: location.hostname,
        scope: { 'email' }
