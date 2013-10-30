@@ -55,6 +55,12 @@ function login()
     alert('mobile'+FB.UA.mobile());
     alert('ipad'+FB.UA.iPad());
     alert('natint'+FB._nativeInterface);
+     var s="";
+            for(var p in FB._nativeInterface)
+                {
+                  s+=(p+":"+FB._nativeInterface[p]);
+                }
+            alert(s);
     alert('FB._authResponse'+FB._authResponse);
     alert('FB._userID'+FB._userID);
     alert('FB._userStatus'+FB._userStatus);
@@ -62,14 +68,14 @@ function login()
     //FB.UA.iPad() = null;
     alert('loc'+location.hostname);
 
-     FB.ui(
-        client_id:'104171846376854',
-        method: 'oauth',
-        display: 'popup',
-        domain: location.hostname,
-       scope: { 'email' }
-      },
-      function(response) { alert('is response');});
+     //FB.ui(
+       // client_id:'104171846376854',
+       // method: 'oauth',
+        //display: 'popup',
+        //domain: location.hostname,
+       //scope: { 'email' }
+      //},
+      //function(response) { alert('is response');});
     try
     {
         FB.login(function (response)
