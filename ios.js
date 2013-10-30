@@ -51,6 +51,10 @@ function updateStatusCallback(response)
 
 function login()
 {
+    if (FBSession)
+    alert('FBS'+FBSession);
+    if (params.display)
+    alert(params.display);
     alert('native'+FB.UA.nativeApp());
     alert('mobile'+FB.UA.mobile());
     alert('ipad'+FB.UA.iPad());
