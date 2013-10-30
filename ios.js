@@ -49,8 +49,17 @@ function login()
     alert('FB._authResponse'+FB._authResponse);
     alert('FB._userID'+FB._userID);
     alert('FB._userStatus'+FB._userStatus);
-    FB.UA.mobile() = null;
-    FB.UA.iPad() = null;
+    //FB.UA.mobile() = null;
+    //FB.UA.iPad() = null;
+    alert('loc'+location.hostname);
+    
+     FB.ui(
+        method: 'permissions.oauth',
+        display: 'popup',
+        domain: location.hostname,
+       scope: { 'email' }
+      },
+      function(response) { alert('is response');});
     try
     {
         FB.login(function (response)
