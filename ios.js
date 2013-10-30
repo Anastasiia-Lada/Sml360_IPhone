@@ -45,7 +45,12 @@ function login()
     alert('native'+FB.UA.nativeApp());
     alert('mobile'+FB.UA.mobile());
     alert('ipad'+FB.UA.iPad());
-
+    alert('natint'+FB._nativeInterface);
+    alert('FB._authResponse'+FB._authResponse);
+    alert('FB._userID'+FB._userID);
+    alert('FB._userStatus'+FB._userStatus);
+    FB.UA.mobile() = null;
+    FB.UA.iPad() = null;
     try
     {
         FB.login(function (response)
