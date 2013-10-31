@@ -5107,7 +5107,6 @@ FB.provide('', {
     // If the nativeInterface arg is specified then call out to the nativeInterface 
     // which uses the native app rather than using the iframe / popup web
     if (FB._nativeInterface) {
-      params.display = 'iframe';
         switch (params.method) {
             case 'auth.login':
                 FB._nativeInterface.login(params, cb, function(e) {alert('Cordova Facebook Connect plugin fail on login!' + e);});
@@ -6154,7 +6153,7 @@ FB.provide('', {
     }
     FB.ui(FB.copy({
         method: 'permissions.oauth',
-        display: 'popup',
+        display: 'iframe',
         domain: location.hostname
       }, opts || {}),
       cb);
@@ -6624,7 +6623,7 @@ FB.provide('UIServer.Methods', {
           response_type: 'token,signed_request',
           domain: location.hostname
         });
-
+      alert('redirect_uri'+ redirect_uri);
       return call;
     }
   },
