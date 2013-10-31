@@ -61,7 +61,6 @@
  * @access private
  */
 
- alert('myfb!');
 if (!window.FB) {
   window.FB = {
     // use the init method to set these values correctly
@@ -6351,13 +6350,13 @@ FB.provide('Auth', {
     // DESKTOP = 4
     // WEB_CANVAS = 5
     if (FB.UA.nativeApp()) {
-      return 3;
+      return 1;
     }
     if (FB.UA.mobile()) {
-      return 2;
+      return 1;
     }
     if (FB._inCanvas) {
-      return 5;
+      return 1;
     }
     return 1;
   },

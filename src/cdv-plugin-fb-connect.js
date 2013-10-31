@@ -1,5 +1,4 @@
 CDV = ( typeof CDV == 'undefined' ? {} : CDV );
-alert('mycdv!');
 var cordova = window.cordova || window.Cordova;
 CDV.FB = {
   init: function(apiKey, fail) {
@@ -16,6 +15,7 @@ CDV.FB = {
     
     cordova.exec(function() {
     var authResponse = JSON.parse(localStorage.getItem('cdv_fb_session') || '{"expiresIn":0}');
+    alert('authresponse'+ authResponse);
     if (authResponse && authResponse.expirationTime) { 
       var nowTime = (new Date()).getTime();
       if (authResponse.expirationTime > nowTime) { 
