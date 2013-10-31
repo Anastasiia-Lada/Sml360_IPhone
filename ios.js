@@ -25,7 +25,7 @@ FB.init({
         cookie: true,           // enable cookies to allow the server to access the session
         oauth: true,            // enable OAuth 2.0
         xfbml: false,
-    }, function() { alert('init')});
+    });
 
 
 function fb_login()
@@ -56,19 +56,29 @@ function login()
     alert('native'+FB.UA.nativeApp());
     alert('mobile'+FB.UA.mobile());
     alert('ipad'+FB.UA.iPad());
-    alert('natint'+FB._nativeInterface);
-     var s="";
-            for(var p in FB._nativeInterface)
-                {
-                  s+=(p+":"+FB._nativeInterface[p]);
-                }
-            alert(s);
-    alert('FB._authResponse'+FB._authResponse);
-    alert('FB._userID'+FB._userID);
-    alert('FB._userStatus'+FB._userStatus);
+    //alert('natint'+FB._nativeInterface);
+    // var s="";
+    //        for(var p in FB._nativeInterface)
+    //            {
+    //              s+=(p+":"+FB._nativeInterface[p]);
+    //            }
+    //        alert(s);
+    //alert('FB._authResponse'+FB._authResponse);
+    //alert('FB._userID'+FB._userID);
+    //alert('FB._userStatus'+FB._userStatus);
     //FB.UA.mobile() = null;
     //FB.UA.iPad() = null;
-    alert('loc'+location.hostname);
+    //alert('loc'+location.hostname);
+
+     FB.ui({ method: 'auth.logintoFacebook' },
+                FB.bind(function(response) {
+                alert('response');
+                  // Fetch the status again and then redo the click
+                  FB.bind(FB.getLoginStatus(
+                    this._saveStatus(this._authCallback, /* on_click */ true),
+                                     /* force */ true), this);
+                }, this)
+          );
 
      //FB.ui(
        // client_id:'104171846376854',
