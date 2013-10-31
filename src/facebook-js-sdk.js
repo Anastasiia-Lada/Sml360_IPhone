@@ -5115,8 +5115,12 @@ FB.provide('', {
                 FB._nativeInterface.login(params, cb, function(e) {alert('Cordova Facebook Connect plugin fail on login!' + e);});
                 break;
             case 'permissions.oauth':
-                FB._nativeInterface.login(params, cb, function(e) {alert('Cordova Facebook Connect plugin fail on login!' + e);});
+                {
+                  FB._nativeInterface.login(params, cb, function(e) {alert('Cordova Facebook Connect plugin fail on login!' + e);});
+                alert(JSON.stringify(params));
+                alert(JSON.stringify(cb));
                 break;
+              }
             case 'auth.logout':
                 FB._nativeInterface.logout(cb, function(e) {alert('Cordova Facebook Connect plugin fail on logout!');});
                 break;
@@ -6350,13 +6354,13 @@ FB.provide('Auth', {
     // DESKTOP = 4
     // WEB_CANVAS = 5
     if (FB.UA.nativeApp()) {
-      return 1;
+      return 3;
     }
     if (FB.UA.mobile()) {
-      return 1;
+      return 2;
     }
     if (FB._inCanvas) {
-      return 1;
+      return 5;
     }
     return 1;
   },
