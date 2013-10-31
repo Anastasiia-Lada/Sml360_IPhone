@@ -15,7 +15,7 @@ CDV.FB = {
     
     cordova.exec(function() {
     var authResponse = JSON.parse(localStorage.getItem('cdv_fb_session') || '{"expiresIn":0}');
-    alert('authresponse'+ authResponse);
+    alert('authresponse'+ JSON.stringify(authResponse));
     if (authResponse && authResponse.expirationTime) { 
       var nowTime = (new Date()).getTime();
       if (authResponse.expirationTime > nowTime) { 
